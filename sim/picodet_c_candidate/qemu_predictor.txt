@@ -1,0 +1,10 @@
+范围：ARM QEMU 用户态、离线输入、CPU 预处理；不是实板或 FPS 测试。
+C_ATTENTION inference_sequence=1 target_id=5 id_source=provisional c_request=1 frame_freshness=unverified hardware_commit=not_attempted roi=0,0
+PERSON confidence=0.8310 x=395.0727 y=80.2402 w=117.4893 h=173.9234
+PERSON confidence=0.7955 x=502.9305 y=98.0528 w=99.0922 h=148.0013
+PERSON confidence=0.7771 x=267.6644 y=71.5293 w=31.2703 h=78.6246
+PERSON confidence=0.6658 x=152.9263 y=72.1016 w=45.8819 h=76.9874
+PERSON confidence=0.6303 x=104.9205 y=39.4034 w=22.7265 h=42.9430
+PERSON confidence=0.5665 x=581.4268 y=99.5416 w=33.1340 h=72.9761
+PERSON confidence=0.5140 x=56.7182 y=103.3947 w=62.2299 h=50.3862
+PREPROC backend=cpu cycles=0

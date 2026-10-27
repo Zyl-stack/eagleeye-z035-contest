@@ -1,0 +1,282 @@
+--- baseline/build_arm.sh
++++ candidate/build_arm.sh
+@@ -20,9 +20,21 @@
+        -std=c++14 -O3 -pthread -static -Wall -Wextra -Werror -Wl,-z,noexecstack)
+ "$CXX" "${FLAGS[@]}" "$ROOT/src/video_guard.cpp" -o "$ROOT/bin/video_guard"
+ "$CXX" "${FLAGS[@]}" "$ROOT/src/fovea_ctl.cpp" "$ROOT/src/fovea_control.cpp" -o "$ROOT/bin/fovea_ctl"
+-"$CXX" "${FLAGS[@]}" -isystem "$PADDLE_LITE_DIR/include" \
++CC="${CXX%g++}gcc"
++CROOT="$ROOT/../c_src"
++CINC="$ROOT/../c_include"
++[ -x "$CC" ] || { echo "Missing C compiler: $CC"; exit 1; }
++mkdir -p "$ROOT/bin/c_objects"
++COBJECTS=()
++for name in bc_adapter ball_challenger_gate c_config c_performance c_runtime_log decision_snapshot director_state enhance_policy fovea_feedback feedback_attention fovea_stats fovea_transaction attention attention_scheduler motion_predictor player_attention_features possession_estimator roi_motion_controller roi_smoother eagleeye_types; do
++    obj="$ROOT/bin/c_objects/$name.o"
++    "$CC" -B"$TOOLS/" --sysroot="$SYSROOT" -mcpu=cortex-a9 -mfpu=neon -mfloat-abi=hard -std=c99 -O3 -Wall -Wextra -I"$CINC" -c "$CROOT/$name.c" -o "$obj"
++    COBJECTS+=("$obj")
++done
++"$CXX" "${FLAGS[@]}" -I"$CINC" -isystem "$PADDLE_LITE_DIR/include" \
+     "$ROOT/src/paddle_person.cpp" "$ROOT/src/eagleeye_hw.cpp" "$ROOT/src/fovea_control.cpp" \
+-    "$ROOT/src/roi_animator.cpp" "$ROOT/src/mouse_roi_controller.cpp" \
++    "$ROOT/src/roi_animator.cpp" "$ROOT/src/mouse_roi_controller.cpp" "$ROOT/src/picodet_c_attention.cpp" \
++    "${COBJECTS[@]}" \
+     "$PADDLE_LITE_DIR/lib/libpaddle_api_light_bundled.a" \
+     -lgomp -lpthread -ldl -lm -o "$ROOT/bin/paddle_person_live"
+ file "$ROOT/bin/video_guard" "$ROOT/bin/fovea_ctl" "$ROOT/bin/paddle_person_live"
+--- baseline/src/paddle_person.cpp
++++ candidate/src/paddle_person.cpp
+@@ -23,6 +23,7 @@
+ #include "eagleeye_hw.hpp"
+ #include "mouse_roi_controller.hpp"
+ #include "roi_animator.hpp"
++#include "picodet_c_attention.hpp"
+ #include "frame_layout.h"
+ #include "paddle_api.h"
+ 
+@@ -49,6 +50,7 @@
+   bool attach_existing_video = false;
+   bool fovea_roi = false;
+   bool mouse_roi = false;
++  bool c_attention_dry_run = false;
+   std::string mouse_device = "auto";
+   int mouse_sensitivity = 2;
+   std::string preprocess = "auto";
+@@ -122,6 +124,7 @@
+       << "  --no-display-init       leave dynclk/VTC untouched\n"
+       << "  --attach-existing-video use running VDMA without reinitializing video\n"
+       << "  --fovea-roi            commit one smoothed 320x180 Lanczos ROI via AXI-Lite\n"
++      << "  --c-attention-dry-run  run C in offline CPU mode without hardware\n"
+       << "  --mouse-roi            use a USB relative mouse while the video is paused\n"
+       << "  --mouse-device PATH    input event path or auto (default auto)\n"
+       << "  --mouse-sensitivity N  ROI pixels per mouse count, 1..8 (default 2)\n";
+@@ -149,6 +152,10 @@
+     }
+     if (arg == "--fovea-roi") {
+       opt->fovea_roi = true;
++      continue;
++    }
++    if (arg == "--c-attention-dry-run") {
++      opt->c_attention_dry_run = true;
+       continue;
+     }
+     if (arg == "--mouse-roi") {
+@@ -485,6 +492,8 @@
+ }
+ 
+ int Run(const Options& opt) {
++  if (opt.c_attention_dry_run && (opt.raw.empty() || opt.preprocess != "cpu" || opt.fovea_roi || opt.mouse_roi))
++    throw std::runtime_error("C dry run requires --raw and --preprocess cpu with no hardware ROI options");
+   std::signal(SIGINT, SignalHandler);
+   std::signal(SIGTERM, SignalHandler);
+ 
+@@ -536,7 +545,7 @@
+   }
+ 
+   std::unique_ptr<eagleeye::RoiAnimator> fovea;
+-  eagleeye::AttentionPolicy roi_policy;
++  eagleeye::PicodetCAttention roi_policy;
+   if (opt.fovea_roi) {
+     fovea.reset(new eagleeye::RoiAnimator(opt.devmem));
+   }
+@@ -622,29 +631,24 @@
+     timing.fps = timing.total_ms > 0 ? 1000.0 / timing.total_ms : 0.0;
+     ++sequence;
+ 
+-    if (fovea) {
+-      fovea->Check();
++    if (fovea || opt.c_attention_dry_run) {
++      if (fovea) fovea->Check();
+       std::vector<eagleeye::PersonBox> boxes;
+       boxes.reserve(persons.size());
+       for (const Detection& d : persons)
+         boxes.push_back({d.confidence, d.x, d.y, d.w, d.h});
+-      const eagleeye::AttentionSelection attention = roi_policy.Update(boxes);
+-      if (attention.valid) {
+-        std::cout << "ATTENTION inference_sequence=" << sequence
+-                  << " target_id=" << attention.target_id
+-                  << " score=" << attention.score
+-                  << " zone=" << unsigned(attention.zone)
+-                  << " motion=" << unsigned(attention.motion)
+-                  << " approach=" << unsigned(attention.approach)
+-                  << " small=" << unsigned(attention.small)
+-                  << " uncertainty=" << unsigned(attention.uncertainty)
+-                  << " accepted_players=" << attention.accepted_players
+-                  << " switched=" << attention.switched
+-                  << " target_roi=" << attention.roi.x << ',' << attention.roi.y << '\n';
+-        fovea->SetTarget(attention.roi);
++      const auto result = roi_policy.Update(static_cast<uint32_t>(sequence), boxes);
++      if (result.valid) {
++        std::cout << "C_ATTENTION inference_sequence=" << sequence
++                  << " target_id=" << result.target_id << " id_source=provisional"
++                  << " c_request=" << result.request_id << " frame_freshness=unverified"
++                  << " hardware_commit=" << (fovea ? "pending" : "not_attempted")
++                  << " roi=" << result.roi.x << ',' << result.roi.y << '\n';
++        if (fovea) fovea->SetTarget(result.roi);
+       } else {
+-        std::cout << "ATTENTION inference_sequence=" << sequence
+-                  << " no_player hold_roi=" << roi_policy.Current().x << ',' << roi_policy.Current().y << '\n';
++        if (fovea) fovea->Hold();
++        std::cout << "C_ATTENTION inference_sequence=" << sequence
++                  << " NO_VALID_TARGET hold_roi=1\n";
+       }
+     }
+ 
+--- baseline/src/roi_animator.hpp
++++ candidate/src/roi_animator.hpp
+@@ -15,6 +15,7 @@
+   RoiAnimator(const RoiAnimator&) = delete;
+   RoiAnimator& operator=(const RoiAnimator&) = delete;
+   void SetTarget(RoiOrigin target);
++  void Hold();
+   void Check() const;
+ 
+  private:
+--- baseline/src/roi_animator.cpp
++++ candidate/src/roi_animator.cpp
+@@ -21,6 +21,12 @@
+   trajectory_.SetTarget(target);
+ }
+ 
++void RoiAnimator::Hold() {
++  std::lock_guard<std::mutex> lock(mutex_);
++  if (error_) std::rethrow_exception(error_);
++  trajectory_.SetTarget(trajectory_.Current());
++}
++
+ void RoiAnimator::Check() const {
+   std::lock_guard<std::mutex> lock(mutex_);
+   if (error_) std::rethrow_exception(error_);
+@@ -33,18 +39,13 @@
+       std::this_thread::sleep_for(std::chrono::milliseconds(50));
+       if (stop_.load()) break;
+       if (control_.Paused()) continue;
+-      RoiOrigin next;
+-      {
+-        std::lock_guard<std::mutex> lock(mutex_);
+-        RoiTrajectory proposed = trajectory_;
+-        if (!proposed.Advance()) continue;
+-        next = proposed.Current();
+-      }
++      // Hold the mutex across commit: Hold() cannot return while a stale move is in flight.
++      std::lock_guard<std::mutex> lock(mutex_);
++      RoiTrajectory proposed = trajectory_;
++      if (!proposed.Advance()) continue;
++      const RoiOrigin next = proposed.Current();
+       control_.Commit(next, ++request_id);
+-      {
+-        std::lock_guard<std::mutex> lock(mutex_);
+-        trajectory_.SetCurrent(next);
+-      }
++      trajectory_.SetCurrent(next);
+     }
+   } catch (...) {
+     std::lock_guard<std::mutex> lock(mutex_);
+--- baseline/src/picodet_c_attention.hpp
++++ candidate/src/picodet_c_attention.hpp
+@@ -0,0 +1,30 @@
++#pragma once
++#include "fovea_roi.hpp"
++#include "bc_adapter.h"
++#include "c_config.h"
++#include "fovea_transaction.h"
++#include <cstdint>
++#include <vector>
++
++namespace eagleeye {
++struct CAttentionResult {
++  bool valid = false;
++  uint16_t target_id = 0;
++  uint32_t request_id = 0;
++  RoiOrigin roi{0, 0};
++};
++class PicodetCAttention {
++ public:
++  PicodetCAttention();
++  CAttentionResult Update(uint32_t sequence, const std::vector<PersonBox>& boxes);
++ private:
++  struct Track { uint16_t id; float x, y; };
++  uint16_t next_id_ = 1;
++  std::vector<Track> previous_;
++  EE_CConfig config_;
++  EE_AttentionScheduler scheduler_;
++  EE_ROISmoother smoother_;
++  EE_FoveaTransactionBuilder transactions_;
++  void Reset();
++};
++}--- baseline/src/picodet_c_attention.cpp
++++ candidate/src/picodet_c_attention.cpp
+@@ -0,0 +1,73 @@
++#include "picodet_c_attention.hpp"
++#include "ball_challenger_gate.h"
++#include <algorithm>
++#include <cmath>
++#include <stdexcept>
++
++namespace eagleeye {
++PicodetCAttention::PicodetCAttention() : config_(ee_c_config_default()) {
++  ee_fovea_transaction_init(&transactions_);
++  Reset();
++}
++void PicodetCAttention::Reset() {
++  previous_.clear();
++  ee_scheduler_init(&scheduler_, config_.scheduler);
++  ee_roi_smoother_init(&smoother_, config_.roi_smoother);
++}
++CAttentionResult PicodetCAttention::Update(uint32_t sequence, const std::vector<PersonBox>& boxes) {
++  CAttentionResult result;
++  if (boxes.size() > EE_MAX_TARGETS) { Reset(); return result; }
++  EE_BParsedFrame parsed{};
++  parsed.frame_id = sequence;
++  parsed.source_width = 640;
++  parsed.source_height = 360;
++  std::vector<Track> current;
++  std::vector<bool> used(previous_.size(), false);
++  for (const auto& box : boxes) {
++    if (!std::isfinite(box.confidence) || !std::isfinite(box.x) || !std::isfinite(box.y) ||
++        !std::isfinite(box.w) || !std::isfinite(box.h) || box.confidence < 0 || box.confidence > 1 ||
++        box.x < 0 || box.y < 0 || box.w <= 0 || box.h <= 0 || box.x + box.w > 640.001f || box.y + box.h > 360.001f) {
++      Reset(); return result;
++    }
++    const float x = box.x + box.w / 2, y = box.y + box.h / 2;
++    int match = -1; float best = 80.f;
++    for (size_t i = 0; i < previous_.size(); ++i) {
++      const float dist = std::hypot(x - previous_[i].x, y - previous_[i].y);
++      if (!used[i] && dist < best) { match = static_cast<int>(i); best = dist; }
++    }
++    uint16_t id;
++    if (match >= 0) { id = previous_[match].id; used[match] = true; }
++    else {
++      // IDs are provisional and never reused during this process lifetime.
++      if (next_id_ == EE_INVALID_TARGET_ID) { Reset(); return result; }
++      id = next_id_++;
++    }
++    current.push_back({id, x, y});
++    auto& t = parsed.targets[parsed.count++];
++    const auto x1 = static_cast<uint16_t>(std::floor(box.x));
++    const auto y1 = static_cast<uint16_t>(std::floor(box.y));
++    const auto x2 = static_cast<uint16_t>(std::min(640.f, std::ceil(box.x + box.w)));
++    const auto y2 = static_cast<uint16_t>(std::min(360.f, std::ceil(box.y + box.h)));
++    if (x2 <= x1 || y2 <= y1) { Reset(); return result; }
++    t.frame_id = sequence; t.target_id = id; t.target_type = EE_SOCCER_TARGET_PLAYER;
++    t.x = x1; t.y = y1; t.w = x2 - x1; t.h = y2 - y1;
++    t.confidence = static_cast<uint8_t>(std::lround(box.confidence * 100)); t.valid = 1;
++    // No fabricated camera timestamp or velocity: inference freshness is unverified.
++  }
++  if (current.empty()) { Reset(); return result; }
++  EE_GlobalTargetList list{}, candidates{};
++  if (!ee_bc_adapt_frame(&parsed, &list)) { Reset(); return result; }
++  ee_attention_update_scores_for_scheduler_step(list.targets, list.count, &config_.attention, scheduler_.wait_frames);
++  EE_FoveaRequest request{}, smoothed{};
++  if (!ee_ball_challenger_gate_apply(&config_, &scheduler_, &list, &candidates) ||
++      !ee_scheduler_step(&scheduler_, &candidates, &request) ||
++      !ee_roi_smoother_step(&smoother_, &request, &smoothed) ||
++      ee_fovea_transaction_build(&transactions_, &smoothed, sequence, &smoothed) == EE_FOVEA_TRANSACTION_INVALID) {
++    Reset(); return result;
++  }
++  previous_ = current;
++  result.valid = true; result.target_id = smoothed.target_id; result.request_id = smoothed.request_id;
++  result.roi = {smoothed.roi_x, smoothed.roi_y};
++  return result;
++}
++}

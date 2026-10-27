@@ -1,0 +1,2 @@
+执行 test_host.sh：PASS；C 注意力与调度、临时 ID、丢失恢复、错误输入和超过 16 个目标；主机测试。
+执行 test_hold.sh：PASS；模拟 Fovea 操作，Hold 等待正在进行的提交并阻止后续旧目标移动；非硬件验证。
