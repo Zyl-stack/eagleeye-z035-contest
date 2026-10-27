@@ -1,0 +1,24 @@
+ARM98_ID kind=REAL_BOARD_MEASURED model=7c8a381bb5ba4a6a3c5c2b3277fd2cfb6ba1f802ddffd854c73bf75e747bfff4 threads=1 input=320x320 power=NO_BIND hardware_submits=0 scope=FULL_PREDICTOR_NOT_CAMERA_FPS
+ARM98_WARMUP frame=-2 conv_count=98 hardware_submits=0
+ARM98_WARMUP frame=-1 conv_count=98 hardware_submits=0
+ARM98_FRAME frame=0 total_ns=698723216 conv_count=98 hardware_submits=0
+ARM98_FRAME frame=1 total_ns=698059021 conv_count=98 hardware_submits=0
+ARM98_FRAME frame=2 total_ns=697435324 conv_count=98 hardware_submits=0
+ARM98_FRAME frame=3 total_ns=697871764 conv_count=98 hardware_submits=0
+ARM98_FRAME frame=4 total_ns=703897288 conv_count=98 hardware_submits=0
+ARM98_FRAME frame=5 total_ns=697388127 conv_count=98 hardware_submits=0
+ARM98_FRAME frame=6 total_ns=697777323 conv_count=98 hardware_submits=0
+ARM98_FRAME frame=7 total_ns=697571258 conv_count=98 hardware_submits=0
+ARM98_FRAME frame=8 total_ns=697476745 conv_count=98 hardware_submits=0
+ARM98_FRAME frame=9 total_ns=697844534 conv_count=98 hardware_submits=0
+ARM98_FRAME frame=10 total_ns=697508962 conv_count=98 hardware_submits=0
+ARM98_FRAME frame=11 total_ns=697567501 conv_count=98 hardware_submits=0
+ARM98_FRAME frame=12 total_ns=697966370 conv_count=98 hardware_submits=0
+ARM98_FRAME frame=13 total_ns=697547451 conv_count=98 hardware_submits=0
+ARM98_FRAME frame=14 total_ns=697368463 conv_count=98 hardware_submits=0
+ARM98_FRAME frame=15 total_ns=697854505 conv_count=98 hardware_submits=0
+ARM98_FRAME frame=16 total_ns=697415513 conv_count=98 hardware_submits=0
+ARM98_FRAME frame=17 total_ns=697348209 conv_count=98 hardware_submits=0
+ARM98_FRAME frame=18 total_ns=697874737 conv_count=98 hardware_submits=0
+ARM98_FRAME frame=19 total_ns=697768637 conv_count=98 hardware_submits=0
+ARM98_SUMMARY frames=20 conv_count=98 mean_ns=698013247.4 conv_sum_mean_ns=593708098.45 full_model_fps=1.4326375663 hardware_submits=0 pre_post_video=UNMEASURED

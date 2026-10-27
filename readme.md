@@ -29,6 +29,8 @@ python tools/verify_submission.py
 
 `board/` 同时包含历史资料，`build/independent_rebuild_20261027/` 包含独立重建报告。当前版本同条件性能数据、完整设计报告及部分验证证据仍需补充，见 `report/submission_audit.md`。历史日志不能直接称为本次构建结果；HDMI 刷新率也不等于检测更新 FPS。
 
+已找到的历史 ARM98 逐层计时及 V2/R3 Golden 和模型计时记录见 [实板证据补充](report/board_evidence_20261027.md)，可使用 `python tools/verify_field_evidence.py` 复核；它们不是当前视频版本的同条件实测。
+
 原材料含模型、第三方 IP、启动镜像及历史日志；当前仓库为私有。公开或比赛提交前需确认版权授权、路径中的个人信息和内容完整性。不要覆盖稳定 SD 卡。
 
 本次补充的材料及仍缺证据见 [提交核查](report/submission_audit.md)、[中文设计报告材料稿](report/design_report_zh.md)、[复现指南](report/reproduction_zh.md)、[技能索引](skill/index.md) 和 [A/B/C/Linux 参考说明](reference/readme.md)。完整 Linux 源码归档使用 Git LFS；克隆后需运行 `git lfs pull`。
