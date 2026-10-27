@@ -39,4 +39,4 @@ A 提供的稳定版源码、Paddle-Lite 构建依赖和修订 Vivado Tcl 可从
 
 ## 足球 B→C 联调
 
-比赛足球 YOLO、PicoDet 人体检测及 ONNX 移植是独立路线。接口和 PC 样例验证见 [B 检测联调说明](report/b_detection_integration_20261027.md)。
+当前使用 PicoDet；足球 YOLO 与 ONNX 移植是独立参考路线。接口和 PC 样例验证见 [B 检测联调说明](report/b_detection_integration_20261027.md)。

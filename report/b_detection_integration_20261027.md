@@ -2,8 +2,8 @@
 
 ## 三条路线
 
-1. **比赛场景足球路线**：B 使用足球数据微调的 YOLO11n 做 PLAYER/BALL 检测、跟踪并产生 `EE_B_TARGET_STREAM_V1`；C 的 `bc_adapter` 接收结果，交给注意力/调度，并生成 Fovea 请求。原始训练数据类编号 PLAYER=0、BALL=1；传输协议的类型枚举 BALL=1、PLAYER=2，不能直接混用。参考：`reference/github_b_detection/b_to_c_yolo_handoff.md`、`reference/github_b_detection/b_detection_interface.md`、`reference/github_c_attention/b_c_interface_v1.md`。
-2. **PicoDet 人体路线**：`data/model.nb` 和 `src/ps/` 是 PERSON 检测，不能当作足球 PLAYER/BALL 检测器。AX7020 材料中的 QEMU 推理也不证明真实板端 B/C 联调。
+1. **B 提供的足球参考路线**：B 描述使用足球数据微调的 YOLO11n 做 PLAYER/BALL 检测、跟踪并产生 `EE_B_TARGET_STREAM_V1`；C 的 `bc_adapter` 接收结果，交给注意力/调度，并生成 Fovea 请求。原始训练数据类编号 PLAYER=0、BALL=1；传输协议的类型枚举 BALL=1、PLAYER=2，不能直接混用。参考：`reference/github_b_detection/b_to_c_yolo_handoff.md`、`reference/github_b_detection/b_detection_interface.md`、`reference/github_c_attention/b_c_interface_v1.md`。
+2. **当前使用的 PicoDet 路线**：用户于 2026-10-27 确认当前使用 PicoDet。`data/model.nb` 和 `src/ps/` 是 PERSON 检测，不能未经验证当作足球 PLAYER/BALL 检测器。最终板端模型、程序身份及其与 C 接口仍待实际记录核实；AX7020 材料中的 QEMU 推理不能证明真实板端 B/C 联调。
 3. **足球 YOLO ONNX/ARM 移植路线**：根据 B 的说明，ARM 构建、上板启动和真实图片输出仍待验收。本仓库当前 B/C/Linux 各固定分支快照中未发现足球 `.pt`、`.onnx` 权重或完整 ONNX ARM 移植包；也未证明 ONNX Runtime/ARM 环境可用。不能将文档提及的 `best.pt` 当成仓库已经包含。请根据实际交付位置核对模型、程序、导出契约与 SHA256，并确认模型分发许可。
 
 ## 交接数据与 PC 检查
@@ -22,7 +22,7 @@ bash tools/test_bc_stream.sh
 
 ## 仍需确认
 
-- B 的足球 YOLO 最终权重和导出 ONNX 的文件、哈希、模型输入输出及其提供位置；足球 ONNX/ARM 移植包和依赖的版本与许可。
+- 当前 PicoDet 板端实际模型和程序的文件、哈希、类别输出、目标 ID 和 B→C 接口；确认其与 C 接口的适配方式。若后续采用足球 YOLO，再核对相关权重、ONNX 文件和依赖。
 - B 交接流的原始画面宽高；将来实际视频流必须正确填写 `STREAM_INFO`，并验证与 A 的显示/ROI 坐标变换一致。
 - 哪个模型及程序实际用于最终演示；A/B/C 和设备身份对应的串口、检测流、ROI 结果及板端测试记录。
 - 足球视频真实运动、遮挡、多目标、无目标/丢失恢复及 B→C→A 与摄像头/HDMI 端到端测试。
