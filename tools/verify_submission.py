@@ -45,6 +45,17 @@ def main():
                 rel = 'report/source_sha256sums.txt'
             elif rel == 'skill/readme.md':
                 rel = 'original/source_skill_readme.txt'
+            elif rel == 'report/ai_collaboration_record.md':
+                rel = 'original/source_ai_collaboration_record.txt'
+            elif rel == 'report/design_report_draft.md':
+                rel = 'original/source_design_report_draft.txt'
+            elif rel == 'skill/lanczos-2x-stream/build/xsim.log':
+                rel = 'sim/lanczos_legacy_xsim.txt'
+            elif rel == 'skill/lanczos-2x-stream/sha256sums.txt':
+                rel = 'sim/lanczos_legacy_rtl_sha256.txt'
+            elif rel.startswith('skill/lanczos-2x-stream/'):
+                # Preserved in the CRC-checked original archive, not displayed as a Skill.
+                continue
             target = ROOT / rel
             if not target.is_file() or hashlib.sha256(z.read(entry)).hexdigest() != digest(target):
                 raise ValueError('source mismatch: ' + entry.filename)

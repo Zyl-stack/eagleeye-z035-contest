@@ -1,1 +1,0 @@
-"tb_lanczos_scaler_rgb_top" -L "xpm" -mt "off" -s "lanczos_rgb_skill_tb" -log "xelab.log" 

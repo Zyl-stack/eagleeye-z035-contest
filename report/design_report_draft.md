@@ -73,8 +73,10 @@ recreation and board replay have not yet been run from this compact directory.
 
 ## 7. AI collaboration and skills
 
-The three `skill/` entries document Lanczos stream integration, FP32 Golden
-checking and ROI review control. Add dated excerpts of actual prompt, response,
+The two submitted `skill/` entries document FP32 Golden checking and ROI
+review control. Lanczos RTL and historical verification records remain in the
+engineering sources and archived evidence; the legacy pixel test failed and
+its applicability to the current RTL remains unverified. Add dated excerpts of actual prompt, response,
 observed failure, correction and validation to the final report. Examples to
 index: KEY0 black-screen diagnosis, USB PHY/mouse enumeration, SD filesystem
 recovery, and preprocessing Golden/latency measurement. Do not invent missing

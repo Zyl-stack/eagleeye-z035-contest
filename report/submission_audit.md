@@ -9,6 +9,6 @@
 | 硬件实现 | A 快照使用完整构建入口完成综合、实现、BIT 和 XSA，报告见 `build/full_rebuild_20261027/` | 12 项输入和 33 项输出延迟缺失；8 项 Methodology Critical Warning 和 CDC Critical 分类尚需核查。已约束时序通过不等于板端安全或功能通过 |
 | 可复现构建 | A 快照恢复、Vivado 全流程入口、Paddle-Lite 依赖、固定 Linux 源码及配置 | Vivado 和 PetaLinux 2022.2 工具链/sysroot 需自行准备；重建内核与历史镜像哈希不同；rootfs 与现场镜像一致性未证明 |
 | 上板证据 | 旧 CPU 预处理日志；用户确认 A 的 PicoDet+C 新候选上板功能正常，并反馈新生成 BIT 已上板验证成功 | 上板 BIT 的具体哈希尚不确定；缺该次原始串口、哈希读回、逐功能记录、当前版本 FPGA/CPU 同条件对照及板端预处理输出对 Golden 逐值比较 |
-| Skill 与报告 | 三个技能、报告材料稿和 AI 协作记录 | 需团队核对贡献、创新对比、授权、原始交互材料并形成正式定稿；Lanczos 失败不得宣称 PASS |
+| Skill 与报告 | 两个技能、报告材料稿和 AI 协作记录 | 需团队核对贡献、创新对比、授权、原始交互材料并形成正式定稿；Lanczos 旧测试失败且版本对应待核实，不得宣称当前逐像素验证 PASS |
 
 A/B 分工下真正需要现场人员或资料所有者补充的内容见 `report/field_evidence_needed_zh.md`。用户反馈、QEMU、仿真和工具报告必须分别标注，不能互相替代。Git LFS 对象须 `git lfs pull`，并在对外分发前确认模型、依赖及第三方 IP 授权。
