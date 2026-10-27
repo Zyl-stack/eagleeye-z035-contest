@@ -1,0 +1,52 @@
+set_property PACKAGE_PIN P16     [get_ports {cmos1_i2c_scl_io}]
+set_property PACKAGE_PIN U15     [get_ports {cmos1_i2c_sda_io}]
+
+set_property PACKAGE_PIN R14     [get_ports {cmos1_pclk}]
+set_property PACKAGE_PIN P15     [get_ports {cmos1_vsync}]
+
+set_property PACKAGE_PIN V15     [get_ports {cmos1_d[5]}]
+set_property PACKAGE_PIN Y14     [get_ports {cmos1_d[4]}]
+
+set_property PACKAGE_PIN P14     [get_ports {cmos1_d[9]}]
+set_property PACKAGE_PIN Y17     [get_ports {cmos1_d[8]}]
+
+#set_property PACKAGE_PIN U13     [get_ports {cmos1_xclk}] 24M时钟，这个摄像头不需要
+set_property PACKAGE_PIN U14     [get_ports {cmos1_href}]
+
+set_property PACKAGE_PIN P18     [get_ports {cmos1_d[2]}]
+set_property PACKAGE_PIN W15     [get_ports {cmos1_d[6]}]
+
+set_property PACKAGE_PIN Y16     [get_ports {cmos1_d[7]}]
+set_property PACKAGE_PIN W14     [get_ports {cmos1_d[3]}]
+
+set_property PACKAGE_PIN N17     [get_ports {cmos_rstn_tri_o[0]}]
+#set_property PACKAGE_PIN U17     [get_ports {cmos1_pwdn}] 工作时拉低，这里用不上
+
+set_property PACKAGE_PIN W19     [get_ports {cmos1_d[0]}]
+set_property PACKAGE_PIN W18     [get_ports {cmos1_d[1]}]
+
+
+set_property IOSTANDARD LVCMOS33 [get_ports {cmos1_i2c_scl_io}]
+set_property IOSTANDARD LVCMOS33 [get_ports {cmos1_i2c_sda_io}]
+set_property IOSTANDARD LVCMOS33 [get_ports {cmos1_pclk}]
+set_property IOSTANDARD LVCMOS33 [get_ports {cmos1_vsync}]
+set_property IOSTANDARD LVCMOS33 [get_ports {cmos1_d[5]}]
+set_property IOSTANDARD LVCMOS33 [get_ports {cmos1_d[4]}]
+set_property IOSTANDARD LVCMOS33 [get_ports {cmos1_d[9]}]
+set_property IOSTANDARD LVCMOS33 [get_ports {cmos1_d[8]}]
+#set_property IOSTANDARD LVCMOS33 [get_ports {cmos1_xclk}]
+set_property IOSTANDARD LVCMOS33 [get_ports {cmos1_href}]
+set_property IOSTANDARD LVCMOS33 [get_ports {cmos1_d[2]}]
+set_property IOSTANDARD LVCMOS33 [get_ports {cmos1_d[6]}]
+set_property IOSTANDARD LVCMOS33 [get_ports {cmos1_d[7]}]
+set_property IOSTANDARD LVCMOS33 [get_ports {cmos1_d[3]}]
+set_property IOSTANDARD LVCMOS33 [get_ports {cmos_rstn_tri_o[0]}]
+#set_property IOSTANDARD LVCMOS33 [get_ports {cmos1_pwdn}]
+
+set_property IOSTANDARD LVCMOS33 [get_ports {cmos1_d[0]}]
+set_property IOSTANDARD LVCMOS33 [get_ports {cmos1_d[1]}]
+
+set_property PULLUP true [get_ports cmos1_i2c_scl_io]
+set_property PULLUP true [get_ports cmos1_i2c_sda_io]
+
+set_property CLOCK_DEDICATED_ROUTE FALSE [get_nets cmos1_pclk_IBUF]

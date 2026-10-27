@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>18.0</VCProjectVersion>
+    <Keyword>Win32Proj</Keyword>
+    <ProjectGuid>{7FBD89D1-3487-49B9-BD1D-9DB20C3A6AA8}</ProjectGuid>
+    <RootNamespace>EagleEyeCAttentionSim</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v145</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v145</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <PropertyGroup>
+    <OutDir>$(SolutionDir)build\$(Configuration)\</OutDir>
+    <IntDir>$(SolutionDir)build\obj\$(Configuration)\</IntDir>
+    <TargetName>eagleeye_c_sim</TargetName>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <WarningLevel>Level4</WarningLevel>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <CompileAs>CompileAsC</CompileAs>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <Optimization>Disabled</Optimization>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level4</WarningLevel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <CompileAs>CompileAsC</CompileAs>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="src\attention.c" />
+    <ClCompile Include="src\attention_scheduler.c" />
+    <ClCompile Include="src\attention_score.c" />
+    <ClCompile Include="src\eagleeye_types.c" />
+    <ClCompile Include="src\fake_data.c" />
+    <ClCompile Include="src\main.c" />
+    <ClCompile Include="src\motion_predictor.c" />
+    <ClCompile Include="src\possession_estimator.c" />
+    <ClCompile Include="src\platform_io_sim.c" />
+    <ClCompile Include="src\risk.c" />
+    <ClCompile Include="src\state_machine.c" />
+    <ClCompile Include="src\transaction.c" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="include\attention_config.h" />
+    <ClInclude Include="include\attention.h" />
+    <ClInclude Include="include\attention_scheduler.h" />
+    <ClInclude Include="include\attention_score.h" />
+    <ClInclude Include="include\eagleeye_types.h" />
+    <ClInclude Include="include\fake_data.h" />
+    <ClInclude Include="include\motion_predictor.h" />
+    <ClInclude Include="include\possession_estimator.h" />
+    <ClInclude Include="include\platform_io.h" />
+    <ClInclude Include="include\platform_io_vitis.h" />
+    <ClInclude Include="include\register_map.h" />
+    <ClInclude Include="include\risk.h" />
+    <ClInclude Include="include\state_machine.h" />
+    <ClInclude Include="include\transaction.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="INTERFACE_SPEC.md" />
+    <None Include="HARDWARE_BRINGUP_CHECKLIST.md" />
+    <None Include="VITIS_PORTING.md" />
+    <None Include="VIVADO_VITIS_BRINGUP_STEPS.md" />
+    <None Include="SOCCER_MIGRATION.md" />
+    <None Include="SOCCER_HARDWARE_BRINGUP_CHECKLIST.md" />
+    <None Include="BALL_CARRIER_FOCUS.md" />
+    <None Include="tests\test_scenarios.c" />
+    <None Include="run_tests_msvc.bat" />
+    <None Include="src\platform_io_vitis.c" />
+    <None Include="vitis_axi_smoke_test.c" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+</Project>

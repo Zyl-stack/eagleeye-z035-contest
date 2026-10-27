@@ -1,0 +1,13 @@
+{
+  "records": 100,
+  "mean": {
+    "capture_ms": 13.60723,
+    "preprocess_ms": 418.06141,
+    "inference_ms": 481.95462,
+    "postprocess_ms": 0.02945,
+    "total_ms": 913.6526,
+    "FPS": 1.0947500000000001
+  },
+  "fps_from_mean_total": 1.094507912526052,
+  "scope": "log statistics only; board identity and comparability require separate evidence"
+}

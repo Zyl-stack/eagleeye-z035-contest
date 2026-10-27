@@ -46,6 +46,23 @@ def main():
             target = ROOT / rel
             if not target.is_file() or hashlib.sha256(z.read(entry)).hexdigest() != digest(target):
                 raise ValueError('source mismatch: ' + entry.filename)
+    for name in ('github_a_fovea', 'github_b_detection', 'github_c_attention', 'github_linux_petalinux'):
+        mirror = ROOT / 'reference' / name
+        with zipfile.ZipFile(ROOT / 'original' / (name + '.zip')) as z:
+            bad = z.testzip()
+            if bad:
+                raise ValueError('reference CRC: ' + name + '/' + bad)
+            entries = [x for x in z.infolist() if not x.is_dir()]
+            names = [x.filename.lower() for x in entries]
+            if len(names) != len(set(names)):
+                raise ValueError('reference case collision: ' + name)
+            actual = {p.relative_to(mirror).as_posix() for p in mirror.rglob('*') if p.is_file()}
+            if set(names) != actual:
+                raise ValueError('reference file list mismatch: ' + name)
+            for entry in entries:
+                if hashlib.sha256(z.read(entry)).hexdigest() != digest(mirror / entry.filename.lower()):
+                    raise ValueError('reference mismatch: ' + entry.filename)
+            print('REFERENCE_PASS ' + name + ' files=' + str(len(entries)))
     expected = set(MANIFEST.read_text(encoding='utf-8').splitlines())
     actual = {digest(p) + '  ' + p.relative_to(ROOT).as_posix() for p in files()}
     if actual != expected:

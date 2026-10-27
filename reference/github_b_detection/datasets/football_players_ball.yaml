@@ -1,0 +1,8 @@
+# YOLO dataset definition. Images and labels are intentionally not committed.
+path: datasets/football_yolo
+train: images/train
+val: images/val
+test: images/test
+names:
+  0: PLAYER
+  1: BALL

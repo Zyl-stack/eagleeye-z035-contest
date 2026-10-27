@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{C7C72D4C-4D35-40BC-B88C-9170555B2119}</UniqueIdentifier>
+      <Extensions>c</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{5718AB35-FA53-40EA-9649-24366EF3FD68}</UniqueIdentifier>
+      <Extensions>h</Extensions>
+    </Filter>
+    <Filter Include="Tests">
+      <UniqueIdentifier>{B4C03F72-98D2-4985-9F7B-A1097DEB5539}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\a_fovea_adapter.c"><Filter>Source Files</Filter></ClCompile>
+    <ClCompile Include="src\ball_challenger_gate.c"><Filter>Source Files</Filter></ClCompile>
+    <ClCompile Include="src\bc_adapter.c"><Filter>Source Files</Filter></ClCompile>
+    <ClCompile Include="src\c_config.c"><Filter>Source Files</Filter></ClCompile>
+    <ClCompile Include="src\c_performance.c"><Filter>Source Files</Filter></ClCompile>
+    <ClCompile Include="src\c_runtime_log.c"><Filter>Source Files</Filter></ClCompile>
+    <ClCompile Include="src\decision_snapshot.c"><Filter>Source Files</Filter></ClCompile>
+    <ClCompile Include="src\director_state.c"><Filter>Source Files</Filter></ClCompile>
+    <ClCompile Include="src\enhance_policy.c"><Filter>Source Files</Filter></ClCompile>
+    <ClCompile Include="src\feedback_attention.c"><Filter>Source Files</Filter></ClCompile>
+    <ClCompile Include="src\fovea_feedback.c"><Filter>Source Files</Filter></ClCompile>
+    <ClCompile Include="src\fovea_stats.c"><Filter>Source Files</Filter></ClCompile>
+    <ClCompile Include="src\attention.c"><Filter>Source Files</Filter></ClCompile>
+    <ClCompile Include="src\attention_scheduler.c"><Filter>Source Files</Filter></ClCompile>
+    <ClCompile Include="src\attention_score.c"><Filter>Source Files</Filter></ClCompile>
+    <ClCompile Include="src\eagleeye_types.c"><Filter>Source Files</Filter></ClCompile>
+    <ClCompile Include="src\fake_data.c"><Filter>Source Files</Filter></ClCompile>
+    <ClCompile Include="src\main.c"><Filter>Source Files</Filter></ClCompile>
+    <ClCompile Include="src\motion_predictor.c"><Filter>Source Files</Filter></ClCompile>
+    <ClCompile Include="src\possession_estimator.c"><Filter>Source Files</Filter></ClCompile>
+    <ClCompile Include="src\platform_io_sim.c"><Filter>Source Files</Filter></ClCompile>
+    <ClCompile Include="src\risk.c"><Filter>Source Files</Filter></ClCompile>
+    <ClCompile Include="src\roi_motion_controller.c"><Filter>Source Files</Filter></ClCompile>
+    <ClCompile Include="src\roi_smoother.c"><Filter>Source Files</Filter></ClCompile>
+    <ClCompile Include="src\state_machine.c"><Filter>Source Files</Filter></ClCompile>
+    <ClCompile Include="src\transaction.c"><Filter>Source Files</Filter></ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="include\a_fovea_adapter.h"><Filter>Header Files</Filter></ClInclude>
+    <ClInclude Include="include\ball_challenger_gate.h"><Filter>Header Files</Filter></ClInclude>
+    <ClInclude Include="include\bc_adapter.h"><Filter>Header Files</Filter></ClInclude>
+    <ClInclude Include="include\c_config.h"><Filter>Header Files</Filter></ClInclude>
+    <ClInclude Include="include\c_performance.h"><Filter>Header Files</Filter></ClInclude>
+    <ClInclude Include="include\c_runtime_log.h"><Filter>Header Files</Filter></ClInclude>
+    <ClInclude Include="include\decision_snapshot.h"><Filter>Header Files</Filter></ClInclude>
+    <ClInclude Include="include\director_state.h"><Filter>Header Files</Filter></ClInclude>
+    <ClInclude Include="include\enhance_policy.h"><Filter>Header Files</Filter></ClInclude>
+    <ClInclude Include="include\feedback_attention.h"><Filter>Header Files</Filter></ClInclude>
+    <ClInclude Include="include\fovea_feedback.h"><Filter>Header Files</Filter></ClInclude>
+    <ClInclude Include="include\fovea_stats.h"><Filter>Header Files</Filter></ClInclude>
+    <ClInclude Include="include\attention_config.h"><Filter>Header Files</Filter></ClInclude>
+    <ClInclude Include="include\attention.h"><Filter>Header Files</Filter></ClInclude>
+    <ClInclude Include="include\attention_scheduler.h"><Filter>Header Files</Filter></ClInclude>
+    <ClInclude Include="include\attention_score.h"><Filter>Header Files</Filter></ClInclude>
+    <ClInclude Include="include\eagleeye_types.h"><Filter>Header Files</Filter></ClInclude>
+    <ClInclude Include="include\fake_data.h"><Filter>Header Files</Filter></ClInclude>
+    <ClInclude Include="include\motion_predictor.h"><Filter>Header Files</Filter></ClInclude>
+    <ClInclude Include="include\possession_estimator.h"><Filter>Header Files</Filter></ClInclude>
+    <ClInclude Include="include\platform_io.h"><Filter>Header Files</Filter></ClInclude>
+    <ClInclude Include="include\platform_io_vitis.h"><Filter>Header Files</Filter></ClInclude>
+    <ClInclude Include="include\register_map.h"><Filter>Header Files</Filter></ClInclude>
+    <ClInclude Include="include\risk.h"><Filter>Header Files</Filter></ClInclude>
+    <ClInclude Include="include\roi_motion_controller.h"><Filter>Header Files</Filter></ClInclude>
+    <ClInclude Include="include\roi_smoother.h"><Filter>Header Files</Filter></ClInclude>
+    <ClInclude Include="include\state_machine.h"><Filter>Header Files</Filter></ClInclude>
+    <ClInclude Include="include\transaction.h"><Filter>Header Files</Filter></ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="INTERFACE_SPEC.md" />
+    <None Include="HARDWARE_BRINGUP_CHECKLIST.md" />
+    <None Include="VITIS_PORTING.md" />
+    <None Include="VIVADO_VITIS_BRINGUP_STEPS.md" />
+    <None Include="SOCCER_MIGRATION.md" />
+    <None Include="SOCCER_HARDWARE_BRINGUP_CHECKLIST.md" />
+    <None Include="A_C_BOARD_BRINGUP.md" />
+    <None Include="tests\test_scenarios.c"><Filter>Tests</Filter></None>
+    <None Include="tests\test_a_fovea_adapter.c"><Filter>Tests</Filter></None>
+    <None Include="tests\test_ball_challenger_gate.c"><Filter>Tests</Filter></None>
+    <None Include="tests\test_bc_adapter.c"><Filter>Tests</Filter></None>
+    <None Include="tests\test_c_stability.c"><Filter>Tests</Filter></None>
+    <None Include="tests\test_match_regression.c"><Filter>Tests</Filter></None>
+    <None Include="tests\test_competition_features_v2.c"><Filter>Tests</Filter></None>
+    <None Include="tools\bc_stream_demo.c"><Filter>Tests</Filter></None>
+    <None Include="examples\b_target_stream_v1_sample.txt"><Filter>Tests</Filter></None>
+    <None Include="B_C_PC_INTEGRATION.md" />
+    <None Include="C_BALL_CHALLENGER_GATE.md" />
+    <None Include="B_C_INTERFACE_V1.md" />
+    <None Include="C_RUNTIME_TUNING.md" />
+    <None Include="C_COMPETITION_FEATURES_V2.md" />
+    <None Include="run_tests_msvc.bat"><Filter>Tests</Filter></None>
+    <None Include="src\platform_io_vitis.c"><Filter>Source Files</Filter></None>
+    <None Include="vitis_axi_smoke_test.c" />
+    <None Include="vitis_dynamic_fovea_smoke_test.c" />
+  </ItemGroup>
+</Project>

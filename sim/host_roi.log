@@ -1,0 +1,11 @@
+Scope: host-only; not hardware validation
+Command: python -B -m unittest discover -s tests -v
+Working directory: skill/roi-review-control
+Exit code: 0
+
+test_pass_and_fail (test_check_hw_contract.ContractTest.test_pass_and_fail) ... ok
+
+----------------------------------------------------------------------
+Ran 1 test in 0.000s
+
+OK

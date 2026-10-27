@@ -1,0 +1,24 @@
+mkdir -p build
+cc -std=c99 -Wall -Wextra -Wpedantic -Iinclude -c src/attention.c -o build/attention.o
+cc -std=c99 -Wall -Wextra -Wpedantic -Iinclude -c src/attention_scheduler.c -o build/attention_scheduler.o
+cc -std=c99 -Wall -Wextra -Wpedantic -Iinclude -c src/attention_score.c -o build/attention_score.o
+cc -std=c99 -Wall -Wextra -Wpedantic -Iinclude -c src/ball_challenger_gate.c -o build/ball_challenger_gate.o
+cc -std=c99 -Wall -Wextra -Wpedantic -Iinclude -c src/c_config.c -o build/c_config.o
+cc -std=c99 -Wall -Wextra -Wpedantic -Iinclude -c src/decision_snapshot.c -o build/decision_snapshot.o
+cc -std=c99 -Wall -Wextra -Wpedantic -Iinclude -c src/director_state.c -o build/director_state.o
+cc -std=c99 -Wall -Wextra -Wpedantic -Iinclude -c src/eagleeye_types.c -o build/eagleeye_types.o
+cc -std=c99 -Wall -Wextra -Wpedantic -Iinclude -c src/enhance_policy.c -o build/enhance_policy.o
+cc -std=c99 -Wall -Wextra -Wpedantic -Iinclude -c src/fake_data.c -o build/fake_data.o
+cc -std=c99 -Wall -Wextra -Wpedantic -Iinclude -c src/fovea_stats.c -o build/fovea_stats.o
+cc -std=c99 -Wall -Wextra -Wpedantic -Iinclude -c src/main.c -o build/main.o
+cc -std=c99 -Wall -Wextra -Wpedantic -Iinclude -c src/motion_predictor.c -o build/motion_predictor.o
+cc -std=c99 -Wall -Wextra -Wpedantic -Iinclude -c src/platform_io_sim.c -o build/platform_io_sim.o
+cc -std=c99 -Wall -Wextra -Wpedantic -Iinclude -c src/player_attention_features.c -o build/player_attention_features.o
+cc -std=c99 -Wall -Wextra -Wpedantic -Iinclude -c src/risk.c -o build/risk.o
+cc -std=c99 -Wall -Wextra -Wpedantic -Iinclude -c src/roi_smoother.c -o build/roi_smoother.o
+cc -std=c99 -Wall -Wextra -Wpedantic -Iinclude -c src/state_machine.c -o build/state_machine.o
+cc -std=c99 -Wall -Wextra -Wpedantic -Iinclude -c src/transaction.c -o build/transaction.o
+cc -std=c99 -Wall -Wextra -Wpedantic -Iinclude -c src/feedback_attention.c -o build/feedback_attention.o
+cc -std=c99 -Wall -Wextra -Wpedantic -Iinclude -c src/fovea_feedback.c -o build/fovea_feedback.o
+cc -std=c99 -Wall -Wextra -Wpedantic -Iinclude -c src/roi_motion_controller.c -o build/roi_motion_controller.o
+cc -std=c99 -Wall -Wextra -Wpedantic -Iinclude build/attention.o build/attention_scheduler.o build/attention_score.o build/ball_challenger_gate.o build/c_config.o build/decision_snapshot.o build/director_state.o build/eagleeye_types.o build/enhance_policy.o build/fake_data.o build/fovea_stats.o build/main.o build/motion_predictor.o build/platform_io_sim.o build/player_attention_features.o build/risk.o build/roi_smoother.o build/state_machine.o build/transaction.o build/feedback_attention.o build/fovea_feedback.o build/roi_motion_controller.o -o build/eagleeye_c_sim

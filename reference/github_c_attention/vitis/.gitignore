@@ -1,0 +1,33 @@
+# Vitis and Eclipse workspace metadata
+.metadata/
+RemoteSystemsTempFiles/
+*.lock
+
+# Generated platform and BSP content
+Debug/
+Release/
+bsp/
+bspinclude/
+export/
+zynq_fsbl/
+standalone_domain/
+generated/
+build/
+
+# Generated build outputs
+*.elf
+*.o
+*.obj
+*.d
+*.a
+*.map
+*.log
+makefile
+Makefile
+sources.mk
+objects.mk
+subdir.mk
+lscript.ld
+xparameters.h
+
+# Keep Vitis project descriptions and source/documentation files tracked.

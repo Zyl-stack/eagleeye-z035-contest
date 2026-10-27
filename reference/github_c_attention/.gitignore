@@ -1,0 +1,20 @@
+# Build outputs
+build/
+tools/build/
+*.obj
+*.exe
+*.ilk
+*.pdb
+*.lib
+*.tlog
+
+# Visual Studio user/local files
+*.vcxproj.user
+.vs/
+
+# Editor/system files
+.DS_Store
+Thumbs.db
+enc_temp_folder/
+__pycache__/
+*.pyc

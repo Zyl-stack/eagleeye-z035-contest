@@ -13,6 +13,7 @@
 | `report/` | 设计报告材料、协作记录和待补证据 |
 | `original/eagleeye_z035.zip` | 原文件夹 226 个文件的完整快照，保留原大小写 |
 | `tools/` | 本仓库完整性与来源核验脚本 |
+| `reference/` | 独立的 A/B/C 和 Linux 分支参考源码及版本边界，不代表与主工程已联调 |
 
 ## 复现与大小写
 
@@ -29,3 +30,5 @@ python tools/verify_submission.py
 `board/` 与 `build/` 为原工程的历史资料。现有报告明确指出：干净目录重建、当前版本同条件性能数据、完整设计报告及部分验证证据仍需补充，详见 `report/readme.md` 和 `report/source_readme.md`。历史日志不能直接称为本次构建结果；HDMI 刷新率也不等于检测更新 FPS。
 
 原材料含模型、第三方 IP、启动镜像及历史日志；当前仓库为私有。公开或比赛提交前需确认版权授权、路径中的个人信息和内容完整性。不要覆盖稳定 SD 卡。
+
+本次补充的材料及仍缺证据见 [提交核查](report/submission_audit.md)、[中文设计报告材料稿](report/design_report_zh.md)、[技能索引](skill/index.md) 和 [A/B/C/Linux 参考说明](reference/readme.md)。

@@ -1,0 +1,2 @@
+EXTRACTED github_linux_petalinux: /tmp/eagleeye_release_linux_20261027
+REPRODUCE_PASS branch=linux scope=host_simulation

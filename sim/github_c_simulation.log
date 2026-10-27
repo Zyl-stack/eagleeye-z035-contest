@@ -1,0 +1,636 @@
+EagleEye soccer foveated broadcast software simulation
+Attention selects a ball/player focus target; ROI uses a constant-velocity predictor.
+
+  state_change: GLOBAL_SCAN -> CANDIDATE target=1 request=1
+[frame=01] state=CANDIDATE selected=1 req=1 roi=(252,210,18,18)
+  target=1 zone=CENTER coarse=UNKNOWN conf=96 vx=2 vy=1 approach=0 attn=1881 bbox=(252,210,18,18)
+  target=11 zone=CENTER coarse=PEDESTRIAN conf=90 vx=1 vy=0 approach=0 attn=1837 bbox=(310,175,46,92)
+  target=12 zone=CENTER coarse=PEDESTRIAN conf=91 vx=1 vy=0 approach=0 attn=1148 bbox=(120,180,50,94)
+Target 1
+  ball_priority     = 255
+  motion_score      = 1
+  goal_zone_score   = 40
+  small_target      = 255
+  uncertainty       = 159
+  ball_proximity    = 0
+  aging_score       = 0
+  total_attention   = 1873
+Target 11
+  ball_priority     = 0
+  motion_score      = 0
+  goal_zone_score   = 180
+  small_target      = 180
+  uncertainty       = 165
+  ball_proximity    = 217
+  aging_score       = 8
+  total_attention   = 1837
+Target 12
+  ball_priority     = 0
+  motion_score      = 0
+  goal_zone_score   = 40
+  small_target      = 169
+  uncertainty       = 164
+  ball_proximity    = 95
+  aging_score       = 8
+  total_attention   = 1148
+Selected Target = 1
+
+  prediction target=1 frame=2 horizon=1 latency=0 roi_origin=(256,211)
+  state_change: CANDIDATE -> FOVEA_LOCK target=1 request=1
+[frame=02] state=FOVEA_LOCK selected=1 req=1 roi=(256,211,18,18)
+  target=1 zone=CENTER coarse=UNKNOWN conf=96 vx=2 vy=1 approach=0 attn=1881 bbox=(254,210,18,18)
+  target=11 zone=CENTER coarse=PEDESTRIAN conf=90 vx=1 vy=0 approach=0 attn=1846 bbox=(310,175,46,92)
+  target=12 zone=CENTER coarse=PEDESTRIAN conf=91 vx=1 vy=0 approach=0 attn=1157 bbox=(120,180,50,94)
+Target 1
+  ball_priority     = 255
+  motion_score      = 1
+  goal_zone_score   = 40
+  small_target      = 255
+  uncertainty       = 159
+  ball_proximity    = 0
+  aging_score       = 8
+  total_attention   = 1881
+Target 11
+  ball_priority     = 0
+  motion_score      = 0
+  goal_zone_score   = 180
+  small_target      = 180
+  uncertainty       = 165
+  ball_proximity    = 217
+  aging_score       = 17
+  total_attention   = 1846
+Target 12
+  ball_priority     = 0
+  motion_score      = 0
+  goal_zone_score   = 40
+  small_target      = 169
+  uncertainty       = 164
+  ball_proximity    = 95
+  aging_score       = 17
+  total_attention   = 1157
+Selected Target = 1
+
+  prediction target=1 frame=3 horizon=1 latency=0 roi_origin=(258,211)
+  state_change: FOVEA_LOCK -> ENHANCING target=1 request=1
+[frame=03] state=ENHANCING selected=1 req=1 roi=(258,211,18,18)
+  target=1 zone=CENTER coarse=UNKNOWN conf=96 vx=2 vy=1 approach=0 attn=1890 bbox=(256,210,18,18)
+  target=11 zone=CENTER coarse=PEDESTRIAN conf=90 vx=1 vy=0 approach=0 attn=1854 bbox=(310,175,46,92)
+  target=12 zone=CENTER coarse=PEDESTRIAN conf=91 vx=1 vy=0 approach=0 attn=1165 bbox=(120,180,50,94)
+Target 1
+  ball_priority     = 255
+  motion_score      = 1
+  goal_zone_score   = 40
+  small_target      = 255
+  uncertainty       = 159
+  ball_proximity    = 0
+  aging_score       = 17
+  total_attention   = 1890
+Target 11
+  ball_priority     = 0
+  motion_score      = 0
+  goal_zone_score   = 180
+  small_target      = 180
+  uncertainty       = 165
+  ball_proximity    = 217
+  aging_score       = 25
+  total_attention   = 1854
+Target 12
+  ball_priority     = 0
+  motion_score      = 0
+  goal_zone_score   = 40
+  small_target      = 169
+  uncertainty       = 164
+  ball_proximity    = 95
+  aging_score       = 25
+  total_attention   = 1165
+Selected Target = 1
+
+  prediction target=1 frame=4 horizon=1 latency=0 roi_origin=(260,211)
+[frame=04] state=ENHANCING selected=1 req=1 roi=(260,211,18,18)
+  target=1 zone=CENTER coarse=UNKNOWN conf=96 vx=2 vy=1 approach=0 attn=1898 bbox=(258,210,18,18)
+  target=11 zone=CENTER coarse=PEDESTRIAN conf=90 vx=1 vy=0 approach=0 attn=1863 bbox=(310,175,46,92)
+  target=12 zone=CENTER coarse=PEDESTRIAN conf=91 vx=1 vy=0 approach=0 attn=1174 bbox=(120,180,50,94)
+Target 1
+  ball_priority     = 255
+  motion_score      = 1
+  goal_zone_score   = 40
+  small_target      = 255
+  uncertainty       = 159
+  ball_proximity    = 0
+  aging_score       = 25
+  total_attention   = 1898
+Target 11
+  ball_priority     = 0
+  motion_score      = 0
+  goal_zone_score   = 180
+  small_target      = 180
+  uncertainty       = 165
+  ball_proximity    = 217
+  aging_score       = 34
+  total_attention   = 1863
+Target 12
+  ball_priority     = 0
+  motion_score      = 0
+  goal_zone_score   = 40
+  small_target      = 169
+  uncertainty       = 164
+  ball_proximity    = 95
+  aging_score       = 34
+  total_attention   = 1174
+Selected Target = 1
+
+  prediction target=1 frame=5 horizon=1 latency=0 roi_origin=(262,211)
+  state_change: ENHANCING -> REFINE_INFER target=1 request=1
+[frame=05] state=REFINE_INFER selected=1 req=1 roi=(262,211,18,18)
+  target=1 zone=CENTER coarse=UNKNOWN conf=96 vx=2 vy=1 approach=0 attn=1907 bbox=(260,210,18,18)
+  target=11 zone=CENTER coarse=PEDESTRIAN conf=90 vx=1 vy=0 approach=0 attn=1871 bbox=(310,175,46,92)
+  target=12 zone=CENTER coarse=PEDESTRIAN conf=91 vx=1 vy=0 approach=0 attn=1182 bbox=(120,180,50,94)
+Target 1
+  ball_priority     = 255
+  motion_score      = 1
+  goal_zone_score   = 40
+  small_target      = 255
+  uncertainty       = 159
+  ball_proximity    = 0
+  aging_score       = 34
+  total_attention   = 1907
+Target 11
+  ball_priority     = 0
+  motion_score      = 0
+  goal_zone_score   = 180
+  small_target      = 180
+  uncertainty       = 165
+  ball_proximity    = 217
+  aging_score       = 42
+  total_attention   = 1871
+Target 12
+  ball_priority     = 0
+  motion_score      = 0
+  goal_zone_score   = 40
+  small_target      = 169
+  uncertainty       = 164
+  ball_proximity    = 95
+  aging_score       = 42
+  total_attention   = 1182
+Selected Target = 1
+
+  prediction target=1 frame=6 horizon=1 latency=0 roi_origin=(264,211)
+  state_change: REFINE_INFER -> CONFIRMED target=1 request=1
+[frame=06] state=CONFIRMED selected=1 req=1 roi=(264,211,18,18)
+  target=1 zone=CENTER coarse=UNKNOWN conf=96 vx=2 vy=1 approach=0 attn=1915 bbox=(262,210,18,18)
+  target=11 zone=CENTER coarse=PEDESTRIAN conf=90 vx=1 vy=0 approach=0 attn=1880 bbox=(310,175,46,92)
+  target=12 zone=CENTER coarse=PEDESTRIAN conf=91 vx=1 vy=0 approach=0 attn=1191 bbox=(120,180,50,94)
+Target 1
+  ball_priority     = 255
+  motion_score      = 1
+  goal_zone_score   = 40
+  small_target      = 255
+  uncertainty       = 159
+  ball_proximity    = 0
+  aging_score       = 42
+  total_attention   = 1915
+Target 11
+  ball_priority     = 0
+  motion_score      = 0
+  goal_zone_score   = 180
+  small_target      = 180
+  uncertainty       = 165
+  ball_proximity    = 217
+  aging_score       = 51
+  total_attention   = 1880
+Target 12
+  ball_priority     = 0
+  motion_score      = 0
+  goal_zone_score   = 40
+  small_target      = 169
+  uncertainty       = 164
+  ball_proximity    = 95
+  aging_score       = 51
+  total_attention   = 1191
+Selected Target = 1
+  refined req=1 target=1 class=UNKNOWN conf=94 focus=HIGHLIGHT risk=ATTENTION score=0.465
+  risk_action=CONFIRMED
+
+  prediction target=1 frame=7 horizon=1 latency=0 roi_origin=(266,211)
+  state_change: CONFIRMED -> HOLD target=1 request=1
+[frame=07] state=HOLD selected=1 req=1 roi=(266,211,18,18)
+  target=1 zone=CENTER coarse=UNKNOWN conf=96 vx=2 vy=1 approach=0 attn=1924 bbox=(264,210,18,18)
+  target=11 zone=CENTER coarse=PEDESTRIAN conf=90 vx=1 vy=0 approach=0 attn=1888 bbox=(310,175,46,92)
+  target=12 zone=CENTER coarse=PEDESTRIAN conf=91 vx=1 vy=0 approach=0 attn=1199 bbox=(120,180,50,94)
+Target 1
+  ball_priority     = 255
+  motion_score      = 1
+  goal_zone_score   = 40
+  small_target      = 255
+  uncertainty       = 159
+  ball_proximity    = 0
+  aging_score       = 51
+  total_attention   = 1924
+Target 11
+  ball_priority     = 0
+  motion_score      = 0
+  goal_zone_score   = 180
+  small_target      = 180
+  uncertainty       = 165
+  ball_proximity    = 217
+  aging_score       = 59
+  total_attention   = 1888
+Target 12
+  ball_priority     = 0
+  motion_score      = 0
+  goal_zone_score   = 40
+  small_target      = 169
+  uncertainty       = 164
+  ball_proximity    = 95
+  aging_score       = 59
+  total_attention   = 1199
+Selected Target = 1
+  refined req=1 target=1 class=UNKNOWN conf=94 focus=HIGHLIGHT risk=ATTENTION score=0.465
+
+  prediction target=1 frame=8 horizon=1 latency=0 roi_origin=(268,211)
+[frame=08] state=HOLD selected=1 req=1 roi=(268,211,18,18)
+  target=1 zone=CENTER coarse=UNKNOWN conf=96 vx=2 vy=1 approach=0 attn=1932 bbox=(266,210,18,18)
+  target=11 zone=CENTER coarse=PEDESTRIAN conf=90 vx=1 vy=0 approach=0 attn=1897 bbox=(310,175,46,92)
+  target=12 zone=CENTER coarse=PEDESTRIAN conf=91 vx=1 vy=0 approach=0 attn=1208 bbox=(120,180,50,94)
+Target 1
+  ball_priority     = 255
+  motion_score      = 1
+  goal_zone_score   = 40
+  small_target      = 255
+  uncertainty       = 159
+  ball_proximity    = 0
+  aging_score       = 59
+  total_attention   = 1932
+Target 11
+  ball_priority     = 0
+  motion_score      = 0
+  goal_zone_score   = 180
+  small_target      = 180
+  uncertainty       = 165
+  ball_proximity    = 217
+  aging_score       = 68
+  total_attention   = 1897
+Target 12
+  ball_priority     = 0
+  motion_score      = 0
+  goal_zone_score   = 40
+  small_target      = 169
+  uncertainty       = 164
+  ball_proximity    = 95
+  aging_score       = 68
+  total_attention   = 1208
+Selected Target = 1
+  refined req=1 target=1 class=UNKNOWN conf=94 focus=HIGHLIGHT risk=ATTENTION score=0.465
+
+  prediction target=1 frame=9 horizon=1 latency=0 roi_origin=(270,211)
+[frame=09] state=HOLD selected=1 req=1 roi=(270,211,18,18)
+  target=1 zone=CENTER coarse=UNKNOWN conf=96 vx=2 vy=1 approach=0 attn=1941 bbox=(268,210,18,18)
+  target=11 zone=CENTER coarse=PEDESTRIAN conf=90 vx=1 vy=0 approach=0 attn=1905 bbox=(310,175,46,92)
+  target=12 zone=CENTER coarse=PEDESTRIAN conf=91 vx=1 vy=0 approach=0 attn=1216 bbox=(120,180,50,94)
+Target 1
+  ball_priority     = 255
+  motion_score      = 1
+  goal_zone_score   = 40
+  small_target      = 255
+  uncertainty       = 159
+  ball_proximity    = 0
+  aging_score       = 68
+  total_attention   = 1941
+Target 11
+  ball_priority     = 0
+  motion_score      = 0
+  goal_zone_score   = 180
+  small_target      = 180
+  uncertainty       = 165
+  ball_proximity    = 217
+  aging_score       = 76
+  total_attention   = 1905
+Target 12
+  ball_priority     = 0
+  motion_score      = 0
+  goal_zone_score   = 40
+  small_target      = 169
+  uncertainty       = 164
+  ball_proximity    = 95
+  aging_score       = 76
+  total_attention   = 1216
+Selected Target = 1
+  refined req=1 target=1 class=UNKNOWN conf=94 focus=HIGHLIGHT risk=ATTENTION score=0.465
+
+  prediction target=1 frame=10 horizon=1 latency=0 roi_origin=(272,211)
+[frame=10] state=HOLD selected=1 req=1 roi=(272,211,18,18)
+  target=1 zone=CENTER coarse=UNKNOWN conf=96 vx=2 vy=1 approach=0 attn=1949 bbox=(270,210,18,18)
+  target=11 zone=CENTER coarse=PEDESTRIAN conf=90 vx=1 vy=0 approach=0 attn=1914 bbox=(310,175,46,92)
+  target=12 zone=CENTER coarse=PEDESTRIAN conf=91 vx=1 vy=0 approach=0 attn=1225 bbox=(120,180,50,94)
+Target 1
+  ball_priority     = 255
+  motion_score      = 1
+  goal_zone_score   = 40
+  small_target      = 255
+  uncertainty       = 159
+  ball_proximity    = 0
+  aging_score       = 76
+  total_attention   = 1949
+Target 11
+  ball_priority     = 0
+  motion_score      = 0
+  goal_zone_score   = 180
+  small_target      = 180
+  uncertainty       = 165
+  ball_proximity    = 217
+  aging_score       = 85
+  total_attention   = 1914
+Target 12
+  ball_priority     = 0
+  motion_score      = 0
+  goal_zone_score   = 40
+  small_target      = 169
+  uncertainty       = 164
+  ball_proximity    = 95
+  aging_score       = 85
+  total_attention   = 1225
+Selected Target = 1
+  refined req=1 target=1 class=UNKNOWN conf=94 focus=HIGHLIGHT risk=ATTENTION score=0.465
+
+  prediction target=1 frame=11 horizon=1 latency=0 roi_origin=(274,211)
+  state_change: HOLD -> RELEASE target=1 request=1
+[frame=11] state=RELEASE selected=65535 req=0 roi=(0,0,0,0)
+  target=1 zone=CENTER coarse=UNKNOWN conf=96 vx=2 vy=1 approach=0 attn=1958 bbox=(272,210,18,18)
+  target=11 zone=CENTER coarse=PEDESTRIAN conf=90 vx=1 vy=0 approach=0 attn=1922 bbox=(310,175,46,92)
+  target=12 zone=CENTER coarse=PEDESTRIAN conf=91 vx=1 vy=0 approach=0 attn=1233 bbox=(120,180,50,94)
+Target 1
+  ball_priority     = 255
+  motion_score      = 1
+  goal_zone_score   = 40
+  small_target      = 255
+  uncertainty       = 159
+  ball_proximity    = 0
+  aging_score       = 85
+  total_attention   = 1958
+Target 11
+  ball_priority     = 0
+  motion_score      = 0
+  goal_zone_score   = 180
+  small_target      = 180
+  uncertainty       = 165
+  ball_proximity    = 217
+  aging_score       = 93
+  total_attention   = 1922
+Target 12
+  ball_priority     = 0
+  motion_score      = 0
+  goal_zone_score   = 40
+  small_target      = 169
+  uncertainty       = 164
+  ball_proximity    = 95
+  aging_score       = 93
+  total_attention   = 1233
+Selected Target = 65535
+
+  prediction target=1 frame=12 horizon=1 latency=0 roi_origin=(276,211)
+  state_change: RELEASE -> CANDIDATE target=1 request=2
+[frame=12] state=CANDIDATE selected=1 req=2 roi=(276,211,18,18)
+  target=1 zone=CENTER coarse=UNKNOWN conf=96 vx=2 vy=1 approach=0 attn=1966 bbox=(274,210,18,18)
+  target=11 zone=CENTER coarse=PEDESTRIAN conf=90 vx=1 vy=0 approach=0 attn=1931 bbox=(310,175,46,92)
+  target=12 zone=CENTER coarse=PEDESTRIAN conf=91 vx=1 vy=0 approach=0 attn=1242 bbox=(120,180,50,94)
+Target 1
+  ball_priority     = 255
+  motion_score      = 1
+  goal_zone_score   = 40
+  small_target      = 255
+  uncertainty       = 159
+  ball_proximity    = 0
+  aging_score       = 0
+  total_attention   = 1873
+Target 11
+  ball_priority     = 0
+  motion_score      = 0
+  goal_zone_score   = 180
+  small_target      = 180
+  uncertainty       = 165
+  ball_proximity    = 217
+  aging_score       = 102
+  total_attention   = 1931
+Target 12
+  ball_priority     = 0
+  motion_score      = 0
+  goal_zone_score   = 40
+  small_target      = 169
+  uncertainty       = 164
+  ball_proximity    = 95
+  aging_score       = 102
+  total_attention   = 1242
+Selected Target = 1
+
+  prediction target=1 frame=13 horizon=1 latency=0 roi_origin=(278,211)
+  state_change: CANDIDATE -> FOVEA_LOCK target=1 request=2
+[frame=13] state=FOVEA_LOCK selected=1 req=2 roi=(278,211,18,18)
+  target=1 zone=CENTER coarse=UNKNOWN conf=96 vx=2 vy=1 approach=0 attn=1881 bbox=(276,210,18,18)
+  target=11 zone=CENTER coarse=PEDESTRIAN conf=90 vx=1 vy=0 approach=0 attn=1939 bbox=(310,175,46,92)
+  target=12 zone=CENTER coarse=PEDESTRIAN conf=91 vx=1 vy=0 approach=0 attn=1250 bbox=(120,180,50,94)
+Target 1
+  ball_priority     = 255
+  motion_score      = 1
+  goal_zone_score   = 40
+  small_target      = 255
+  uncertainty       = 159
+  ball_proximity    = 0
+  aging_score       = 8
+  total_attention   = 1881
+Target 11
+  ball_priority     = 0
+  motion_score      = 0
+  goal_zone_score   = 180
+  small_target      = 180
+  uncertainty       = 165
+  ball_proximity    = 217
+  aging_score       = 110
+  total_attention   = 1939
+Target 12
+  ball_priority     = 0
+  motion_score      = 0
+  goal_zone_score   = 40
+  small_target      = 169
+  uncertainty       = 164
+  ball_proximity    = 95
+  aging_score       = 110
+  total_attention   = 1250
+Selected Target = 1
+
+  prediction target=1 frame=14 horizon=1 latency=0 roi_origin=(280,211)
+  state_change: FOVEA_LOCK -> ENHANCING target=1 request=2
+[frame=14] state=ENHANCING selected=1 req=2 roi=(280,211,18,18)
+  target=1 zone=CENTER coarse=UNKNOWN conf=96 vx=2 vy=1 approach=0 attn=1890 bbox=(278,210,18,18)
+  target=11 zone=CENTER coarse=PEDESTRIAN conf=90 vx=1 vy=0 approach=0 attn=1948 bbox=(310,175,46,92)
+  target=12 zone=CENTER coarse=PEDESTRIAN conf=91 vx=1 vy=0 approach=0 attn=1259 bbox=(120,180,50,94)
+Target 1
+  ball_priority     = 255
+  motion_score      = 1
+  goal_zone_score   = 40
+  small_target      = 255
+  uncertainty       = 159
+  ball_proximity    = 0
+  aging_score       = 17
+  total_attention   = 1890
+Target 11
+  ball_priority     = 0
+  motion_score      = 0
+  goal_zone_score   = 180
+  small_target      = 180
+  uncertainty       = 165
+  ball_proximity    = 217
+  aging_score       = 119
+  total_attention   = 1948
+Target 12
+  ball_priority     = 0
+  motion_score      = 0
+  goal_zone_score   = 40
+  small_target      = 169
+  uncertainty       = 164
+  ball_proximity    = 95
+  aging_score       = 119
+  total_attention   = 1259
+Selected Target = 1
+
+  prediction target=1 frame=15 horizon=1 latency=0 roi_origin=(282,211)
+[frame=15] state=ENHANCING selected=1 req=2 roi=(282,211,18,18)
+  target=1 zone=CENTER coarse=UNKNOWN conf=96 vx=2 vy=1 approach=0 attn=1898 bbox=(280,210,18,18)
+  target=11 zone=CENTER coarse=PEDESTRIAN conf=90 vx=1 vy=0 approach=0 attn=1956 bbox=(310,175,46,92)
+  target=12 zone=CENTER coarse=PEDESTRIAN conf=91 vx=1 vy=0 approach=0 attn=1267 bbox=(120,180,50,94)
+Target 1
+  ball_priority     = 255
+  motion_score      = 1
+  goal_zone_score   = 40
+  small_target      = 255
+  uncertainty       = 159
+  ball_proximity    = 0
+  aging_score       = 25
+  total_attention   = 1898
+Target 11
+  ball_priority     = 0
+  motion_score      = 0
+  goal_zone_score   = 180
+  small_target      = 180
+  uncertainty       = 165
+  ball_proximity    = 217
+  aging_score       = 127
+  total_attention   = 1956
+Target 12
+  ball_priority     = 0
+  motion_score      = 0
+  goal_zone_score   = 40
+  small_target      = 169
+  uncertainty       = 164
+  ball_proximity    = 95
+  aging_score       = 127
+  total_attention   = 1267
+Selected Target = 1
+
+  prediction target=1 frame=16 horizon=1 latency=0 roi_origin=(284,211)
+  state_change: ENHANCING -> REFINE_INFER target=1 request=2
+[frame=16] state=REFINE_INFER selected=1 req=2 roi=(284,211,18,18)
+  target=1 zone=CENTER coarse=UNKNOWN conf=96 vx=2 vy=1 approach=0 attn=1907 bbox=(282,210,18,18)
+  target=11 zone=CENTER coarse=PEDESTRIAN conf=90 vx=1 vy=0 approach=0 attn=1965 bbox=(310,175,46,92)
+  target=12 zone=CENTER coarse=PEDESTRIAN conf=91 vx=1 vy=0 approach=0 attn=1276 bbox=(120,180,50,94)
+Target 1
+  ball_priority     = 255
+  motion_score      = 1
+  goal_zone_score   = 40
+  small_target      = 255
+  uncertainty       = 159
+  ball_proximity    = 0
+  aging_score       = 34
+  total_attention   = 1907
+Target 11
+  ball_priority     = 0
+  motion_score      = 0
+  goal_zone_score   = 180
+  small_target      = 180
+  uncertainty       = 165
+  ball_proximity    = 217
+  aging_score       = 136
+  total_attention   = 1965
+Target 12
+  ball_priority     = 0
+  motion_score      = 0
+  goal_zone_score   = 40
+  small_target      = 169
+  uncertainty       = 164
+  ball_proximity    = 95
+  aging_score       = 136
+  total_attention   = 1276
+Selected Target = 1
+
+  prediction target=1 frame=17 horizon=1 latency=0 roi_origin=(286,211)
+  state_change: REFINE_INFER -> CONFIRMED target=1 request=2
+[frame=17] state=CONFIRMED selected=1 req=2 roi=(286,211,18,18)
+  target=1 zone=CENTER coarse=UNKNOWN conf=96 vx=2 vy=1 approach=0 attn=1915 bbox=(284,210,18,18)
+  target=11 zone=CENTER coarse=PEDESTRIAN conf=90 vx=1 vy=0 approach=0 attn=1973 bbox=(310,175,46,92)
+  target=12 zone=CENTER coarse=PEDESTRIAN conf=91 vx=1 vy=0 approach=0 attn=1284 bbox=(120,180,50,94)
+Target 1
+  ball_priority     = 255
+  motion_score      = 1
+  goal_zone_score   = 40
+  small_target      = 255
+  uncertainty       = 159
+  ball_proximity    = 0
+  aging_score       = 42
+  total_attention   = 1915
+Target 11
+  ball_priority     = 0
+  motion_score      = 0
+  goal_zone_score   = 180
+  small_target      = 180
+  uncertainty       = 165
+  ball_proximity    = 217
+  aging_score       = 144
+  total_attention   = 1973
+Target 12
+  ball_priority     = 0
+  motion_score      = 0
+  goal_zone_score   = 40
+  small_target      = 169
+  uncertainty       = 164
+  ball_proximity    = 95
+  aging_score       = 144
+  total_attention   = 1284
+Selected Target = 1
+  refined req=2 target=1 class=UNKNOWN conf=94 focus=HIGHLIGHT risk=ATTENTION score=0.465
+  risk_action=CONFIRMED
+
+  prediction target=1 frame=18 horizon=1 latency=0 roi_origin=(288,211)
+  state_change: CONFIRMED -> HOLD target=1 request=2
+[frame=18] state=HOLD selected=1 req=2 roi=(288,211,18,18)
+  target=1 zone=CENTER coarse=UNKNOWN conf=96 vx=2 vy=1 approach=0 attn=1924 bbox=(286,210,18,18)
+  target=11 zone=CENTER coarse=PEDESTRIAN conf=90 vx=1 vy=0 approach=0 attn=1982 bbox=(310,175,46,92)
+  target=12 zone=CENTER coarse=PEDESTRIAN conf=91 vx=1 vy=0 approach=0 attn=1293 bbox=(120,180,50,94)
+Target 1
+  ball_priority     = 255
+  motion_score      = 1
+  goal_zone_score   = 40
+  small_target      = 255
+  uncertainty       = 159
+  ball_proximity    = 0
+  aging_score       = 51
+  total_attention   = 1924
+Target 11
+  ball_priority     = 0
+  motion_score      = 0
+  goal_zone_score   = 180
+  small_target      = 180
+  uncertainty       = 165
+  ball_proximity    = 217
+  aging_score       = 153
+  total_attention   = 1982
+Target 12
+  ball_priority     = 0
+  motion_score      = 0
+  goal_zone_score   = 40
+  small_target      = 169
+  uncertainty       = 164
+  ball_proximity    = 95
+  aging_score       = 153
+  total_attention   = 1293
+Selected Target = 1
+  refined req=2 target=1 class=UNKNOWN conf=94 focus=HIGHLIGHT risk=ATTENTION score=0.465
+

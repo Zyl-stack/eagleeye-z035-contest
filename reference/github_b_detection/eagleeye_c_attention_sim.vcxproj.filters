@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{C7C72D4C-4D35-40BC-B88C-9170555B2119}</UniqueIdentifier>
+      <Extensions>c</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{5718AB35-FA53-40EA-9649-24366EF3FD68}</UniqueIdentifier>
+      <Extensions>h</Extensions>
+    </Filter>
+    <Filter Include="Tests">
+      <UniqueIdentifier>{B4C03F72-98D2-4985-9F7B-A1097DEB5539}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\attention.c"><Filter>Source Files</Filter></ClCompile>
+    <ClCompile Include="src\attention_scheduler.c"><Filter>Source Files</Filter></ClCompile>
+    <ClCompile Include="src\attention_score.c"><Filter>Source Files</Filter></ClCompile>
+    <ClCompile Include="src\eagleeye_types.c"><Filter>Source Files</Filter></ClCompile>
+    <ClCompile Include="src\fake_data.c"><Filter>Source Files</Filter></ClCompile>
+    <ClCompile Include="src\main.c"><Filter>Source Files</Filter></ClCompile>
+    <ClCompile Include="src\motion_predictor.c"><Filter>Source Files</Filter></ClCompile>
+    <ClCompile Include="src\possession_estimator.c"><Filter>Source Files</Filter></ClCompile>
+    <ClCompile Include="src\platform_io_sim.c"><Filter>Source Files</Filter></ClCompile>
+    <ClCompile Include="src\risk.c"><Filter>Source Files</Filter></ClCompile>
+    <ClCompile Include="src\state_machine.c"><Filter>Source Files</Filter></ClCompile>
+    <ClCompile Include="src\transaction.c"><Filter>Source Files</Filter></ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="include\attention_config.h"><Filter>Header Files</Filter></ClInclude>
+    <ClInclude Include="include\attention.h"><Filter>Header Files</Filter></ClInclude>
+    <ClInclude Include="include\attention_scheduler.h"><Filter>Header Files</Filter></ClInclude>
+    <ClInclude Include="include\attention_score.h"><Filter>Header Files</Filter></ClInclude>
+    <ClInclude Include="include\eagleeye_types.h"><Filter>Header Files</Filter></ClInclude>
+    <ClInclude Include="include\fake_data.h"><Filter>Header Files</Filter></ClInclude>
+    <ClInclude Include="include\motion_predictor.h"><Filter>Header Files</Filter></ClInclude>
+    <ClInclude Include="include\possession_estimator.h"><Filter>Header Files</Filter></ClInclude>
+    <ClInclude Include="include\platform_io.h"><Filter>Header Files</Filter></ClInclude>
+    <ClInclude Include="include\platform_io_vitis.h"><Filter>Header Files</Filter></ClInclude>
+    <ClInclude Include="include\register_map.h"><Filter>Header Files</Filter></ClInclude>
+    <ClInclude Include="include\risk.h"><Filter>Header Files</Filter></ClInclude>
+    <ClInclude Include="include\state_machine.h"><Filter>Header Files</Filter></ClInclude>
+    <ClInclude Include="include\transaction.h"><Filter>Header Files</Filter></ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="INTERFACE_SPEC.md" />
+    <None Include="HARDWARE_BRINGUP_CHECKLIST.md" />
+    <None Include="VITIS_PORTING.md" />
+    <None Include="VIVADO_VITIS_BRINGUP_STEPS.md" />
+    <None Include="SOCCER_MIGRATION.md" />
+    <None Include="SOCCER_HARDWARE_BRINGUP_CHECKLIST.md" />
+    <None Include="tests\test_scenarios.c"><Filter>Tests</Filter></None>
+    <None Include="run_tests_msvc.bat"><Filter>Tests</Filter></None>
+    <None Include="src\platform_io_vitis.c"><Filter>Source Files</Filter></None>
+    <None Include="vitis_axi_smoke_test.c" />
+  </ItemGroup>
+</Project>

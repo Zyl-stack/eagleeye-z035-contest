@@ -1,0 +1,86 @@
+/include/ "system-conf.dtsi"
+
+/ {
+	model = "EagleEye AX7020 OV5640 PicoDet";
+	compatible = "alinx,ax7020", "xlnx,zynq-7000";
+
+	aliases {
+		ethernet0 = &gem0;
+		serial0 = &uart1;
+	};
+
+	reserved-memory {
+		#address-cells = <1>;
+		#size-cells = <1>;
+		ranges;
+
+		eagleeye_framebuf: framebuf@1e000000 {
+			compatible = "shared-dma-pool";
+			reg = <0x1e000000 0x00210000>;
+			no-map;
+		};
+	};
+
+	usb_phy0: usb_phy@0 {
+		compatible = "ulpi-phy";
+		#phy-cells = <0>;
+		reg = <0xe0002000 0x1000>;
+		view-port = <0x0170>;
+		drv-vbus;
+	};
+};
+
+&i2c0 {
+	status = "okay";
+	clock-frequency = <40000>;
+};
+
+&usb0 {
+	dr_mode = "host";
+	usb-phy = <&usb_phy0>;
+};
+
+&sdhci0 {
+	u-boot,dm-pre-reloc;
+};
+
+&uart1 {
+	u-boot,dm-pre-reloc;
+};
+
+&flash0 {
+	compatible = "micron,m25p80", "w25q256", "spi-flash";
+};
+
+&gem0 {
+	phy-handle = <&ethernet_phy>;
+	ethernet_phy: ethernet-phy@1 {
+		reg = <1>;
+		device_type = "ethernet-phy";
+	};
+};
+
+/*
+ * One root-only process owns these registers through uncached /dev/mem.
+ * Disabling the kernel bindings prevents DRM/DMA clients from reprogramming
+ * either VDMA while the shared capture/display ring is live.
+ */
+&axi_vdma_0 {
+	status = "disabled";
+};
+
+&axi_vdma_1 {
+	status = "disabled";
+};
+
+&cmos_rst {
+	status = "disabled";
+};
+
+&axi_dynclk_0 {
+	status = "disabled";
+};
+
+&v_tc_0 {
+	status = "disabled";
+};
