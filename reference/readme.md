@@ -12,3 +12,5 @@
 `sim/github_b_tests.log`、`sim/github_c_build.log`、`sim/github_c_simulation.log`、`sim/github_linux_reproduce.log` 和 `sim/github_a_inspection.txt` 是先前整理过程留下的记录。B/C/Linux 的主机测试与 A 的静态检查均不表示本仓库主版本完成了板端联调。使用这些材料前请核对器件、提交版本、接口、模型和测试环境。
 
 比赛是否允许归档内使用原始大小写、各第三方源码和模型能否公开分发，仍需以组委会规则和权利人授权为准。
+
+本地 Z035 稳定系统配置及独立 eeiso22 实验内核补丁另见 [linux_z035](linux_z035/readme.md)，完整 Linux 源码仍须从文档固定的上游提交获取。

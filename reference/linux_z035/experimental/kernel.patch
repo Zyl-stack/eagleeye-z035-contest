@@ -1,0 +1,89 @@
+--- a/drivers/base/Makefile
++++ b/drivers/base/Makefile
+@@ -7,6 +7,7 @@
+ 			   attribute_container.o transport_class.o \
+ 			   topology.o container.o property.o cacheinfo.o \
+ 			   swnode.o
++obj-y += ee_rawio_isolation.o
+ obj-$(CONFIG_AUXILIARY_BUS) += auxiliary.o
+ obj-$(CONFIG_DEVTMPFS)	+= devtmpfs.o
+ obj-y			+= power/
+--- /dev/null
++++ b/drivers/base/ee_rawio_isolation.c
+@@ -0,0 +1,17 @@
++/* Built INTO the experimental kernel, never into a loadable provider module.
++ * No runtime flag can promote the existing unrestricted /dev/mem kernel.
++ */
++#include <linux/kconfig.h>
++#include <linux/export.h>
++#include <linux/types.h>
++#ifdef MODULE
++#error This isolation marker must be built into the experimental kernel
++#endif
++u32 ee_rawio_isolation_v1(void)
++{
++ return (IS_ENABLED(CONFIG_DEVMEM) || IS_ENABLED(CONFIG_DEVKMEM) ||
++         IS_ENABLED(CONFIG_DEVPORT) || IS_ENABLED(CONFIG_UIO) ||
++         IS_ENABLED(CONFIG_VFIO) || IS_ENABLED(CONFIG_PCI) ||
++         IS_ENABLED(CONFIG_OF_CONFIGFS) || !IS_ENABLED(CONFIG_MODULE_SIG_FORCE))?0:0x45454931u;
++}
++EXPORT_SYMBOL_GPL(ee_rawio_isolation_v1);
+--- a/drivers/fpga/fpga-mgr.c
++++ b/drivers/fpga/fpga-mgr.c
+@@ -555,25 +555,8 @@
+ 			      struct device_attribute *attr,
+ 			      const char *buf, size_t count)
+ {
+-	struct fpga_manager *mgr = to_fpga_manager(dev);
+-	unsigned int len;
+-	char image_name[NAME_MAX];
+-	int ret;
+-
+-	/* struct with information about the FPGA image to program. */
+-	struct fpga_image_info info = {0};
+-
+-	/* lose terminating \n */
+-	strcpy(image_name, buf);
+-	len = strlen(image_name);
+-	if (image_name[len - 1] == '\n')
+-		image_name[len - 1] = 0;
+-
+-	ret = fpga_mgr_firmware_load(mgr, &info, image_name);
+-	if (ret)
+-		return ret;
+-
+-	return count;
++	/* Experimental isolation kernel: PL configuration is boot-chain owned. */
++	return -EPERM;
+ }
+ 
+ static ssize_t key_show(struct device *dev,
+@@ -588,11 +571,7 @@
+ 			 struct device_attribute *attr,
+ 			 const char *buf, size_t count)
+ {
+-	struct fpga_manager *mgr = to_fpga_manager(dev);
+-
+-	memcpy(mgr->key, buf, count);
+-
+-	return count;
++	return -EPERM;
+ }
+ 
+ static ssize_t flags_show(struct device *dev,
+@@ -607,14 +586,7 @@
+ 			   struct device_attribute *attr,
+ 			   const char *buf, size_t count)
+ {
+-	struct fpga_manager *mgr = to_fpga_manager(dev);
+-	int ret;
+-
+-	ret = kstrtol(buf, 16, &mgr->flags);
+-	if (ret)
+-		return ret;
+-
+-	return count;
++	return -EPERM;
+ }
+ 
+ static DEVICE_ATTR_RO(name);

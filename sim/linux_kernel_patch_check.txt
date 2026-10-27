@@ -1,0 +1,4 @@
+Kernel source: Xilinx linux-xlnx 19984dd147fa7fbb7cb14b17400263ad0925c189
+Command: git -C <local-clean-kernel-tree> apply --check reference/linux_z035/experimental/kernel.patch
+Exit code: 0
+Scope: patch applicability only; no patch applied and no kernel build performed.

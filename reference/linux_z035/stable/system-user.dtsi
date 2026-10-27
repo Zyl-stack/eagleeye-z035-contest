@@ -1,0 +1,43 @@
+/include/ "system-conf.dtsi"
+
+/ {
+    model = "EagleEye Z035 OV5640 PicoDet + preprocessor test";
+
+    aliases {
+        serial0 = &uart0;
+    };
+
+    reserved-memory {
+        #address-cells = <1>;
+        #size-cells = <1>;
+        ranges;
+
+        eagleeye_framebuf: framebuf@1e000000 {
+            compatible = "shared-dma-pool";
+            reg = <0x1e000000 0x00210000>;
+            no-map;
+        };
+
+        eagleeye_preproc: preproc@1e300000 {
+            compatible = "shared-dma-pool";
+            reg = <0x1e300000 0x00400000>;
+            no-map;
+        };
+    };
+};
+
+&uart0 { status = "okay"; };
+&sdhci0 { status = "okay"; u-boot,dm-pre-reloc; };
+&i2c0 { status = "okay"; clock-frequency = <40000>; };
+
+/* One root-only userspace process owns these registers through /dev/mem. */
+&axi_vdma_0 { status = "disabled"; };
+&axi_vdma_1 { status = "disabled"; };
+&cmos_rst { status = "disabled"; };
+&axi_dynclk_0 { status = "disabled"; };
+&v_tc_0 { status = "disabled"; };
+&axi_dma_pre_in { status = "disabled"; };
+&axi_dma_pre_r { status = "disabled"; };
+&axi_dma_pre_g { status = "disabled"; };
+&axi_dma_pre_b { status = "disabled"; };
+&picodet_preproc_ip_0 { status = "disabled"; };
