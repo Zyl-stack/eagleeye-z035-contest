@@ -1,26 +1,14 @@
-# 竞赛提交材料核查与缺口
+# 竞赛提交材料核查与缺口（2026-10-27）
 
-依据用户提供的 3.3.5 提交内容与推荐目录截图，核查对象为本仓库的 Eyes Z035 原始快照及其小写整理副本。此表不替代组委会最终形式审查。
+依据已提供的比赛 3.3.5 截图检查；不代替组委会对完整规则的最终审核。
 
-| 要求 | 已有材料 | 当前判断 |
+| 项目 | 已有 | 尚需完成 |
 |---|---|---|
-| 工程和源代码 | `src/`、`original/eagleeye_z035.zip` | 已收集原目录 226 个文件；原 Vivado XPR 未作为自包含工程提供，干净重建尚未成功验证 |
-| 仿真与功能正确性 | `sim/`、`src/ip_repo/preproc/tb/`、`data/` | 本次新增五帧预处理 RTL、采集帧适配器联测、AXI-Lite 及舵机 PWM 离线仿真；每帧 307200 值逐位一致。当前系统板端 FPGA 输出张量与完整比对日志缺失。旧 Lanczos XSim 日志为 FAIL，不得写成 PASS |
-| 综合/实现、资源及时钟 | `build/z100_top_utilization_placed.rpt`、`build/z100_top_timing_summary_routed.rpt` | 有历史 Eyes 报告；不能称为本次重新综合，外部时序和干净工程复现仍需证明 |
-| 上板工程、运行脚本和输出对比 | `board/`、`src/ps/`、`data/` | 有启动材料、运行脚本与历史日志；缺当前镜像身份绑定的完整演示、板端输出与参考结果对比 |
-| 可复现构建 | `report/reproduction_zh.md`、`build/recreate_vivado.tcl`、原始快照 | 提供逐项命令，但尚无从干净目录完成的 Vivado/PS/Linux 重建证据；还需匹配工具链、sysroot 和 Paddle-Lite 库 |
-| 技能包 | `skill/index.md` 及三个子目录 | 有方法、验证脚本和限制；旧 Lanczos 像素测试失败，不能宣传为已通过；未证明为通用 PYNQ Skill |
-| 设计报告 | `report/design_report_zh.md`、`report/figures/` | 已有材料稿、系统图与预处理图；尚缺前人工作/创新引用、团队贡献、实测对比和正式定稿 |
-| 大模型协作记录 | `report/ai_collaboration_record.md` | 现有整理稿，不是完整原始对话；需补经过团队确认的提示、纠错和验证材料 |
-| 命名与目录 | `src/` 等小写路径，`original/eagleeye_z035.zip` | 仓库外层采用小写英文；原始快照内部保留大小写以保持可复现。截图文字和示例对 README 大小写存在差异，最终按组委会要求确认 |
+| 工程与代码 | Z035 Eyes RTL、BD、XDC、IP、PicoDet 应用、C 候选和 Linux 固定源码；原快照与 A 增量均可哈希核验 | 由团队确认最终演示版本及 A/B/C 对应关系；若足球检测列为实际参赛功能，需补齐其最终模型及板端链路，不能把 PERSON 模型冒充 PLAYER/BALL |
+| 仿真 | 预处理五类帧及适配器、AXI-Lite、舵机 RTL；C 主机与 QEMU | Lanczos 旧逐像素日志有 768 个错误，需确认测试版本并解决或如实保留失败 |
+| 硬件实现 | A 快照使用完整构建入口完成综合、实现、BIT 和 XSA，报告见 `build/full_rebuild_20261027/` | 12 项输入和 33 项输出延迟缺失；8 项 Methodology Critical Warning 和 CDC Critical 分类尚需核查。已约束时序通过不等于板端安全或功能通过 |
+| 可复现构建 | A 快照恢复、Vivado 全流程入口、Paddle-Lite 依赖、固定 Linux 源码及配置 | Vivado 和 PetaLinux 2022.2 工具链/sysroot 需自行准备；重建内核与历史镜像哈希不同；rootfs 与现场镜像一致性未证明 |
+| 上板证据 | 旧 CPU 预处理日志；用户确认 A 的 PicoDet+C 新候选上板功能正常 | 缺该次原始串口、哈希读回、逐功能记录、当前版本 FPGA/CPU 同条件对照及板端预处理输出对 Golden 逐值比较 |
+| Skill 与报告 | 三个技能、报告材料稿和 AI 协作记录 | 需团队核对贡献、创新对比、授权、原始交互材料并形成正式定稿；Lanczos 失败不得宣称 PASS |
 
-## 仍需补充
-
-1. 可运行的 Vivado 2022.2 环境下干净恢复原快照，记录 BD Validation、综合、布局布线、时序、资源和完整日志；现有本地独立尝试曾在 Vivado 启动时退出 `0xC0000135`，未进入 Tcl，不能当作通过或确定具体故障原因。
-2. 与提交 BOOT、DT、应用、模型哈希绑定的现场连续演示和日志；对同一输入采集 FPGA 原始预处理输出，与 `data/captured.golden.f32` 完整比较。
-3. 同摄像头场景、模型、线程、输入、阈值和显示条件的 CPU/FPGA 预处理 A/B，以及真实检测更新 FPS。现有 100 帧历史日志只证明可计算历史统计，不是当前版本的配对 A/B。
-4. 针对当前 Lanczos RTL 和参考契约补齐逐像素测试；旧测试台与当前源码是否完全匹配尚需查明，不能据其单独断定板上画面失效，也不能忽略其失败。
-5. 模型、第三方 IP、Paddle-Lite、启动材料的使用和再分发授权；完整 PS 工具链/sysroot/静态库；团队贡献和完整的报告定稿。
-6. 最终硬件系统图和架构图须由工程负责人对照当前 BD、地址、时钟和实际演示确认；图片本身不是验证证据。
-
-仓库已另外收录本地 A/B/C/Linux 分支源码快照，见 `reference/readme.md`；它们不是已完成 Z035 联调的主工程。Z035 固定提交的完整 Linux 上游源码归档已通过 Git LFS 上传，另附稳定配置和独立实验补丁；PetaLinux SDK、rootfs 完整依赖、原签名私钥及实际镜像字节一致性仍未提供或证明。公开仓库前还需审查隐私与授权；当前为私有仓库。
+A/B 分工下真正需要现场人员或资料所有者补充的内容见 `report/field_evidence_needed_zh.md`。用户反馈、QEMU、仿真和工具报告必须分别标注，不能互相替代。Git LFS 对象须 `git lfs pull`，并在对外分发前确认模型、依赖及第三方 IP 授权。

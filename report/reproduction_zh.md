@@ -1,6 +1,6 @@
 # 干净目录复现与证据边界
 
-以下步骤用于重建与验证的独立工作目录，不能证明现场板卡身份，也不能覆盖稳定 SD。本仓库上传了原工程完整快照和 Git LFS 中的 Xilinx Linux 固定版本源码；当前尚未在干净环境完成 Vivado 或 Linux 完整构建。
+以下步骤用于重建与验证的独立工作目录，不能证明现场板卡身份，也不能覆盖稳定 SD。本仓库上传了原工程完整快照和 Git LFS 中的 Xilinx Linux 固定版本源码；已在本机独立目录完成 Eyes 源码综合、实现和 BIT 生成，并完成固定源码的 Linux 内核和模块构建；尚未证明新生成的镜像与现场逐字节一致或完成新 BIT 板测。
 
 ## 1. 获取与验证
 
@@ -17,19 +17,17 @@ python3 -B tools/verify_kernel_source.py
 
 源码包约 240 MiB，若没有 Git LFS 或未拉取对象，源码路径可能只有 LFS 指针；核验脚本会拒绝。`verify_submission.py` 还会核对原始 Eyes 快照、A/B/C/Linux 参考快照及清单。哈希不是签名或板端运行证明。
 
-## 2. 恢复原工程大小写
+## 2. 恢复大小写并构建 Vivado 工程
 
-从仓库根目录：
+从仓库根目录运行，输出目录必须不存在；在 Windows 上建议使用短 ASCII 路径：
 
 ```sh
-mkdir -p /tmp/eagleeye_contest_work
-python3 -m zipfile -e original/eagleeye_z035.zip /tmp/eagleeye_contest_work
-cd /tmp/eagleeye_contest_work/eagleeye_z035
+python3 tools/restore_a_repro.py --output /tmp/eagleeye_a_new
+vivado -mode batch -source build/build_full_vivado.tcl -tclargs /tmp/eagleeye_a_new/eagleeye_z035 /tmp/eagleeye_vivado_new 4
+python3 tools/verify_vivado_outputs.py /tmp/eagleeye_vivado_new
 ```
 
-之后按该目录 `README.md`、`build/recreate_vivado.tcl` 和 `src/ps/build_arm.sh` 指引准备 Vivado 2022.2、ARM 交叉编译器、PetaLinux sysroot 和匹配的 Paddle-Lite 静态库。ZIP 保留 `BOOT.BIN` 和工程原有文件名；仓库小写展示副本可能不满足工程中大小写引用。请另选未使用的目录，避免覆盖。
-
-独立 Vivado 启动此前遇到 `0xC0000135`，未进入脚本。本次重试 `vivado.bat -version` 退出非零、没有输出；尚未证明干净重建成功。原有 `build/*.rpt` 是历史结果。
+先执行 `git lfs pull`。恢复工具将原始快照与 A 增量合并并核验 275 项哈希；`build_full_vivado.tcl` 在独立输出目录进行 BD 校验、综合、实现、BIT/XSA 和资源/时序/CDC/DRC 报告。最后的校验脚本确认 XSA 内 BIT 与独立 BIT 一致，并输出 BIT/XSA/HWH SHA256。实际运行以本机 Vivado 2022.2 与许可证为准。上述完整入口已在本机从还原的 A 快照实际完成 BD、综合、实现和 BIT/XSA；报告与哈希见 `build/full_rebuild_20261027/`。此前独立构建报告保存在 `build/independent_rebuild_20261027/`。BIT 生成不等于板端验证；缺失 I/O 延迟和 CDC Critical 项仍需检查。
 
 ## 3. 预处理 IP RTL 仿真
 
@@ -66,4 +64,4 @@ patch --dry-run -d /tmp/eagleeye_linux_src -p1 -i "$PWD/reference/linux_z035/exp
 
 该补丁仅用于 `eeiso22` 实验内核，不能施用于声称不变的稳定内核。实际构建还需匹配的 PetaLinux 2022.2 交叉工具链、内核配置、设备树/XSA、rootfs 和外部依赖；生成并核对 `kernel.release`、`.config`、`Module.symvers` 与镜像哈希。稳定配置启用 `CONFIG_LOCALVERSION_AUTO`，单纯解压源码并不保证得到原构建版本字符串；必须核验，不能靠版本名推断二进制一致。
 
-实验配置强制模块签名，签名私钥不在仓库；新生成的密钥不证明与已发布模块或板端信任链匹配。本次只核验源码归档和三个实验补丁文件，**没有进行完整内核构建、模块签名或实板启动**。
+实验配置强制模块签名，签名私钥不在仓库；新生成的密钥不证明与已发布模块或板端信任链匹配。已在本机独立目录用稳定配置完成上游内核 zImage 和 172 个模块构建；新 zImage 与历史镜像哈希不同，原因尚未确定。实验补丁只进行了源码核验；没有证明实验模块签名或板端启动。

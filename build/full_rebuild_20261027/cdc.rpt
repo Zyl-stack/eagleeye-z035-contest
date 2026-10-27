@@ -1,0 +1,30 @@
+Copyright 1986-2022 Xilinx, Inc. All Rights Reserved.
+------------------------------------------------------------------------------------
+| Tool Version : Vivado v.2022.2 (win64) Build 3671981 Fri Oct 14 05:00:03 MDT 2022
+| Date         : Tue Oct 27 21:38:09 2026
+| Host         : beixiao running 64-bit major release  (build 9200)
+| Command      : report_cdc -file D:/ee_a_full_build_20261027/reports/cdc.rpt
+| Design       : z100_top
+| Device       : 7z035-ffg900
+| Speed File   : -2  PRODUCTION 1.12 2019-11-22
+------------------------------------------------------------------------------------
+
+CDC Report
+
+Severity  Source Clock                                                                                Destination Clock                                                                           CDC Type                 Exceptions               Endpoints  Safe  Unsafe  Unknown  No ASYNC_REG  
+--------  ------------------------------------------------------------------------------------------  ------------------------------------------------------------------------------------------  -----------------------  -----------------------  ---------  ----  ------  -------  ------------  
+Critical  clk_fpga_0                                                                                  aclk                                                                                        No Common Primary Clock  None                           748   260     230      258             0  
+Critical  aclk                                                                                        clk_fpga_0                                                                                  No Common Primary Clock  None                           331   264       1       66             0  
+Critical  ov5640_pclk                                                                                 clk_fpga_1                                                                                  No Common Primary Clock  None                             3     1       0        2             0  
+Warning   video_clk_out_OBUF                                                                          clk_fpga_0                                                                                  Safely Timed             Max Delay Datapath Only         34    34       0        0             0  
+Info      clk_fpga_1                                                                                  clk_fpga_0                                                                                  No Common Primary Clock  Max Delay Datapath Only         13    13       0        0             0  
+Info      ms7210_dri_clk                                                                              clk_fpga_0                                                                                  Safely Timed             None                             1     1       0        0             0  
+Info      clk_fpga_0                                                                                  clk_fpga_1                                                                                  No Common Primary Clock  Max Delay Datapath Only         11    11       0        0             0  
+Info      video_clk_out_OBUF                                                                          clk_fpga_1                                                                                  No Common Primary Clock  Max Delay Datapath Only          2     2       0        0             0  
+Info      ov5640_pclk                                                                                 dbg_hub/inst/BSCANID.u_xsdbm_id/SWITCH_N_EXT_BSCAN.bscan_inst/SERIES7_BSCAN.bscan_inst/TCK  No Common Primary Clock  Max Delay Datapath Only          2     2       0        0             0  
+Info      clk_fpga_0                                                                                  ms7210_dri_clk                                                                              Safely Timed             None                           108   108       0        0             0  
+Info      clk_fpga_1                                                                                  ov5640_pclk                                                                                 No Common Primary Clock  Max Delay Datapath Only          1     1       0        0             0  
+Info      dbg_hub/inst/BSCANID.u_xsdbm_id/SWITCH_N_EXT_BSCAN.bscan_inst/SERIES7_BSCAN.bscan_inst/TCK  ov5640_pclk                                                                                 No Common Primary Clock  Max Delay Datapath Only          9     9       0        0             0  
+Info      clk_fpga_0                                                                                  video_clk_out_OBUF                                                                          Safely Timed             Max Delay Datapath Only         42    42       0        0             0  
+Info      clk_fpga_1                                                                                  video_clk_out_OBUF                                                                          No Common Primary Clock  Max Delay Datapath Only          1     1       0        0             0  
+

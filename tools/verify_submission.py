@@ -43,6 +43,8 @@ def main():
                 rel = 'report/source_readme.md'
             elif rel == 'sha256sums.txt':
                 rel = 'report/source_sha256sums.txt'
+            elif rel == 'skill/readme.md':
+                rel = 'original/source_skill_readme.txt'
             target = ROOT / rel
             if not target.is_file() or hashlib.sha256(z.read(entry)).hexdigest() != digest(target):
                 raise ValueError('source mismatch: ' + entry.filename)

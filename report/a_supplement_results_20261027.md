@@ -18,6 +18,6 @@ python3 tools/restore_a_repro.py --output /tmp/eagleeye_a_repro_new
 - 使用 A 提供的 Paddle-Lite 构建依赖和本机 PetaLinux 2022.2 工具链，重编稳定 GridPolicy 应用；`paddle_person_live` SHA256 为 `a16025dacfb8f02cee60a82b8c236e32319f724514baa50a0898b2c189f18aea`，与 A 所述稳定包二进制一致。编译告警指出静态链接中的 dlopen 需要匹配的 glibc 动态库；本次未在板上执行。
 - 先前独立重建同一仓库 Eyes 源码并对旧路径脚本做局部修复，综合、实现及 BIT 成功。布线后 WNS +0.608 ns、WHS +0.007 ns；LUT 24986、FF 28246、BRAM 303、DSP 49。报告在 `build/independent_rebuild_20261027/`；12 个输入和 33 个输出延迟未约束，Methodology 有 8 项 Critical Warning，CDC 有 Critical 分类。已约束时序通过不代表 I/O 或 CDC 签核完成。
 - `src/ps_as_built/` 是稳定 GridPolicy；`src/ps/` 是后续 AttentionPolicy。A 的交接材料记载有用户上板通过反馈，但完整串口及视频证据未随包提供；历史日志不能冒充新注意力版本的实测。
-- 原文档 `report/submission_audit.md` 和 `report/reproduction_zh.md` 中关于 Vivado 未启动、内核未构建的描述早于本次独立验证；以此文件和本次报告为准。独立软件/内核构建不证明与现场镜像完全相同。
+- `report/submission_audit.md` 和 `report/reproduction_zh.md` 已更新独立构建状态。独立软件/内核构建不证明与现场镜像完全相同。
 
 仍需真实资料：板级摄像头及 HDMI 设备时序约束依据；CDC/时钟告警的处理；AttentionPolicy 当前板端完整日志与功能记录；新构建 BIT 的板端验证；最终检测程序/模型和 B 模块的实际集成关系。未声称完整板端功能或加速性能 PASS。

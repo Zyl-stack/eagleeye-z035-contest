@@ -17,17 +17,17 @@
 
 ## 复现与大小写
 
-仓库中展开的文件名已转成小写以符合目录命名要求；工程脚本、约束和板端启动文件可能依赖原大小写，**不要直接使用小写副本重建或写卡**。请先将 `original/eagleeye_z035.zip` 解压到新的独立目录，按原快照 `README.md`、`build/recreate_vivado.tcl` 和 `report/` 说明操作。原快照保留了原 `SHA256SUMS.txt`。
+仓库中展开的文件名已转成小写以符合目录命名要求；工程脚本、约束和板端启动文件可能依赖原大小写，**不要直接使用小写副本重建或写卡**。请先按 [复现指南](report/reproduction_zh.md) 用 `tools/restore_a_repro.py` 恢复保留原始大小写的 A 快照，再使用 `build/build_full_vivado.tcl` 在新的独立输出目录构建。原始快照未被覆盖。
 
 ```sh
 python tools/verify_submission.py
 ```
 
-工具检查仓库文件哈希、原快照 CRC、源文件数量及展开副本与原件的对应关系，不代替 Vivado 构建、仿真或板端验证。工程使用 Vivado 2022.2；Paddle-Lite、交叉编译工具链等外部依赖未因本仓库整理而自动补齐。
+工具检查仓库文件哈希、原快照 CRC、源文件数量及展开副本与原件的对应关系，不代替 Vivado 构建、仿真或板端验证。工程使用 Vivado 2022.2；匹配的 Paddle-Lite 库在 A 增量快照中，PetaLinux 交叉编译工具链和 sysroot 仍需外部准备。
 
 ## 实测和缺失材料
 
-`board/` 与 `build/` 为原工程的历史资料。现有报告明确指出：干净目录重建、当前版本同条件性能数据、完整设计报告及部分验证证据仍需补充，详见 `report/readme.md` 和 `report/source_readme.md`。历史日志不能直接称为本次构建结果；HDMI 刷新率也不等于检测更新 FPS。
+`board/` 同时包含历史资料，`build/independent_rebuild_20261027/` 包含独立重建报告。当前版本同条件性能数据、完整设计报告及部分验证证据仍需补充，见 `report/submission_audit.md`。历史日志不能直接称为本次构建结果；HDMI 刷新率也不等于检测更新 FPS。
 
 原材料含模型、第三方 IP、启动镜像及历史日志；当前仓库为私有。公开或比赛提交前需确认版权授权、路径中的个人信息和内容完整性。不要覆盖稳定 SD 卡。
 
