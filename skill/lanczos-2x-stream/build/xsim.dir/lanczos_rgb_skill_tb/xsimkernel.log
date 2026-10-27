@@ -1,0 +1,7 @@
+Running: xsim.dir/lanczos_rgb_skill_tb/xsimk.exe -runall -simmode gui -wdb lanczos_rgb_skill_tb.wdb -simrunnum 0 -socket 20010
+Design successfully loaded
+Design Loading Memory Usage: 10312 KB (Peak: 10312 KB)
+Design Loading CPU Usage: 15 ms
+Simulation completed
+Simulation Memory Usage: 11504 KB (Peak: 11504 KB)
+Simulation CPU Usage: 202 ms

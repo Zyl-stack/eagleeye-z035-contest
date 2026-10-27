@@ -1,0 +1,16 @@
+{
+  "modules": [
+    "video_mode_switch_top_0",
+    "fovea_axil_ctrl_0",
+    "roi_servo_pwm_0"
+  ],
+  "top_ports": [
+    "mode_key",
+    "pause_key",
+    "servo_pan_pwm",
+    "servo_tilt_pwm"
+  ],
+  "register_bases": {
+    "fovea_axil_ctrl_0": "0x40000000"
+  }
+}

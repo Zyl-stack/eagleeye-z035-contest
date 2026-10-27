@@ -1,0 +1,11 @@
+/build/vivado_work/
+/build/bd_source/
+/src/ip_repo/preproc/build/
+/src/ip_repo/preproc/vectors/
+**/__pycache__/
+*.pyc
+*.jou
+*.log
+!board/*.log
+*.wdb
+*.wdf

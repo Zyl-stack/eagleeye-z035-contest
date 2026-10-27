@@ -1,0 +1,9 @@
+{
+  "sequence": 100,
+  "image_width": 640,
+  "image_height": 360,
+  "timing_ms": {"capture": 8.5401, "preprocess": 418.0196, "inference": 501.1942, "postprocess": 0.0288, "total": 927.7828, "fps": 1.0778},
+  "persons": [
+    {"confidence": 0.4697, "x": 117.7207, "y": 75.7732, "w": 309.7684, "h": 251.6589}
+  ]
+}

@@ -1,0 +1,6 @@
+The PicoDet model.nb and Paddle-Lite static library used for this build were
+supplied in the earlier EagleEye AX7020 team handoff. This package does not
+claim authorship of the model or Paddle-Lite. The upstream Paddle-Lite project
+is https://github.com/PaddlePaddle/Paddle-Lite. The bundled ARM binary is for
+testing on the user's AX7020; check upstream and model license terms before
+redistributing the binary or model outside the project team.

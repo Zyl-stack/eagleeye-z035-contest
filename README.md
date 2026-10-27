@@ -1,1 +1,0 @@
-# eagleeye-z035-contest
