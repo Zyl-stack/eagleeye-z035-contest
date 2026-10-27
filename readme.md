@@ -36,3 +36,7 @@ python tools/verify_submission.py
 ## 2026-10-27 A 复现补充
 
 A 提供的稳定版源码、Paddle-Lite 构建依赖和修订 Vivado Tcl 可从保留大小写的增量快照恢复，步骤与验证边界见 [A 复现补充](report/a_supplement_results_20261027.md)。原工程快照保持不变。
+
+## 足球 B→C 联调
+
+比赛足球 YOLO、PicoDet 人体检测及 ONNX 移植是独立路线。接口和 PC 样例验证见 [B 检测联调说明](report/b_detection_integration_20261027.md)。
