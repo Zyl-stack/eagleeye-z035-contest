@@ -1,0 +1,10 @@
+Source: git archive 19984dd147fa7fbb7cb14b17400263ad0925c189 | gzip -n -1
+Archive SHA256: 139cbe4ad3b6e21f243f21e0fd272640b295d50737d666c055a54784f0e954a9
+Fresh regeneration: matching SHA256
+Full streaming tar check: 78975 entries; Makefile 5.15.36; COPYING and selected files present.
+Extracted two patch inputs into independent temporary directory.
+patch -p1 -i reference/linux_z035/experimental/kernel.patch: EXIT=0
+drivers/base/Makefile: SHA256 4d021684ebdabcf49fbb6e410792bfdfc20e8d5659b072ae1eba8f367da27525 matched local experimental source
+drivers/base/ee_rawio_isolation.c: SHA256 f863f9ee1c3ab8685a809e7ad909b5a19cdd6b11adcb643fc546a9eb5e356253 matched local experimental source
+drivers/fpga/fpga-mgr.c: SHA256 86c1e8f69660781beea735343cb6c39969e0b788ecf9cf479dfcd87bc43c2cc5 matched local experimental source
+Scope: archive and three patched files only; no complete kernel build or image identity claim.

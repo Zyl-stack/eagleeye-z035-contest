@@ -31,4 +31,4 @@ python tools/verify_submission.py
 
 原材料含模型、第三方 IP、启动镜像及历史日志；当前仓库为私有。公开或比赛提交前需确认版权授权、路径中的个人信息和内容完整性。不要覆盖稳定 SD 卡。
 
-本次补充的材料及仍缺证据见 [提交核查](report/submission_audit.md)、[中文设计报告材料稿](report/design_report_zh.md)、[技能索引](skill/index.md) 和 [A/B/C/Linux 参考说明](reference/readme.md)。
+本次补充的材料及仍缺证据见 [提交核查](report/submission_audit.md)、[中文设计报告材料稿](report/design_report_zh.md)、[复现指南](report/reproduction_zh.md)、[技能索引](skill/index.md) 和 [A/B/C/Linux 参考说明](reference/readme.md)。完整 Linux 源码归档使用 Git LFS；克隆后需运行 `git lfs pull`。

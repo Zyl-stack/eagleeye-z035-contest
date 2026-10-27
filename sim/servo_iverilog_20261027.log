@@ -1,0 +1,7 @@
+2026-10-27; Icarus Verilog 10.3; offline simulation, not board validation.
+Working directory: /mnt/d/eagleeye_z035_github_submission
+$ /home/eagleuser/work/eagleeye_contest_sim_20261027/tool/usr/bin/iverilog -B /home/eagleuser/work/eagleeye_contest_sim_20261027/tool/usr/lib/x86_64-linux-gnu/ivl -g2012 -s tb_roi_servo_pwm -o /mnt/d/eagleeye_preproc_sim_20261027/build/servo.vvp src/servo/roi_servo_pwm.v src/servo/tb_roi_servo_pwm.sv
+EXIT=0
+$ /home/eagleuser/work/eagleeye_contest_sim_20261027/tool/usr/bin/vvp -M /home/eagleuser/work/eagleeye_contest_sim_20261027/tool/usr/lib/x86_64-linux-gnu/ivl /mnt/d/eagleeye_preproc_sim_20261027/build/servo.vvp
+PASS servo center hold, 20 ms period, 10 us slew, ROI reversal
+EXIT=0

@@ -23,6 +23,8 @@
 | 项目 | 仓库证据 | 范围 |
 |---|---|---|
 | 预处理张量比较器 | `sim/host_preproc.log`：2 项主机测试通过 | 比较工具测试，不是当前系统板端 DMA 输出 |
+| 预处理 RTL 仿真 | `sim/preproc_iverilog_20261027.log`：五类帧及采集帧适配器联测逐位一致，每帧 307,200 值 | Icarus 10.3 仿真；不证明实板 DMA、缓存或整个视频系统 |
+| 舵机 PWM RTL 仿真 | `sim/servo_iverilog_20261027.log`：中心保持、周期、渐变及反向测试通过 | 离线 RTL 仿真，不证明实物舵机机械安全 |
 | ROI 硬件合同检查器 | `sim/host_roi.log`：1 项主机测试通过 | 检查器测试，不证明按键、鼠标和舵机实板功能 |
 | 预处理 IP 独立历史记录 | `sim/preproc_standalone_readme.md` 报告五类帧；六个 RTL/ROM 哈希见 `sim/preproc_standalone_rtl_sha256.txt` | 这是交接文档的历史结果，原始逐帧仿真日志未随本材料提供；不是整个 Eyes 系统的板端输出 |
 | Lanczos 源码来源 | `sim/host_lanczos_source.log`：7 个文件哈希匹配 | 不验证像素；旧 XSim 日志 `skill/lanczos-2x-stream/build/xsim.log` 显示 768 项错误，不能写成 PASS |
@@ -44,7 +46,7 @@
 
 1. 执行 `python tools/verify_submission.py` 验证当前仓库与原始快照。
 2. 将 `original/eagleeye_z035.zip` 解压到新目录，保留原始文件名大小写；按原快照 `README.md` 和 `build/recreate_vivado.tcl` 使用 Vivado 2022.2。
-3. 按原快照 `sim/README.md`、`src/ps/build_arm.sh` 准备工具链、Paddle-Lite 依赖及测试输入。当前材料尚未证明从干净目录完成整套构建。
+3. 按 `report/reproduction_zh.md` 及原快照 `sim/README.md`、`src/ps/build_arm.sh` 准备工具链、Paddle-Lite 依赖及测试输入。当前材料尚未证明从干净目录完成整套构建。
 4. 上板验证应使用获准的独立介质，记录镜像身份、测试条件、原始输出和恢复情况；不覆盖稳定系统。
 
 详细缺口和证据边界见 `submission_audit.md`。

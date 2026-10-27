@@ -5,10 +5,10 @@
 | 要求 | 已有材料 | 当前判断 |
 |---|---|---|
 | 工程和源代码 | `src/`、`original/eagleeye_z035.zip` | 已收集原目录 226 个文件；原 Vivado XPR 未作为自包含工程提供，干净重建尚未成功验证 |
-| 仿真与功能正确性 | `sim/`、`src/ip_repo/preproc/tb/`、`data/` | 主机比较器和合同检查器测试通过；预处理独立交接 README 有五帧历史结果，六个 RTL/ROM 哈希匹配，但缺原始逐帧仿真日志。当前系统板端 FPGA 输出张量与完整比对日志缺失。旧 Lanczos XSim 日志为 FAIL，不得写成 PASS |
+| 仿真与功能正确性 | `sim/`、`src/ip_repo/preproc/tb/`、`data/` | 本次新增五帧预处理 RTL、采集帧适配器联测、AXI-Lite 及舵机 PWM 离线仿真；每帧 307200 值逐位一致。当前系统板端 FPGA 输出张量与完整比对日志缺失。旧 Lanczos XSim 日志为 FAIL，不得写成 PASS |
 | 综合/实现、资源及时钟 | `build/z100_top_utilization_placed.rpt`、`build/z100_top_timing_summary_routed.rpt` | 有历史 Eyes 报告；不能称为本次重新综合，外部时序和干净工程复现仍需证明 |
 | 上板工程、运行脚本和输出对比 | `board/`、`src/ps/`、`data/` | 有启动材料、运行脚本与历史日志；缺当前镜像身份绑定的完整演示、板端输出与参考结果对比 |
-| 可复现构建 | `build/recreate_vivado.tcl`、`src/ps/build_arm.sh`、原始快照 | 有入口，但尚无从干净目录完成的 Vivado/PS 重建证据；还需匹配工具链、sysroot 和 Paddle-Lite 库 |
+| 可复现构建 | `report/reproduction_zh.md`、`build/recreate_vivado.tcl`、原始快照 | 提供逐项命令，但尚无从干净目录完成的 Vivado/PS/Linux 重建证据；还需匹配工具链、sysroot 和 Paddle-Lite 库 |
 | 技能包 | `skill/index.md` 及三个子目录 | 有方法、验证脚本和限制；旧 Lanczos 像素测试失败，不能宣传为已通过；未证明为通用 PYNQ Skill |
 | 设计报告 | `report/design_report_zh.md`、`report/figures/` | 已有材料稿、系统图与预处理图；尚缺前人工作/创新引用、团队贡献、实测对比和正式定稿 |
 | 大模型协作记录 | `report/ai_collaboration_record.md` | 现有整理稿，不是完整原始对话；需补经过团队确认的提示、纠错和验证材料 |
@@ -23,4 +23,4 @@
 5. 模型、第三方 IP、Paddle-Lite、启动材料的使用和再分发授权；完整 PS 工具链/sysroot/静态库；团队贡献和完整的报告定稿。
 6. 最终硬件系统图和架构图须由工程负责人对照当前 BD、地址、时钟和实际演示确认；图片本身不是验证证据。
 
-仓库已另外收录本地 A/B/C/Linux 分支源码快照，见 `reference/readme.md`；它们不是已完成 Z035 联调的主工程。已另附 Z035 内核配置、实验补丁及上游源码提交（`reference/linux_z035/`）；完整内核源码和 SDK 未上传。公开仓库前还需审查隐私与授权；当前为私有仓库。
+仓库已另外收录本地 A/B/C/Linux 分支源码快照，见 `reference/readme.md`；它们不是已完成 Z035 联调的主工程。Z035 固定提交的完整 Linux 上游源码归档已通过 Git LFS 上传，另附稳定配置和独立实验补丁；PetaLinux SDK、rootfs 完整依赖、原签名私钥及实际镜像字节一致性仍未提供或证明。公开仓库前还需审查隐私与授权；当前为私有仓库。

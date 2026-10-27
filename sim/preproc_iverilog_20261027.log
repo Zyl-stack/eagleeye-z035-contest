@@ -1,0 +1,88 @@
+2026-10-27; offline Icarus 10.3; never a board test.
+Captured CPU golden matches repository data/captured.golden.f32 by SHA256.
+
+$ compile tb_preproc: /home/eagleuser/work/eagleeye_contest_sim_20261027/tool/usr/bin/iverilog -B /home/eagleuser/work/eagleeye_contest_sim_20261027/tool/usr/lib/x86_64-linux-gnu/ivl -g2005-sv -s tb_preproc -o build/verify_tb_preproc.vvp rtl/preproc_axis_core.v tb/tb_preproc.v
+
+EXIT=0
+
+$ simulate tb_preproc: /home/eagleuser/work/eagleeye_contest_sim_20261027/tool/usr/bin/vvp -M /home/eagleuser/work/eagleeye_contest_sim_20261027/tool/usr/lib/x86_64-linux-gnu/ivl ../build/verify_tb_preproc.vvp +INPUT=../vectors/zero.hex +OUTPUT=../build/zero
+PASS cycles=    673804 latency_ms_at_100MHz=6.738040
+
+EXIT=0
+
+$ compare -B D:\eagleeye_preproc_sim_20261027\tools\compare.py zero
+zero: max_abs=0 mean_abs=0 exact=307200/307200 over_atol=0
+
+EXIT=0
+
+$ simulate tb_preproc: /home/eagleuser/work/eagleeye_contest_sim_20261027/tool/usr/bin/vvp -M /home/eagleuser/work/eagleeye_contest_sim_20261027/tool/usr/lib/x86_64-linux-gnu/ivl ../build/verify_tb_preproc.vvp +INPUT=../vectors/full.hex +OUTPUT=../build/full
+PASS cycles=    673804 latency_ms_at_100MHz=6.738040
+
+EXIT=0
+
+$ compare -B D:\eagleeye_preproc_sim_20261027\tools\compare.py full
+full: max_abs=0 mean_abs=0 exact=307200/307200 over_atol=0
+
+EXIT=0
+
+$ simulate tb_preproc: /home/eagleuser/work/eagleeye_contest_sim_20261027/tool/usr/bin/vvp -M /home/eagleuser/work/eagleeye_contest_sim_20261027/tool/usr/lib/x86_64-linux-gnu/ivl ../build/verify_tb_preproc.vvp +INPUT=../vectors/distinct.hex +OUTPUT=../build/distinct
+PASS cycles=    673804 latency_ms_at_100MHz=6.738040
+
+EXIT=0
+
+$ compare -B D:\eagleeye_preproc_sim_20261027\tools\compare.py distinct
+distinct: max_abs=0 mean_abs=0 exact=307200/307200 over_atol=0
+
+EXIT=0
+
+$ simulate tb_preproc: /home/eagleuser/work/eagleeye_contest_sim_20261027/tool/usr/bin/vvp -M /home/eagleuser/work/eagleeye_contest_sim_20261027/tool/usr/lib/x86_64-linux-gnu/ivl ../build/verify_tb_preproc.vvp +INPUT=../vectors/edge.hex +OUTPUT=../build/edge
+PASS cycles=    673804 latency_ms_at_100MHz=6.738040
+
+EXIT=0
+
+$ compare -B D:\eagleeye_preproc_sim_20261027\tools\compare.py edge
+edge: max_abs=0 mean_abs=0 exact=307200/307200 over_atol=0
+
+EXIT=0
+
+$ simulate tb_preproc: /home/eagleuser/work/eagleeye_contest_sim_20261027/tool/usr/bin/vvp -M /home/eagleuser/work/eagleeye_contest_sim_20261027/tool/usr/lib/x86_64-linux-gnu/ivl ../build/verify_tb_preproc.vvp +INPUT=../vectors/captured.hex +OUTPUT=../build/captured
+PASS cycles=    673804 latency_ms_at_100MHz=6.738040
+
+EXIT=0
+
+$ compare -B D:\eagleeye_preproc_sim_20261027\tools\compare.py captured
+captured: max_abs=0 mean_abs=0 exact=307200/307200 over_atol=0
+
+EXIT=0
+
+$ compile tb_unpack: /home/eagleuser/work/eagleeye_contest_sim_20261027/tool/usr/bin/iverilog -B /home/eagleuser/work/eagleeye_contest_sim_20261027/tool/usr/lib/x86_64-linux-gnu/ivl -g2005-sv -s tb_unpack -o build/verify_tb_unpack.vvp rtl/rgb888_mm2s_adapter.v tb/tb_unpack.v
+
+EXIT=0
+
+$ simulate tb_unpack: /home/eagleuser/work/eagleeye_contest_sim_20261027/tool/usr/bin/vvp -M /home/eagleuser/work/eagleeye_contest_sim_20261027/tool/usr/lib/x86_64-linux-gnu/ivl build/verify_tb_unpack.vvp +WORDS=vectors/distinct.hex32 +PIXELS=vectors/distinct.hex
+PASS unpack 691200 bytes -> 230400 RGB pixels, cycles=     388803
+
+EXIT=0
+
+$ compile tb_preproc_dma: /home/eagleuser/work/eagleeye_contest_sim_20261027/tool/usr/bin/iverilog -B /home/eagleuser/work/eagleeye_contest_sim_20261027/tool/usr/lib/x86_64-linux-gnu/ivl -g2005-sv -s tb_preproc_dma -o build/verify_tb_preproc_dma.vvp rtl/preproc_axis_core.v rtl/rgb888_mm2s_adapter.v tb/tb_preproc_dma.v
+
+EXIT=0
+
+$ simulate tb_preproc_dma: /home/eagleuser/work/eagleeye_contest_sim_20261027/tool/usr/bin/vvp -M /home/eagleuser/work/eagleeye_contest_sim_20261027/tool/usr/lib/x86_64-linux-gnu/ivl ../build/verify_tb_preproc_dma.vvp +INPUT=../vectors/captured.hex32 +OUTPUT=../build/captured_dma
+PASS cycles=    788884 latency_ms_at_100MHz=7.888840
+
+EXIT=0
+
+$ compare -B D:\eagleeye_preproc_sim_20261027\tools\compare.py captured --prefix captured_dma
+captured: max_abs=0 mean_abs=0 exact=307200/307200 over_atol=0
+
+EXIT=0
+
+$ compile tb_control: /home/eagleuser/work/eagleeye_contest_sim_20261027/tool/usr/bin/iverilog -B /home/eagleuser/work/eagleeye_contest_sim_20261027/tool/usr/lib/x86_64-linux-gnu/ivl -g2005-sv -s tb_control -o build/verify_tb_control.vvp rtl/preproc_axis_core.v rtl/rgb888_mm2s_adapter.v rtl/picodet_preproc_ip.v tb/tb_control.v
+
+EXIT=0
+
+$ simulate tb_control: /home/eagleuser/work/eagleeye_contest_sim_20261027/tool/usr/bin/vvp -M /home/eagleuser/work/eagleeye_contest_sim_20261027/tool/usr/lib/x86_64-linux-gnu/ivl ../build/verify_tb_control.vvp
+PASS AXI-Lite independent AW/W and busy status
+
+EXIT=0
