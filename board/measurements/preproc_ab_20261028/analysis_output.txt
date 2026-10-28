@@ -1,0 +1,6 @@
+backend,n,preprocess_mean_ms,inference_mean_ms,total_mean_ms,total_sd_ms,effective_fps
+cpu,30,416.960,468.659,903.150,5.915,1.107
+fpga,30,17.537,468.204,502.665,5.149,1.989
+preprocess_speedup=23.776x
+full_pipeline_fps_ratio=1.797x
+scope: same BIT/app/model, live camera, CPU bicubic vs FPGA bilinear preprocessing; PicoDet inference remains on ARM; HDMI refresh rate is not detection FPS

@@ -1,0 +1,1 @@
+Linux eagleeye_z035_ps_picodet_20261016 5.15.36-xilinx-v2022.2 #1 SMP PREEMPT Mon Oct 3 07:50:07 UTC 2022 armv7l GNU/Linux

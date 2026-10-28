@@ -48,7 +48,7 @@ python -m unittest discover -s tests -v
 
 板端顺序：确认 HWH 地址/时钟与驱动一致；锁定输入帧槽；CPU 写过输入时先 clean cache；启动一条 MM2S 和三条 S2MM；等待三条输出、检查 DMA/IP 状态与超时；invalidate 输出 cache；导出张量比对。不得把摄像头仍在写入的槽当作固定输入。
 
-测速要分别记录 IP `cycles`、DMA/DDR/cache 的端到端 `preprocess_ms`、纯 PS 参考 `preprocess_ms` 和检测结果。**IP 流接口仿真时延不是板端实测。**历史用户反馈包含预处理时长，但本仓库缺少可核验的当前版本同条件完整 A/B 原始日志，不能据此计算当前系统加速比。
+测速要分别记录 IP `cycles`、DMA/DDR/cache 的端到端 `preprocess_ms`、纯 PS 参考 `preprocess_ms` 和检测结果。**IP 流接口仿真时延不是板端实测。**已收到当前版本的 [CPU/FPGA A/B 原始日志](../../report/preproc_ab_20261028_zh.md)：两组使用相同模型与线程，但 CPU 为双三次、FPGA 为双线性且实时帧不同；只能报告两种配置的计时比，不能称为同算法加速比或数值一致。
 
 ## 已验证效果与边界
 

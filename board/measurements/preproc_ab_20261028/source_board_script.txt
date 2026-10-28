@@ -1,0 +1,87 @@
+#!/bin/sh
+# Run from the stable Linux system as root. Writes only to volatile /tmp.
+set -eu
+
+APP=/tmp/eagleeye-autostart/linux_camera_smooth_trial_v7_20261013
+RESULTS=$(mktemp -d /tmp/EE_PREPROC_AB_XXXXXXXX)
+N=35
+
+echo "RESULTS=$RESULTS"
+[ "$(id -u)" = 0 ] || { echo 'ERROR: run from sudo -i'; exit 2; }
+[ -x "$APP/bin/paddle_person_live" ] || { echo 'ERROR: autostart application missing'; exit 2; }
+[ -x "$APP/bin/video_guard" ] || { echo 'ERROR: video_guard missing'; exit 2; }
+
+cd "$APP"
+sha256sum ./bin/paddle_person_live ./model.nb > "$RESULTS/identity.sha256"
+uname -a > "$RESULTS/uname.txt"
+printf 'iterations=%s\nthreads=2\nthreshold=0.3\nwarmup=1\nvideo=existing VDMA\nroi=on\nmouse=on\n' "$N" > "$RESULTS/conditions.txt"
+if ! sha256sum -c SHA256SUMS > "$RESULTS/app_integrity.txt" 2>&1; then
+    echo 'ERROR: application SHA256SUMS failed'; exit 2
+fi
+if ! ./bin/paddle_person_live --help 2>&1 | grep -q -- '--preprocess'; then
+    echo 'ERROR: application has no --preprocess switch'; exit 2
+fi
+
+PIDS=$(pidof paddle_person_live 2>/dev/null || true)
+if [ -n "$PIDS" ]; then
+    echo "Stopping only autostart inference PIDs: $PIDS"
+    kill -TERM $PIDS
+    i=0
+    while [ "$i" -lt 15 ] && pidof paddle_person_live >/dev/null 2>&1; do
+        sleep 1
+        i=$((i + 1))
+    done
+    if pidof paddle_person_live >/dev/null 2>&1; then
+        echo 'ERROR: inference did not stop; no benchmark started'; exit 3
+    fi
+fi
+
+i=0
+while [ "$i" -lt 15 ] && [ -e /tmp/eagleeye-camera-v4-session ]; do
+    sleep 1
+    i=$((i + 1))
+done
+if [ -e /tmp/eagleeye-camera-v4-session ]; then
+    echo 'ERROR: session lock still present; no benchmark started'; exit 3
+fi
+if ! ./bin/video_guard inspect > "$RESULTS/video_before.txt" 2>&1; then
+    echo 'ERROR: video is not in attachable state; no benchmark started'; exit 3
+fi
+
+run_mode() {
+    MODE=$1
+    echo "BEGIN backend=$MODE frames=$N"
+    if ./bin/paddle_person_live --attach-existing-video --fovea-roi \
+        --mouse-roi --mouse-device auto --mouse-sensitivity 2 \
+        --model ./model.nb --labels ./label_list.txt \
+        --iterations "$N" --threads 2 --threshold 0.3 --warmup 1 \
+        --pixel-order rgb --preprocess "$MODE" > "$RESULTS/$MODE.log" 2>&1; then
+        echo "END backend=$MODE exit=0"
+    else
+        RC=$?
+        echo "END backend=$MODE exit=$RC log=$RESULTS/$MODE.log"
+        exit "$RC"
+    fi
+    if [ "$(grep -c '^TIME ' "$RESULTS/$MODE.log" || true)" -ne "$N" ]; then
+        echo "ERROR: backend=$MODE did not produce $N TIME lines"; exit 4
+    fi
+    if [ "$(grep -c "^PREPROC backend=$MODE " "$RESULTS/$MODE.log" || true)" -ne "$N" ]; then
+        echo "ERROR: backend=$MODE did not run for all $N frames"; exit 4
+    fi
+    if grep -q 'PREPROC_FALLBACK' "$RESULTS/$MODE.log"; then
+        echo "ERROR: backend=$MODE fell back"; exit 4
+    fi
+}
+
+run_mode cpu
+if ! ./bin/video_guard inspect > "$RESULTS/video_between.txt" 2>&1; then
+    echo 'ERROR: video state changed after CPU run; FPGA run not started'; exit 3
+fi
+run_mode fpga
+./bin/video_guard inspect > "$RESULTS/video_after.txt" 2>&1 || true
+tar -czf "$RESULTS.tar.gz" -C /tmp "$(basename "$RESULTS")"
+sha256sum "$RESULTS.tar.gz"
+echo 'AB_PASS cpu=35 fpga=35; video left running'
+echo "RESULTS=$RESULTS"
+echo "ARCHIVE=$RESULTS.tar.gz"
+echo 'After extraction on PC, run analyze_results.py against the RESULTS directory.'

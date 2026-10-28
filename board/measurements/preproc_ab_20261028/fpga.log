@@ -1,0 +1,431 @@
+[I  3/ 9 12:39: 2.574 ...src/Paddle-Lite/lite/core/device_info.cc:229 get_cpu_arch] Unknow cpu arch: 3081
+[I  3/ 9 12:39: 2.574 ...src/Paddle-Lite/lite/core/device_info.cc:229 get_cpu_arch] Unknow cpu arch: 3081
+[I  3/ 9 12:39: 2.575 ...src/Paddle-Lite/lite/core/device_info.cc:1183 Setup] ARM multiprocessors name: MODEL NAME	: ARMV7 PROCESSOR REV 0 (V7L)
+HARDWARE	: XILINX ZYNQ PLATFORM
+
+[I  3/ 9 12:39: 2.575 ...src/Paddle-Lite/lite/core/device_info.cc:1184 Setup] ARM multiprocessors number: 2
+[I  3/ 9 12:39: 2.575 ...src/Paddle-Lite/lite/core/device_info.cc:1186 Setup] ARM multiprocessors ID: 0, max freq: 0, min freq: 0, cluster ID: 0, CPU ARCH: A-1
+[I  3/ 9 12:39: 2.575 ...src/Paddle-Lite/lite/core/device_info.cc:1186 Setup] ARM multiprocessors ID: 1, max freq: 0, min freq: 0, cluster ID: 0, CPU ARCH: A-1
+[I  3/ 9 12:39: 2.575 ...src/Paddle-Lite/lite/core/device_info.cc:1192 Setup] L1 DataCache size is: 
+[I  3/ 9 12:39: 2.575 ...src/Paddle-Lite/lite/core/device_info.cc:1194 Setup] 32 KB
+[I  3/ 9 12:39: 2.575 ...src/Paddle-Lite/lite/core/device_info.cc:1194 Setup] 32 KB
+[I  3/ 9 12:39: 2.575 ...src/Paddle-Lite/lite/core/device_info.cc:1196 Setup] L2 Cache size is: 
+[I  3/ 9 12:39: 2.575 ...src/Paddle-Lite/lite/core/device_info.cc:1198 Setup] 512 KB
+[I  3/ 9 12:39: 2.575 ...src/Paddle-Lite/lite/core/device_info.cc:1198 Setup] 512 KB
+[I  3/ 9 12:39: 2.575 ...src/Paddle-Lite/lite/core/device_info.cc:1200 Setup] L3 Cache size is: 
+[I  3/ 9 12:39: 2.575 ...src/Paddle-Lite/lite/core/device_info.cc:1202 Setup] 0 KB
+[I  3/ 9 12:39: 2.575 ...src/Paddle-Lite/lite/core/device_info.cc:1202 Setup] 0 KB
+[I  3/ 9 12:39: 2.575 ...src/Paddle-Lite/lite/core/device_info.cc:1204 Setup] Total memory: 1022076KB
+[I  3/ 9 12:39: 2.576 ...src/Paddle-Lite/lite/core/device_info.cc:456 check_cpu_online] Failed to query the online statue of CPU id:0
+[I  3/ 9 12:39: 2.576 ...src/Paddle-Lite/lite/core/device_info.cc:461 check_cpu_online] CPU id:0 is offine
+[W  3/ 9 12:39: 2.576 ...src/Paddle-Lite/lite/core/device_info.cc:1257 SetRunMode] Some cores are offline, switch to NO BIND MODE
+HW attached_existing_video s2mm_status=0x15810 mm2s_status=0x11000
+PREPROC_FPGA version=0x10000 input=0x1e300000 output=0x1e400000
+FOVEA request=0 roi=160,90,320,180 requested_mode=2 display_mode=2 status=0x22 quality=0x30
+VDMA_STATUS s2mm=0x15810 mm2s=0x11000 cleared=0
+WARNING VDMA error bits present; snapshot consistency is not frame-completion proof
+SNAPSHOT inference_sequence=1 slot=1 attempts=2 content_hash=0xb56f0795 content_changed=1 freshness=unverified
+ATTENTION inference_sequence=1 target_id=6 score=1107 zone=90 motion=0 approach=0 small=255 uncertainty=109 accepted_players=6 switched=1 target_roi=320,26
+PERSON confidence=0.8141 x=86.6987 y=159.7956 w=27.4808 h=71.3228
+PERSON confidence=0.7380 x=339.0291 y=42.8070 w=22.7687 h=51.0990
+PERSON confidence=0.7240 x=190.2736 y=308.1990 w=30.6958 h=51.8010
+PERSON confidence=0.7211 x=469.0652 y=149.3040 w=32.6113 h=72.2092
+PERSON confidence=0.6037 x=329.0404 y=202.0155 w=66.8168 h=120.0446
+PERSON confidence=0.5715 x=627.6860 y=90.8449 w=12.3140 h=50.2584
+PERSON confidence=0.4729 x=337.1039 y=224.0627 w=48.0176 h=97.6413
+PREPROC backend=fpga cycles=755830
+TIME capture_ms=21.896 preprocess_ms=22.344 inference_ms=469.074 postprocess_ms=0.030 total_ms=513.355 FPS=1.948
+SNAPSHOT inference_sequence=2 slot=2 attempts=1 content_hash=0x916daa35 content_changed=1 freshness=unverified
+FOVEA request=1 roi=172,78,320,180 requested_mode=2 display_mode=2 status=0x22 quality=0x30
+FOVEA request=2 roi=184,66,320,180 requested_mode=2 display_mode=2 status=0x22 quality=0x30
+FOVEA request=3 roi=196,54,320,180 requested_mode=2 display_mode=2 status=0x22 quality=0x30
+FOVEA request=4 roi=208,42,320,180 requested_mode=2 display_mode=2 status=0x22 quality=0x30
+FOVEA request=5 roi=220,30,320,180 requested_mode=2 display_mode=2 status=0x22 quality=0x30
+FOVEA request=6 roi=232,26,320,180 requested_mode=2 display_mode=2 status=0x22 quality=0x30
+FOVEA request=7 roi=244,26,320,180 requested_mode=2 display_mode=2 status=0x22 quality=0x30
+FOVEA request=8 roi=256,26,320,180 requested_mode=2 display_mode=2 status=0x22 quality=0x30
+ATTENTION inference_sequence=2 target_id=6 score=1114 zone=90 motion=1 approach=0 small=255 uncertainty=111 accepted_players=6 switched=0 target_roi=320,26
+PERSON confidence=0.8334 x=87.0678 y=159.4976 w=27.0641 h=71.4442
+PERSON confidence=0.7435 x=339.0815 y=42.6305 w=22.7087 h=51.2557
+PERSON confidence=0.7197 x=468.4318 y=149.2131 w=33.7367 h=72.6219
+PERSON confidence=0.7173 x=190.2277 y=308.2119 w=31.4234 h=51.7881
+PERSON confidence=0.5867 x=329.2778 y=201.7917 w=66.5941 h=120.2771
+PERSON confidence=0.5658 x=627.7707 y=90.9164 w=12.2293 h=50.3789
+PERSON confidence=0.4004 x=335.9770 y=234.8112 w=48.2978 h=87.0750
+PREPROC backend=fpga cycles=755518
+TIME capture_ms=12.539 preprocess_ms=17.544 inference_ms=472.509 postprocess_ms=0.030 total_ms=502.637 FPS=1.990
+SNAPSHOT inference_sequence=3 slot=2 attempts=3 content_hash=0xac87237d content_changed=1 freshness=unverified
+FOVEA request=9 roi=268,26,320,180 requested_mode=2 display_mode=2 status=0x22 quality=0x30
+FOVEA request=10 roi=280,26,320,180 requested_mode=2 display_mode=2 status=0x22 quality=0x30
+FOVEA request=11 roi=292,26,320,180 requested_mode=2 display_mode=2 status=0x22 quality=0x30
+FOVEA request=12 roi=304,26,320,180 requested_mode=2 display_mode=2 status=0x22 quality=0x30
+FOVEA request=13 roi=316,26,320,180 requested_mode=2 display_mode=2 status=0x22 quality=0x30
+FOVEA request=14 roi=320,26,320,180 requested_mode=2 display_mode=2 status=0x22 quality=0x30
+ATTENTION inference_sequence=3 target_id=6 score=1128 zone=90 motion=3 approach=1 small=255 uncertainty=114 accepted_players=6 switched=0 target_roi=320,25
+PERSON confidence=0.8163 x=86.8237 y=160.0135 w=27.8752 h=70.8699
+PERSON confidence=0.7365 x=338.9016 y=42.6139 w=23.0001 h=51.3557
+PERSON confidence=0.7284 x=190.1801 y=308.4473 w=30.9412 h=51.5527
+PERSON confidence=0.7224 x=468.7808 y=149.1053 w=33.4762 h=72.6918
+PERSON confidence=0.5872 x=329.2994 y=201.9150 w=66.2174 h=120.1694
+PERSON confidence=0.5535 x=626.9808 y=89.4758 w=12.9837 h=52.0085
+PERSON confidence=0.4487 x=338.0561 y=223.9498 w=47.2867 h=97.8988
+PREPROC backend=fpga cycles=755516
+TIME capture_ms=27.503 preprocess_ms=17.741 inference_ms=469.080 postprocess_ms=0.030 total_ms=514.372 FPS=1.944
+SNAPSHOT inference_sequence=4 slot=0 attempts=1 content_hash=0x68ca5c01 content_changed=1 freshness=unverified
+FOVEA request=15 roi=320,25,320,180 requested_mode=2 display_mode=2 status=0x22 quality=0x30
+ATTENTION inference_sequence=4 target_id=6 score=1126 zone=90 motion=4 approach=0 small=255 uncertainty=114 accepted_players=6 switched=0 target_roi=320,26
+PERSON confidence=0.8253 x=86.9601 y=159.8893 w=27.0575 h=71.0126
+PERSON confidence=0.7515 x=339.2168 y=42.7836 w=22.5812 h=50.9978
+PERSON confidence=0.7335 x=469.2488 y=149.3132 w=32.7843 h=72.5358
+PERSON confidence=0.7212 x=190.2032 y=308.2479 w=31.0774 h=51.7521
+PERSON confidence=0.6089 x=329.1149 y=201.8558 w=66.5246 h=120.3350
+PERSON confidence=0.5524 x=627.6572 y=91.2767 w=12.3428 h=49.9284
+PERSON confidence=0.3570 x=336.0751 y=235.2953 w=48.4818 h=86.5921
+PREPROC backend=fpga cycles=755521
+TIME capture_ms=12.456 preprocess_ms=17.652 inference_ms=467.910 postprocess_ms=0.028 total_ms=498.064 FPS=2.008
+SNAPSHOT inference_sequence=5 slot=2 attempts=2 content_hash=0x37324235 content_changed=1 freshness=unverified
+FOVEA request=16 roi=320,26,320,180 requested_mode=2 display_mode=2 status=0x22 quality=0x30
+ATTENTION inference_sequence=5 target_id=6 score=1129 zone=90 motion=1 approach=0 small=255 uncertainty=116 accepted_players=6 switched=0 target_roi=320,26
+PERSON confidence=0.8154 x=86.8321 y=159.8549 w=27.4411 h=71.3208
+PERSON confidence=0.7474 x=338.9130 y=42.5436 w=22.8486 h=51.5651
+PERSON confidence=0.7309 x=190.1241 y=308.1358 w=31.0264 h=51.8475
+PERSON confidence=0.7301 x=469.1061 y=149.5313 w=32.9928 h=72.1740
+PERSON confidence=0.6203 x=328.9748 y=202.0682 w=66.2366 h=119.5784
+PERSON confidence=0.5467 x=627.8948 y=90.6209 w=12.1052 h=50.8434
+PERSON confidence=0.4474 x=337.5474 y=225.2222 w=48.9951 h=96.3425
+PREPROC backend=fpga cycles=755517
+TIME capture_ms=19.365 preprocess_ms=17.620 inference_ms=468.295 postprocess_ms=0.030 total_ms=505.328 FPS=1.979
+SNAPSHOT inference_sequence=6 slot=0 attempts=1 content_hash=0xe79df141 content_changed=1 freshness=unverified
+ATTENTION inference_sequence=6 target_id=6 score=1135 zone=90 motion=1 approach=0 small=255 uncertainty=118 accepted_players=6 switched=0 target_roi=320,26
+PERSON confidence=0.8298 x=86.7775 y=159.8357 w=27.6271 h=71.1045
+PERSON confidence=0.7462 x=339.0913 y=42.7718 w=22.6889 h=50.8714
+PERSON confidence=0.7263 x=190.3249 y=308.4702 w=30.5918 h=51.5298
+PERSON confidence=0.7150 x=468.3717 y=149.5091 w=33.9824 h=72.3213
+PERSON confidence=0.5999 x=329.2158 y=201.8504 w=66.2686 h=120.0929
+PERSON confidence=0.5368 x=627.6971 y=90.7779 w=12.3029 h=50.7243
+PERSON confidence=0.4921 x=338.1953 y=224.1981 w=47.8845 h=97.5592
+PREPROC backend=fpga cycles=755517
+TIME capture_ms=12.280 preprocess_ms=17.550 inference_ms=468.489 postprocess_ms=0.029 total_ms=498.365 FPS=2.007
+SNAPSHOT inference_sequence=7 slot=2 attempts=2 content_hash=0x83fbd039 content_changed=1 freshness=unverified
+ATTENTION inference_sequence=7 target_id=6 score=1108 zone=90 motion=1 approach=0 small=255 uncertainty=109 accepted_players=6 switched=0 target_roi=320,26
+PERSON confidence=0.8339 x=86.8203 y=159.3011 w=27.9506 h=71.8365
+PERSON confidence=0.7435 x=339.0029 y=42.7403 w=22.8427 h=51.4077
+PERSON confidence=0.7294 x=190.1543 y=308.2502 w=31.0885 h=51.7498
+PERSON confidence=0.7224 x=469.2115 y=149.2478 w=33.0431 h=72.6319
+PERSON confidence=0.6054 x=329.0725 y=201.9225 w=66.8254 h=119.9579
+PERSON confidence=0.5740 x=627.8118 y=90.7168 w=12.1882 h=50.3615
+PERSON confidence=0.4524 x=337.7883 y=224.7646 w=48.0414 h=96.9480
+PREPROC backend=fpga cycles=755516
+TIME capture_ms=19.729 preprocess_ms=17.582 inference_ms=467.951 postprocess_ms=0.030 total_ms=505.309 FPS=1.979
+SNAPSHOT inference_sequence=8 slot=0 attempts=1 content_hash=0x28f30a2d content_changed=1 freshness=unverified
+ATTENTION inference_sequence=8 target_id=6 score=1107 zone=90 motion=0 approach=0 small=255 uncertainty=109 accepted_players=6 switched=0 target_roi=320,26
+PERSON confidence=0.8176 x=86.6617 y=159.8875 w=27.7788 h=71.2163
+PERSON confidence=0.7466 x=338.7734 y=42.7020 w=23.1638 h=51.1831
+PERSON confidence=0.7317 x=189.9887 y=308.3376 w=31.5105 h=51.6624
+PERSON confidence=0.7252 x=468.8894 y=149.0238 w=33.6172 h=72.8925
+PERSON confidence=0.6063 x=329.2516 y=201.9478 w=66.0905 h=120.0995
+PERSON confidence=0.5720 x=627.6776 y=90.4285 w=12.3224 h=51.0659
+PERSON confidence=0.4591 x=337.1684 y=224.1007 w=48.5425 h=97.7034
+PREPROC backend=fpga cycles=755515
+TIME capture_ms=12.332 preprocess_ms=17.607 inference_ms=468.191 postprocess_ms=0.029 total_ms=498.176 FPS=2.007
+SNAPSHOT inference_sequence=9 slot=2 attempts=2 content_hash=0x7c2a8bc1 content_changed=1 freshness=unverified
+ATTENTION inference_sequence=9 target_id=6 score=1132 zone=90 motion=1 approach=0 small=255 uncertainty=117 accepted_players=6 switched=0 target_roi=320,26
+PERSON confidence=0.8222 x=87.1154 y=159.8721 w=27.4381 h=71.2638
+PERSON confidence=0.7453 x=339.0532 y=42.5094 w=22.7872 h=51.1938
+PERSON confidence=0.7375 x=469.1032 y=149.5712 w=32.8399 h=72.1484
+PERSON confidence=0.7219 x=190.1874 y=308.0222 w=30.9442 h=51.9778
+PERSON confidence=0.5773 x=328.7427 y=201.7309 w=66.9745 h=120.0711
+PERSON confidence=0.5410 x=627.6661 y=90.7067 w=12.3339 h=50.9473
+PERSON confidence=0.4275 x=338.2468 y=224.5253 w=47.8547 h=97.0788
+PREPROC backend=fpga cycles=755517
+TIME capture_ms=20.113 preprocess_ms=17.558 inference_ms=467.860 postprocess_ms=0.030 total_ms=505.578 FPS=1.978
+SNAPSHOT inference_sequence=10 slot=0 attempts=1 content_hash=0x4392d74d content_changed=1 freshness=unverified
+ATTENTION inference_sequence=10 target_id=6 score=1129 zone=90 motion=1 approach=0 small=255 uncertainty=116 accepted_players=6 switched=0 target_roi=320,26
+PERSON confidence=0.8266 x=86.7800 y=159.5494 w=27.6634 h=71.4558
+PERSON confidence=0.7505 x=338.9153 y=42.4773 w=23.0165 h=51.3492
+PERSON confidence=0.7229 x=468.6957 y=149.4729 w=33.2950 h=72.3759
+PERSON confidence=0.7221 x=190.1598 y=307.5916 w=31.2593 h=52.4084
+PERSON confidence=0.6067 x=329.2586 y=201.8505 w=66.3699 h=120.3579
+PERSON confidence=0.5470 x=627.7900 y=90.9698 w=12.2100 h=50.6162
+PERSON confidence=0.4537 x=337.5223 y=225.0515 w=48.8419 h=96.6862
+PREPROC backend=fpga cycles=755518
+TIME capture_ms=12.547 preprocess_ms=17.536 inference_ms=467.838 postprocess_ms=0.029 total_ms=497.968 FPS=2.008
+SNAPSHOT inference_sequence=11 slot=2 attempts=2 content_hash=0xa3586695 content_changed=1 freshness=unverified
+ATTENTION inference_sequence=11 target_id=6 score=1120 zone=90 motion=1 approach=0 small=255 uncertainty=113 accepted_players=6 switched=0 target_roi=320,26
+PERSON confidence=0.8195 x=86.9911 y=159.9166 w=27.3203 h=71.3500
+PERSON confidence=0.7528 x=338.8822 y=42.7869 w=22.8869 h=51.0139
+PERSON confidence=0.7309 x=190.2894 y=308.2374 w=30.8616 h=51.7626
+PERSON confidence=0.7293 x=468.5844 y=149.1813 w=33.4698 h=72.8290
+PERSON confidence=0.5973 x=328.6667 y=201.6031 w=66.8663 h=120.3880
+PERSON confidence=0.5574 x=627.8497 y=90.5332 w=12.1503 h=50.8009
+PERSON confidence=0.4583 x=337.2109 y=224.2597 w=48.8518 h=97.4808
+PREPROC backend=fpga cycles=755516
+TIME capture_ms=20.492 preprocess_ms=17.494 inference_ms=468.774 postprocess_ms=0.029 total_ms=506.806 FPS=1.973
+SNAPSHOT inference_sequence=12 slot=0 attempts=1 content_hash=0x463c7679 content_changed=1 freshness=unverified
+ATTENTION inference_sequence=12 target_id=6 score=1129 zone=90 motion=1 approach=0 small=255 uncertainty=116 accepted_players=6 switched=0 target_roi=320,26
+PERSON confidence=0.8293 x=87.0082 y=159.5202 w=27.2753 h=71.4799
+PERSON confidence=0.7445 x=338.8461 y=42.8493 w=23.0698 h=51.0305
+PERSON confidence=0.7267 x=469.3620 y=148.9168 w=32.8620 h=72.8205
+PERSON confidence=0.7241 x=190.3740 y=307.9533 w=30.9262 h=52.0467
+PERSON confidence=0.6149 x=328.4816 y=201.8447 w=67.6147 h=120.0506
+PERSON confidence=0.5443 x=627.9206 y=90.8372 w=12.0794 h=50.5078
+PERSON confidence=0.4510 x=337.7597 y=224.8051 w=48.6158 h=96.8471
+PREPROC backend=fpga cycles=755518
+TIME capture_ms=12.351 preprocess_ms=17.611 inference_ms=467.879 postprocess_ms=0.029 total_ms=497.887 FPS=2.008
+SNAPSHOT inference_sequence=13 slot=0 attempts=3 content_hash=0x651dca21 content_changed=1 freshness=unverified
+ATTENTION inference_sequence=13 target_id=6 score=1116 zone=90 motion=0 approach=0 small=255 uncertainty=112 accepted_players=6 switched=0 target_roi=320,26
+PERSON confidence=0.8279 x=86.9847 y=159.7117 w=27.2566 h=71.1359
+PERSON confidence=0.7527 x=338.9066 y=42.9904 w=22.9243 h=50.6716
+PERSON confidence=0.7305 x=468.7241 y=149.2403 w=32.9591 h=72.4771
+PERSON confidence=0.7182 x=190.0367 y=308.1908 w=31.3354 h=51.8092
+PERSON confidence=0.6010 x=328.7337 y=201.7849 w=67.3095 h=120.2625
+PERSON confidence=0.5589 x=627.8947 y=90.9272 w=12.1053 h=50.1657
+PERSON confidence=0.4383 x=337.5168 y=224.8920 w=48.6277 h=96.7532
+PREPROC backend=fpga cycles=755517
+TIME capture_ms=27.367 preprocess_ms=17.519 inference_ms=468.321 postprocess_ms=0.029 total_ms=513.254 FPS=1.948
+SNAPSHOT inference_sequence=14 slot=1 attempts=1 content_hash=0xee4f0805 content_changed=1 freshness=unverified
+ATTENTION inference_sequence=14 target_id=6 score=1128 zone=90 motion=0 approach=0 small=255 uncertainty=116 accepted_players=6 switched=0 target_roi=320,26
+PERSON confidence=0.8239 x=86.8048 y=159.7945 w=28.1376 h=71.4201
+PERSON confidence=0.7368 x=338.7611 y=42.5952 w=23.1300 h=51.2567
+PERSON confidence=0.7334 x=469.0367 y=149.4347 w=33.2781 h=72.2325
+PERSON confidence=0.7311 x=190.0495 y=307.8828 w=31.4839 h=52.1172
+PERSON confidence=0.6219 x=328.6412 y=202.0489 w=66.7907 h=119.8450
+PERSON confidence=0.5455 x=627.8618 y=90.6767 w=12.1115 h=50.5696
+PERSON confidence=0.3495 x=335.5050 y=236.2368 w=48.7349 h=85.3380
+PREPROC backend=fpga cycles=755518
+TIME capture_ms=12.373 preprocess_ms=17.417 inference_ms=468.815 postprocess_ms=0.029 total_ms=498.652 FPS=2.005
+SNAPSHOT inference_sequence=15 slot=0 attempts=2 content_hash=0x8052a855 content_changed=1 freshness=unverified
+ATTENTION inference_sequence=15 target_id=6 score=1126 zone=90 motion=1 approach=0 small=255 uncertainty=115 accepted_players=6 switched=0 target_roi=320,26
+PERSON confidence=0.8357 x=86.6537 y=159.2816 w=27.7573 h=71.7596
+PERSON confidence=0.7473 x=338.9035 y=42.9438 w=22.7728 h=50.6383
+PERSON confidence=0.7276 x=190.2524 y=308.2982 w=31.1987 h=51.7018
+PERSON confidence=0.7263 x=468.2351 y=149.1529 w=33.5256 h=72.8786
+PERSON confidence=0.5929 x=329.0916 y=201.8083 w=67.4306 h=119.9906
+PERSON confidence=0.5473 x=627.6161 y=90.5109 w=12.3839 h=51.0263
+PERSON confidence=0.3574 x=336.2779 y=234.5860 w=48.6075 h=87.1463
+PREPROC backend=fpga cycles=755517
+TIME capture_ms=19.201 preprocess_ms=17.598 inference_ms=467.581 postprocess_ms=0.029 total_ms=504.426 FPS=1.982
+SNAPSHOT inference_sequence=16 slot=1 attempts=1 content_hash=0x4058cf81 content_changed=1 freshness=unverified
+ATTENTION inference_sequence=16 target_id=6 score=1142 zone=90 motion=2 approach=0 small=255 uncertainty=120 accepted_players=6 switched=0 target_roi=320,27
+PERSON confidence=0.8317 x=86.9016 y=159.1560 w=27.7236 h=71.9207
+PERSON confidence=0.7414 x=339.0078 y=42.7837 w=22.8923 h=51.1941
+PERSON confidence=0.7241 x=468.8939 y=148.7971 w=32.8806 h=73.1624
+PERSON confidence=0.7231 x=189.9761 y=308.0366 w=31.8793 h=51.9634
+PERSON confidence=0.6008 x=329.1434 y=201.3347 w=66.0896 h=120.7983
+PERSON confidence=0.5303 x=627.7190 y=90.7722 w=12.2810 h=51.7667
+PERSON confidence=0.4655 x=337.1725 y=224.5073 w=48.2787 h=97.3091
+PREPROC backend=fpga cycles=755519
+TIME capture_ms=12.294 preprocess_ms=17.518 inference_ms=468.678 postprocess_ms=0.029 total_ms=498.538 FPS=2.006
+SNAPSHOT inference_sequence=17 slot=0 attempts=2 content_hash=0xe4d1adcd content_changed=1 freshness=unverified
+FOVEA request=17 roi=320,27,320,180 requested_mode=2 display_mode=2 status=0x22 quality=0x30
+ATTENTION inference_sequence=17 target_id=6 score=1144 zone=90 motion=1 approach=0 small=255 uncertainty=121 accepted_players=6 switched=0 target_roi=320,26
+PERSON confidence=0.8124 x=87.0476 y=159.8867 w=27.5123 h=71.2607
+PERSON confidence=0.7440 x=339.0988 y=42.7256 w=22.6007 h=51.0639
+PERSON confidence=0.7370 x=469.0695 y=149.6989 w=32.9652 h=71.9196
+PERSON confidence=0.7230 x=189.8598 y=308.4189 w=31.7046 h=51.5811
+PERSON confidence=0.6000 x=328.6454 y=202.2763 w=67.3837 h=120.1246
+PERSON confidence=0.5246 x=627.7313 y=90.9240 w=12.2687 h=50.6661
+PERSON confidence=0.4498 x=337.8219 y=224.0942 w=48.5310 h=97.8108
+PREPROC backend=fpga cycles=755516
+TIME capture_ms=19.483 preprocess_ms=17.801 inference_ms=469.114 postprocess_ms=0.030 total_ms=506.444 FPS=1.975
+SNAPSHOT inference_sequence=18 slot=1 attempts=1 content_hash=0x406bb0e5 content_changed=1 freshness=unverified
+FOVEA request=18 roi=320,26,320,180 requested_mode=2 display_mode=2 status=0x22 quality=0x30
+ATTENTION inference_sequence=18 target_id=6 score=1132 zone=90 motion=1 approach=0 small=255 uncertainty=117 accepted_players=6 switched=0 target_roi=320,26
+PERSON confidence=0.8104 x=86.8830 y=159.9729 w=27.7235 h=71.1627
+PERSON confidence=0.7570 x=338.3830 y=42.9365 w=23.3571 h=51.0650
+PERSON confidence=0.7417 x=190.3475 y=307.8300 w=31.1961 h=52.1700
+PERSON confidence=0.7220 x=468.9865 y=149.3162 w=32.7495 h=72.5573
+PERSON confidence=0.5931 x=329.7621 y=202.0128 w=65.8629 h=119.7836
+PERSON confidence=0.5420 x=627.7772 y=90.6488 w=12.2228 h=50.9059
+PERSON confidence=0.3672 x=336.4061 y=235.8021 w=48.3208 h=85.6712
+PREPROC backend=fpga cycles=755519
+TIME capture_ms=12.319 preprocess_ms=17.524 inference_ms=467.937 postprocess_ms=0.028 total_ms=497.826 FPS=2.009
+SNAPSHOT inference_sequence=19 slot=0 attempts=2 content_hash=0xf43c49d9 content_changed=1 freshness=unverified
+ATTENTION inference_sequence=19 target_id=6 score=1113 zone=90 motion=0 approach=0 small=255 uncertainty=111 accepted_players=6 switched=0 target_roi=320,26
+PERSON confidence=0.8145 x=86.8104 y=159.6424 w=28.0686 h=71.5984
+PERSON confidence=0.7464 x=339.1635 y=42.6412 w=22.7571 h=51.6000
+PERSON confidence=0.7258 x=190.2083 y=308.0265 w=31.5222 h=51.9735
+PERSON confidence=0.7151 x=469.2895 y=149.2010 w=32.6839 h=72.4249
+PERSON confidence=0.5958 x=329.4870 y=201.9439 w=65.6621 h=120.0476
+PERSON confidence=0.5637 x=627.5674 y=90.8583 w=12.4253 h=50.5783
+PERSON confidence=0.3830 x=336.1242 y=234.4672 w=48.3076 h=87.2043
+PREPROC backend=fpga cycles=755516
+TIME capture_ms=20.065 preprocess_ms=17.458 inference_ms=468.531 postprocess_ms=0.029 total_ms=506.100 FPS=1.976
+SNAPSHOT inference_sequence=20 slot=1 attempts=1 content_hash=0x6e11c14d content_changed=1 freshness=unverified
+ATTENTION inference_sequence=20 target_id=6 score=1126 zone=90 motion=1 approach=0 small=255 uncertainty=115 accepted_players=6 switched=0 target_roi=320,26
+PERSON confidence=0.8173 x=86.9421 y=159.9815 w=28.1773 h=71.2509
+PERSON confidence=0.7436 x=339.0184 y=42.5932 w=22.7766 h=51.1475
+PERSON confidence=0.7294 x=469.0618 y=149.2430 w=32.8907 h=72.5166
+PERSON confidence=0.7284 x=190.1793 y=308.2299 w=31.0022 h=51.7701
+PERSON confidence=0.5943 x=329.0403 y=201.8826 w=66.4983 h=120.4935
+PERSON confidence=0.5507 x=627.6965 y=90.4953 w=12.3035 h=50.9820
+PERSON confidence=0.4757 x=336.7075 y=224.7753 w=49.5046 h=97.0399
+PREPROC backend=fpga cycles=755519
+TIME capture_ms=12.523 preprocess_ms=17.683 inference_ms=468.032 postprocess_ms=0.029 total_ms=498.285 FPS=2.007
+SNAPSHOT inference_sequence=21 slot=0 attempts=2 content_hash=0x263671ad content_changed=1 freshness=unverified
+ATTENTION inference_sequence=21 target_id=6 score=1134 zone=90 motion=3 approach=1 small=255 uncertainty=116 accepted_players=6 switched=0 target_roi=320,27
+PERSON confidence=0.8321 x=86.8980 y=159.2366 w=27.7618 h=71.7804
+PERSON confidence=0.7547 x=338.6074 y=42.9088 w=23.2162 h=50.7972
+PERSON confidence=0.7294 x=190.3089 y=308.1108 w=31.1976 h=51.8892
+PERSON confidence=0.7161 x=469.4218 y=149.8197 w=32.9000 h=71.7321
+PERSON confidence=0.5943 x=329.6592 y=201.6188 w=65.9244 h=120.1012
+PERSON confidence=0.5433 x=627.5233 y=91.6467 w=12.3455 h=50.5499
+PERSON confidence=0.4649 x=338.1733 y=224.6149 w=47.8600 h=96.7372
+PREPROC backend=fpga cycles=755516
+TIME capture_ms=20.475 preprocess_ms=17.515 inference_ms=468.447 postprocess_ms=0.029 total_ms=506.483 FPS=1.974
+FOVEA request=19 roi=320,27,320,180 requested_mode=2 display_mode=2 status=0x22 quality=0x30
+SNAPSHOT inference_sequence=22 slot=1 attempts=1 content_hash=0x7c0568d content_changed=1 freshness=unverified
+ATTENTION inference_sequence=22 target_id=6 score=1125 zone=90 motion=3 approach=0 small=255 uncertainty=114 accepted_players=6 switched=0 target_roi=320,26
+PERSON confidence=0.8297 x=86.8984 y=159.6892 w=27.5758 h=71.5332
+PERSON confidence=0.7474 x=338.8633 y=42.9790 w=23.0307 h=51.4914
+PERSON confidence=0.7348 x=468.6872 y=149.3406 w=33.3248 h=72.0626
+PERSON confidence=0.7195 x=190.0701 y=308.2449 w=31.1382 h=51.7551
+PERSON confidence=0.5873 x=329.0062 y=201.7360 w=67.1495 h=119.8151
+PERSON confidence=0.5541 x=627.7405 y=90.7800 w=12.2595 h=50.4953
+PERSON confidence=0.4250 x=337.0722 y=224.4478 w=48.2930 h=97.0423
+PREPROC backend=fpga cycles=755520
+TIME capture_ms=12.590 preprocess_ms=17.588 inference_ms=466.976 postprocess_ms=0.029 total_ms=497.197 FPS=2.011
+SNAPSHOT inference_sequence=23 slot=1 attempts=3 content_hash=0x2376a945 content_changed=1 freshness=unverified
+FOVEA request=20 roi=320,26,320,180 requested_mode=2 display_mode=2 status=0x22 quality=0x30
+ATTENTION inference_sequence=23 target_id=6 score=1125 zone=90 motion=0 approach=0 small=255 uncertainty=115 accepted_players=6 switched=0 target_roi=320,26
+PERSON confidence=0.8203 x=86.9520 y=159.8444 w=27.6913 h=71.2158
+PERSON confidence=0.7472 x=339.0337 y=42.7697 w=22.8329 h=51.0644
+PERSON confidence=0.7370 x=190.0946 y=308.1071 w=31.2911 h=51.8929
+PERSON confidence=0.7271 x=468.9121 y=149.1758 w=32.8915 h=72.5719
+PERSON confidence=0.5985 x=329.1188 y=202.0958 w=66.6932 h=120.1895
+PERSON confidence=0.5503 x=627.7128 y=90.6532 w=12.2872 h=50.9387
+PERSON confidence=0.4591 x=337.7437 y=224.6537 w=47.6753 h=97.0806
+PREPROC backend=fpga cycles=755516
+TIME capture_ms=27.548 preprocess_ms=17.474 inference_ms=468.628 postprocess_ms=0.029 total_ms=513.697 FPS=1.947
+SNAPSHOT inference_sequence=24 slot=2 attempts=1 content_hash=0xdde40cd9 content_changed=1 freshness=unverified
+ATTENTION inference_sequence=24 target_id=6 score=1119 zone=90 motion=0 approach=0 small=255 uncertainty=113 accepted_players=6 switched=0 target_roi=320,26
+PERSON confidence=0.8198 x=86.8233 y=159.7157 w=27.6528 h=71.4382
+PERSON confidence=0.7446 x=338.9043 y=42.6162 w=23.0035 h=51.1847
+PERSON confidence=0.7240 x=190.3176 y=308.1863 w=31.3374 h=51.8137
+PERSON confidence=0.7239 x=469.1361 y=149.3965 w=33.2797 h=72.3803
+PERSON confidence=0.6022 x=329.0381 y=201.9761 w=66.7230 h=120.0373
+PERSON confidence=0.5566 x=627.7225 y=90.5757 w=12.2775 h=50.8952
+PERSON confidence=0.4669 x=337.5108 y=224.4025 w=49.0310 h=97.2572
+PREPROC backend=fpga cycles=755518
+TIME capture_ms=12.365 preprocess_ms=17.460 inference_ms=468.894 postprocess_ms=0.028 total_ms=498.764 FPS=2.005
+SNAPSHOT inference_sequence=25 slot=1 attempts=2 content_hash=0x18bb7c4d content_changed=1 freshness=unverified
+ATTENTION inference_sequence=25 target_id=6 score=1113 zone=90 motion=0 approach=0 small=255 uncertainty=111 accepted_players=6 switched=0 target_roi=320,26
+PERSON confidence=0.8219 x=86.9847 y=159.8692 w=27.9349 h=71.2773
+PERSON confidence=0.7469 x=338.8115 y=42.4630 w=23.0300 h=51.3276
+PERSON confidence=0.7401 x=469.1041 y=149.2498 w=33.3806 h=72.4826
+PERSON confidence=0.7109 x=189.9892 y=308.0540 w=31.7727 h=51.9460
+PERSON confidence=0.6199 x=329.4250 y=202.0725 w=66.3161 h=120.0730
+PERSON confidence=0.5634 x=627.8710 y=90.7247 w=12.1290 h=50.7428
+PERSON confidence=0.3576 x=336.2650 y=235.2679 w=48.5646 h=86.5901
+PREPROC backend=fpga cycles=755514
+TIME capture_ms=19.037 preprocess_ms=17.562 inference_ms=468.295 postprocess_ms=0.028 total_ms=504.940 FPS=1.980
+SNAPSHOT inference_sequence=26 slot=2 attempts=1 content_hash=0x1d2249bd content_changed=1 freshness=unverified
+ATTENTION inference_sequence=26 target_id=6 score=1114 zone=90 motion=1 approach=1 small=255 uncertainty=110 accepted_players=6 switched=0 target_roi=320,26
+PERSON confidence=0.8345 x=87.0748 y=159.4626 w=27.3331 h=71.8218
+PERSON confidence=0.7480 x=338.9717 y=42.8415 w=22.6351 h=50.5455
+PERSON confidence=0.7480 x=189.8322 y=307.8570 w=31.7234 h=52.1430
+PERSON confidence=0.7320 x=469.3975 y=149.1578 w=32.4105 h=72.4435
+PERSON confidence=0.6352 x=328.8488 y=202.0417 w=66.8843 h=119.5325
+PERSON confidence=0.5692 x=627.6631 y=91.2363 w=12.3369 h=50.2733
+PERSON confidence=0.4350 x=337.7340 y=224.6540 w=48.1721 h=96.7852
+PREPROC backend=fpga cycles=755519
+TIME capture_ms=12.300 preprocess_ms=17.459 inference_ms=468.783 postprocess_ms=0.029 total_ms=498.588 FPS=2.006
+SNAPSHOT inference_sequence=27 slot=1 attempts=2 content_hash=0xae8e23fd content_changed=1 freshness=unverified
+ATTENTION inference_sequence=27 target_id=6 score=1135 zone=90 motion=1 approach=0 small=255 uncertainty=118 accepted_players=6 switched=0 target_roi=320,26
+PERSON confidence=0.8048 x=86.4671 y=159.8008 w=28.3329 h=71.4106
+PERSON confidence=0.7358 x=339.2113 y=42.5367 w=22.6341 h=51.3481
+PERSON confidence=0.7237 x=469.1160 y=148.8822 w=33.0467 h=72.7364
+PERSON confidence=0.7219 x=190.4517 y=307.9509 w=30.9784 h=52.0491
+PERSON confidence=0.5904 x=328.6825 y=201.8537 w=66.6458 h=120.0680
+PERSON confidence=0.5365 x=627.6771 y=90.7873 w=12.3229 h=50.7140
+PERSON confidence=0.4567 x=337.4802 y=224.9368 w=48.7788 h=96.4969
+PREPROC backend=fpga cycles=755514
+TIME capture_ms=19.428 preprocess_ms=17.536 inference_ms=468.225 postprocess_ms=0.028 total_ms=505.236 FPS=1.979
+SNAPSHOT inference_sequence=28 slot=2 attempts=1 content_hash=0x9580fe7d content_changed=1 freshness=unverified
+ATTENTION inference_sequence=28 target_id=6 score=1108 zone=90 motion=1 approach=0 small=255 uncertainty=109 accepted_players=6 switched=0 target_roi=320,26
+PERSON confidence=0.8290 x=86.7533 y=159.6385 w=28.0542 h=71.3279
+PERSON confidence=0.7493 x=339.1821 y=42.8167 w=22.7354 h=51.5739
+PERSON confidence=0.7371 x=468.2066 y=149.2526 w=33.6478 h=72.2657
+PERSON confidence=0.7311 x=189.9736 y=308.1790 w=31.6315 h=51.8210
+PERSON confidence=0.6218 x=328.7542 y=202.3285 w=66.9587 h=119.9153
+PERSON confidence=0.5728 x=627.9104 y=90.8705 w=12.0896 h=50.2576
+PERSON confidence=0.3862 x=335.8711 y=234.3792 w=48.6906 h=87.7124
+PREPROC backend=fpga cycles=755520
+TIME capture_ms=12.330 preprocess_ms=17.607 inference_ms=468.353 postprocess_ms=0.029 total_ms=498.335 FPS=2.007
+SNAPSHOT inference_sequence=29 slot=1 attempts=2 content_hash=0xca068409 content_changed=1 freshness=unverified
+ATTENTION inference_sequence=29 target_id=6 score=1151 zone=90 motion=2 approach=1 small=255 uncertainty=122 accepted_players=6 switched=0 target_roi=320,26
+PERSON confidence=0.8385 x=86.8571 y=159.4744 w=27.5190 h=71.5723
+PERSON confidence=0.7425 x=338.6987 y=42.7027 w=23.3618 h=51.1459
+PERSON confidence=0.7243 x=468.9739 y=149.1580 w=33.3796 h=72.5605
+PERSON confidence=0.7236 x=190.2463 y=307.9256 w=31.1762 h=52.0744
+PERSON confidence=0.5872 x=329.1020 y=201.8761 w=67.4097 h=120.0726
+PERSON confidence=0.5216 x=627.1105 y=90.2961 w=12.8129 h=51.2666
+PERSON confidence=0.3855 x=335.9100 y=235.9374 w=48.6535 h=85.9485
+PREPROC backend=fpga cycles=755516
+TIME capture_ms=19.888 preprocess_ms=17.450 inference_ms=467.731 postprocess_ms=0.029 total_ms=505.116 FPS=1.980
+SNAPSHOT inference_sequence=30 slot=2 attempts=1 content_hash=0x492ebdb5 content_changed=1 freshness=unverified
+ATTENTION inference_sequence=30 target_id=6 score=1139 zone=90 motion=2 approach=0 small=255 uncertainty=119 accepted_players=6 switched=0 target_roi=320,26
+PERSON confidence=0.8233 x=86.8536 y=159.8625 w=27.5183 h=71.3560
+PERSON confidence=0.7530 x=338.9679 y=42.6941 w=22.8431 h=50.9157
+PERSON confidence=0.7332 x=190.0641 y=307.8553 w=31.6298 h=52.1447
+PERSON confidence=0.7277 x=469.2617 y=149.3164 w=32.9053 h=72.6147
+PERSON confidence=0.6012 x=328.9707 y=201.7611 w=66.8952 h=120.4879
+PERSON confidence=0.5316 x=627.8306 y=91.0676 w=12.1237 h=50.0413
+PERSON confidence=0.4764 x=336.7651 y=224.7013 w=49.7610 h=97.1003
+PREPROC backend=fpga cycles=755521
+TIME capture_ms=12.396 preprocess_ms=17.488 inference_ms=467.854 postprocess_ms=0.028 total_ms=497.782 FPS=2.009
+SNAPSHOT inference_sequence=31 slot=1 attempts=2 content_hash=0xf946028d content_changed=1 freshness=unverified
+ATTENTION inference_sequence=31 target_id=6 score=1132 zone=90 motion=1 approach=1 small=255 uncertainty=116 accepted_players=6 switched=0 target_roi=320,26
+PERSON confidence=0.8267 x=86.9838 y=160.0616 w=27.4183 h=71.0305
+PERSON confidence=0.7380 x=339.1981 y=42.5252 w=22.5115 h=51.0174
+PERSON confidence=0.7283 x=469.3470 y=149.1735 w=32.8108 h=72.4841
+PERSON confidence=0.7215 x=190.3076 y=308.1978 w=30.9043 h=51.8022
+PERSON confidence=0.5959 x=329.1544 y=201.8270 w=66.3905 h=120.1048
+PERSON confidence=0.5435 x=627.1949 y=90.4693 w=12.6731 h=51.2905
+PERSON confidence=0.4469 x=337.3435 y=224.6526 w=49.0884 h=97.1714
+PREPROC backend=fpga cycles=755533
+TIME capture_ms=20.151 preprocess_ms=17.481 inference_ms=467.776 postprocess_ms=0.029 total_ms=505.455 FPS=1.978
+SNAPSHOT inference_sequence=32 slot=2 attempts=1 content_hash=0x5208ce91 content_changed=1 freshness=unverified
+ATTENTION inference_sequence=32 target_id=6 score=1112 zone=90 motion=2 approach=0 small=255 uncertainty=110 accepted_players=6 switched=0 target_roi=320,26
+PERSON confidence=0.8244 x=87.1704 y=159.9018 w=27.0959 h=70.9899
+PERSON confidence=0.7503 x=338.8306 y=42.9115 w=22.9393 h=50.8871
+PERSON confidence=0.7320 x=190.0243 y=307.7346 w=31.3437 h=52.2654
+PERSON confidence=0.7267 x=469.2409 y=149.6945 w=32.5985 h=71.9494
+PERSON confidence=0.6106 x=328.8506 y=202.0722 w=66.7035 h=120.0177
+PERSON confidence=0.5675 x=627.7829 y=90.4568 w=12.2171 h=50.8164
+PERSON confidence=0.4721 x=337.6410 y=224.6927 w=48.6467 h=96.9876
+PREPROC backend=fpga cycles=755518
+TIME capture_ms=12.446 preprocess_ms=17.425 inference_ms=467.201 postprocess_ms=0.028 total_ms=497.116 FPS=2.012
+SNAPSHOT inference_sequence=33 slot=1 attempts=2 content_hash=0x99d91481 content_changed=1 freshness=unverified
+ATTENTION inference_sequence=33 target_id=6 score=1120 zone=90 motion=1 approach=0 small=255 uncertainty=113 accepted_players=6 switched=0 target_roi=320,26
+PERSON confidence=0.8187 x=87.0112 y=160.1169 w=27.5573 h=70.9124
+PERSON confidence=0.7387 x=338.9942 y=42.8586 w=22.8740 h=51.5428
+PERSON confidence=0.7364 x=190.1881 y=308.2660 w=31.3965 h=51.7340
+PERSON confidence=0.7198 x=469.0910 y=149.3593 w=33.0005 h=72.4967
+PERSON confidence=0.5807 x=328.9049 y=201.8227 w=67.0034 h=119.9475
+PERSON confidence=0.5569 x=627.7820 y=90.7853 w=12.2180 h=50.6114
+PERSON confidence=0.4474 x=338.2919 y=224.4772 w=48.0982 h=97.2177
+PREPROC backend=fpga cycles=755516
+TIME capture_ms=20.453 preprocess_ms=17.497 inference_ms=467.707 postprocess_ms=0.029 total_ms=505.704 FPS=1.977
+SNAPSHOT inference_sequence=34 slot=2 attempts=1 content_hash=0x2b0ed49 content_changed=1 freshness=unverified
+ATTENTION inference_sequence=34 target_id=6 score=1119 zone=90 motion=0 approach=0 small=255 uncertainty=113 accepted_players=6 switched=0 target_roi=320,26
+PERSON confidence=0.8319 x=86.6549 y=159.7598 w=28.0718 h=71.3941
+PERSON confidence=0.7542 x=338.7773 y=42.7444 w=23.0924 h=51.1327
+PERSON confidence=0.7401 x=468.9695 y=149.2568 w=33.1872 h=72.4992
+PERSON confidence=0.7223 x=190.1036 y=308.2288 w=31.0907 h=51.7712
+PERSON confidence=0.6208 x=329.1841 y=201.8051 w=66.3093 h=120.0202
+PERSON confidence=0.5553 x=627.6702 y=90.6125 w=12.3298 h=51.0175
+PERSON confidence=0.4469 x=337.2867 y=224.8222 w=48.6277 h=96.7713
+PREPROC backend=fpga cycles=755518
+TIME capture_ms=12.287 preprocess_ms=17.502 inference_ms=468.781 postprocess_ms=0.029 total_ms=498.617 FPS=2.006
+SNAPSHOT inference_sequence=35 slot=2 attempts=3 content_hash=0x891115a1 content_changed=1 freshness=unverified
+ATTENTION inference_sequence=35 target_id=6 score=1122 zone=90 motion=0 approach=0 small=255 uncertainty=114 accepted_players=6 switched=0 target_roi=320,26
+PERSON confidence=0.8338 x=86.7859 y=159.5984 w=27.4234 h=71.3991
+PERSON confidence=0.7383 x=338.9187 y=42.6891 w=22.8506 h=51.0601
+PERSON confidence=0.7351 x=189.9119 y=307.9983 w=31.8036 h=52.0017
+PERSON confidence=0.7324 x=468.7777 y=149.4369 w=33.3176 h=72.1660
+PERSON confidence=0.6207 x=329.6911 y=201.7982 w=65.5437 h=119.7746
+PERSON confidence=0.5543 x=627.7204 y=90.5443 w=12.2796 h=51.0468
+PERSON confidence=0.3676 x=337.1327 y=234.7399 w=47.4109 h=86.6507
+PREPROC backend=fpga cycles=755516
+TIME capture_ms=27.177 preprocess_ms=17.611 inference_ms=468.468 postprocess_ms=0.029 total_ms=513.302 FPS=1.948

@@ -1,0 +1,61 @@
+#!/usr/bin/env python3
+"""Summarize paired EagleEye CPU/FPGA preprocessor camera runs."""
+import argparse
+import re
+import statistics
+from pathlib import Path
+
+FIELDS = ("capture_ms", "preprocess_ms", "inference_ms", "postprocess_ms", "total_ms")
+
+
+def load(path: Path, backend: str):
+    text = path.read_text(encoding="utf-8", errors="replace")
+    if "PREPROC_FALLBACK" in text:
+        raise ValueError(f"{backend}: backend fallback found")
+    markers = re.findall(r"^PREPROC backend=(cpu|fpga)\b", text, re.M)
+    records = []
+    for line in text.splitlines():
+        if not line.startswith("TIME "):
+            continue
+        values = dict((k, float(v)) for k, v in re.findall(r"([a-z_]+)=(\d+(?:\.\d+)?)", line))
+        if not all(f in values for f in FIELDS):
+            raise ValueError(f"{backend}: incomplete timing line: {line}")
+        records.append(values)
+    if len(markers) != len(records) or any(m != backend for m in markers):
+        raise ValueError(f"{backend}: backend markers disagree with TIME records")
+    if len(records) < 10:
+        raise ValueError(f"{backend}: fewer than 10 timed frames")
+    return records
+
+
+def main():
+    parser = argparse.ArgumentParser()
+    parser.add_argument("results_dir", type=Path)
+    parser.add_argument("--discard", type=int, default=5, help="discard first N timed frames from each run")
+    args = parser.parse_args()
+    data = {}
+    for mode in ("cpu", "fpga"):
+        records = load(args.results_dir / f"{mode}.log", mode)
+        if len(records) <= args.discard:
+            raise ValueError("discard count leaves no frames")
+        data[mode] = records[args.discard:]
+    if len(data["cpu"]) != len(data["fpga"]):
+        raise ValueError("retained frame counts differ")
+    print("backend,n,preprocess_mean_ms,inference_mean_ms,total_mean_ms,total_sd_ms,effective_fps")
+    summary = {}
+    for mode in ("cpu", "fpga"):
+        rec = data[mode]
+        mean = lambda f: statistics.mean(x[f] for x in rec)
+        total = mean("total_ms")
+        summary[mode] = (mean("preprocess_ms"), mean("inference_ms"), total, 1000 / total)
+        print(f"{mode},{len(rec)},{summary[mode][0]:.3f},{summary[mode][1]:.3f},"
+              f"{total:.3f},{statistics.stdev(x['total_ms'] for x in rec):.3f},"
+              f"{summary[mode][3]:.3f}")
+    print(f"preprocess_speedup={summary['cpu'][0] / summary['fpga'][0]:.3f}x")
+    print(f"full_pipeline_fps_ratio={summary['fpga'][3] / summary['cpu'][3]:.3f}x")
+    print("scope: same BIT/app/model, live camera, CPU bicubic vs FPGA bilinear preprocessing; "
+          "PicoDet inference remains on ARM; HDMI refresh rate is not detection FPS")
+
+
+if __name__ == "__main__":
+    main()

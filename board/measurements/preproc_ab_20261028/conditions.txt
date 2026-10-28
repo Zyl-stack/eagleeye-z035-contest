@@ -1,0 +1,7 @@
+iterations=35
+threads=2
+threshold=0.3
+warmup=1
+video=existing VDMA
+roi=on
+mouse=on

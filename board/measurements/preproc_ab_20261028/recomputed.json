@@ -1,0 +1,33 @@
+{
+  "cpu": {
+    "frames_observed": 35,
+    "discarded": 5,
+    "frames_measured": 30,
+    "mean_ms": {
+      "capture_ms": 17.4851,
+      "preprocess_ms": 416.95953333333335,
+      "inference_ms": 468.6589333333333,
+      "postprocess_ms": 0.0291,
+      "total_ms": 903.1498666666666
+    },
+    "total_sample_sd_ms": 5.915376023453668,
+    "fps_from_mean_total": 1.1072359493234345
+  },
+  "fpga": {
+    "frames_observed": 35,
+    "discarded": 5,
+    "frames_measured": 30,
+    "mean_ms": {
+      "capture_ms": 16.878,
+      "preprocess_ms": 17.537033333333333,
+      "inference_ms": 468.20366666666666,
+      "postprocess_ms": 0.028900000000000002,
+      "total_ms": 502.6648666666667
+    },
+    "total_sample_sd_ms": 5.149324627515752,
+    "fps_from_mean_total": 1.9893970442599727
+  },
+  "preprocess_time_ratio": 23.775944620051664,
+  "fps_ratio": 1.7967236752704552,
+  "scope": "Log statistics only. CPU bicubic vs FPGA bilinear; sequential live frames differ."
+}
