@@ -9,7 +9,7 @@
 | 资源与时序 | [干净复现记录](clean_reproduction_20261028_zh.md)保留 Vivado 日志、报告、BIT/XSA；[告警说明](warning_review_zh.md)按类型汇总 | WNS/WHS 为已约束路径结果；I/O、CDC 和方法学问题仍未闭环。 |
 | 上板及运行 | [启动证据](board_reproduced_20261028_zh.md)、[Attention 应用日志及 A 六项功能确认](board_app_evidence_20261028_zh.md)，另有独立 C 候选现场功能确认 | 应用日志含 VDMA 警告与 `freshness=unverified`，不否定 A 的功能确认；已有 CPU/FPGA A/B 计时，但缩放算法和实时帧不同，见 [实板结果](preproc_ab_20261028_zh.md)。 |
 | 构建复现 | [复现步骤](reproduction_zh.md)、`build/build_full_vivado.tcl`、源码及归档校验脚本；干净克隆后从中断的检查点续跑生成 BIT/XSA | 所需 Vivado、交叉工具链、sysroot 和设备环境不全部随仓库提供；新内核与现场镜像二进制一致性未证明。 |
-| Skill | [Skill 索引](../skill/index.md)：FP32 比较、ROI 接口检查、PYNQ 示例 | PYNQ 项目仅模拟对象验证，无 PYNQ 实板及真实跨项目复用证据；不宣称获得加分。 |
+| Skill | [Skill 索引](../skill/index.md)：FP32 比较、ROI 接口检查、PYNQ 示例 | PYNQ 示例仅模拟对象验证；团队确认无 PYNQ 实板及真实跨项目复用资料，按模拟候选提交，不列为需要队友补交的既有材料，也不宣称获得加分。 |
 | 设计报告和 AI 协作 | [设计报告](design_report_zh.md)、[AI 协作记录](ai_collaboration_record.md)及图示、参考资料 | 团队确认分工、贡献及引用；AI 记录为整理稿而非完整逐字对话。 |
 
 ## 本地可重复检查
