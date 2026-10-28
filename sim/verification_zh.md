@@ -47,3 +47,7 @@ cd ../roi-review-control && python -B -m unittest discover -s tests -v
 ## 2026-10-28 脱离工程复用补充
 
 两项 Skill 分别复制到临时空目录，使用另一种张量形状及不同模块/地址的合成 HWH 运行正反例、长度错误和单元测试，命令及输出见 [复用测试记录](skill_portability_20261028.txt)。这些不是其他真实项目或 PYNQ 板端证据。
+
+## PYNQ 示例的模拟验证
+
+独立 PYNQ Skill 在空目录通过模拟对象测试；身份校验、下载许可、寄存器白名单、DMA 调用顺序、异常及长度检查的命令与输出见 [模拟记录](pynq_skill_mock_20261028.txt)。未加载 Overlay，未使用真实 DMA 或 PYNQ 板卡，不能视为板端结果。

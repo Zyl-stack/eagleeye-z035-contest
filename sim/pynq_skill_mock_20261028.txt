@@ -1,0 +1,32 @@
+PYNQ Skill independent mock test, 2026-10-28
+Python 3.13.6
+Scope: copied standalone skill directory; simulated objects only; no PYNQ installed, no board access.
+
+$ python -B examples/mock_demo.py
+exit=0
+MOCK flush buffer
+MOCK flush buffer
+MOCK transfer recv 16
+MOCK transfer send 16
+MOCK wait send
+MOCK wait recv
+MOCK invalidate output
+MOCK completed; no FPGA transaction or numerical output tested
+
+
+$ python -B -m unittest discover -s tests -v
+exit=0
+
+test_dma_error_or_invalid_buffers (test_pynq_examples.PynqSkillTest.test_dma_error_or_invalid_buffers) ... ok
+test_dma_failures_do_not_read_or_reuse (test_pynq_examples.PynqSkillTest.test_dma_failures_do_not_read_or_reuse) ... ok
+test_dma_sequence_cache_and_reuse (test_pynq_examples.PynqSkillTest.test_dma_sequence_cache_and_reuse) ... ok
+test_overlay_integrity_and_explicit_download (test_pynq_examples.PynqSkillTest.test_overlay_integrity_and_explicit_download) ... ok
+test_register_access_allowlist (test_pynq_examples.PynqSkillTest.test_register_access_allowlist) ... ok
+test_short_transfer_and_interrupt_are_faults (test_pynq_examples.PynqSkillTest.test_short_transfer_and_interrupt_are_faults) ... ok
+
+----------------------------------------------------------------------
+Ran 6 tests in 0.012s
+
+OK
+
+PASS: mock control-flow tests only. Overlay, register I/O, DMA, cache coherency and recovery on PYNQ hardware: NOT RUN.
