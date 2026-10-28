@@ -43,3 +43,7 @@ cd ../roi-review-control && python -B -m unittest discover -s tests -v
 [旧 XSim 原始记录](lanczos_legacy_xsim.txt)报告 1536 个输出像素中 768 处错误；旧测试台与当前 RTL 的版本、参考算法对应关系尚未确认。既不能声称当前 RTL 逐像素通过，也不能单凭旧日志断言当前实板像素错误。工程源码和记录保留，独立 Lanczos Skill 不再展示；详见 [说明](lanczos_legacy_readme.md)。
 
 当前缺少本次实板预处理输出与同一输入 Golden 的逐值对照、登录后的应用日志及逐项功能记录；所需材料列于 [现场证据清单](../report/field_evidence_needed_zh.md)。[BIT 上板记录](../report/board_reproduced_20261028_zh.md)只有 U-Boot 至 Linux 登录串口和 A 的现场功能反馈，不包含实板张量比较。
+
+## 2026-10-28 脱离工程复用补充
+
+两项 Skill 分别复制到临时空目录，使用另一种张量形状及不同模块/地址的合成 HWH 运行正反例、长度错误和单元测试，命令及输出见 [复用测试记录](skill_portability_20261028.txt)。这些不是其他真实项目或 PYNQ 板端证据。

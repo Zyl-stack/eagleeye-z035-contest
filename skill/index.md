@@ -8,3 +8,5 @@
 | [ROI 复判控制](roi-review-control/readme.md) | 检查视频暂停、鼠标与 ROI 控制合同 | `sim/host_roi.log` 为合同检查器测试；不证明具体板卡外设行为 |
 
 这些方法不是已验证的通用 PYNQ Overlay，也不表示 V2/V3 卷积加速器已集成到此版本。证据缺口见 `report/submission_audit.md`。
+
+脱离原工程的合成示例和退出码记录见 [复用测试](../sim/skill_portability_20261028.txt)。独立 HWH 检查支持其他模块名与地址；PYNQ 和真实外部工程尚未验证。

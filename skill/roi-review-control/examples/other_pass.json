@@ -1,0 +1,11 @@
+{
+  "modules": [
+    "filter_0"
+  ],
+  "top_ports": [
+    "sensor_valid"
+  ],
+  "register_bases": {
+    "filter_0": "0x41000000"
+  }
+}

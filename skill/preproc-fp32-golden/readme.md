@@ -26,6 +26,17 @@ python -B -m unittest discover -s tests -v
 
 第一条输出 `passed: true`、`values: 4`、`exact: 4`，退出码 0；第二条故意改动一个值，输出 `passed: false`、`exact: 3`、`over_tolerance: 1`，退出码 1。文件缺失、长度不对或含非有限值时退出码为 2。负例应当失败；若命令链会在非零退出码时中止，请分别运行各条命令。
 
+## 非 EagleEye 形状的复用示例
+
+以下是合成的 2×3 小端 FP32 数据，展示比较工具不依赖摄像头或具体模型；不是板端数据：
+
+```sh
+python -B tools/verify_tensor.py --actual examples/other_pass.f32 --golden examples/other_golden.f32 --shape 2x3 --require-exact
+python -B tools/verify_tensor.py --actual examples/other_fail.f32 --golden examples/other_golden.f32 --shape 2x3 --require-exact
+```
+
+正例退出码 0；第二个例子改动了一个值，退出码 1。其他项目先确认输入来源一致、元素类型、布局、字节序和预先确定的容差；本工具不执行格式转换。用于 PYNQ 项目时，仅比较导出的数据，不负责 Overlay、缓存同步或 DMA。PYNQ 板端适配尚未验证。
+
 ## 用法
 
 ```powershell
@@ -47,7 +58,7 @@ A 反馈复现 BIT 上板功能正常，但登录后应用输出及本次板端�
 
 ## 失效条件
 
-- 模型输入不再是 RGB888 到 `1x3x320x320` FP32，或 R/G/B 顺序改变。
+- 原 EagleEye 板端流程的输入、输出形状或 R/G/B 顺序改变时，必须重新定义预处理参考及传输契约；通用文件比较器仍可用于其他明确契约的小端 FP32 张量。
 - DMA 尚未全部完成、帧槽被覆盖、cache 未维护、出现 AXI 错误/超时。
 - 仅拿 IP cycle 或一次 FPS 作为正确性证明；应停止并补完整张量比对。
 - 比较器只接受小端 FP32 原始文件；其他数据类型、字节序或张量布局应先按已确认的契约转换。它只判断两个文件是否符合给定容差，不能证明参考本身正确、输入帧一致或 DMA 已完成。

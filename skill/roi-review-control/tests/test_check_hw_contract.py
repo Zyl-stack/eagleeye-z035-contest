@@ -29,6 +29,23 @@ class ContractTest(unittest.TestCase):
             self.assertEqual(result.returncode, 2)
             self.assertIn("INVALID:", result.stderr)
 
+    def test_standalone_hwh_and_invalid_config(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            (root / "other.hwh").write_text(
+                '<EDKSYSTEM><MODULE INSTANCE="filter_0"/>'
+                '<MEMRANGE INSTANCE="filter_0" BASEVALUE="0x41000000"/></EDKSYSTEM>'
+            )
+            config = root / "contract.json"
+            config.write_text(json.dumps({"modules": ["filter_0"], "register_bases": {"filter_0": "0x41000000"}}))
+            tool = Path(__file__).resolve().parents[1] / "tools/check_hw_contract.py"
+            command = [sys.executable, "-B", str(tool), "--hwh", str(root / "other.hwh"), "--config", str(config)]
+            self.assertEqual(subprocess.run(command, capture_output=True).returncode, 0)
+            config.write_text(json.dumps({"modules": "filter_0"}))
+            self.assertEqual(subprocess.run(command, capture_output=True).returncode, 2)
+            config.write_text(json.dumps({"modules": ["missing"]}))
+            self.assertEqual(subprocess.run(command, capture_output=True).returncode, 1)
+
     def test_pass_and_fail(self):
         root = ET.fromstring(
             '<EDKSYSTEM><EXTERNALPORTS><PORT NAME="pause_key"/></EXTERNALPORTS>'

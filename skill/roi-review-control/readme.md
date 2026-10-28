@@ -33,6 +33,17 @@ python -B -m unittest discover -s tests -v
 
 第一条返回 `{"passed": true, "problems": []}`、退出码 0；第二条故意要求不存在的 `missing_key`，返回 `passed: false` 和对应问题、退出码 1。配置为空、文件无法读取或 XSA 不是 ZIP 时退出码为 2；若命令链会在非零退出码时中止，请分别运行各条命令。
 
+### 第二种工程与独立 HWH 示例
+
+`examples/other_project.hwh` 和两个配置是**合成的非 EagleEye 示例**，可检查独立 HWH，无需 XSA 或 PYNQ 包：
+
+```sh
+python -B tools/check_hw_contract.py --hwh examples/other_project.hwh --config examples/other_pass.json
+python -B tools/check_hw_contract.py --hwh examples/other_project.hwh --config examples/other_fail.json
+```
+
+依次应返回 0（匹配）和 1（故意缺少模块）。XSA 和 HWH 参数互斥；文件损坏、配置类型错误返回 2。迁移时用目标设计的 HWH 和逐项确认的模块名、顶层端口、地址替换示例；不能将示例地址用于设备访问。若目标是 PYNQ，此检查可用于预先审查与 Overlay 配套的 HWH，但**不加载 Overlay、不访问寄存器或 DMA**，也不能证明 BIT 与 HWH、板卡或运行时状态匹配。尚未在 PYNQ 环境和其他真实工程验证。
+
 ### 检查自己的工程
 
 先导出含 BIT 的 XSA，按本板实际命名修改 `expected_hw.example.json`，执行：
@@ -42,7 +53,7 @@ python tools/check_hw_contract.py --xsa path/to/design.xsa --config expected_hw.
 python -m unittest discover -s tests -v
 ```
 
-该脚本检查 XSA/HWH 中配置列出的模块、外部端口和寄存器基地址，**不能证明**鼠标事件、暂停后帧保持或舵机方向正确。配置应列出实际需要检查的项目；空配置会被拒绝。脚本要求 ZIP 根目录包含名为 `system.hwh` 的文件；其他导出结构或 HWH 格式需先核对，不能忽略异常。随后至少做：KEY1 暂停 10 秒且 HDMI 不黑屏；两种起始模式各循环多次 KEY0；鼠标四个动作及拔插恢复；ROI 在四边界保持合法；KEY1 恢复后自动跟踪；断电冷启动和 30 分钟连续演示。这里列的是建议验收步骤，不代表这些步骤已有本次原始记录。
+该脚本检查 XSA 中的 HWH 或独立 HWH 里配置列出的模块、外部端口和寄存器基地址，**不能证明**鼠标事件、暂停后帧保持或舵机方向正确。配置应列出实际需要检查的项目；空配置会被拒绝。脚本要求 ZIP 根目录包含名为 `system.hwh` 的文件；其他导出结构或 HWH 格式需先核对，不能忽略异常。随后至少做：KEY1 暂停 10 秒且 HDMI 不黑屏；两种起始模式各循环多次 KEY0；鼠标四个动作及拔插恢复；ROI 在四边界保持合法；KEY1 恢复后自动跟踪；断电冷启动和 30 分钟连续演示。这里列的是建议验收步骤，不代表这些步骤已有本次原始记录。
 
 软件必须识别 `/dev/input/event*` 中的相对鼠标，写手动 ROI 命令时保持 `manual` 标志，不能让检测器在暂停状态覆盖鼠标位置。机械眼只接两路 PWM 信号和公共地；位置舵机使用独立稳压电源，禁止从 FPGA I/O 供电。不同 SG90 批次、连续旋转版和机构限位要重新标定，不能把 1.3–1.7 ms 当作通用角度标尺。
 
