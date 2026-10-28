@@ -23,4 +23,4 @@
 
 运行 `python tools/verify_field_evidence.py` 可从收录数据复核帧数、硬件提交数、逐层统计、重复输出一致性及 V2 Golden/耗时摘要。核验脚本检查原始记录内部一致性，不代替现场验证，也不认定两次实验的配置相同。
 
-当前 PicoDet+C 候选运行正常、新 BIT 上板成功均为用户转述；本地材料仍未找到能够绑定当前运行程序及 BIT 哈希的完整串口、逐功能结果和同条件输出对照。特别是不能把新 BIT 自动认定为 `b286f480...`。原有 CPU 预处理记录见 [已有板端数据](board_measurements.md)，必要的现场证据见 [待补清单](field_evidence_needed_zh.md)。
+2026-10-28 后续补充已确认新复现 BIT 的哈希为 `b286f480...`，并保存 U-Boot 到 Linux 登录的串口原文；证据范围见 [复现 BIT 的上板记录](board_reproduced_20261028_zh.md)。登录后应用输出、逐功能结果与同条件输出对照仍缺失。原有 CPU 预处理记录见 [已有板端数据](board_measurements.md)，必要的现场证据见 [待补清单](field_evidence_needed_zh.md)。
