@@ -50,3 +50,6 @@ A 提供的稳定版源码、Paddle-Lite 构建依赖和修订 Vivado Tcl 可从
 ## PicoDet + C 候选
 
 独立候选源码、构建及现场反馈边界见 [PicoDet + C 候选说明](src/picodet_c_candidate/readme.md)。
+
+
+2026-10-28 从 GitHub 干净克隆的独立复现结果、构建日志和证据范围见 [干净复现记录](report/clean_reproduction_20261028_zh.md)。

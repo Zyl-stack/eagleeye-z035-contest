@@ -1,0 +1,29 @@
+set ee_out D:/ee_github_build_20261028
+set ee_run_dir [file join $ee_out vivado_work eagleeye_z035.runs impl_1]
+if {![file isfile [file join $ee_run_dir z100_top_physopt.dcp]]} {
+    error "Post-placement checkpoint missing; refusing to reset or resume"
+}
+open_project [file join $ee_out vivado_work eagleeye_z035.xpr]
+set run [get_runs impl_1]
+puts "BEFORE_RESUME STATUS=[get_property STATUS $run] PROGRESS=[get_property PROGRESS $run]"
+reset_runs -from_step route_design $run
+puts "AFTER_RESET STATUS=[get_property STATUS $run] PROGRESS=[get_property PROGRESS $run]"
+launch_runs impl_1 -to_step write_bitstream -jobs 4
+wait_on_run impl_1
+set status [get_property STATUS $run]
+puts "IMPL_STATUS=$status"
+if {$status ne "write_bitstream Complete!"} {error "Implementation or bitstream failed: $status"}
+open_run impl_1
+set reports [file join $ee_out reports]
+file mkdir $reports
+report_utilization -file [file join $reports impl_utilization.rpt]
+report_timing_summary -report_unconstrained -file [file join $reports timing_summary.rpt]
+report_drc -file [file join $reports drc.rpt]
+report_cdc -file [file join $reports cdc.rpt]
+report_methodology -file [file join $reports methodology.rpt]
+set bit [file join $ee_run_dir z100_top.bit]
+if {![file isfile $bit]} {error "BIT file not found: $bit"}
+write_hw_platform -fixed -include_bit -force -file [file join $ee_out eagleeye_z035.xsa]
+puts "EAGLEEYE_BUILD_COMPLETE bit=$bit xsa=[file join $ee_out eagleeye_z035.xsa]"
+puts "NOTE: Review timing coverage, CDC and DRC; this is not board validation."
+close_project

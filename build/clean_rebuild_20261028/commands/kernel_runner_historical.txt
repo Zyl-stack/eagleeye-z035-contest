@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+set -euo pipefail
+work=/home/eagleuser/work/eagleeye_git_kernel_20261028
+if test -e "$work"; then echo 'Output already exists'; exit 2; fi
+mkdir -p "$work/source" "$work/build" "$work/tool-bin" "$work/tmp"
+tar -xzf /mnt/d/ee_github_fresh_20261028/reference/linux_z035/source/linux_xlnx_19984dd.tar.gz -C "$work/source"
+cp /mnt/d/ee_github_fresh_20261028/reference/linux_z035/stable/kernel.config "$work/build/.config"
+tools=/home/eagleuser/eagleeye_ax7020_build/eagleeye_petalinux_2022_2/build/tmp/sysroots-components/x86_64
+gcc="$tools/gcc-cross-arm/usr/bin/arm-xilinx-linux-gnueabi/arm-xilinx-linux-gnueabi-gcc"
+bins="$tools/binutils-cross-arm/usr/bin/arm-xilinx-linux-gnueabi"
+ln -s "$bins/arm-xilinx-linux-gnueabi-as" "$work/tool-bin/as"
+ln -s "$bins/arm-xilinx-linux-gnueabi-ld" "$work/tool-bin/ld"
+export TMPDIR="$work/tmp"
+args=(-C "$work/source" O="$work/build" ARCH=arm "CROSS_COMPILE=$bins/arm-xilinx-linux-gnueabi-" "CC=$gcc -B$work/tool-bin/")
+make "${args[@]}" olddefconfig
+make "${args[@]}" -j4 zImage modules
+printf 'KERNEL_BUILD_PASS\n'
+cat "$work/build/include/config/kernel.release"
+sha256sum "$work/build/arch/arm/boot/zImage" "$work/build/Module.symvers"

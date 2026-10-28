@@ -1,0 +1,48 @@
+from pathlib import Path
+import subprocess
+import sys
+
+root = Path('D:/ee_github_sim_20261028')
+log = Path('D:/ee_github_sim_20261028.log')
+sim = '/mnt/d/ee_github_sim_20261028'
+tool = '/home/eagleuser/work/eagleeye_contest_sim_20261027/tool/usr'
+iverilog = tool + '/bin/iverilog -B ' + tool + '/lib/x86_64-linux-gnu/ivl'
+vvp = tool + '/bin/vvp -M ' + tool + '/lib/x86_64-linux-gnu/ivl'
+
+def run(args, cwd=None):
+    with log.open('a', encoding='utf-8') as f:
+        f.write('\n$ ' + ' '.join(str(x) for x in args) + '\n')
+        f.flush()
+        p = subprocess.run(args, cwd=cwd, stdout=f, stderr=subprocess.STDOUT)
+        f.write('EXIT=' + str(p.returncode) + '\n')
+    if p.returncode:
+        raise SystemExit(p.returncode)
+
+def linux(command, sub=''):
+    run(['wsl', '-d', 'Ubuntu-20.04', '--', 'bash', '-lc', 'cd ' + sim + sub + ' && ' + command])
+
+def compare(name, prefix=None):
+    args = [sys.executable, '-B', str(root / 'tools/compare.py'), name]
+    if prefix:
+        args.extend(['--prefix', prefix])
+    run(args)
+
+log.write_text('Fresh GitHub snapshot: offline Icarus verification; not board data.\n', encoding='utf-8')
+(root / 'build').mkdir(exist_ok=True)
+linux(iverilog + ' -g2005-sv -s tb_preproc -o build/verify_tb_preproc.vvp rtl/preproc_axis_core.v tb/tb_preproc.v')
+for name in ('zero', 'full', 'distinct', 'edge', 'captured'):
+    linux(vvp + ' ../build/verify_tb_preproc.vvp +INPUT=../vectors/' + name + '.hex +OUTPUT=../build/' + name, '/rtl')
+    compare(name)
+    print('PASS preproc ' + name, flush=True)
+linux(iverilog + ' -g2005-sv -s tb_unpack -o build/verify_tb_unpack.vvp rtl/rgb888_mm2s_adapter.v tb/tb_unpack.v')
+linux(vvp + ' build/verify_tb_unpack.vvp +WORDS=vectors/distinct.hex32 +PIXELS=vectors/distinct.hex')
+linux(iverilog + ' -g2005-sv -s tb_preproc_dma -o build/verify_tb_preproc_dma.vvp rtl/preproc_axis_core.v rtl/rgb888_mm2s_adapter.v tb/tb_preproc_dma.v')
+linux(vvp + ' ../build/verify_tb_preproc_dma.vvp +INPUT=../vectors/captured.hex32 +OUTPUT=../build/captured_dma', '/rtl')
+compare('captured', 'captured_dma')
+linux(iverilog + ' -g2005-sv -s tb_control -o build/verify_tb_control.vvp rtl/preproc_axis_core.v rtl/rgb888_mm2s_adapter.v rtl/picodet_preproc_ip.v tb/tb_control.v')
+linux(vvp + ' ../build/verify_tb_control.vvp', '/rtl')
+print('PASS unpack, adapter+preproc, AXI-Lite', flush=True)
+source = '/mnt/d/ee_github_restore_20261028/eagleeye_z035'
+linux(iverilog + ' -g2012 -s tb_roi_servo_pwm -o build/servo.vvp ' + source + '/src/servo/roi_servo_pwm.v ' + source + '/src/servo/tb_roi_servo_pwm.sv')
+linux(vvp + ' build/servo.vvp')
+print('PASS servo RTL; offline only', flush=True)

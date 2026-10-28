@@ -1,0 +1,42 @@
+# GitHub 干净克隆复现记录（2026-10-28）
+
+复现对象：GitHub `main` 提交 `8588b389aacab349c8cae3132730d7ed1bac6669`，独立克隆和独立构建目录；本记录提交自身当然不包含在被复现的版本中。本次没有操作开发板或稳定 SD。原始日志、实际历史命令、报告和 BIT/XSA 归档在 [`build/clean_rebuild_20261028`](../build/clean_rebuild_20261028/)，文件哈希见 [sha256sums.txt](../build/clean_rebuild_20261028/sha256sums.txt)。运行 `python -B tools/verify_clean_rebuild_20261028.py` 可核验归档及 BIT/XSA 对应关系。历史命令含本机绝对路径，仅供复核，不能不经调整直接用于其他电脑。
+
+## 获取、源码与功能验证
+
+Git LFS 获取后 `tools/verify_submission.py` 通过（原始文件 226、仓库文件 991）；Linux 固定源码归档哈希核验通过，归档包含 78975 个条目；A 快照恢复核验通过，共 275 项。这里的文件数量对应上述源提交，后续仓库添加材料后会变化。
+
+Skill 单元测试 5 项通过；PicoDet+C 主机测试及模拟无目标保持测试通过。足球 B 参考代码的 12 项 PC 测试及样例流解析通过，不能据此宣称它接入当前 Z035。上述主机测试没有单独留存本次原始日志，仅记录当次执行结果。
+
+RTL 测试采用 Windows Python 3.13 / NumPy 2.5.2 生成和比较，WSL Ubuntu 20.04 中 Icarus Verilog 10.3 运行仿真；实际命令和输出见 [RTL 日志](../build/clean_rebuild_20261028/logs/rtl_simulation.log)及[历史运行器](../build/clean_rebuild_20261028/commands/rtl_runner_historical.txt)。五类输入各 307200 项与参考逐位一致，RGB 适配器、采集帧适配器与核心、AXI-Lite 和舵机 RTL 测试通过。本次是分环境执行，并未原样执行仓库 `run_verification.py`；标准单环境执行方式见[复现说明](reproduction_zh.md)。仿真不等于上板验证。
+
+## 完整 Vivado 工程
+
+Vivado 2022.2 对恢复的 A 快照完成 BD 校验、26 个 IP 子综合及顶层综合、布局和物理优化。首次运行在布线期间中断；保留[首次日志](../build/clean_rebuild_20261028/logs/vivado_initial.log)和[中断前实现日志](../build/clean_rebuild_20261028/logs/vivado_impl_before_resume.log)。确认已完成物理优化检查点后，仅重置布线步骤并从检查点继续，生成 BIT 和 XSA；[续跑命令](../build/clean_rebuild_20261028/commands/vivado_resume_historical.txt)和[日志](../build/clean_rebuild_20261028/logs/vivado_resume.log)保留原貌。**因此这是干净输入、一次中断后续跑完成，并非一次不中断完成的全流程。**
+
+| 产物或结果 | 本次结果 |
+|---|---|
+| [BIT](../build/clean_rebuild_20261028/artifacts/z100_top.bit) SHA256 | `7dd0f6ac95d9b8e5f3c62db6707ea8ddad0130bbd23ec0c9cb17faaf413ada70` |
+| [XSA](../build/clean_rebuild_20261028/artifacts/eagleeye_z035.xsa) SHA256 | `7c168e50d6a6da58753b0ce1d2c32434f7b34e5474110be2b130cbfd63ed8f41` |
+| XSA 内 `system.hwh` SHA256 | `f2e91d38a119b4a0ab7b07efadd9cd286d1d6bcdae08e73e9de221073765c03f` |
+| LUT / FF / BRAM36 / DSP | 24986 / 28246 / 303（共500）/ 49（共900） |
+| 已约束路径 WNS / WHS | +0.608 ns / +0.007 ns |
+| DRC | 65 Warning、4 Advisory |
+| Methodology / CDC | 8 Critical Warning / 有 Critical 分类 |
+| 外部时序 | 12 个输入、33 个输出缺少延迟约束 |
+
+原始[资源](../build/clean_rebuild_20261028/reports/impl_utilization.rpt)、[时序](../build/clean_rebuild_20261028/reports/timing_summary.rpt)、[DRC](../build/clean_rebuild_20261028/reports/drc.rpt)、[CDC](../build/clean_rebuild_20261028/reports/cdc.rpt)、[Methodology](../build/clean_rebuild_20261028/reports/methodology.rpt)报告供逐项核查。首次日志亦有 XDC 端口未匹配和管脚告警；必须结合设计与板级资料判断。WNS 为正并不能证明未约束的外部接口或所有 CDC 已闭环。
+
+本次 BIT 与 A 此前上板反馈使用的 [`b286f480...`](../board/reproduced_20261028/z100_top.bit) 文件长度相同，仅 7 字节不同，均位于生成日期/时间头部；从同步字 `aa995566` 起的配置数据逐字节一致，SHA256 均为 `02c426b197721f9b367e33d9047dfe3e7c84191c90227a18f45411bd94526076`。新旧 XSA 中 HWH 只有 TIMESTAMP 不同，XSA 内 BIT 均与对应独立 BIT 一致。**整文件哈希不同；本次新 BIT 尚未在板上验证。**此前 A 的反馈和串口范围见[既有板端记录](board_reproduced_20261028_zh.md)。
+
+## ARM 程序、QEMU 与 Linux
+
+使用本机外部 PetaLinux 2022.2 ARM 交叉工具链/sysroot、A 快照内 Paddle-Lite 静态库，独立编译 PicoDet+C 候选，ELF SHA256 `1421b51bb95c448fe8ed244a21aff300d13156ecbf02ef9bde4b7b4a5c9a19f5`；独立编译原 GridPolicy 稳定应用 SHA256 `a16025dacfb8f02cee60a82b8c236e32319f724514baa50a0898b2c189f18aea`，分别与已有候选和稳定记录一致。见[候选构建日志](../build/clean_rebuild_20261028/logs/app_build.log)和[稳定应用构建日志](../build/clean_rebuild_20261028/logs/stable_app_build.log)。链接警告指出静态应用调用 `dlopen` 时仍可能需要匹配的 glibc 动态库，不应仅凭静态 ELF 宣称运行环境零依赖。
+
+QEMU 固定 RGB、单线程 CPU 预处理用例产生 7 个人体框及 `C_ATTENTION` 请求；无目标用例也执行，见[检测](../build/clean_rebuild_20261028/logs/qemu_person.log)和[无目标](../build/clean_rebuild_20261028/logs/qemu_empty.log)日志。`hardware_commit=not_attempted`；QEMU 耗时和 FPS 不是实板速度，也不证明摄像头、HDMI、舵机或 FPGA 推理。
+
+仓库固定 Linux 源码与稳定配置在独立目录通过 ARM 交叉构建，`kernel.release=5.15.36-xilinx-v2022.2`，生成 zImage 和 172 个模块；配置 SHA256 `6f1063a6e7a38c1f0d264db258a1987c9e46c7ec70c9a3bfcfb527df5aa005c4`，zImage SHA256 `dd442f1a509f453a7931ce47ebf1cdb00d65ce0235275bdb354dbbf8ccaa7bf4`，`Module.symvers` SHA256 `23ff35be01e406a61776b708685a96aa5922309029f7e12eada2d5fdebfb82e0`。见[内核日志](../build/clean_rebuild_20261028/logs/kernel_build.log)和[历史构建命令](../build/clean_rebuild_20261028/commands/kernel_runner_historical.txt)。尚未证明二进制与实板 `image.ub` 相同、可混用模块或可启动；编译依赖本机外部交叉工具链。
+
+## 原始日志及尚缺结果
+
+日志为保留原始字节的本机输出；部分包含 WSL 启动信息和 NUL 字节，文本查看器可能显示异常，不能当作加密数据或修改后再冒充原始日志。当前仍缺本次新 BIT 的板端记录、FSBL 和登录后应用完整原始日志、相同输入的板端输出与参考逐项对比、摄像头到检测更新的实际 FPS，以及外部 I/O 时序和 CDC 告警的闭环依据。历史现场反馈不能替代这些证据。
