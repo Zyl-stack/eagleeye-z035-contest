@@ -1,0 +1,11 @@
+{
+  "modules": [
+    "sample_ip_0"
+  ],
+  "top_ports": [
+    "pause_key"
+  ],
+  "register_bases": {
+    "sample_ip_0": "0x40000000"
+  }
+}

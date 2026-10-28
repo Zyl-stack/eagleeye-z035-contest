@@ -1,5 +1,9 @@
 # PicoDet FP32 预处理 Golden 验证
 
+## 问题来源与提炼
+
+在摄像头、四路 DMA 和 FPGA 预处理对接时，仅看到 IP 完成或画面正常，并不能确认模型实际收到的张量正确：输入帧可能被覆盖，通道顺序、缩放或缓存状态也可能不一致。因此将“固定同一输入、比较完整参考张量、检查错误和退出码”整理成可复用流程；项目背景与局限见 [AI 协作记录](../../report/ai_collaboration_record.md)的预处理案例。
+
 ## 适用范围
 
 验证 RGB888 摄像头帧经 FPGA 预处理后生成的 FP32 NCHW 张量。默认示例契约为 640x360 RGB888 输入、`1x3x320x320` 输出；换模型或输入尺寸时，应先修改参考程序和 DMA 长度，再使用本 Skill。它是验证流程，不包含队友 IP 的所有权或许可证。
@@ -9,6 +13,18 @@
 - 输入：同一帧原始 RGB、CPU 参考输出 `.f32`、从三个 S2MM DMA 缓冲区按 R/G/B 顺序拼成的 `.f32`。
 - 输出：元素数、逐位相等数、最大/平均绝对误差、超出容差数；非有限值、长度不符或误差越界返回非零状态。
 - 四路 DMA 示例：MM2S 输入 `691200` 字节；R/G/B 各 S2MM `409600` 字节。三个输出平面地址依次相隔 `409600` 字节；完成顺序无要求。
+
+## 不依赖开发板的最小示例
+
+将本目录完整复制到任意位置，在该目录下用 Python 3.10 或更新版本运行；脚本仅使用标准库。`examples/` 中是人工构造的 2×2 小端 FP32 测试数据，**不是真实摄像头或板端输出**：
+
+```sh
+python -B tools/verify_tensor.py --actual examples/actual_pass.f32 --golden examples/golden.f32 --shape 2x2 --require-exact
+python -B tools/verify_tensor.py --actual examples/actual_fail.f32 --golden examples/golden.f32 --shape 2x2 --require-exact
+python -B -m unittest discover -s tests -v
+```
+
+第一条输出 `passed: true`、`values: 4`、`exact: 4`，退出码 0；第二条故意改动一个值，输出 `passed: false`、`exact: 3`、`over_tolerance: 1`，退出码 1。文件缺失、长度不对或含非有限值时退出码为 2。负例应当失败；若命令链会在非零退出码时中止，请分别运行各条命令。
 
 ## 用法
 
@@ -21,12 +37,19 @@ python -m unittest discover -s tests -v
 
 板端顺序：确认 HWH 地址/时钟与驱动一致；锁定输入帧槽；CPU 写过输入时先 clean cache；启动一条 MM2S 和三条 S2MM；等待三条输出、检查 DMA/IP 状态与超时；invalidate 输出 cache；导出张量比对。不得把摄像头仍在写入的槽当作固定输入。
 
-测速要分别记录 IP `cycles`、DMA/DDR/cache 的端到端 `preprocess_ms`、纯 PS 参考 `preprocess_ms` 和检测结果。**IP 流接口仿真时延不是板端实测。**用户提供的本项目串口样例约为 FPGA 预处理 19 ms、此前纯 PS 约 420 ms；这些是特定板卡和帧的观测，不保证其他系统同速。完整 FP32 Golden 的独立交付记录为五类帧、每帧 307200 个值逐位一致。
+测速要分别记录 IP `cycles`、DMA/DDR/cache 的端到端 `preprocess_ms`、纯 PS 参考 `preprocess_ms` 和检测结果。**IP 流接口仿真时延不是板端实测。**历史用户反馈包含预处理时长，但本仓库缺少可核验的当前版本同条件完整 A/B 原始日志，不能据此计算当前系统加速比。
+
+## 已验证效果与边界
+
+仓库内 [Icarus 仿真记录](../../sim/preproc_iverilog_20261027.log)显示五类帧各 307200 个值与参考逐位一致；采集帧的三路仿真输出和独立复核方法见 [仿真数据说明](../../sim/preproc_captured_dma_20261027/readme.md)。这证明指定测试台和输入下的离线结果，不证明实板 DMA 与缓存行为。
+
+A 反馈复现 BIT 上板功能正常，但登录后应用输出及本次板端张量与 Golden 的逐值对照尚未提供，详见 [现场证据清单](../../report/field_evidence_needed_zh.md)。本 Skill 不自动锁帧、操作 DMA 或维护缓存；板端采集必须由匹配系统的驱动和流程完成。
 
 ## 失效条件
 
 - 模型输入不再是 RGB888 到 `1x3x320x320` FP32，或 R/G/B 顺序改变。
 - DMA 尚未全部完成、帧槽被覆盖、cache 未维护、出现 AXI 错误/超时。
 - 仅拿 IP cycle 或一次 FPS 作为正确性证明；应停止并补完整张量比对。
+- 比较器只接受小端 FP32 原始文件；其他数据类型、字节序或张量布局应先按已确认的契约转换。它只判断两个文件是否符合给定容差，不能证明参考本身正确、输入帧一致或 DMA 已完成。
 
-参考来源：`D:\EagleEye_FPGA_Competition\Preproc_7035_Standalone_20261017\picodet_preproc_ip` 的 README、RTL、五类向量及 `tools/compare.py`；EagleEye Z035 板端日志由项目实测。使用者应替换这些示例路径为自己的工程路径。
+参考来源：仓库 [预处理源码](../../src/ip_repo/preproc/)、[仿真与验证说明](../../sim/verification_zh.md)及其中引用的历史交付记录。移植时应以自己的工程输入、张量和板端记录为准。

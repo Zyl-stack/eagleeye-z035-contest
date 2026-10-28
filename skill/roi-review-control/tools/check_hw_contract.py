@@ -5,10 +5,14 @@ import argparse
 import json
 import xml.etree.ElementTree as ET
 from pathlib import Path
-from zipfile import ZipFile
+from zipfile import BadZipFile, ZipFile
 
 
 def check(root, contract):
+    if not isinstance(contract, dict) or not any(
+        contract.get(key) for key in ("modules", "top_ports", "register_bases")
+    ):
+        raise ValueError("contract contains no checks")
     modules = {node.get("INSTANCE") for node in root.findall(".//MODULE")}
     ports = {
         node.get("NAME")
@@ -41,7 +45,7 @@ def main():
         with ZipFile(args.xsa) as archive:
             root = ET.fromstring(archive.read("system.hwh"))
         problems = check(root, contract)
-    except (OSError, ValueError, KeyError, ET.ParseError) as error:
+    except (OSError, ValueError, KeyError, ET.ParseError, BadZipFile) as error:
         parser.exit(2, f"INVALID: {error}\n")
     print(json.dumps({"passed": not problems, "problems": problems}, ensure_ascii=False))
     return 0 if not problems else 1

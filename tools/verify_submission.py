@@ -45,6 +45,13 @@ def main():
                 rel = 'report/source_sha256sums.txt'
             elif rel == 'skill/readme.md':
                 rel = 'original/source_skill_readme.txt'
+            elif rel in (
+                'skill/preproc-fp32-golden/readme.md',
+                'skill/roi-review-control/readme.md',
+                'skill/roi-review-control/tests/test_check_hw_contract.py',
+                'skill/roi-review-control/tools/check_hw_contract.py',
+            ):
+                rel = 'original/skill_snapshot/' + rel[len('skill/'):]
             elif rel == 'report/ai_collaboration_record.md':
                 rel = 'original/source_ai_collaboration_record.txt'
             elif rel == 'report/design_report_draft.md':

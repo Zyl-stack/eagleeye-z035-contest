@@ -1,0 +1,53 @@
+2026-10-28; local independent-copy examples; NO BOARD ACCESS
+Python 3.13.6
+
+[preproc-fp32-golden] python -B tools/verify_tensor.py --actual examples/actual_pass.f32 --golden examples/golden.f32 --shape 2x2 --require-exact
+exit=0
+{"exact": 4, "max_abs": 0.0, "mean_abs": 0.0, "over_tolerance": 0, "passed": true, "shape": [2, 2], "values": 4}
+
+[preproc-fp32-golden] python -B tools/verify_tensor.py --actual examples/actual_fail.f32 --golden examples/golden.f32 --shape 2x2 --require-exact
+exit=1
+{"exact": 3, "max_abs": 1.0, "mean_abs": 0.25, "over_tolerance": 1, "passed": false, "shape": [2, 2], "values": 4}
+
+[preproc-fp32-golden] python -B -m unittest discover -s tests -v
+exit=0
+test_exact (test_verify_tensor.TensorComparisonTest.test_exact) ... ok
+test_mismatch_and_length (test_verify_tensor.TensorComparisonTest.test_mismatch_and_length) ... ok
+
+----------------------------------------------------------------------
+Ran 2 tests in 0.012s
+
+OK
+
+[roi-review-control] python -B tools/check_hw_contract.py --xsa examples/sample.xsa --config examples/pass.json
+exit=0
+{"passed": true, "problems": []}
+
+[roi-review-control] python -B tools/check_hw_contract.py --xsa examples/sample.xsa --config examples/fail.json
+exit=1
+{"passed": false, "problems": ["missing top port: missing_key"]}
+
+[roi-review-control] python -B tools/check_hw_contract.py --xsa examples/sample.xsa --config examples/empty.json
+exit=2
+INVALID: contract contains no checks
+
+[roi-review-control] python -B tools/check_hw_contract.py --xsa examples/not_xsa.bin --config examples/pass.json
+exit=2
+INVALID: File is not a zip file
+
+[roi-review-control] python -B -m unittest discover -s tests -v
+exit=0
+test_empty_contract_is_invalid (test_check_hw_contract.ContractTest.test_empty_contract_is_invalid) ... ok
+test_invalid_archive_is_reported (test_check_hw_contract.ContractTest.test_invalid_archive_is_reported) ... ok
+test_pass_and_fail (test_check_hw_contract.ContractTest.test_pass_and_fail) ... ok
+
+----------------------------------------------------------------------
+Ran 3 tests in 0.264s
+
+OK
+
+[roi-review-control] python -B tools/check_hw_contract.py --xsa D:\eagleeye_a_submission_20261027\board\reproduced_20261028\eagleeye_z035.xsa --config expected_hw.example.json
+exit=0
+{"passed": true, "problems": []}
+
+PASS synthetic examples, invalid input and real local XSA file check; no hardware or board claims.
