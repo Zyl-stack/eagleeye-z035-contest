@@ -1,5 +1,7 @@
 # 给 A/B/C 队友的复现状态说明（2026-10-27）
 
+**后续更新（2026-10-28）：**下表保留 10 月 27 日核对时的历史状态。之后完整构建 BIT 并收到 A 的 `b286f480...` BIT 上板反馈及 U-Boot 至 Linux 登录串口，详见 [复现 BIT 的上板记录](board_reproduced_20261028_zh.md)；登录后应用与逐功能原始记录仍缺。
+
 | 部分 | 可复现内容与证据 | 尚不能声称 |
 | --- | --- | --- |
 | A 板级视频 | 本包 Z035 Eyes `system.bd` 与本机原工程一致；63 个 `.srcs` 文件逐字节一致。`build/recreate_vivado.tcl` 已在 Vivado 2022.2、短 ASCII 路径下从干净副本创建工程，BD Validation 和 Output Products PASS。原工程 BIT 与 BOOT 打包输入 BIT 哈希一致。 | 本包干净重建的 BIT 尚未重新生成、上板。原 routed timing 报告有 16 项缺失 I/O delay 以及时钟相关 Critical Warning，摄像头/HDMI 板级接口时序没有完整签核。AX7020 A/Fovea 参考分支不能替代这份 Z035 工程。 |
