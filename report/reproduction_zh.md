@@ -6,7 +6,7 @@
 
 ## 1. 获取与验证
 
-需要 Git LFS、Python 3.10+；Linux 中完整 RTL 测试还需 NumPy 和 Icarus Verilog（本次为 10.3）。
+FPGA 工程构建使用 **Xilinx Vivado 2022.2**。获取和核验需要 Git LFS、Python 3.10+；Linux 中完整 RTL 测试还需 NumPy 和 Icarus Verilog（本次为 10.3）。
 
 ```sh
 git lfs install
