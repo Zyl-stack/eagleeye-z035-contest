@@ -54,7 +54,7 @@ python -m unittest discover -s tests -v
 
 仓库内 [Icarus 仿真记录](../../sim/preproc_iverilog_20261027.log)显示五类帧各 307200 个值与参考逐位一致；采集帧的三路仿真输出和独立复核方法见 [仿真数据说明](../../sim/preproc_captured_dma_20261027/readme.md)。这证明指定测试台和输入下的离线结果，不证明实板 DMA 与缓存行为。
 
-A 反馈复现 BIT 上板功能正常，但登录后应用输出及本次板端张量与 Golden 的逐值对照尚未提供，详见 [现场证据清单](../../report/field_evidence_needed_zh.md)。本 Skill 不自动锁帧、操作 DMA 或维护缓存；板端采集必须由匹配系统的驱动和流程完成。
+A 已确认复现 BIT 上板功能正常，登录后应用输出已收到；本次板端张量与 Golden 的逐值对照无结果，详见 [现场证据清单](../../report/field_evidence_needed_zh.md)。本 Skill 不自动锁帧、操作 DMA 或维护缓存；板端采集必须由匹配系统的驱动和流程完成。
 
 ## 失效条件
 

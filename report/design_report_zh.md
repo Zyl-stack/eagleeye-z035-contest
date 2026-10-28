@@ -40,7 +40,7 @@
 
 | 特点 | 项目实现与证据 | 目前能说明的范围 |
 |---|---|---|
-| 全景观察与局部复判结合 | Eyes 视频通路保留全景显示，ROI 局部缩放用于观察；鼠标、按键和暂停/恢复控制见 `src/ps/` 和 `src/vivado/` | 工程和交互路径已有源码；A 对摄像头、人体检测、鼠标 ROI、按键、舵机和 HDMI 逐项反馈正常，独立功能表和照片/视频未提供。放大不能增加原图真实信息量 |
+| 全景观察与局部复判结合 | Eyes 视频通路保留全景显示，ROI 局部缩放用于观察；鼠标、按键和暂停/恢复控制见 `src/ps/` 和 `src/vivado/` | 工程和交互路径已有源码；A 已现场确认摄像头、人体检测、鼠标 ROI、按键、舵机和 HDMI 逐项功能正常。放大不能增加原图真实信息量 |
 | 预处理的软硬件划分 | PL 将 640×360 RGB888 转换为 320×320 FP32 NCHW，PS 负责 PicoDet 推理；`auto` 路径可退回 CPU。见 `src/ip_repo/preproc/` 和 `src/ps/src/paddle_person.cpp` | 五类帧离线 RTL 仿真与参考逐位一致；本次板端张量对照和同条件速度增益未提供 |
 | 人体框驱动注意力与 ROI | `src/ps/src/fovea_roi.hpp` 将区域、运动、接近、小目标和不确定度评分并限制目标切换；独立 `src/picodet_c_candidate/` 接入 C 注意力和 ROI 平滑 | 属于具体版本的软件策略；ID 为临时匹配，不能声称跨遮挡稳定追踪；C 候选的现场细节缺少日志 |
 | 可追溯验证和复现 | 保存输入、参考、RTL 日志、构建报告、BIT/XSA/HWH 与校验脚本；示例见 `sim/verification_zh.md` 和 `report/board_reproduced_20261028_zh.md` | 有助于复核指定产物；哈希、仿真和现场反馈各自有边界，不等同于系统精度或长期可靠性证明 |
@@ -64,7 +64,7 @@
 3. PicoDet 输出人体框后，`src/ps/src/fovea_roi.hpp` 中的 AttentionPolicy 对目标筛选、临时匹配并产生 ROI。该本地 ID 不保证跨遮挡稳定；无目标时清除匹配历史并保留最近安全 ROI。
 4. 鼠标与 Fovea 请求经过已有控制路径，舵机由相应 PWM RTL 控制。独立 `src/picodet_c_candidate/` 还将人体框送入 C 注意力与调度逻辑；它与稳定 GridPolicy、后续 AttentionPolicy 是不同软件版本，不应混称同一程序。
 
-接口源码说明预期行为，不单独证明现场调用、DDR 一致性或舵机动作。A 已反馈新候选功能正常；现已收到 AttentionPolicy 版本的登录后应用日志，但日志对应的应用归档与独立 PicoDet+C 候选 ELF 不同，不能用其代替后者的实板日志。详见 [应用证据](board_app_evidence_20261028_zh.md)。
+接口源码说明预期行为，不单独证明现场调用、DDR 一致性或舵机动作。A 已确认新候选上板功能正常；现已收到 AttentionPolicy 版本的登录后应用日志，但日志对应的应用归档与独立 PicoDet+C 候选 ELF 不同，不能用其代替后者的实板日志。详见 [应用证据](board_app_evidence_20261028_zh.md)。
 
 ### 2.1 团队分工与接口
 
@@ -72,7 +72,7 @@
 
 | 角色 | 分工范围 | 当前可查交接与边界 |
 |---|---|---|
-| A：板级与视频/Fovea | 视频输入输出、ROI/显示通路、工程集成及板端测试 | Eyes 工程和构建见 `build/full_rebuild_20261027/`；A 回传的 BIT 和启动串口见 `report/board_reproduced_20261028_zh.md`。功能正常为现场反馈 |
+| A：板级与视频/Fovea | 视频输入输出、ROI/显示通路、工程集成及板端测试 | Eyes 工程和构建见 `build/full_rebuild_20261027/`；A 回传的 BIT 和启动串口见 `report/board_reproduced_20261028_zh.md`。六项功能已由 A 现场确认正常 |
 | B：模型与目标感知 | PicoDet 人体检测的模型、推理与人体框接口核对 | `data/model.nb`、`src/ps/` 及 `report/b_detection_integration_20261027.md`；当前 Z035 包未提供跨遮挡稳定 target_id。足球 YOLO 资料是独立参考路线，不能当成当前程序 |
 | C：注意力、调度与接口 | 对人体框做目标选择、ROI 请求与系统接口适配 | `src/picodet_c_candidate/` 和 `sim/picodet_c_candidate/`；有主机/QEMU 测试及用户转述的现场反馈，尚无该候选的完整实板运行日志 |
 | 团队与 AI 协作 | 需求拆分、接口核对、构建/测试和交付资料整理；实板操作与结论由团队核验 | `report/ai_collaboration_record.md` 是整理稿，不是完整原始聊天；模型、第三方 IP 作者与授权待补充 |
@@ -92,9 +92,9 @@
 | 历史实现资源 | `build/z100_top_utilization_placed.rpt`：LUT 24,789；FF 28,234；BRAM 303/500；DSP 49 | 历史 Eyes 布局报告，不是本次重新综合 |
 | 历史时序 | `build/z100_top_timing_summary_routed.rpt`：WNS +0.505 ns，WHS +0.051 ns | Vivado 2022.2，已约束路径；不能代替外设时序和稳定性验证 |
 | 独立 Eyes 重建 | `build/full_rebuild_20261027/`：LUT 24,986、FF 28,246、BRAM 303、DSP 49；WNS +0.608 ns、WHS +0.007 ns | 本机独立源码副本完成实现；12 项输入/33 项输出延迟缺失，CDC 和方法学仍有 Critical，不能代表完整时序签核 |
-| 复现 BIT 上板 | `report/board_reproduced_20261028_zh.md`；BIT SHA256 `b286f480a1e91282c4be813f35247deffbc6de7d35f31bb9a7984dd3c7fa4a15` | A 反馈六项功能正常；U-Boot 到 Linux 登录及 Attention 应用输出已有原始记录，FSBL 和逐项功能表、照片/视频未录到 |
+| 复现 BIT 上板 | `report/board_reproduced_20261028_zh.md`；BIT SHA256 `b286f480a1e91282c4be813f35247deffbc6de7d35f31bb9a7984dd3c7fa4a15` | A 已确认六项功能上板正常；U-Boot 到 Linux 登录及 Attention 应用输出已有原始记录，未额外记录 FSBL 与逐项量化数据 |
 | Attention 应用上板日志 | `report/board_app_evidence_20261028_zh.md`：179 条 `ATTENTION`、FPGA 预处理和 `TIME` | 应用日志含 VDMA 错误位警告、帧新鲜度未验证；没有同输入板端张量与 Golden 对比，也不能代替独立 C 候选日志 |
-| PicoDet+C 候选上板反馈 | `src/picodet_c_candidate/readme.md` | 用户确认 A 使用该候选后反馈功能正常；尚无该次串口、哈希读回和逐项测试记录 |
+| PicoDet+C 候选上板反馈 | `src/picodet_c_candidate/readme.md` | A 已确认使用该候选上板功能正常；现有日志属于 AttentionPolicy，未将两者日志混用 |
 | 历史 CPU 预处理 | `board/attach_100.log` 和 `report/board_measurements.md` | 100 帧统计；不能与其他版本直接相除作为 FPGA 加速比 |
 
 文件完整性检查见 `tools/verify_submission.py`。主机测试只覆盖工具自己的行为，不代表当前板端计算或完整系统 PASS。

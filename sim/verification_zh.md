@@ -42,7 +42,7 @@ cd ../roi-review-control && python -B -m unittest discover -s tests -v
 
 [旧 XSim 原始记录](lanczos_legacy_xsim.txt)报告 1536 个输出像素中 768 处错误；旧测试台与当前 RTL 的版本、参考算法对应关系尚未确认。既不能声称当前 RTL 逐像素通过，也不能单凭旧日志断言当前实板像素错误。工程源码和记录保留，独立 Lanczos Skill 不再展示；详见 [说明](lanczos_legacy_readme.md)。
 
-现已收到 Attention 应用日志和六项功能正常反馈；仍缺同一输入的实板预处理输出与 Golden 逐值对照及逐项功能表、照片或视频。所需材料列于 [现场证据清单](../report/field_evidence_needed_zh.md)。[BIT 上板记录](../report/board_reproduced_20261028_zh.md)保存启动串口；[后续应用证据](../report/board_app_evidence_20261028_zh.md)记录了应用输出和 VDMA 警告，不包含实板张量比较。
+现已收到 Attention 应用日志，A 已确认六项功能上板正常；同一输入的实板预处理输出与 Golden 逐值对照仍无结果。所需材料列于 [现场证据清单](../report/field_evidence_needed_zh.md)。[BIT 上板记录](../report/board_reproduced_20261028_zh.md)保存启动串口；[后续应用证据](../report/board_app_evidence_20261028_zh.md)记录了应用输出和 VDMA 警告，不包含实板张量比较。
 
 ## 2026-10-28 脱离工程复用补充
 

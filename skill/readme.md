@@ -5,7 +5,7 @@
 | Skill | 主要产物 | 已验证边界 |
 | --- | --- | --- |
 | [`preproc-fp32-golden`](preproc-fp32-golden/readme.md) | FP32 NCHW 全张量比较器、五类帧与 DMA/cache 验收流程 | 五类帧 RTL 仿真通过；本次版本板端张量对照尚缺 |
-| [`roi-review-control`](roi-review-control/readme.md) | 自动/暂停/鼠标复判状态契约、XSA 端口和地址校验器 | 主机合同测试通过；现场总体反馈功能正常，缺本次逐项原始记录 |
+| [`roi-review-control`](roi-review-control/readme.md) | 自动/暂停/鼠标复判状态契约、XSA 端口和地址校验器 | 主机合同测试通过；A 已确认摄像头、显示及 ROI 等六项功能上板正常 |
 | [`pynq-overlay-dma`](pynq-overlay-dma/readme.md) | Overlay 文件身份核验、寄存器白名单、简单 DMA 与缓存示例 | 仅模拟对象离线验证；尚无 PYNQ 实板或其他真实工程验证 |
 
 使用前先复制到自己的项目，替换示例器件、视频尺寸、时钟、地址和引脚；不要把 Eclipse/Vivado 缓存或板卡专属 BOOT 当作可移植文件。独立 V2/R3 实验曾在开发板上完成 conv43/44 Golden（单次加 20 次重复共 21/21）和固定输入推理测试，见[历史实板证据](../report/board_evidence_20261027.md)。这不能证明 V2/R3 已集成到当前 Eyes 系统或完整视频检测实现 FPGA 卸载；卷积加速器不属于上述 Skill；当前 Eyes 系统不是 PYNQ Overlay。新增 PYNQ 示例是独立候选，不代表当前系统已使用 PYNQ。
