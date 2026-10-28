@@ -1,0 +1,16 @@
+2026-10-28; local host verification; not a board test.
+
+Working directory: skill/preproc-fp32-golden
+Command: python -B -m unittest discover -s tests -v
+test_exact ... ok
+test_mismatch_and_length ... ok
+Ran 2 tests
+OK
+Exit code: 0
+
+Working directory: skill/roi-review-control
+Command: python -B -m unittest discover -s tests -v
+test_pass_and_fail ... ok
+Ran 1 test
+OK
+Exit code: 0
