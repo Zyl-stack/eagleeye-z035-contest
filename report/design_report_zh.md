@@ -40,7 +40,7 @@
 
 | 特点 | 项目实现与证据 | 目前能说明的范围 |
 |---|---|---|
-| 全景观察与局部复判结合 | Eyes 视频通路保留全景显示，ROI 局部缩放用于观察；鼠标、按键和暂停/恢复控制见 `src/ps/` 和 `src/vivado/` | 工程和交互路径已有源码；A 对新 BIT 的总体功能反馈正常，逐项日志仍缺。放大不能增加原图真实信息量 |
+| 全景观察与局部复判结合 | Eyes 视频通路保留全景显示，ROI 局部缩放用于观察；鼠标、按键和暂停/恢复控制见 `src/ps/` 和 `src/vivado/` | 工程和交互路径已有源码；A 对摄像头、人体检测、鼠标 ROI、按键、舵机和 HDMI 逐项反馈正常，独立功能表和照片/视频未提供。放大不能增加原图真实信息量 |
 | 预处理的软硬件划分 | PL 将 640×360 RGB888 转换为 320×320 FP32 NCHW，PS 负责 PicoDet 推理；`auto` 路径可退回 CPU。见 `src/ip_repo/preproc/` 和 `src/ps/src/paddle_person.cpp` | 五类帧离线 RTL 仿真与参考逐位一致；本次板端张量对照和同条件速度增益未提供 |
 | 人体框驱动注意力与 ROI | `src/ps/src/fovea_roi.hpp` 将区域、运动、接近、小目标和不确定度评分并限制目标切换；独立 `src/picodet_c_candidate/` 接入 C 注意力和 ROI 平滑 | 属于具体版本的软件策略；ID 为临时匹配，不能声称跨遮挡稳定追踪；C 候选的现场细节缺少日志 |
 | 可追溯验证和复现 | 保存输入、参考、RTL 日志、构建报告、BIT/XSA/HWH 与校验脚本；示例见 `sim/verification_zh.md` 和 `report/board_reproduced_20261028_zh.md` | 有助于复核指定产物；哈希、仿真和现场反馈各自有边界，不等同于系统精度或长期可靠性证明 |
@@ -64,7 +64,7 @@
 3. PicoDet 输出人体框后，`src/ps/src/fovea_roi.hpp` 中的 AttentionPolicy 对目标筛选、临时匹配并产生 ROI。该本地 ID 不保证跨遮挡稳定；无目标时清除匹配历史并保留最近安全 ROI。
 4. 鼠标与 Fovea 请求经过已有控制路径，舵机由相应 PWM RTL 控制。独立 `src/picodet_c_candidate/` 还将人体框送入 C 注意力与调度逻辑；它与稳定 GridPolicy、后续 AttentionPolicy 是不同软件版本，不应混称同一程序。
 
-接口源码说明预期行为，不单独证明现场调用、DDR 一致性或舵机动作。A 已反馈新候选功能正常，但登录后应用原始输出仍未提供。
+接口源码说明预期行为，不单独证明现场调用、DDR 一致性或舵机动作。A 已反馈新候选功能正常；现已收到 AttentionPolicy 版本的登录后应用日志，但日志对应的应用归档与独立 PicoDet+C 候选 ELF 不同，不能用其代替后者的实板日志。详见 [应用证据](board_app_evidence_20261028_zh.md)。
 
 ### 2.1 团队分工与接口
 
@@ -92,7 +92,8 @@
 | 历史实现资源 | `build/z100_top_utilization_placed.rpt`：LUT 24,789；FF 28,234；BRAM 303/500；DSP 49 | 历史 Eyes 布局报告，不是本次重新综合 |
 | 历史时序 | `build/z100_top_timing_summary_routed.rpt`：WNS +0.505 ns，WHS +0.051 ns | Vivado 2022.2，已约束路径；不能代替外设时序和稳定性验证 |
 | 独立 Eyes 重建 | `build/full_rebuild_20261027/`：LUT 24,986、FF 28,246、BRAM 303、DSP 49；WNS +0.608 ns、WHS +0.007 ns | 本机独立源码副本完成实现；12 项输入/33 项输出延迟缺失，CDC 和方法学仍有 Critical，不能代表完整时序签核 |
-| 复现 BIT 上板 | `report/board_reproduced_20261028_zh.md`；BIT SHA256 `b286f480a1e91282c4be813f35247deffbc6de7d35f31bb9a7984dd3c7fa4a15` | A 反馈功能正常；U-Boot 到 Linux 登录有原始串口，FSBL、登录后应用和逐项功能记录未录到 |
+| 复现 BIT 上板 | `report/board_reproduced_20261028_zh.md`；BIT SHA256 `b286f480a1e91282c4be813f35247deffbc6de7d35f31bb9a7984dd3c7fa4a15` | A 反馈六项功能正常；U-Boot 到 Linux 登录及 Attention 应用输出已有原始记录，FSBL 和逐项功能表、照片/视频未录到 |
+| Attention 应用上板日志 | `report/board_app_evidence_20261028_zh.md`：179 条 `ATTENTION`、FPGA 预处理和 `TIME` | 应用日志含 VDMA 错误位警告、帧新鲜度未验证；没有同输入板端张量与 Golden 对比，也不能代替独立 C 候选日志 |
 | PicoDet+C 候选上板反馈 | `src/picodet_c_candidate/readme.md` | 用户确认 A 使用该候选后反馈功能正常；尚无该次串口、哈希读回和逐项测试记录 |
 | 历史 CPU 预处理 | `board/attach_100.log` 和 `report/board_measurements.md` | 100 帧统计；不能与其他版本直接相除作为 FPGA 加速比 |
 
@@ -104,7 +105,7 @@
 
 原工程包含预处理和 ROI 的硬件实现与历史记录，但目前未找到当前 Eyes 版本同场景、同模型和相同参数的 CPU/FPGA 预处理成对原始数据。优化前后延迟、检测更新 FPS 和准确率应保持待测；不得将 HDMI 刷新率或 IP 内部周期当作完整检测 FPS。
 
-可引用的历史基线为 `board/attach_100.log` 的 CPU 预处理 100 帧：平均预处理 418.061 ms，平均 total 913.653 ms，1000 / 平均 total 约 1.09451 FPS，计算方式及边界见 [记录说明](board_measurements.md)。它没有匹配当前 BIT 的同条件 FPGA 对照，因此不计算加速比。
+可引用的历史基线为 `board/attach_100.log` 的 CPU 预处理 100 帧：平均预处理 418.061 ms，平均 total 913.653 ms，1000 / 平均 total 约 1.09451 FPS，计算方式及边界见 [记录说明](board_measurements.md)。它没有匹配当前 BIT 的同条件 FPGA 对照，因此不计算加速比。另有 2026-10-28 Attention 应用的 179 条 FPGA 预处理日志：平均 `total` 512.566 ms，`1000 / mean(total)` 为 1.951 FPS；这些是该日志的统计，含 VDMA 警告和 `freshness=unverified`，不能当作同条件对照加速比或已验证的检测更新率。详见 [应用证据](board_app_evidence_20261028_zh.md)。
 
 ## 5. 大模型协作与技能包
 
@@ -116,7 +117,7 @@
 
 1. 执行 `python tools/verify_submission.py` 验证当前仓库与原始快照。
 2. 先运行 `python tools/restore_a_repro.py --output <新目录>` 恢复 A 快照，再按 `report/reproduction_zh.md` 使用 `build/build_full_vivado.tcl` 运行 Vivado 2022.2。
-3. 按 `report/reproduction_zh.md` 及原快照 `sim/README.md`、`src/ps/build_arm.sh` 准备工具链、Paddle-Lite 依赖及测试输入。独立构建已覆盖 Eyes FPGA、稳定 ARM 应用和固定源码 Linux 内核；A 所提供的本次板测 BIT 与复现 BIT 哈希一致，实验卡读回清单及现场应用身份仍待核对。
+3. 按 `report/reproduction_zh.md` 及原快照 `sim/README.md`、`src/ps/build_arm.sh` 准备工具链、Paddle-Lite 依赖及测试输入。独立构建已覆盖 Eyes FPGA、稳定 ARM 应用和固定源码 Linux 内核；A 所提供的板测 BIT 与 2026-10-27 复现 BIT 哈希一致；2026-10-28 干净复现 BIT 的配置数据一致但整文件哈希不同。实验卡读回清单和现场运行文件独立哈希仍待核对。
 4. 上板验证应使用获准的独立介质，记录镜像身份、测试条件、原始输出和恢复情况；不覆盖稳定系统。
 
 详细缺口和证据边界见 `submission_audit.md`。
