@@ -14,6 +14,8 @@
 
 2026-10-27 的实际工具命令、退出码和逐项输出保存在 [原始仿真日志](preproc_iverilog_20261027.log)。输入包括零值、满值、通道区分、边界及采集帧；每帧 307,200 个 FP32 值与对应参考逐位一致，最大和平均绝对误差均为 0。采集帧经 RGB 字节适配器和核心联合仿真后也逐位一致。另有字节适配器与 AXI-Lite 独立地址/数据通道和 busy 状态测试通过。
 
+现补充本地保留的[采集帧三路仿真输出](preproc_captured_dma_20261027/)，分别为 R/G/B 32 位十六进制字，共 307,200 个值。输入和 Golden 与上述仓库文件哈希一致。运行 `python -B tools/verify_preproc_sim_capture.py` 可将这三路记录逐位对照仓库 Golden；此数据出自 Icarus 仿真，**不是板端 DMA 输出**。
+
 日志中核心 `673804 cycles` 和适配器加核心 `788884 cycles` 是测试平台的仿真周期；按 100 MHz 换算的时长不是板端 DMA、缓存和完整预处理延迟。
 
 复现流程见 [复现指南](../report/reproduction_zh.md) 第 2、3 节：先恢复保留大小写的 A 快照，再用 Python/NumPy 生成测试向量，使用 Icarus 运行 `tools/run_verification.py`。生成的 `vectors/` 和 `build/` 应位于独立目录。源文件与参考张量的哈希应先核验。
