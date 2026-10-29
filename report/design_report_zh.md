@@ -1,6 +1,6 @@
 # EagleEye Z035 摄像头辅助观察系统——设计报告
 
-**状态：提交整理稿。**已有内容依据仓库源码、工具报告、实板日志及 A 的现场确认编写；已有实际 CPU/FPGA 预处理 A/B 耗时记录；同一固定输入及同算法的输出对比、团队分工和最终发布版本仍待补充或确认。 本报告对应仓库 `original/eagleeye_z035.zip` 中的 Eyes 板级版本；不把独立 V2/V3 卷积实验当作该系统已经集成的功能。
+**状态：提交整理稿。**已有内容依据仓库源码、工具报告、实板日志及 A 的现场确认编写；已有实际 CPU/FPGA 预处理 A/B 耗时记录；同一固定输入及同算法的输出对比与最终发布版本仍待补充或确认；A、B、C 的主要职责按团队确认记录。 本报告对应仓库 `original/eagleeye_z035.zip` 中的 Eyes 板级版本；不把独立 V2/V3 卷积实验当作该系统已经集成的功能。
 
 ## 1. 背景、目标和范围
 
@@ -76,14 +76,18 @@ Fovea AXI-Lite、预处理 IP、四路预处理 DMA 和视频 VDMA 的地址，�
 
 ### 2.2 团队分工与接口
 
-以下按本地团队分工草案及后续交接整理为**职责范围**，不是未经确认的个人代码归属或工作量统计。早期草案面向 AX7020；本报告只将其职责划分用于说明 Z035 项目的组织方式，最终贡献请团队确认。
+按团队确认的 A、B、C 职责，并结合原仓库四个分支的源码整理。分工说明用于归纳主要工作范围；集成过程中具体文件可能由多人协作，不能仅凭分支名称推断每个文件的唯一作者。
 
-| 角色 | 分工范围 | 当前可查交接与边界 |
+| 角色 | 主要分工 | 源码与当前系统边界 |
 |---|---|---|
-| A：板级与视频/Fovea | 视频输入输出、ROI/显示通路、工程集成及板端测试 | Eyes 工程和构建见 `build/full_rebuild_20261027/`；A 回传的 BIT 和启动串口见 `report/board_reproduced_20261028_zh.md`。六项功能已由 A 现场确认正常 |
-| B：模型与目标感知 | PicoDet 人体检测的模型、推理与人体框接口核对 | `data/model.nb`、`src/ps/` 及 `report/b_detection_integration_20261027.md`；当前 Z035 包未提供跨遮挡稳定 target_id。足球 YOLO 资料是独立参考路线，不能当成当前程序 |
-| C：注意力、调度与接口 | 对人体框做目标选择、ROI 请求与系统接口适配 | `src/picodet_c_candidate/` 和 `sim/picodet_c_candidate/`；有主机/QEMU 测试及用户转述的现场反馈，尚无该候选的完整实板运行日志 |
-| 团队与 AI 协作 | 需求拆分、接口核对、构建/测试和交付资料整理；实板操作与结论由团队核验 | `report/ai_collaboration_record.md` 是整理稿，不是完整原始聊天；模型、第三方 IP 作者与授权待补充 |
+| A：视频、Fovea 与板级集成 | 摄像头输入、VDMA 和视频显示；ROI 局部画布、插值放大、视频模式控制、Fovea 接口及板级工程集成。 | 原 [a-fovea](https://github.com/Zyl-stack/EagleEye_C_Attention_Sim/tree/729a8d05a01ecac1b97351dfc5d1d6654294f304) 分支包含 `video_mode_switch_top.v`、`bilinear_scaler_rgb_top.v`、`fovea_axil_ctrl.v` 和摄像头/VDMA 软件。当前 Z035 版本以本仓库 Eyes 源码和 A 的上板资料为准；A 已确认六项功能正常。 |
+| B：PicoDet 人体检测 | 负责 PicoDet 模型与 ARM/Paddle-Lite 推理，产生人体检测框及置信度，供后续关注区域选择使用。 | 当前 Z035 路线的模型与程序见 [`data/model.nb`](../data/model.nb) 和 [`src/ps/`](../src/ps/)；[预处理 A/B 记录](preproc_ab_20261028_zh.md)中两组 PicoDet 推理均在 ARM。原 [b-detection](https://github.com/Zyl-stack/EagleEye_C_Attention_Sim/tree/a4d9226b401c878c6a83a6e520966f997262b492) 分支中的足球 YOLO、目标跟踪及 `EE_B_TARGET_STREAM_V1` 是独立参考路线，不能说该分支就是当前板上的 PicoDet 程序，也不能把 YOLO 的 PLAYER/BALL 结果当作当前系统实测。 |
+| C：注意力与 ROI 调度 | 接收人体目标信息，计算关注度并选择目标；处理保持、切换、ROI 平滑及向 A 的 Fovea 控制接口发出请求。 | 原 [c-attention](https://github.com/Zyl-stack/EagleEye_C_Attention_Sim/tree/e91d713a5b42153d29f7b80ad53ae6709c656716) 分支包含 `attention_score.c`、`attention_scheduler.c`、`bc_adapter.c`、`roi_smoother.c` 和 `a_fovea_adapter.c`。当前 PicoDet+C 独立候选见 [`src/picodet_c_candidate/`](../src/picodet_c_candidate/readme.md)；A 已确认该候选上板功能正常。分支中足球场景的其他功能不自动等同于当前板端已经部署。 |
+| 团队与 AI 协作 | 需求拆分、接口核对、构建测试与交付资料整理；现场上板由团队执行与确认。 | [AI 协作记录](ai_collaboration_record.md)为整理稿，不是完整对话逐字稿；第三方模型和 IP 需注明来源和授权。 |
+
+原 [main](https://github.com/Zyl-stack/EagleEye_C_Attention_Sim/tree/d1253a65f09451d2c48cffbc70d22d12bba3003a) 分支的 `src/main.c` 使用模拟目标数据串联注意力、调度、运动预测与事务状态，属于 PC 软件模拟，不能直接作为当前 Z035 实板证据。本仓库的 `reference/github_a_fovea/`、`reference/github_b_detection/`、`reference/github_c_attention/` 保存了对应参考快照；原仓库链接的可访问范围由其权限决定。
+
+当前板端 PicoDet 输出 PERSON 人体框；原足球 YOLO 路线可输出 PLAYER/BALL 并通过其跟踪模块形成目标流。**两条路线的模型、接口和验证范围分开记录**。当前 AttentionPolicy 中的本地匹配 ID 不能当作跨遮挡稳定追踪 ID。C 侧候选的上板功能采用 A 的现场确认；仓库中的 AttentionPolicy 原始应用日志属于另一应用归档，不能混作该候选的原始日志。
 
 在 `src/ps/src/fovea_roi.hpp` 的 AttentionPolicy 示例中，五项分数依次以 3、1、3、2、3 相乘后求和；这些是人体目标选择策略参数，不表示球参与评分，也不证明数值经准确率或跟踪稳定性实验最优。独立 C 候选应以自己的源码和配置为准。
 
