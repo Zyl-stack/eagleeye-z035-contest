@@ -2,6 +2,8 @@
 
 本页把已核验文件、A 的现场确认和不同程序的日志分开记录。当前团队确认使用 PicoDet 人体检测；原仓库的足球 YOLO 是独立参考路线，不作为当前上板模型。
 
+团队后续反馈，另一台机器上的 AX7020 交付说明将同哈希模型描述为官方 PicoDet-XS 320 COCO LCNet 导出后转为 Paddle-Lite ARM，且未由团队训练或量化；不同的 PicoDet-S 416 训练记录不对应此文件。该机器文件本次无法独立读取，权重授权仍待确认，见[第三方来源](third_party_sources_zh.md)。
+
 ## 已有实测组合
 
 A 的上板交接及预处理 A/B 实测说明使用以下组合：
@@ -19,6 +21,7 @@ A 的上板交接及预处理 A/B 实测说明使用以下组合：
 ## 其他已有版本，不能混用证据
 
 - 原 GridPolicy 稳定应用归档的可执行文件 SHA256 为 `a16025dacfb8f02cee60a82b8c236e32319f724514baa50a0898b2c189f18aea`，源码重编身份见 [`src/ps_as_built/readme_provenance_zh.md`](../src/ps_as_built/readme_provenance_zh.md)。原资料是该历史版本记录，不代表它是本次 A/B 测试程序。
+- 团队反馈 AX7020 早期交付为 JPEG 测试图程序，较新的交接版本使用 OV5640 摄像头与 VDMA；现有相关日志为 QEMU 离线记录，不能作为 AX7020 实板演示证据。这与上表 A 已确认的 Z035 板端功能是不同平台和记录，不能互相替代。
 - 独立 PicoDet+C 候选的本地交叉编译 ELF SHA256 为 `1421b51bb95c448fe8ed244a21aff300d13156ecbf02ef9bde4b7b4a5c9a19f5`；A 已确认该候选上板功能正常。AttentionPolicy 的原始日志对应上表的另一个 ELF，不能混作 C 候选原始日志，见 [`src/picodet_c_candidate/readme.md`](../src/picodet_c_candidate/readme.md)。
 - 2026-10-28 干净克隆复现的新 BIT SHA256 为 `7dd0f6ac95d9b8e5f3c62db6707ea8ddad0130bbd23ec0c9cb17faaf413ada70`；其配置数据与 A 测试的 BIT 一致、整文件哈希不同。该新文件没有单独上板记录，见 [复现记录](clean_reproduction_20261028_zh.md)。
 
