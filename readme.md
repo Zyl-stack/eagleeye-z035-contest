@@ -4,6 +4,8 @@
 
 本仓库整理自 `eagleeye_z035` 本地交付目录，包含 Z035 摄像头视频、FPGA 预处理、PicoDet ARM 推理、ROI 和舵机相关代码及现有证据。**本次整理和上传不等于重新完成综合或板端验收。**
 
+按比赛要求查找源码、报告与验证记录，请先查看 [比赛材料与证据索引](report/contest_evidence_index_zh.md)。
+
 | 目录 | 内容 |
 |---|---|
 | `src/` | RTL、IP、FPGA 工程源、PS 应用源码 |
