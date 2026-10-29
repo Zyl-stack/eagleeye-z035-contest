@@ -4,7 +4,7 @@
 
 | 项目 | 已有 | 尚需完成 |
 |---|---|---|
-| 工程与代码 | Z035 Eyes RTL、BD、XDC、IP、PicoDet 应用、C 候选和 Linux 固定源码；原快照与 A 增量均可哈希核验 | A/B/C 主要分工已按团队确认记录；仍需确认最终演示版本及具体版本对应关系；若足球检测列为实际参赛功能，需补齐其最终模型及板端链路，不能把 PERSON 模型冒充 PLAYER/BALL |
+| 工程与代码 | Z035 Eyes RTL、BD、XDC、IP、PicoDet 应用、C 候选和 Linux 固定源码；原快照与 A 增量均可哈希核验 | A/B/C 主要分工及 [实测版本](release_identity_zh.md)已记录；仍需确认最终演示应用选择及具体版本对应关系，并核对 [第三方许可](third_party_sources_zh.md)；若足球检测列为实际参赛功能，需补齐其最终模型及板端链路，不能把 PERSON 模型冒充 PLAYER/BALL |
 | 仿真 | 预处理五类帧及适配器、AXI-Lite、舵机 RTL；C 主机与 QEMU | Lanczos 旧逐像素日志有 768 个错误，需确认测试版本并解决或如实保留失败 |
 | 硬件实现 | A 快照使用完整构建入口完成综合、实现、BIT 和 XSA，报告见 `build/full_rebuild_20261027/` | 12 项输入和 33 项输出延迟缺失；8 项 Methodology Critical Warning 和 CDC Critical 分类尚需核查。已约束时序通过不等于板端安全或功能通过 |
 | 可复现构建 | A 快照恢复、Vivado 全流程入口、Paddle-Lite 依赖、固定 Linux 源码及配置 | Vivado 和 PetaLinux 2022.2 工具链/sysroot 需自行准备；重建内核与历史镜像哈希不同；rootfs 与现场镜像一致性未证明 |

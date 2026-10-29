@@ -57,3 +57,5 @@ A 提供的稳定版源码、Paddle-Lite 构建依赖和修订 Vivado Tcl 可从
 2026-10-28 从 GitHub 干净克隆的独立复现结果、构建日志和证据范围见 [干净复现记录](report/clean_reproduction_20261028_zh.md)。
 
 比赛材料入口：[设计报告](report/design_report_zh.md) · [硬件接口表](report/hardware_interfaces_zh.md) · [告警说明](report/warning_review_zh.md) · [提交检查](report/submission_check_20261028_zh.md)。
+
+版本与来源核对：[实测版本身份](report/release_identity_zh.md) · [第三方来源与授权](report/third_party_sources_zh.md)。
