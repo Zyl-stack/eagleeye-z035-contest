@@ -26,8 +26,8 @@
 
 | 类别 | 文件 |
 |---|---|
-| A 的早期复现与交接 | [复现检查表](a_repro_checklist_20261027.md) · [复现状态](a_repro_status_20261027.md) · [补充结果](a_supplement_results_20261027.md) |
-| B 检测参考路线 | [足球检测联调说明](b_detection_integration_20261027.md)，与当前 PicoDet 路线区分。 |
+| 早期工程复现 | [复现检查表](a_repro_checklist_20261027.md) · [复现状态](a_repro_status_20261027.md) · [补充结果](a_supplement_results_20261027.md) |
+| 检测参考路线 | [足球检测联调说明](b_detection_integration_20261027.md)，与当前 PicoDet 路线区分。 |
 | 早期板端记录 | [历史板端证据](board_evidence_20261027.md) · [历史计时说明](board_measurements.md) |
 | 提交核查 | [检查表](submission_check_20261028_zh.md) · [早期核查](submission_audit.md) · [现场证据范围](field_evidence_needed_zh.md) |
 | 原始说明和草稿 | [英文报告草稿](design_report_draft.md) · [原始报告目录说明](../original/source_report_readme.txt) · [原始项目说明](source_readme.md) · [原始文件哈希](source_sha256sums.txt) |

@@ -1,14 +1,9 @@
 # 可复用技能索引
 
-原工程快照保持原样；以下链接使用仓库中实际的小写文件名。若原文中的路径依赖大小写，请先解压 `original/eagleeye_z035.zip` 还原原始目录。
+所有 Skill 已按用途合并整理，请查看 [技能包目录与使用说明](readme.md)：
 
-| 项目 | 用途与使用方法 | 已验证范围和失效条件 |
-|---|---|---|
-| [FP32 预处理 Golden](preproc-fp32-golden/readme.md) | 对同一帧的参考与实际张量进行逐值/容差比较 | `sim/host_preproc.log` 为比较器主机测试；模型格式变化、DMA 未完成或缓存未同步时不能当作有效板端结果 |
-| [ROI 复判控制](roi-review-control/readme.md) | 检查视频暂停、鼠标与 ROI 控制合同 | `sim/host_roi.log` 为合同检查器测试；不证明具体板卡外设行为 |
-| [PYNQ Overlay 与 DMA 示例](pynq-overlay-dma/readme.md) | 核验身份、受控访问寄存器、DMA/cache 顺序 | 模拟对象测试；尚未验证真实 PYNQ 板卡、DMA 状态和故障恢复 |
-| [B 交接的 11 项 Skill](b_team_20261029/readme.md) | 视频回归、预处理核验、ARM 部署、检测流、ROI 和工程发布等 | 已有主机测试及历史案例；具体范围见各项说明，足球检测和 AX7020 案例不等同于当前 Z035 实测 |
+- 视频与硬件验证：AXI 视频流、张量 Golden、VDMA、ROI 控制和 PYNQ 示例。
+- 检测与决策：检测流接口、小目标跟踪、ROI 消融和请求事务。
+- 构建与交付：ARMv7、PetaLinux/XSA、HLS 移植及发布核验。
 
-这些方法不是已验证的通用 PYNQ Overlay，也不表示 V2/V3 卷积加速器已集成到此版本。证据缺口见 `report/submission_audit.md`。
-
-脱离原工程的合成示例和退出码记录见 [复用测试](../sim/skill_portability_20261028.txt)。独立 HWH 检查支持其他模块名与地址；团队目前没有 PYNQ 实板及真实外部工程验证资料，本项按模拟候选提交，不要求队友重复提供不存在的材料。
+各项的适用范围、示例、验证状态和失效条件见对应说明；[验证记录](validation.md)与[经验来源](evidence.md)保留了历史案例的证据边界。

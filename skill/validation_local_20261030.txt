@@ -1,5 +1,7 @@
-B Skill 交接整理与本机核验
+技能整理与本机核验（历史记录）
 日期：2026-10-30
+
+以下为整理前的执行路径；技能目录后来已合并，当前命令见 skill/readme.md。测试结果和原始归档仍予保留。
 
 原始 ZIP：eagleeye_skills_20261029_v1.zip
 SHA256：972f1caebdc25bdb9b2c0a9d4deaef41faea2b1cad1734ff5c998bf04f756d7a

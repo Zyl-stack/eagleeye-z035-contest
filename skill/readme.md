@@ -1,22 +1,49 @@
 # EagleEye 可复用技能包
 
-这些是从 Z035 EagleEye 已完成工作中提炼的**方法、校验脚本与参考源码**，不是另一份可直接烧录的 BOOT 镜像。每项有自己的适用范围、用法、已验证效果和停止条件。
+本目录汇集项目开发中形成的验证工具、工作流、提示词和案例模板。按需要选择对应项目，将器件、模型、尺寸和接口替换为自己的实际配置；各项 README 或 `skill.md` 中列有使用方法、经验来源和失效条件。
 
-| Skill | 主要产物 | 已验证边界 |
-| --- | --- | --- |
-| [`preproc-fp32-golden`](preproc-fp32-golden/readme.md) | FP32 NCHW 全张量比较器、五类帧与 DMA/cache 验收流程 | 五类帧 RTL 仿真通过；另一次[独立板端固定输入](../report/preproc_board_golden_20261029_zh.md)逐位一致，BIT 哈希未核实 |
-| [`roi-review-control`](roi-review-control/readme.md) | 自动/暂停/鼠标复判状态契约、XSA 端口和地址校验器 | 主机合同测试通过；A 已确认摄像头、显示及 ROI 等六项功能上板正常 |
-| [`pynq-overlay-dma`](pynq-overlay-dma/readme.md) | Overlay 文件身份核验、寄存器白名单、简单 DMA 与缓存示例 | 仅模拟对象离线验证；尚无 PYNQ 实板或其他真实工程验证 |
-| [B 交接的 11 项 Skill](b_team_20261029/readme.md) | 视频、张量、部署、检测流、ROI 和可复现发布等工作流与工具 | 各项按原交接记录区分主机、仿真、历史资料和未验证内容；当前 Z035 实板结果以对应证据为准 |
+## 视频与硬件验证
 
-使用前先复制到自己的项目，替换示例器件、视频尺寸、时钟、地址和引脚；不要把 Eclipse/Vivado 缓存或板卡专属 BOOT 当作可移植文件。独立 V2/R3 实验曾在开发板上完成 conv43/44 Golden（单次加 20 次重复共 21/21）和固定输入推理测试，见[历史实板证据](../report/board_evidence_20261027.md)。这不能证明 V2/R3 已集成到当前 Eyes 系统或完整视频检测实现 FPGA 卸载；卷积加速器不属于上述 Skill；当前 Eyes 系统不是 PYNQ Overlay。新增 PYNQ 示例是独立候选，不代表当前系统已使用 PYNQ。
+| Skill | 作用 |
+|---|---|
+| [AXI 视频流回归](01-axi-video-regression/skill.md) | 检查握手、反压、RGB 锁步、帧边界与逐像素 Golden。 |
+| [FP32 预处理 Golden](preproc-fp32-golden/readme.md) | 比较预处理张量，包含示例和板端验证记录。 |
+| [张量预处理一致性](02-tensor-preprocess-golden/skill.md) | 检查 FP32 格式、张量布局、数值误差和固定输入契约。 |
+| [VDMA 帧快照](05-vdma-frame-snapshot/skill.md) | 梳理帧缓冲、同步、缓存和新鲜度的检查方法。 |
+| [ROI 复判控制](roi-review-control/readme.md) | 核对暂停、鼠标、ROI 及硬件接口合同。 |
+| [PYNQ Overlay 与 DMA](pynq-overlay-dma/readme.md) | Overlay、寄存器访问、DMA 与缓存一致性示例；目前为模拟对象验证。 |
 
-上表前三项提供 `examples/` 和离线测试、标准库 Python 命令及问题来源、验证和失效边界；示例数据是人为构造的主机测试，不是板端测量。复现方式和验证记录见各自说明及 [Skill 验证记录](../sim/skill_examples_20261028.txt)。B 的 11 项以其独立索引和测试记录为准。
+## 检测与决策
 
-为保留原始工程快照的可追溯性，更新前的 Skill 说明及 ROI 检查器原件另存于 `original/skill_snapshot/`，完整原始归档仍为 `original/eagleeye_z035.zip`。现行可使用版本在本目录中。
+| Skill | 作用 |
+|---|---|
+| [检测流接口合同](06-detection-stream-contract/skill.md) | 检查目标框、坐标、ID、尺寸与时间基准。 |
+| [小目标跟踪回归](07-small-object-tracking-regression/skill.md) | 设计遮挡、小目标与跟踪错误的回归评估。 |
+| [ROI 消融评估](08-roi-ablation-evaluation/skill.md) | 使用配对实验比较不同 ROI 处理方式。 |
+| [ROI 请求事务](09-roi-transaction-integration/skill.md) | 检查请求关联、目标身份和过期结果处理。 |
 
-## 脱离工程复用和 PYNQ 边界
+## 构建与交付
 
-两项 Skill 可分别复制到空目录，使用自身的 `examples/` 和 Python 标准库运行；详见各目录 README。独立 HWH 和另一种张量形状的合成示例用于检查不同接口命名、地址及数据形状，不是来自其他真实项目。脱离工程的实际运行记录见 [本次复用测试](../sim/skill_portability_20261028.txt)。
+| Skill | 作用 |
+|---|---|
+| [ARMv7 推理部署](03-armv7-inference-deploy/skill.md) | 核查 ELF、运行依赖和交叉部署边界。 |
+| [PetaLinux 与 XSA 重建](04-petalinux-xsa-rebuild/skill.md) | 核查工具环境、XSA 与 bitstream 身份和构建证据。 |
+| [HLS 跨平台移植](10-hls-cross-platform-port/skill.md) | 检查器件、接口和内存模型是否适合目标平台。 |
+| [可复现证据与发布](11-reproducible-evidence-release/skill.md) | 建立文件清单、版本绑定和发布核验流程。 |
 
-已有 PYNQ Overlay、寄存器、简单 DMA 与缓存的可复用示例，详见新 Skill；只在 PC 模拟对象验证；团队目前没有 PYNQ 实板或真实外部工程的验证资料，不要求队友重复提供不存在的材料。不能宣称硬件操作已通过或已获得比赛加分。
+## 使用与验证
+
+每项都有适用范围和验证边界。部分工具功能相近，但输入契约和输出有所不同，按任务选用即可。足球检测、AX7020 和历史工程案例仅作为可复用经验，不代表当前 Z035 系统已完成相同板端功能。
+
+从仓库根目录运行主要离线检查：
+
+```sh
+python -B -m unittest discover -s skill/tests -v
+python -B -m unittest discover -s skill/preproc-fp32-golden/tests -v
+python -B -m unittest discover -s skill/roi-review-control/tests -v
+python -B -m unittest discover -s skill/pynq-overlay-dma/tests -v
+```
+
+已有测试和来源见 [验证记录](validation.md)、[整理与复核记录](validation_local_20261030.txt)、[经验来源](evidence.md) 和 [Skill 复用测试](../sim/skill_portability_20261028.txt)。PYNQ 示例尚无实板或真实跨项目验证，不能把模拟结果写成实板结果。
+
+为符合比赛仓库命名要求，展开后的技能入口使用小写 `skill.md`。若需安装到要求大写入口 `SKILL.md` 的工具，请在自己的独立副本中改名，或从 [原始技能包](../original/b_skills_20261029_v1.zip)提取原始大小写版本。该归档保留了原始内容与清单，未在本次整理中删除。

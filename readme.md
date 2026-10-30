@@ -45,7 +45,7 @@ OV5640 摄像头 → FPGA 视频通路 / VDMA → HDMI 全景与局部显示
 | [`skill/`](skill/) | 可复用技能、示例和验证说明 |
 | [`report/`](report/) | 设计报告、AI 协作记录与证据索引 |
 | [`tools/`](tools/) | 完整性、复现产物与日志核验脚本 |
-| [`reference/`](reference/) | A/B/C 参考源码及 Linux 固定版本源码 |
+| [`reference/`](reference/) | 参考源码及 Linux 固定版本源码 |
 | [`original/`](original/) | 原工程和 A 增量快照，保留原文件大小写 |
 
 按比赛要求查找具体文件，请从 [比赛材料与证据索引](report/contest_evidence_index_zh.md) 开始。

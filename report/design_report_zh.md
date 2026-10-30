@@ -156,7 +156,7 @@ A 已提供同一开发板、应用、模型、输入尺寸及线程条件下的
 
 团队目前没有 PYNQ 实板和跨项目复用验证资料；PYNQ 示例按离线模拟候选展示，不作为需要队友补交的既有材料，也不声称已获得加分。
 
-`report/ai_collaboration_record.md` 为已有的协作整理稿，不是完整原始会话。`skill/index.md` 索引已有校验内容、PYNQ 模拟候选及 [B 交接的 11 项 Skill](../skill/b_team_20261029/readme.md)，记录各自的适用范围、使用方式、验证及失效条件；B 的足球检测和 AX7020 是独立参考案例。Lanczos 验证反馈与历史记录见 [验证说明](../sim/lanczos_legacy_readme.md)。完整提示词、回复、纠错轨迹和团队确认需另行补充。
+`report/ai_collaboration_record.md` 为已有的协作整理稿，不是完整原始会话。[技能索引](../skill/index.md)将视频、检测、ROI、构建及 PYNQ 相关技能按用途统一列出，记录各自适用范围、使用方式、验证及失效条件；足球检测和 AX7020 资料是独立参考案例。Lanczos 验证反馈与历史记录见 [验证说明](../sim/lanczos_legacy_readme.md)。完整提示词、回复、纠错轨迹和团队确认需另行补充。
 
 可复核的协作案例包括：针对板端 BusyBox 差异修订只读采集；从固定输入的 V2/R3 实测发现卸载比 ARM 慢，保留真实日志而不将局部 Golden 等同整网提速；依据团队要求仅移除 Lanczos 的独立 Skill 展示，保留旧测试及失败记录；A 回传启动串口后，将 U-Boot 至 Linux 登录与登录后的现场功能反馈分开。各案例的来源、纠错和局限见 `report/ai_collaboration_record.md` 和相关证据页面，不应把整理稿冒充完整聊天逐字稿。
 
