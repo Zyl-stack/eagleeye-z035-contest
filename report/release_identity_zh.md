@@ -16,7 +16,7 @@ A 的上板交接及预处理 A/B 实测说明使用以下组合：
 | AttentionPolicy 应用归档 | `linux_camera_smooth_trial_v7_20261013.tar.gz`，SHA256 `b41241dd9db598af66a6cb46d52c744c9b53a6c6461633823c1f62fbecdfdc59`，位于 `original/a_repro_delta_20261027.zip` 的 `eagleeye_z035/board/attention/`。归档内 `bin/paddle_person_live` SHA256 `785948413759d4478d8b99578da3a406f7d5870304756e386518fb6b4d73c57f`；[A/B 测试的身份记录](../board/measurements/preproc_ab_20261028/identity.sha256)与之相同。 |
 | PicoDet 模型 | [`data/model.nb`](../data/model.nb) SHA256 `7c8a381bb5ba4a6a3c5c2b3277fd2cfb6ba1f802ddffd854c73bf75e747bfff4`；与 Attention 应用归档内模型及 A/B 测试身份记录一致。 |
 
-上述应用日志和 A/B 测试证明的范围见 [应用证据](board_app_evidence_20261028_zh.md)和 [A/B 计时](preproc_ab_20261028_zh.md)。这些记录不证明当前板端张量与 Golden 一致；该对比仍无结果。
+上述应用日志和 A/B 测试证明的范围见 [应用证据](board_app_evidence_20261028_zh.md)和 [A/B 计时](preproc_ab_20261028_zh.md)。后续[独立固定输入板端 Golden](preproc_board_golden_20261029_zh.md)逐位通过，但本次 BOOT 哈希与上表不同，独立 BIT 哈希未核实，不能自动认定为上表组合的测试。
 
 ## 其他已有版本，不能混用证据
 

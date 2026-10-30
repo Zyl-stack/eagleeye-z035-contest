@@ -1,6 +1,6 @@
 # EagleEye Z035 摄像头辅助观察系统——设计报告
 
-**状态：提交整理稿。**已有内容依据仓库源码、工具报告、实板日志及 A 的现场确认编写；已有实际 CPU/FPGA 预处理 A/B 耗时记录；同一固定输入及同算法的输出对比与最终发布版本仍待补充或确认；A、B、C 的主要职责按团队确认记录。 本报告对应 Z035 Eyes 基线与 A 的后续上板交接；具体 BIT、应用和模型身份见 [版本说明](release_identity_zh.md)。不把独立 V2/V3 卷积实验当作该系统已经集成的功能。
+**状态：提交整理稿。**已有内容依据仓库源码、工具报告、实板日志及 A 的现场确认编写；已有 CPU/FPGA 预处理 A/B 耗时记录，以及一次[独立板端固定输入 Golden 对比](preproc_board_golden_20261029_zh.md)；两次测试的 BIT 身份关系和最终发布版本仍待确认。A、B、C 的主要职责按团队确认记录。 本报告对应 Z035 Eyes 基线与 A 的后续上板交接；具体 BIT、应用和模型身份见 [版本说明](release_identity_zh.md)。不把独立 V2/V3 卷积实验当作该系统已经集成的功能。
 
 评审可从 [比赛材料与证据索引](contest_evidence_index_zh.md)查看每项要求对应的源码、报告、原始日志和验证边界。
 
@@ -43,7 +43,7 @@
 | 特点 | 项目实现与证据 | 目前能说明的范围 |
 |---|---|---|
 | 全景观察与局部复判结合 | Eyes 视频通路保留全景显示，ROI 局部缩放用于观察；鼠标、按键和暂停/恢复控制见 `src/ps/` 和 `src/vivado/` | 工程和交互路径已有源码；A 已现场确认摄像头、人体检测、鼠标 ROI、按键、舵机和 HDMI 逐项功能正常。放大不能增加原图真实信息量 |
-| 预处理的软硬件划分 | PL 将 640×360 RGB888 转换为 320×320 FP32 NCHW，PS 负责 PicoDet 推理；`auto` 路径可退回 CPU。见 `src/ip_repo/preproc/` 和 `src/ps/src/paddle_person.cpp` | 五类帧离线 RTL 仿真与参考逐位一致；已有两种实际配置的板端计时，但本次板端张量对照未提供，CPU/FPGA 使用不同缩放算法 |
+| 预处理的软硬件划分 | PL 将 640×360 RGB888 转换为 320×320 FP32 NCHW，PS 负责 PicoDet 推理；`auto` 路径可退回 CPU。见 `src/ip_repo/preproc/` 和 `src/ps/src/paddle_person.cpp` | 五类帧离线 RTL 仿真一致；另一次独立板端固定输入 Golden 逐位一致，独立 BIT 身份未核实；A/B 计时的 CPU/FPGA 使用不同缩放算法 |
 | 人体框驱动注意力与 ROI | `src/ps/src/fovea_roi.hpp` 将区域、运动、接近、小目标和不确定度评分并限制目标切换；独立 `src/picodet_c_candidate/` 接入 C 注意力和 ROI 平滑 | 属于具体版本的软件策略；ID 为临时匹配，不能声称跨遮挡稳定追踪；C 候选的现场细节缺少日志 |
 | 可追溯验证和复现 | 保存输入、参考、RTL 日志、构建报告、BIT/XSA/HWH 与校验脚本；示例见 `sim/verification_zh.md` 和 `report/board_reproduced_20261028_zh.md` | 有助于复核指定产物；哈希、仿真和现场反馈各自有边界，不等同于系统精度或长期可靠性证明 |
 
@@ -105,6 +105,7 @@ Fovea AXI-Lite、预处理 IP、四路预处理 DMA 和视频 VDMA 的地址，�
 |---|---|---|
 | 预处理张量比较器 | `sim/host_preproc.log`：2 项主机测试通过 | 比较工具测试，不是当前系统板端 DMA 输出 |
 | 预处理 RTL 仿真 | `sim/preproc_iverilog_20261027.log`：五类帧及采集帧适配器联测逐位一致，每帧 307,200 值 | Icarus 10.3 仿真；不证明实板 DMA、缓存或整个视频系统 |
+| 预处理板端固定输入 | [独立板端 Golden](preproc_board_golden_20261029_zh.md)：307,200/307,200 个 FP32 值逐位一致 | 一次独立测试，BOOT 哈希已记录，独立 BIT 哈希和此前版本关系未核实；不证明摄像头帧新鲜度或整网精度 |
 | 舵机 PWM RTL 仿真 | `sim/servo_iverilog_20261027.log`：中心保持、周期、渐变及反向测试通过 | 离线 RTL 仿真，不证明实物舵机机械安全 |
 | ROI 硬件合同检查器 | `sim/host_roi.log`：1 项主机测试通过 | 检查器测试，不证明按键、鼠标和舵机实板功能 |
 | 预处理 IP 独立历史记录 | `sim/preproc_standalone_readme.md` 报告五类帧；六个 RTL/ROM 哈希见 `sim/preproc_standalone_rtl_sha256.txt` | 这是交接文档的历史结果，原始逐帧仿真日志未随本材料提供；不是整个 Eyes 系统的板端输出 |
@@ -137,7 +138,7 @@ A 已提供同一开发板、应用、模型、输入尺寸及线程条件下的
 
 这两种实际配置的预处理均值比为 **23.776 倍**，`1000 / 平均 total_ms` 比值为 **1.797 倍**，平均 `total_ms` 缩短约 44.3%。**两组采用不同缩放算法和不同摄像头帧**，不能当作同算法硬件加速比、固定输入逐值比较或精度相同的证明。`total_ms` 不包含之后的 ROI 控制和结果打印；VDMA 状态提示及 `freshness=unverified` 限制了对帧新鲜度和完整检测更新率的判断，不能将该 FPS 当作 HDMI 刷新率。
 
-历史 `board/attach_100.log` 的 CPU 记录和另一份 179 条 Attention 应用日志保留作独立背景，条件不完全相同，不与该 A/B 测试混算；见 [记录说明](board_measurements.md)。同一固定输入的板端张量与 Golden 对比目前无结果。
+历史 `board/attach_100.log` 的 CPU 记录和另一份 179 条 Attention 应用日志保留作独立背景，条件不完全相同，不与该 A/B 测试混算；见 [记录说明](board_measurements.md)。后续[独立板端固定输入 Golden](preproc_board_golden_20261029_zh.md)已通过，但不能作为这两组不同实时帧的逐帧配对或检测精度比较。
 
 | FPGA 构建记录 | LUT | FF | BRAM | DSP | WNS/WHS |
 |---|---:|---:|---:|---:|---|

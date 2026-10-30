@@ -4,7 +4,7 @@
 
 | Skill | 主要产物 | 已验证边界 |
 | --- | --- | --- |
-| [`preproc-fp32-golden`](preproc-fp32-golden/readme.md) | FP32 NCHW 全张量比较器、五类帧与 DMA/cache 验收流程 | 五类帧 RTL 仿真通过；本次版本板端张量对照尚缺 |
+| [`preproc-fp32-golden`](preproc-fp32-golden/readme.md) | FP32 NCHW 全张量比较器、五类帧与 DMA/cache 验收流程 | 五类帧 RTL 仿真通过；另一次[独立板端固定输入](../report/preproc_board_golden_20261029_zh.md)逐位一致，BIT 哈希未核实 |
 | [`roi-review-control`](roi-review-control/readme.md) | 自动/暂停/鼠标复判状态契约、XSA 端口和地址校验器 | 主机合同测试通过；A 已确认摄像头、显示及 ROI 等六项功能上板正常 |
 | [`pynq-overlay-dma`](pynq-overlay-dma/readme.md) | Overlay 文件身份核验、寄存器白名单、简单 DMA 与缓存示例 | 仅模拟对象离线验证；尚无 PYNQ 实板或其他真实工程验证 |
 
