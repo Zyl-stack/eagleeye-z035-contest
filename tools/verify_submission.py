@@ -28,6 +28,8 @@ def files():
             yield p
 
 def main():
+    compared = 0
+    archive_only = 0
     with zipfile.ZipFile(ROOT / 'original/eagleeye_z035.zip') as z:
         bad = z.testzip()
         if bad:
@@ -43,31 +45,33 @@ def main():
                 rel = 'report/source_readme.md'
             elif rel == 'sha256sums.txt':
                 rel = 'report/source_sha256sums.txt'
-            elif rel == 'skill/readme.md':
-                rel = 'original/source_skill_readme.txt'
             elif rel in (
+                'skill/readme.md',
                 'skill/preproc-fp32-golden/readme.md',
                 'skill/roi-review-control/readme.md',
                 'skill/roi-review-control/tests/test_check_hw_contract.py',
                 'skill/roi-review-control/tools/check_hw_contract.py',
+                'report/ai_collaboration_record.md',
+                'report/design_report_draft.md',
+                'report/readme.md',
             ):
-                rel = 'original/skill_snapshot/' + rel[len('skill/'):]
-            elif rel == 'report/ai_collaboration_record.md':
-                rel = 'original/source_ai_collaboration_record.txt'
-            elif rel == 'report/design_report_draft.md':
-                rel = 'original/source_design_report_draft.txt'
-            elif rel == 'report/readme.md':
-                rel = 'original/source_report_readme.txt'
+                # The original bytes remain in the CRC-checked archive;
+                # the displayed files have since been edited or replaced.
+                archive_only += 1
+                continue
             elif rel == 'skill/lanczos-2x-stream/build/xsim.log':
                 rel = 'sim/lanczos_legacy_xsim.txt'
             elif rel == 'skill/lanczos-2x-stream/sha256sums.txt':
                 rel = 'sim/lanczos_legacy_rtl_sha256.txt'
             elif rel.startswith('skill/lanczos-2x-stream/'):
                 # Preserved in the CRC-checked original archive, not displayed as a Skill.
+                archive_only += 1
                 continue
             target = ROOT / rel
             if not target.is_file() or hashlib.sha256(z.read(entry)).hexdigest() != digest(target):
                 raise ValueError('source mismatch: ' + entry.filename)
+            compared += 1
+        print('SOURCE_PASS compared=' + str(compared) + ' archive_only=' + str(archive_only))
     for name in ('github_a_fovea', 'github_b_detection', 'github_c_attention', 'github_linux_petalinux'):
         mirror = ROOT / 'reference' / name
         with zipfile.ZipFile(ROOT / 'original' / (name + '.zip')) as z:

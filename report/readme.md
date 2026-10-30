@@ -31,7 +31,7 @@
 | 检测参考路线 | [足球检测联调说明](b_detection_integration_20261027.md)，与当前 PicoDet 路线区分。 |
 | 早期板端记录 | [历史板端证据](board_evidence_20261027.md) · [历史计时说明](board_measurements.md) |
 | 提交核查 | [检查表](submission_check_20261028_zh.md) · [早期核查](submission_audit.md) · [现场证据范围](field_evidence_needed_zh.md) |
-| 原始说明和草稿 | [英文报告草稿](design_report_draft.md) · [原始报告目录说明](../original/source_report_readme.txt) · [原始项目说明](source_readme.md) · [原始文件哈希](source_sha256sums.txt) |
+| 原始说明和草稿 | [英文报告草稿](design_report_draft.md) · [原始项目说明](source_readme.md) · [原始文件哈希](source_sha256sums.txt)；早期说明保留在原工程归档中 |
 | 图和许可文件 | [`figures/`](figures/) · [`third_party/`](third_party/) |
 
-为保持原始证据和已有链接可追溯，本次整理没有删除或移动这些文件。当前设计报告仍是提交整理稿；未核实的授权、旧仿真记录及告警按各自证据范围说明。
+原工程归档和验证记录用于追溯来源。当前设计报告仍是提交整理稿；未核实的授权、旧仿真记录及告警按各自证据范围说明。

@@ -46,4 +46,4 @@ python -B -m unittest discover -s skill/pynq-overlay-dma/tests -v
 
 已有测试和来源见 [验证记录](validation.md)、[整理与复核记录](validation_local_20261030.txt)、[经验来源](evidence.md) 和 [Skill 复用测试](../sim/skill_portability_20261028.txt)。PYNQ 示例尚无实板或真实跨项目验证，不能把模拟结果写成实板结果。
 
-为符合比赛仓库命名要求，展开后的技能入口使用小写 `skill.md`。若需安装到要求大写入口 `SKILL.md` 的工具，请在自己的独立副本中改名，或从 [原始技能包](../original/b_skills_20261029_v1.zip)提取原始大小写版本。该归档保留了原始内容与清单，未在本次整理中删除。
+为符合比赛仓库命名要求，展开后的技能入口使用小写 `skill.md`。若需安装到要求大写入口 `SKILL.md` 的工具，请在自己的独立副本中改名。

@@ -34,4 +34,4 @@ python -B tools/verify_submission.py
 python -B -m unittest discover -s skill/tests -v
 ```
 
-原始技能包及其原清单保留在 [`original/`](../original/b_skills_20261029_v1.zip)；目录合并前的清单作为历史记录保留，不再代表当前完整技能目录。格式校验不证明工作流在新板卡上成功，保存的 Golden 不证明本次重新运行过 RTL。历史资源/时序、QEMU、训练和上板反馈的证据范围见 [经验来源](evidence.md)。迁移到新模型、工具版本、器件、坐标系或 PYNQ API 后，需按相应技能重新验证。
+技能材料已按用途统一整理在当前目录；格式校验不证明工作流在新板卡上成功，保存的 Golden 不证明本次重新运行过 RTL。历史资源/时序、QEMU、训练和上板反馈的证据范围见 [经验来源](evidence.md)。迁移到新模型、工具版本、器件、坐标系或 PYNQ API 后，需按相应技能重新验证。
