@@ -38,14 +38,19 @@
 4. PaddlePaddle. [PaddleDetection PicoDet 模型与部署说明，release/2.6](https://github.com/PaddlePaddle/PaddleDetection/blob/release/2.6/configs/picodet/README_en.md). 模型和 Paddle-Lite 部署资料。
 5. AMD. [Vitis Vision Library User Guide](https://docs.amd.com/r/en-US/Vitis_Libraries/vision/overview.html?contentId=tllvbqJ7TwA66BDW6JeAcw). 图像处理库功能参考；该页面不证明本项目直接调用了该库。
 
-### 1.3 可核查的设计特点
+### 1.3 四项可核查的设计贡献
 
-| 特点 | 项目实现与证据 | 目前能说明的范围 |
-|---|---|---|
-| 全景观察与局部复判结合 | Eyes 视频通路保留全景显示，ROI 局部缩放用于观察；鼠标、按键和暂停/恢复控制见 `src/ps/` 和 `src/vivado/` | 工程和交互路径已有源码；A 已现场确认摄像头、人体检测、鼠标 ROI、按键、舵机和 HDMI 逐项功能正常。放大不能增加原图真实信息量 |
-| 预处理的软硬件划分 | PL 将 640×360 RGB888 转换为 320×320 FP32 NCHW，PS 负责 PicoDet 推理；`auto` 路径可退回 CPU。见 `src/ip_repo/preproc/` 和 `src/ps/src/paddle_person.cpp` | 五类帧离线 RTL 仿真一致；另一次独立板端固定输入 Golden 逐位一致，独立 BIT 身份未核实；A/B 计时的 CPU/FPGA 使用不同缩放算法 |
-| 人体框驱动注意力与 ROI | `src/ps/src/fovea_roi.hpp` 将区域、运动、接近、小目标和不确定度评分并限制目标切换；独立 `src/picodet_c_candidate/` 接入 C 注意力和 ROI 平滑 | 属于具体版本的软件策略；ID 为临时匹配，不能声称跨遮挡稳定追踪；C 候选的现场细节缺少日志 |
-| 可追溯验证和复现 | 保存输入、参考、RTL 日志、构建报告、BIT/XSA/HWH 与校验脚本；示例见 `sim/verification_zh.md` 和 `report/board_reproduced_20261028_zh.md` | 有助于复核指定产物；哈希、仿真和现场反馈各自有边界，不等同于系统精度或长期可靠性证明 |
+以下贡献着重于本项目的系统组合和工程实现，不将 PicoDet、Lanczos 或第三方 IP 本身称为团队首创。各项证据和限制分别列出，独立 V2/V3 卷积实验不计入当前视频系统的功能结论。
+
+**一、视觉关注与机械眼协同。** 系统将关注区域与双路舵机动作联系起来，为屏幕上的 ROI 提供可观察的物理反馈。[`roi_servo_pwm.v`](../src/servo/roi_servo_pwm.v) 将 ROI 坐标映射为水平、垂直 PWM 目标，并设置中心、范围和渐变步进；暂停后也可通过鼠标调整 ROI。A 已确认鼠标 ROI、按键和舵机等功能正常，[舵机 RTL 仿真](../sim/servo_iverilog_20261027.log)覆盖中心、周期及渐变。该方案是视觉关注与机械动作协同的原型：舵机没有位置反馈闭环，现有记录也没有量化机械跟踪误差或响应延迟。
+
+**二、人体检测驱动的规则型注意力与 ROI 决策。** [`fovea_roi.hpp`](../src/ps/src/fovea_roi.hpp) 对 PicoDet 人体框进行筛选、去重和相邻推理结果的临时关联，并综合区域、运动、向画面中心接近、小目标和检测不确定度评分；保持次数与切换门槛用于减少目标频繁切换。选中的 ROI 可经过轨迹平滑，暂停时支持人工调整。处理流程为“人体框 → 候选关联 → 多因素评分 → 保持或切换 → ROI 平滑 → 视频观察与控制”。[Attention 应用日志](board_app_evidence_20261028_zh.md)保存了相应输出；权重是工程规则参数，不是训练得到的神经注意力；临时 ID 不代表跨遮挡稳定跟踪，不同应用版本的日志也不能混用。
+
+**三、面向视频 ROI 的 Lanczos 放大与资源约束设计。** PL 视频链路将 ROI、双线性/Lanczos 插值、显示模式及 OSD 组合，用于保留全景的同时观察局部；[模式选择源码](../src/vivado/eagleeye_7035_eyes.srcs/sources_1/imports/rtl/video_mode_switch_top.v)与 [Lanczos 系数 ROM](../src/vivado/eagleeye_7035_eyes.srcs/sources_1/imports/rtl/lanczos_coeff_2d_rom.v)可供复核。已有[整工程资源和时序记录](clean_reproduction_20261028_zh.md)与 A 对 HDMI 等功能正常的现场确认；这些不单独证明 Lanczos 每像素数值正确或资源节省比例。现有旧 [XSim 日志](../sim/lanczos_legacy_xsim.txt)报告 768 项错误，测试版本与当前 RTL 的对应关系未确认；尚无同功能、同器件和同约束的优化前后资源对照，因此不能声称“节省 67% DSP”或“当前 Lanczos 像素逐位通过”。
+
+**四、与 PicoDet 对接的 FPGA 预处理 IP。** PL 侧将 640×360 RGB888 输入经双线性缩放和归一化，形成 `1×3×320×320` FP32 NCHW 张量；数据经一路输入 DMA 和三路 R/G/B 输出 DMA 在 IP 与 DDR 之间搬运，PS 侧负责将张量交给 Paddle-Lite 并提供 CPU 回退。见[预处理源码](../src/ip_repo/preproc/)及[硬件接口表](hardware_interfaces_zh.md)。五类帧 RTL 仿真与 Golden 逐位一致；另一次[独立板端固定输入测试](preproc_board_golden_20261029_zh.md)中 307,200/307,200 个值逐位一致，本次独立 BIT 哈希未核实。[A/B 计时](preproc_ab_20261028_zh.md)中 CPU 双三次和 FPGA 双线性预处理的平均耗时分别为 416.960 ms、17.537 ms；由于算法及实时帧不同，这只是两种系统配置的计时，不能称为同算法加速比或整网精度对照。模型推理仍由 ARM 执行。
+
+作为配套工作，仓库还保存测试输入、参考张量、RTL 日志、构建报告、BIT/XSA/HWH 和核验脚本；见[比赛材料与证据索引](contest_evidence_index_zh.md)。这些证据分别覆盖指定产物、仿真或现场记录，不等同于长期稳定性证明。
 
 这些特点是已有部件的系统组合与实现方法，不代表 PicoDet、Lanczos 或厂商 IP 均为团队原创。第三方来源、本地许可文件和尚需确认的授权范围逐项见 [来源与授权核对](third_party_sources_zh.md)。
 
