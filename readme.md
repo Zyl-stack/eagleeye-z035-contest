@@ -1,63 +1,75 @@
-# EagleEye Z035 竞赛工程
+# EagleEye Z035：实时视频辅助观察系统
 
-**FPGA 工程工具版本：Xilinx Vivado 2022.2。**
+EagleEye 是一套基于 **Xilinx Zynq XC7Z035** 的视频辅助观察原型，面向快速运动场景，将摄像头视频、人体检测和局部观察结合在一起。系统保留全景画面，依据人体检测结果选择关注区域，并支持暂停、鼠标调整 ROI 和舵机控制，帮助使用者观察画面细节。
 
-本仓库整理自 `eagleeye_z035` 本地交付目录，包含 Z035 摄像头视频、FPGA 预处理、PicoDet ARM 推理、ROI 和舵机相关代码及现有证据。**本次整理和上传不等于重新完成综合或板端验收。**
+本项目使用 **Vivado 2022.2** 构建 FPGA 工程；人体检测使用 **PicoDet-XS 与 Paddle-Lite**，模型推理运行在 ARM 端。项目用于辅助观察，不是自动裁判系统。
 
-按比赛要求查找源码、报告与验证记录，请先查看 [比赛材料与证据索引](report/contest_evidence_index_zh.md)。
+## 系统功能
+
+- **实时视频**：OV5640 摄像头采集，经过 FPGA 视频链路与 VDMA，输出至 HDMI。
+- **FPGA 图像预处理**：将视频输入转换为 PicoDet 所需的 `1×3×320×320` FP32 NCHW 张量。
+- **人体检测与注意力**：ARM 端运行 PicoDet，依据人体框选择关注目标和 ROI。
+- **人工复判与控制**：支持画面暂停、鼠标调整 ROI、按键操作和双路舵机控制。
+
+```text
+OV5640 摄像头 → FPGA 视频通路 / VDMA → HDMI 全景与局部显示
+                         ↓
+                 FPGA 图像预处理 → ARM PicoDet 人体检测
+                                         ↓
+                          注意力选择 → ROI / 鼠标 / 舵机控制
+```
+
+系统原理、软硬件接口及团队分工见 [设计报告](report/design_report_zh.md) 和 [硬件接口表](report/hardware_interfaces_zh.md)。当前系统以 PicoDet 人体检测为准；仓库中的足球 YOLO 是独立参考路线，不代表已在当前 Z035 系统部署。
+
+## 验证与实现结果
+
+| 项目 | 已有结果 |
+|---|---|
+| 上板功能 | A 已确认摄像头、人体检测、鼠标 ROI、按键、舵机和 HDMI 功能正常；[上板记录](report/board_reproduced_20261028_zh.md)与[应用日志](report/board_app_evidence_20261028_zh.md)已保存。 |
+| 预处理板端 Golden | 一次独立固定输入测试中，**307,200 / 307,200 个 FP32 值**与参考逐位一致；[结果与复核方式](report/preproc_board_golden_20261029_zh.md)。 |
+| RTL 仿真 | 预处理五类输入、AXI-Lite 和舵机等测试记录见 [仿真与验证说明](sim/verification_zh.md)。 |
+| Vivado 构建 | 干净克隆后的独立构建生成 BIT/XSA：LUT 24,986、FF 28,246、BRAM36 303/500、DSP 49；已约束路径 WNS +0.608 ns、WHS +0.007 ns。[构建记录和报告](report/clean_reproduction_20261028_zh.md) |
+| 预处理计时 | 已有 CPU 与 FPGA 两组板端记录；两组使用不同缩放算法和不同实时帧，不能直接作为同算法加速比或精度对比。[测试条件与结果](report/preproc_ab_20261028_zh.md) |
+
+固定输入 Golden 使用独立测试程序，该次测试的独立 BIT 哈希未核实；它不能直接证明其他版本或整网精度。I/O 时序、CDC 和 VDMA 告警的现有记录及限制见 [告警说明](report/warning_review_zh.md)。独立 V2/R3 卷积实验不等同于当前 Eyes 系统已实现 FPGA 卷积卸载。
+
+## 仓库目录
 
 | 目录 | 内容 |
 |---|---|
-| `src/` | RTL、IP、FPGA 工程源、PS 应用源码 |
-| `sim/` | 仿真与验证材料 |
-| `build/` | 构建脚本与原实现报告 |
-| `board/` | 现有上板资料及历史日志 |
-| `data/` | 模型、测试输入与参考结果 |
-| `skill/` | 可复用技能与使用说明 |
-| `report/` | 设计报告材料、协作记录和待补证据 |
-| `original/eagleeye_z035.zip` | 原文件夹 226 个文件的完整快照，保留原大小写 |
-| `tools/` | 本仓库完整性与来源核验脚本 |
-| `reference/` | 独立的 A/B/C 和 Linux 分支参考源码及版本边界，不代表与主工程已联调 |
+| [`src/`](src/) | RTL、IP、FPGA 工程及 PS 应用源码 |
+| [`sim/`](sim/) | 仿真脚本、日志和验证说明 |
+| [`build/`](build/) | 构建脚本、综合与实现报告 |
+| [`board/`](board/) | 上板文件、实测日志和 Golden 对比数据 |
+| [`data/`](data/) | 模型、测试输入和参考结果 |
+| [`skill/`](skill/) | 可复用技能、示例和验证说明 |
+| [`report/`](report/) | 设计报告、AI 协作记录与证据索引 |
+| [`tools/`](tools/) | 完整性、复现产物与日志核验脚本 |
+| [`reference/`](reference/) | A/B/C 参考源码及 Linux 固定版本源码 |
+| [`original/`](original/) | 原工程和 A 增量快照，保留原文件大小写 |
 
-## 复现与大小写
+按比赛要求查找具体文件，请从 [比赛材料与证据索引](report/contest_evidence_index_zh.md) 开始。
 
-仓库中展开的文件名已转成小写以符合目录命名要求；工程脚本、约束和板端启动文件可能依赖原大小写，**不要直接使用小写副本重建或写卡**。请先按 [复现指南](report/reproduction_zh.md) 用 `tools/restore_a_repro.py` 恢复保留原始大小写的 A 快照，再使用 `build/build_full_vivado.tcl` 在新的独立输出目录构建。原始快照未被覆盖。
+## 获取与复现
+
+需要 Git LFS、Python 3.10+ 和 **Vivado 2022.2**；ARM/Linux 构建还需要匹配的 PetaLinux 交叉工具链、sysroot 和相应依赖。部分大文件通过 Git LFS 保存：
 
 ```sh
-python tools/verify_submission.py
+git lfs install
+git clone https://github.com/Zyl-stack/eagleeye-z035-contest.git
+cd eagleeye-z035-contest
+git lfs pull
+python -B tools/verify_submission.py
 ```
 
-工具检查仓库文件哈希、原快照 CRC、源文件数量及展开副本与原件的对应关系，不代替 Vivado 构建、仿真或板端验证。工程使用 Vivado 2022.2；匹配的 Paddle-Lite 库在 A 增量快照中，PetaLinux 交叉编译工具链和 sysroot 仍需外部准备。
+仓库中展开的文件名采用小写；原工程脚本和约束可能依赖原始大小写。请先按 [复现指南](report/reproduction_zh.md) 使用 `tools/restore_a_repro.py` 将原快照恢复到**新的独立目录**，再运行 `build/build_full_vivado.tcl`。不要直接使用小写副本重建或覆盖稳定 SD。
 
-## 实测和缺失材料
+已记录的干净克隆构建曾在布线阶段中断，随后从检查点续跑生成 BIT/XSA；具体命令、日志和验证范围见 [干净复现记录](report/clean_reproduction_20261028_zh.md)。文件哈希核验、仿真、上板记录分别证明不同内容。
 
-`board/` 同时包含历史资料，`build/independent_rebuild_20261027/` 包含独立重建报告。当前版本同条件性能数据、完整设计报告及部分验证证据仍需补充，见 `report/submission_audit.md`。历史日志不能直接称为本次构建结果；HDMI 刷新率也不等于检测更新 FPS。
+## 报告与技能包
 
-已找到的历史 ARM98 逐层计时及 V2/R3 Golden 和模型计时记录见 [实板证据补充](report/board_evidence_20261027.md)，可使用 `python tools/verify_field_evidence.py` 复核；它们不是当前视频版本的同条件实测。
+- [设计报告](report/design_report_zh.md) · [比赛材料与证据索引](report/contest_evidence_index_zh.md) · [版本身份](report/release_identity_zh.md)
+- [AI 协作记录](report/ai_collaboration_record.md) · [Skill 索引](skill/index.md) · [第三方来源与授权](report/third_party_sources_zh.md)
+- [预处理板端 Golden](report/preproc_board_golden_20261029_zh.md) · [CPU/FPGA 计时](report/preproc_ab_20261028_zh.md) · [复现指南](report/reproduction_zh.md)
 
-A 于 2026-10-28 提供了复现 BIT、实验 BOOT 和 U-Boot 至 Linux 登录的串口记录；BIT 哈希与独立构建结果一致。现场功能正常为 A 的反馈，证据边界见 [复现 BIT 的上板记录](report/board_reproduced_20261028_zh.md)。
-
-各项仿真与验证的输入、判据、日志、复现入口和待验证事项见 [仿真与验证说明](sim/verification_zh.md)。
-
-原材料含模型、第三方 IP、启动镜像及历史日志；当前仓库为私有。公开或比赛提交前需确认版权授权、路径中的个人信息和内容完整性。不要覆盖稳定 SD 卡。
-
-本次补充的材料及仍缺证据见 [提交核查](report/submission_audit.md)、[中文设计报告材料稿](report/design_report_zh.md)、[复现指南](report/reproduction_zh.md)、[技能索引](skill/index.md) 和 [A/B/C/Linux 参考说明](reference/readme.md)。完整 Linux 源码归档使用 Git LFS；克隆后需运行 `git lfs pull`。
-
-## 2026-10-27 A 复现补充
-
-A 提供的稳定版源码、Paddle-Lite 构建依赖和修订 Vivado Tcl 可从保留大小写的增量快照恢复，步骤与验证边界见 [A 复现补充](report/a_supplement_results_20261027.md)。原工程快照保持不变。
-
-## 足球 B→C 联调
-
-当前使用 PicoDet；足球 YOLO 与 ONNX 移植是独立参考路线。接口和 PC 样例验证见 [B 检测联调说明](report/b_detection_integration_20261027.md)。
-
-## PicoDet + C 候选
-
-独立候选源码、构建及现场反馈边界见 [PicoDet + C 候选说明](src/picodet_c_candidate/readme.md)。
-
-
-2026-10-28 从 GitHub 干净克隆的独立复现结果、构建日志和证据范围见 [干净复现记录](report/clean_reproduction_20261028_zh.md)。
-
-比赛材料入口：[设计报告](report/design_report_zh.md) · [硬件接口表](report/hardware_interfaces_zh.md) · [告警说明](report/warning_review_zh.md) · [提交检查](report/submission_check_20261028_zh.md)。
-
-版本与来源核对：[实测版本身份](report/release_identity_zh.md) · [第三方来源与授权](report/third_party_sources_zh.md)。
+PYNQ Skill 提供可复用示例并完成离线模拟测试，尚无 PYNQ 实板或真实跨项目验证。模型权重及部分第三方 IP 的使用与再分发授权仍需按 [来源与授权说明](report/third_party_sources_zh.md) 核对。
