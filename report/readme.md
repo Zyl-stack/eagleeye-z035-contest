@@ -9,7 +9,7 @@
 | [设计报告](design_report_zh.md) | 选题背景、设计贡献、系统原理、软硬件分工、验证、性能与复现。 |
 | [比赛材料与证据索引](contest_evidence_index_zh.md) | 按比赛要求查找源码、仿真、实现报告、板端资料和 Skill。 |
 | [复现指南](reproduction_zh.md) | 获取源码、恢复原始工程、Vivado 2022.2 构建及仿真步骤。 |
-| [AI 协作记录](ai_collaboration_record.md) | 已整理的协作、纠错和技能提炼案例；不是完整原始对话逐字稿。 |
+| [AI 协作记录](ai_collaboration_record.md) | 工程问题、真实会话摘录、纠错及验证案例；[会话证据索引](ai_collaboration_evidence_20261030.md)记录来源。 |
 | [技能包](../skill/index.md) | 可复用工具、使用方法、验证范围及限制。 |
 
 ## 主要验证和版本资料
