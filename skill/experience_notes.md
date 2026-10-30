@@ -2,7 +2,7 @@
 
 > 本文件保留早期整理时的项目说明；当前仓库已将全部技能合并，完整入口见 [技能包目录](readme.md)。仓库内展开文件使用小写 `skill.md`，如需安装到要求 `SKILL.md` 的工具，请在独立副本中恢复文件名。
 
-本包从“嵌赛”项目的 10 个可访问历史聊天（93 个回合）及当前聊天提炼，结合本地源码、测试、训练报告和交接材料编写。整理日期：2026-10-29。覆盖清单及证据见 [EVIDENCE.md](evidence.md)。无法读取的原始附件、未保存的串口记录不作为已验证事实。
+本包从“嵌赛”项目的 10 个可访问历史聊天（93 个回合）及当前聊天提炼，结合本地源码、测试、训练报告和工程材料编写。整理日期：2026-10-29。覆盖清单及证据见 [EVIDENCE.md](evidence.md)。无法读取的原始附件、未保存的串口记录不作为已验证事实。
 
 技能包保留的是可迁移的工作方法、提示词、检查步骤和校验工具。另一支队伍可替换器件、模型、分辨率、地址和接口表后使用；本项目参数仅作案例。模型、数据集、Paddle-Lite 库和完整工程不随本包重复分发。
 
@@ -17,10 +17,10 @@
 | [03-armv7-inference-deploy](03-armv7-inference-deploy/skill.md) | 模型可在 PC 跑，ARM 板上加载失败 | ELF 检查脚本、分阶段移植与 QEMU 验证流程 | Cortex-A9 QEMU 已跑通；速度须板测 |
 | [04-petalinux-xsa-rebuild](04-petalinux-xsa-rebuild/skill.md) | XSA、bitstream、系统镜像版本混用 | XSA/外部 bitstream 校验脚本、环境预检清单 | 硬件匹配与环境阻塞有记录；不声称镜像已构建 |
 | [05-vdma-frame-snapshot](05-vdma-frame-snapshot/skill.md) | 推理期间摄像头覆盖 DDR，出现撕裂或旧帧 | 缓冲所有权、时间界限、cache 排查与时延拆分 | 实现及离线运行有记录；真实 DMA 所有权须实测 |
-| [06-detection-stream-contract](06-detection-stream-contract/skill.md) | B→C 坐标、速度、帧率和 ID 语义不一致 | 独立流校验器、旧流显式尺寸覆盖、时间基准模板 | STREAM_INFO 与实际视频 metrics 可核验 |
+| [06-detection-stream-contract](06-detection-stream-contract/skill.md) | 检测与注意力接口的坐标、速度、帧率和 ID 语义不一致 | 独立流校验器、旧流显式尺寸覆盖、时间基准模板 | STREAM_INFO 与实际视频 metrics 可核验 |
 | [07-small-object-tracking-regression](07-small-object-tracking-regression/skill.md) | 小球漏检、目标预算挤掉球、遮挡后 ID 变化 | 两类数据审计、场景回归矩阵、分块检测评价 | 训练/真实视频 PC 测试；非板上实时指标 |
 | [08-roi-ablation-evaluation](08-roi-ablation-evaluation/skill.md) | 无法证明插值方式对识别的真实影响 | 配对实验模板、UNKNOWN 指标、负结果写法 | 400 个配对 ROI；Lanczos 并未全面优于双线性 |
-| [09-roi-transaction-integration](09-roi-transaction-integration/skill.md) | 分类返回到错误目标、旧结果覆盖新请求 | 三 ID 匹配、语义适配、故障注入与交接模板 | 12 帧软件闭环及过期结果拒绝报告 |
+| [09-roi-transaction-integration](09-roi-transaction-integration/skill.md) | 分类返回到错误目标、旧结果覆盖新请求 | 三 ID 匹配、语义适配、故障注入与接口模板 | 12 帧软件闭环及过期结果拒绝报告 |
 | [10-hls-cross-platform-port](10-hls-cross-platform-port/skill.md) | 将上游 FPGA 后端误当可直接部署的 Zynq 工程 | 仓库职责图、寄存器/内存迁移表、器件支持预检 | Z100 在 set_part 阻塞；后续报告不虚填 |
 | [11-reproducible-evidence-release](11-reproducible-evidence-release/skill.md) | 报告、模型、源码和演示程序无法绑定版本 | manifest 工具、发布清单模板、证据分层和授权核对 | 多条模型路线与 Grid/Attention 案例；现场版仍须证据 |
 

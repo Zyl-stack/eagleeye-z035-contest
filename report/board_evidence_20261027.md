@@ -23,4 +23,4 @@
 
 运行 `python tools/verify_field_evidence.py` 可从收录数据复核帧数、硬件提交数、逐层统计、重复输出一致性及 V2 Golden/耗时摘要。核验脚本检查原始记录内部一致性，不代替现场验证，也不认定两次实验的配置相同。
 
-2026-10-28 后续补充已确认新复现 BIT 的哈希为 `b286f480...`，并保存 U-Boot 到 Linux 登录的串口原文；证据范围见 [复现 BIT 的上板记录](board_reproduced_20261028_zh.md)。后续收到 Attention 应用日志、A 对六项功能正常的确认、不同缩放算法的 [CPU/FPGA A/B 计时](preproc_ab_20261028_zh.md)，以及另一次[固定输入板端 Golden 对照](preproc_board_golden_20261029_zh.md)。原有 CPU 预处理记录见 [已有板端数据](board_measurements.md)，必要的现场证据见 [待补清单](field_evidence_needed_zh.md)。
+2026-10-28 后续补充已确认新复现 BIT 的哈希为 `b286f480...`，并保存 U-Boot 到 Linux 登录的串口原文；证据范围见 [复现 BIT 的上板记录](board_reproduced_20261028_zh.md)。后续收到 Attention 应用日志、现场对六项功能正常的确认、不同缩放算法的 [CPU/FPGA A/B 计时](preproc_ab_20261028_zh.md)，以及另一次[固定输入板端 Golden 对照](preproc_board_golden_20261029_zh.md)。原有 CPU 预处理记录见 [已有板端数据](board_measurements.md)，必要的现场证据见 [待补清单](field_evidence_needed_zh.md)。

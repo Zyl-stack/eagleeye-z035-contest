@@ -4,15 +4,15 @@
 
 ## 获取、源码与功能验证
 
-Git LFS 获取后 `tools/verify_submission.py` 通过（原始文件 226、仓库文件 991）；Linux 固定源码归档哈希核验通过，归档包含 78975 个条目；A 快照恢复核验通过，共 275 项。这里的文件数量对应上述源提交，后续仓库添加材料后会变化。
+Git LFS 获取后 `tools/verify_submission.py` 通过（原始文件 226、仓库文件 991）；Linux 固定源码归档哈希核验通过，归档包含 78975 个条目；工程快照恢复核验通过，共 275 项。这里的文件数量对应上述源提交，后续仓库添加材料后会变化。
 
-Skill 单元测试 5 项通过；PicoDet+C 主机测试及模拟无目标保持测试通过。足球 B 参考代码的 12 项 PC 测试及样例流解析通过，不能据此宣称它接入当前 Z035。上述主机测试没有单独留存本次原始日志，仅记录当次执行结果。
+Skill 单元测试 5 项通过；PicoDet 注意力主机测试及模拟无目标保持测试通过。足球检测参考代码的 12 项 PC 测试及样例流解析通过，不能据此宣称它接入当前 Z035。上述主机测试没有单独留存本次原始日志，仅记录当次执行结果。
 
 RTL 测试采用 Windows Python 3.13 / NumPy 2.5.2 生成和比较，WSL Ubuntu 20.04 中 Icarus Verilog 10.3 运行仿真；实际命令和输出见 [RTL 日志](../build/clean_rebuild_20261028/logs/rtl_simulation.log)及[历史运行器](../build/clean_rebuild_20261028/commands/rtl_runner_historical.txt)。五类输入各 307200 项与参考逐位一致，RGB 适配器、采集帧适配器与核心、AXI-Lite 和舵机 RTL 测试通过。本次是分环境执行，并未原样执行仓库 `run_verification.py`；标准单环境执行方式见[复现说明](reproduction_zh.md)。仿真不等于上板验证。
 
 ## 完整 Vivado 工程
 
-Vivado 2022.2 对恢复的 A 快照完成 BD 校验、26 个 IP 子综合及顶层综合、布局和物理优化。首次运行在布线期间中断；保留[首次日志](../build/clean_rebuild_20261028/logs/vivado_initial.log)和[中断前实现日志](../build/clean_rebuild_20261028/logs/vivado_impl_before_resume.log)。确认已完成物理优化检查点后，仅重置布线步骤并从检查点继续，生成 BIT 和 XSA；[续跑命令](../build/clean_rebuild_20261028/commands/vivado_resume_historical.txt)和[日志](../build/clean_rebuild_20261028/logs/vivado_resume.log)保留原貌。**因此这是干净输入、一次中断后续跑完成，并非一次不中断完成的全流程。**
+Vivado 2022.2 对恢复的 工程快照完成 BD 校验、26 个 IP 子综合及顶层综合、布局和物理优化。首次运行在布线期间中断；保留[首次日志](../build/clean_rebuild_20261028/logs/vivado_initial.log)和[中断前实现日志](../build/clean_rebuild_20261028/logs/vivado_impl_before_resume.log)。确认已完成物理优化检查点后，仅重置布线步骤并从检查点继续，生成 BIT 和 XSA；[续跑命令](../build/clean_rebuild_20261028/commands/vivado_resume_historical.txt)和[日志](../build/clean_rebuild_20261028/logs/vivado_resume.log)保留原貌。**因此这是干净输入、一次中断后续跑完成，并非一次不中断完成的全流程。**
 
 | 产物或结果 | 本次结果 |
 |---|---|
@@ -27,11 +27,11 @@ Vivado 2022.2 对恢复的 A 快照完成 BD 校验、26 个 IP 子综合及顶�
 
 原始[资源](../build/clean_rebuild_20261028/reports/impl_utilization.rpt)、[时序](../build/clean_rebuild_20261028/reports/timing_summary.rpt)、[DRC](../build/clean_rebuild_20261028/reports/drc.rpt)、[CDC](../build/clean_rebuild_20261028/reports/cdc.rpt)、[Methodology](../build/clean_rebuild_20261028/reports/methodology.rpt)报告供逐项核查。首次日志亦有 XDC 端口未匹配和管脚告警；必须结合设计与板级资料判断。WNS 为正并不能证明未约束的外部接口或所有 CDC 已闭环。
 
-本次 BIT 与 A 此前上板反馈使用的 [`b286f480...`](../board/reproduced_20261028/z100_top.bit) 文件长度相同，仅 7 字节不同，均位于生成日期/时间头部；从同步字 `aa995566` 起的配置数据逐字节一致，SHA256 均为 `02c426b197721f9b367e33d9047dfe3e7c84191c90227a18f45411bd94526076`。新旧 XSA 中 HWH 只有 TIMESTAMP 不同，XSA 内 BIT 均与对应独立 BIT 一致。**整文件哈希不同；本次新 BIT 尚未在板上验证。**此前 A 的反馈和串口范围见[既有板端记录](board_reproduced_20261028_zh.md)。
+本次 BIT 与现场此前上板反馈使用的 [`b286f480...`](../board/reproduced_20261028/z100_top.bit) 文件长度相同，仅 7 字节不同，均位于生成日期/时间头部；从同步字 `aa995566` 起的配置数据逐字节一致，SHA256 均为 `02c426b197721f9b367e33d9047dfe3e7c84191c90227a18f45411bd94526076`。新旧 XSA 中 HWH 只有 TIMESTAMP 不同，XSA 内 BIT 均与对应独立 BIT 一致。**整文件哈希不同；本次新 BIT 尚未在板上验证。**此前现场反馈和串口范围见[既有板端记录](board_reproduced_20261028_zh.md)。
 
 ## ARM 程序、QEMU 与 Linux
 
-使用本机外部 PetaLinux 2022.2 ARM 交叉工具链/sysroot、A 快照内 Paddle-Lite 静态库，独立编译 PicoDet+C 候选，ELF SHA256 `1421b51bb95c448fe8ed244a21aff300d13156ecbf02ef9bde4b7b4a5c9a19f5`；独立编译原 GridPolicy 稳定应用 SHA256 `a16025dacfb8f02cee60a82b8c236e32319f724514baa50a0898b2c189f18aea`，分别与已有候选和稳定记录一致。见[候选构建日志](../build/clean_rebuild_20261028/logs/app_build.log)和[稳定应用构建日志](../build/clean_rebuild_20261028/logs/stable_app_build.log)。链接警告指出静态应用调用 `dlopen` 时仍可能需要匹配的 glibc 动态库，不应仅凭静态 ELF 宣称运行环境零依赖。
+使用本机外部 PetaLinux 2022.2 ARM 交叉工具链/sysroot、工程快照内 Paddle-Lite 静态库，独立编译 PicoDet 注意力候选，ELF SHA256 `1421b51bb95c448fe8ed244a21aff300d13156ecbf02ef9bde4b7b4a5c9a19f5`；独立编译原 GridPolicy 稳定应用 SHA256 `a16025dacfb8f02cee60a82b8c236e32319f724514baa50a0898b2c189f18aea`，分别与已有候选和稳定记录一致。见[候选构建日志](../build/clean_rebuild_20261028/logs/app_build.log)和[稳定应用构建日志](../build/clean_rebuild_20261028/logs/stable_app_build.log)。链接警告指出静态应用调用 `dlopen` 时仍可能需要匹配的 glibc 动态库，不应仅凭静态 ELF 宣称运行环境零依赖。
 
 QEMU 固定 RGB、单线程 CPU 预处理用例产生 7 个人体框及 `C_ATTENTION` 请求；无目标用例也执行，见[检测](../build/clean_rebuild_20261028/logs/qemu_person.log)和[无目标](../build/clean_rebuild_20261028/logs/qemu_empty.log)日志。`hardware_commit=not_attempted`；QEMU 耗时和 FPS 不是实板速度，也不证明摄像头、HDMI、舵机或 FPGA 推理。
 

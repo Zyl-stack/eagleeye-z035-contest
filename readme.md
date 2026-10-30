@@ -25,7 +25,7 @@ OV5640 摄像头 → FPGA 视频通路 / VDMA → HDMI 全景与局部显示
 
 | 项目 | 已有结果 |
 |---|---|
-| 上板功能 | A 已确认摄像头、人体检测、鼠标 ROI、按键、舵机和 HDMI 功能正常；[上板记录](report/board_reproduced_20261028_zh.md)与[应用日志](report/board_app_evidence_20261028_zh.md)已保存。 |
+| 上板功能 | 现场已确认摄像头、人体检测、鼠标 ROI、按键、舵机和 HDMI 功能正常；[上板记录](report/board_reproduced_20261028_zh.md)与[应用日志](report/board_app_evidence_20261028_zh.md)已保存。 |
 | 预处理板端 Golden | 一次独立固定输入测试中，**307,200 / 307,200 个 FP32 值**与参考逐位一致；[结果与复核方式](report/preproc_board_golden_20261029_zh.md)。 |
 | RTL 仿真 | 预处理五类输入、AXI-Lite 和舵机等测试记录见 [仿真与验证说明](sim/verification_zh.md)。 |
 | Vivado 构建 | 干净克隆后的独立构建生成 BIT/XSA：LUT 24,986、FF 28,246、BRAM36 303/500、DSP 49；已约束路径 WNS +0.608 ns、WHS +0.007 ns。[构建记录和报告](report/clean_reproduction_20261028_zh.md) |
@@ -46,7 +46,7 @@ OV5640 摄像头 → FPGA 视频通路 / VDMA → HDMI 全景与局部显示
 | [`report/`](report/) | 设计报告、AI 协作记录与证据索引 |
 | [`tools/`](tools/) | 完整性、复现产物与日志核验脚本 |
 | [`reference/`](reference/) | 参考源码及 Linux 固定版本源码 |
-| [`original/`](original/) | 原工程和 A 增量快照，保留原文件大小写 |
+| [`original/`](original/) | 原工程和补充材料快照，保留原文件大小写 |
 
 按比赛要求查找具体文件，请从 [比赛材料与证据索引](report/contest_evidence_index_zh.md) 开始。
 

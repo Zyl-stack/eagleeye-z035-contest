@@ -18,7 +18,7 @@
 
 日志中核心 `673804 cycles` 和适配器加核心 `788884 cycles` 是测试平台的仿真周期；按 100 MHz 换算的时长不是板端 DMA、缓存和完整预处理延迟。
 
-复现流程见 [复现指南](../report/reproduction_zh.md) 第 2、3 节：先恢复保留大小写的 A 快照，再用 Python/NumPy 生成测试向量，使用 Icarus 运行 `tools/run_verification.py`。生成的 `vectors/` 和 `build/` 应位于独立目录。源文件与参考张量的哈希应先核验。
+复现流程见 [复现指南](../report/reproduction_zh.md) 第 2、3 节：先恢复保留大小写的工程快照，再用 Python/NumPy 生成测试向量，使用 Icarus 运行 `tools/run_verification.py`。生成的 `vectors/` 和 `build/` 应位于独立目录。源文件与参考张量的哈希应先核验。
 
 ## 舵机与 ROI 控制
 
@@ -34,15 +34,15 @@ cd skill/preproc-fp32-golden && python -B -m unittest discover -s tests -v
 cd ../roi-review-control && python -B -m unittest discover -s tests -v
 ```
 
-## PicoDet + C 独立候选
+## PicoDet 与注意力独立候选
 
-[主机测试摘要](picodet_c_candidate/host_results.txt)记录临时 ID、无目标、错误输入以及模拟 Hold 行为。ARM 用户态 QEMU 使用离线输入和 CPU 预处理：[人体框与 C 请求摘要](picodet_c_candidate/qemu_predictor.txt)和[无目标摘要](picodet_c_candidate/qemu_empty.txt)均标明测试范围。这里的请求不是 Fovea 硬件完成信号；临时 ID 不保证遮挡后稳定。构建入口和边界见 [候选说明](../src/picodet_c_candidate/readme.md)。
+[主机测试摘要](picodet_c_candidate/host_results.txt)记录临时 ID、无目标、错误输入以及模拟 Hold 行为。ARM 用户态 QEMU 使用离线输入和 CPU 预处理：[人体框与注意力请求摘要](picodet_c_candidate/qemu_predictor.txt)和[无目标摘要](picodet_c_candidate/qemu_empty.txt)均标明测试范围。这里的请求不是 Fovea 硬件完成信号；临时 ID 不保证遮挡后稳定。构建入口和边界见 [候选说明](../src/picodet_c_candidate/readme.md)。
 
 ## 旧 Lanczos 仿真及仍缺的验证
 
 [旧 XSim 原始记录](lanczos_legacy_xsim.txt)报告 1536 个输出像素中 768 处错误；旧测试台与当前 RTL 的版本、参考算法对应关系尚未确认。既不能声称当前 RTL 逐像素通过，也不能单凭旧日志断言当前实板像素错误。工程源码和记录保留，独立 Lanczos Skill 不再展示；详见 [说明](lanczos_legacy_readme.md)。
 
-现已收到 Attention 应用日志，A 已确认六项功能上板正常；后续[独立板端固定输入测试](../report/preproc_board_golden_20261029_zh.md)记录 307,200 个输出与 Golden 逐位一致，本次 BIT 哈希未核实。所需材料列于 [现场证据清单](../report/field_evidence_needed_zh.md)。[BIT 上板记录](../report/board_reproduced_20261028_zh.md)保存启动串口；[应用证据](../report/board_app_evidence_20261028_zh.md)记录了应用输出和 VDMA 警告，该次应用日志不包含实板张量比较。
+现已收到 Attention 应用日志，现场已确认六项功能上板正常；后续[独立板端固定输入测试](../report/preproc_board_golden_20261029_zh.md)记录 307,200 个输出与 Golden 逐位一致，本次 BIT 哈希未核实。所需材料列于 [现场证据清单](../report/field_evidence_needed_zh.md)。[BIT 上板记录](../report/board_reproduced_20261028_zh.md)保存启动串口；[应用证据](../report/board_app_evidence_20261028_zh.md)记录了应用输出和 VDMA 警告，该次应用日志不包含实板张量比较。
 
 ## 2026-10-28 脱离工程复用补充
 

@@ -1,6 +1,6 @@
 # EagleEye Z035 摄像头辅助观察系统——设计报告
 
-**状态：提交整理稿。**已有内容依据仓库源码、工具报告、实板日志及 A 的现场确认编写；已有 CPU/FPGA 预处理 A/B 耗时记录，以及一次[独立板端固定输入 Golden 对比](preproc_board_golden_20261029_zh.md)；两次测试的 BIT 身份关系和最终发布版本仍待确认。A、B、C 的主要职责按团队确认记录。 本报告对应 Z035 Eyes 基线与 A 的后续上板交接；具体 BIT、应用和模型身份见 [版本说明](release_identity_zh.md)。不把独立 V2/V3 卷积实验当作该系统已经集成的功能。
+**状态：提交整理稿。**已有内容依据仓库源码、工具报告、实板日志及现场确认编写；已有 CPU/FPGA 预处理 A/B 耗时记录，以及一次[独立板端固定输入 Golden 对比](preproc_board_golden_20261029_zh.md)；两次测试的 BIT 身份关系和最终发布版本仍待确认。团队主要职责按确认记录。 本报告对应 Z035 Eyes 基线与后续板端测试；具体 BIT、应用和模型身份见 [版本说明](release_identity_zh.md)。不把独立 V2/V3 卷积实验当作该系统已经集成的功能。
 
 评审可从 [比赛材料与证据索引](contest_evidence_index_zh.md)查看每项要求对应的源码、报告、原始日志和验证边界。
 
@@ -42,11 +42,11 @@
 
 以下贡献着重于本项目的系统组合和工程实现，不将 PicoDet、Lanczos 或第三方 IP 本身称为团队首创。各项证据和限制分别列出，独立 V2/V3 卷积实验不计入当前视频系统的功能结论。
 
-**一、视觉关注与机械眼协同。** 系统将关注区域与双路舵机动作联系起来，为屏幕上的 ROI 提供可观察的物理反馈。[`roi_servo_pwm.v`](../src/servo/roi_servo_pwm.v) 将 ROI 坐标映射为水平、垂直 PWM 目标，并设置中心、范围和渐变步进；暂停后也可通过鼠标调整 ROI。A 已确认鼠标 ROI、按键和舵机等功能正常，[舵机 RTL 仿真](../sim/servo_iverilog_20261027.log)覆盖中心、周期及渐变。该方案是视觉关注与机械动作协同的原型：舵机没有位置反馈闭环，现有记录也没有量化机械跟踪误差或响应延迟。
+**一、视觉关注与机械眼协同。** 系统将关注区域与双路舵机动作联系起来，为屏幕上的 ROI 提供可观察的物理反馈。[`roi_servo_pwm.v`](../src/servo/roi_servo_pwm.v) 将 ROI 坐标映射为水平、垂直 PWM 目标，并设置中心、范围和渐变步进；暂停后也可通过鼠标调整 ROI。现场已确认鼠标 ROI、按键和舵机等功能正常，[舵机 RTL 仿真](../sim/servo_iverilog_20261027.log)覆盖中心、周期及渐变。该方案是视觉关注与机械动作协同的原型：舵机没有位置反馈闭环，现有记录也没有量化机械跟踪误差或响应延迟。
 
 **二、人体检测驱动的规则型注意力与 ROI 决策。** [`fovea_roi.hpp`](../src/ps/src/fovea_roi.hpp) 对 PicoDet 人体框进行筛选、去重和相邻推理结果的临时关联，并综合区域、运动、向画面中心接近、小目标和检测不确定度评分；保持次数与切换门槛用于减少目标频繁切换。选中的 ROI 可经过轨迹平滑，暂停时支持人工调整。处理流程为“人体框 → 候选关联 → 多因素评分 → 保持或切换 → ROI 平滑 → 视频观察与控制”。[Attention 应用日志](board_app_evidence_20261028_zh.md)保存了相应输出；权重是工程规则参数，不是训练得到的神经注意力；临时 ID 不代表跨遮挡稳定跟踪，不同应用版本的日志也不能混用。
 
-**三、面向视频 ROI 的 Lanczos 放大与资源约束设计。** PL 视频链路将 ROI、双线性/Lanczos 插值、显示模式及 OSD 组合，用于保留全景的同时观察局部；[模式选择源码](../src/vivado/eagleeye_7035_eyes.srcs/sources_1/imports/rtl/video_mode_switch_top.v)与 [Lanczos 系数 ROM](../src/vivado/eagleeye_7035_eyes.srcs/sources_1/imports/rtl/lanczos_coeff_2d_rom.v)可供复核。已有[整工程资源和时序记录](clean_reproduction_20261028_zh.md)及 A 对 HDMI 等功能正常的现场确认。团队反馈该设计节省 67% DSP，逐像素验证通过；验证口径和历史记录见 [Lanczos 验证说明](../sim/lanczos_legacy_readme.md)。
+**三、面向视频 ROI 的 Lanczos 放大与资源约束设计。** PL 视频链路将 ROI、双线性/Lanczos 插值、显示模式及 OSD 组合，用于保留全景的同时观察局部；[模式选择源码](../src/vivado/eagleeye_7035_eyes.srcs/sources_1/imports/rtl/video_mode_switch_top.v)与 [Lanczos 系数 ROM](../src/vivado/eagleeye_7035_eyes.srcs/sources_1/imports/rtl/lanczos_coeff_2d_rom.v)可供复核。已有[整工程资源和时序记录](clean_reproduction_20261028_zh.md)及 HDMI 等功能正常的现场确认。团队反馈该设计节省 67% DSP，逐像素验证通过；验证口径和历史记录见 [Lanczos 验证说明](../sim/lanczos_legacy_readme.md)。
 
 **四、与 PicoDet 对接的 FPGA 预处理 IP。** PL 侧将 640×360 RGB888 输入经双线性缩放和归一化，形成 `1×3×320×320` FP32 NCHW 张量；数据经一路输入 DMA 和三路 R/G/B 输出 DMA 在 IP 与 DDR 之间搬运，PS 侧负责将张量交给 Paddle-Lite 并提供 CPU 回退。见[预处理源码](../src/ip_repo/preproc/)及[硬件接口表](hardware_interfaces_zh.md)。五类帧 RTL 仿真与 Golden 逐位一致；另一次[独立板端固定输入测试](preproc_board_golden_20261029_zh.md)中 307,200/307,200 个值逐位一致，本次独立 BIT 哈希未核实。[A/B 计时](preproc_ab_20261028_zh.md)中 CPU 双三次和 FPGA 双线性预处理的平均耗时分别为 416.960 ms、17.537 ms；由于算法及实时帧不同，这只是两种系统配置的计时，不能称为同算法加速比或整网精度对照。模型推理仍由 ARM 执行。
 
@@ -73,17 +73,17 @@
 1. 摄像头数据进入 Eyes 视频链路；PS 程序从视频帧获取检测输入。HDMI 显示与检测更新是不同速率，不能用画面刷新率代表检测 FPS。
 2. `src/ps/src/paddle_person.cpp` 中的预处理路径将 RGB 帧放入缓冲区，通过一条输入 DMA 和三条 R/G/B 输出 DMA 调用预处理 IP，再形成 NCHW 张量供 Paddle-Lite 使用；`auto` 模式下遇到不可用或运行错误会退回 CPU。源码中的寄存器和缓冲地址是该版本的配置示例，移植时必须对照 XSA、DT 和实际内存归属。
 3. PicoDet 输出人体框后，`src/ps/src/fovea_roi.hpp` 中的 AttentionPolicy 对目标筛选、临时匹配并产生 ROI。该本地 ID 不保证跨遮挡稳定；无目标时清除匹配历史并保留最近安全 ROI。
-4. 鼠标与 Fovea 请求经过已有控制路径，舵机由相应 PWM RTL 控制。独立 `src/picodet_c_candidate/` 还将人体框送入 C 注意力与调度逻辑；它与稳定 GridPolicy、后续 AttentionPolicy 是不同软件版本，不应混称同一程序。
+4. 鼠标与 Fovea 请求经过已有控制路径，舵机由相应 PWM RTL 控制。独立 `src/picodet_c_candidate/` 还将人体框送入注意力与调度逻辑；它与稳定 GridPolicy、后续 AttentionPolicy 是不同软件版本，不应混称同一程序。
 
-接口源码说明预期行为，不单独证明现场调用、DDR 一致性或舵机动作。A 已确认新候选上板功能正常；现已收到 AttentionPolicy 版本的登录后应用日志，但日志对应的应用归档与独立 PicoDet+C 候选 ELF 不同，不能用其代替后者的实板日志。详见 [应用证据](board_app_evidence_20261028_zh.md)。
+接口源码说明预期行为，不单独证明现场调用、DDR 一致性或舵机动作。现场已确认新候选上板功能正常；现已收到 AttentionPolicy 版本的登录后应用日志，但日志对应的应用归档与独立 PicoDet 注意力候选 ELF 不同，不能用其代替后者的实板日志。详见 [应用证据](board_app_evidence_20261028_zh.md)。
 
 ### 当前实测版本
 
-A 的实测组合采用 `b286f480...` BIT、PicoDet `model.nb` 和 AttentionPolicy 应用；PicoDet+C 候选的 A 现场功能确认单独记录。完整文件 SHA256、原始证据及不同应用的边界见 [版本说明](release_identity_zh.md)。最终演示若选用其他程序或镜像，应以其实际身份和记录更新该表。
+实测组合采用 `b286f480...` BIT、PicoDet `model.nb` 和 AttentionPolicy 应用；PicoDet 注意力候选的现场功能确认单独记录。完整文件 SHA256、原始证据及不同应用的边界见 [版本说明](release_identity_zh.md)。最终演示若选用其他程序或镜像，应以其实际身份和记录更新该表。
 
 ### 2.1 关键接口及版本
 
-Fovea AXI-Lite、预处理 IP、四路预处理 DMA 和视频 VDMA 的地址，已按 A 提供的 HWH 与 AttentionPolicy 应用源码逐项整理在 [硬件与软件接口表](hardware_interfaces_zh.md)。该表同时列出帧缓冲与预处理张量的尺寸、格式、源码出处，以及时钟与复位的核对边界。它描述特定版本的配置，不可直接当成其他板卡的地址或资源归属。
+Fovea AXI-Lite、预处理 IP、四路预处理 DMA 和视频 VDMA 的地址，已按现场提供的 HWH 与 AttentionPolicy 应用源码逐项整理在 [硬件与软件接口表](hardware_interfaces_zh.md)。该表同时列出帧缓冲与预处理张量的尺寸、格式、源码出处，以及时钟与复位的核对边界。它描述特定版本的配置，不可直接当成其他板卡的地址或资源归属。
 
 系统将连续视频接入、显示和格式转换放在 PL 侧，以匹配视频接口和固定数据流；PS 侧承担模型推理、目标选择及交互控制，便于复用 Paddle-Lite 和调整策略。该划分描述设计意图，当前没有同条件实验可据此量化证明端到端性能优势。
 
@@ -93,16 +93,16 @@ Fovea AXI-Lite、预处理 IP、四路预处理 DMA 和视频 VDMA 的地址，�
 
 | 角色 | 主要分工 | 源码与当前系统边界 |
 |---|---|---|
-| A：视频、Fovea 与板级集成 | 摄像头输入、VDMA 和视频显示；ROI 局部画布、插值放大、视频模式控制、Fovea 接口及板级工程集成。 | 原 [a-fovea](https://github.com/Zyl-stack/EagleEye_C_Attention_Sim/tree/729a8d05a01ecac1b97351dfc5d1d6654294f304) 分支包含 `video_mode_switch_top.v`、`bilinear_scaler_rgb_top.v`、`fovea_axil_ctrl.v` 和摄像头/VDMA 软件。当前 Z035 版本以本仓库 Eyes 源码和 A 的上板资料为准；A 已确认六项功能正常。 |
+| A：视频、Fovea 与板级集成 | 摄像头输入、VDMA 和视频显示；ROI 局部画布、插值放大、视频模式控制、Fovea 接口及板级工程集成。 | 原 [a-fovea](https://github.com/Zyl-stack/EagleEye_C_Attention_Sim/tree/729a8d05a01ecac1b97351dfc5d1d6654294f304) 分支包含 `video_mode_switch_top.v`、`bilinear_scaler_rgb_top.v`、`fovea_axil_ctrl.v` 和摄像头/VDMA 软件。当前 Z035 版本以本仓库 Eyes 源码和 A 的上板资料为准；现场已确认六项功能正常。 |
 | B：PicoDet 人体检测 | 负责 PicoDet 模型与 ARM/Paddle-Lite 推理，产生人体检测框及置信度，供后续关注区域选择使用。 | 当前 Z035 路线的模型与程序见 [`data/model.nb`](../data/model.nb) 和 [`src/ps/`](../src/ps/)；[预处理 A/B 记录](preproc_ab_20261028_zh.md)中两组 PicoDet 推理均在 ARM。原 [b-detection](https://github.com/Zyl-stack/EagleEye_C_Attention_Sim/tree/a4d9226b401c878c6a83a6e520966f997262b492) 分支中的足球 YOLO、目标跟踪及 `EE_B_TARGET_STREAM_V1` 是独立参考路线，不能说该分支就是当前板上的 PicoDet 程序，也不能把 YOLO 的 PLAYER/BALL 结果当作当前系统实测。 |
-| C：注意力与 ROI 调度 | 接收人体目标信息，计算关注度并选择目标；处理保持、切换、ROI 平滑及向 A 的 Fovea 控制接口发出请求。 | 原 [c-attention](https://github.com/Zyl-stack/EagleEye_C_Attention_Sim/tree/e91d713a5b42153d29f7b80ad53ae6709c656716) 分支包含 `attention_score.c`、`attention_scheduler.c`、`bc_adapter.c`、`roi_smoother.c` 和 `a_fovea_adapter.c`。当前 PicoDet+C 独立候选见 [`src/picodet_c_candidate/`](../src/picodet_c_candidate/readme.md)；A 已确认该候选上板功能正常。分支中足球场景的其他功能不自动等同于当前板端已经部署。 |
+| C：注意力与 ROI 调度 | 接收人体目标信息，计算关注度并选择目标；处理保持、切换、ROI 平滑及向 A 的 Fovea 控制接口发出请求。 | 原 [c-attention](https://github.com/Zyl-stack/EagleEye_C_Attention_Sim/tree/e91d713a5b42153d29f7b80ad53ae6709c656716) 分支包含 `attention_score.c`、`attention_scheduler.c`、`bc_adapter.c`、`roi_smoother.c` 和 `a_fovea_adapter.c`。当前 PicoDet+C 独立候选见 [`src/picodet_c_candidate/`](../src/picodet_c_candidate/readme.md)；现场已确认该候选上板功能正常。分支中足球场景的其他功能不自动等同于当前板端已经部署。 |
 | 团队与 AI 协作 | 需求拆分、接口核对、构建测试与交付资料整理；现场上板由团队执行与确认。 | [AI 协作记录](ai_collaboration_record.md)为整理稿，不是完整对话逐字稿；第三方模型和 IP 需注明来源和授权。 |
 
 原 [main](https://github.com/Zyl-stack/EagleEye_C_Attention_Sim/tree/d1253a65f09451d2c48cffbc70d22d12bba3003a) 分支的 `src/main.c` 使用模拟目标数据串联注意力、调度、运动预测与事务状态，属于 PC 软件模拟，不能直接作为当前 Z035 实板证据。本仓库的 `reference/github_a_fovea/`、`reference/github_b_detection/`、`reference/github_c_attention/` 保存了对应参考快照；原仓库链接的可访问范围由其权限决定。
 
-当前板端 PicoDet 输出 PERSON 人体框；原足球 YOLO 路线可输出 PLAYER/BALL 并通过其跟踪模块形成目标流。**两条路线的模型、接口和验证范围分开记录**。当前 AttentionPolicy 中的本地匹配 ID 不能当作跨遮挡稳定追踪 ID。C 侧候选的上板功能采用 A 的现场确认；仓库中的 AttentionPolicy 原始应用日志属于另一应用归档，不能混作该候选的原始日志。
+当前板端 PicoDet 输出 PERSON 人体框；原足球 YOLO 路线可输出 PLAYER/BALL 并通过其跟踪模块形成目标流。**两条路线的模型、接口和验证范围分开记录**。当前 AttentionPolicy 中的本地匹配 ID 不能当作跨遮挡稳定追踪 ID。注意力候选的上板功能采用现场确认；仓库中的 AttentionPolicy 原始应用日志属于另一应用归档，不能混作该候选的原始日志。
 
-在 `src/ps/src/fovea_roi.hpp` 的 AttentionPolicy 示例中，五项分数依次以 3、1、3、2、3 相乘后求和；这些是人体目标选择策略参数，不表示球参与评分，也不证明数值经准确率或跟踪稳定性实验最优。独立 C 候选应以自己的源码和配置为准。
+在 `src/ps/src/fovea_roi.hpp` 的 AttentionPolicy 示例中，五项分数依次以 3、1、3、2、3 相乘后求和；这些是人体目标选择策略参数，不表示球参与评分，也不证明数值经准确率或跟踪稳定性实验最优。独立注意力候选应以自己的源码和配置为准。
 
 ## 3. 验证、资源与时序
 
@@ -118,12 +118,12 @@ Fovea AXI-Lite、预处理 IP、四路预处理 DMA 和视频 VDMA 的地址，�
 | 历史实现资源 | `build/z100_top_utilization_placed.rpt`：LUT 24,789；FF 28,234；BRAM 303/500；DSP 49 | 历史 Eyes 布局报告，不是本次重新综合 |
 | 历史时序 | `build/z100_top_timing_summary_routed.rpt`：WNS +0.505 ns，WHS +0.051 ns | Vivado 2022.2，已约束路径；不能代替外设时序和稳定性验证 |
 | 独立 Eyes 重建 | `build/full_rebuild_20261027/`：LUT 24,986、FF 28,246、BRAM 303、DSP 49；WNS +0.608 ns、WHS +0.007 ns | 本机独立源码副本完成实现；12 项输入/33 项输出延迟缺失，CDC 和方法学仍有 Critical，不能代表完整时序签核 |
-| 复现 BIT 上板 | `report/board_reproduced_20261028_zh.md`；BIT SHA256 `b286f480a1e91282c4be813f35247deffbc6de7d35f31bb9a7984dd3c7fa4a15` | A 已确认六项功能上板正常；U-Boot 到 Linux 登录及 Attention 应用输出已有原始记录，未额外记录 FSBL 与逐项量化数据 |
-| Attention 应用上板日志 | `report/board_app_evidence_20261028_zh.md`：179 条 `ATTENTION`、FPGA 预处理和 `TIME` | 应用日志含 VDMA 错误位警告、帧新鲜度未验证；没有同输入板端张量与 Golden 对比，也不能代替独立 C 候选日志 |
-| PicoDet+C 候选上板反馈 | `src/picodet_c_candidate/readme.md` | A 已确认使用该候选上板功能正常；现有日志属于 AttentionPolicy，未将两者日志混用 |
+| 复现 BIT 上板 | `report/board_reproduced_20261028_zh.md`；BIT SHA256 `b286f480a1e91282c4be813f35247deffbc6de7d35f31bb9a7984dd3c7fa4a15` | 现场已确认六项功能上板正常；U-Boot 到 Linux 登录及 Attention 应用输出已有原始记录，未额外记录 FSBL 与逐项量化数据 |
+| Attention 应用上板日志 | `report/board_app_evidence_20261028_zh.md`：179 条 `ATTENTION`、FPGA 预处理和 `TIME` | 应用日志含 VDMA 错误位警告、帧新鲜度未验证；没有同输入板端张量与 Golden 对比，也不能代替独立注意力候选日志 |
+| PicoDet 注意力候选上板反馈 | `src/picodet_c_candidate/readme.md` | 现场已确认使用该候选上板功能正常；现有日志属于 AttentionPolicy，未将两者日志混用 |
 | 历史 CPU 预处理 | `board/attach_100.log` 和 `report/board_measurements.md` | 100 帧统计；不能与其他版本直接相除作为 FPGA 加速比 |
 
-工具报告与板端日志中的时钟、I/O、CDC 和 VDMA 告警逐项说明见 [告警说明](warning_review_zh.md)。这些记录与 A 已确认的六项功能正常并列保留，不互相替代。
+工具报告与板端日志中的时钟、I/O、CDC 和 VDMA 告警逐项说明见 [告警说明](warning_review_zh.md)。这些记录与现场已确认的六项功能正常并列保留，不互相替代。
 
 文件完整性检查见 `tools/verify_submission.py`。主机测试只覆盖工具自己的行为，不代表当前板端计算或完整系统 PASS。
 
@@ -131,7 +131,7 @@ Fovea AXI-Lite、预处理 IP、四路预处理 DMA 和视频 VDMA 的地址，�
 
 ## 4. 优化过程与性能、资源记录
 
-A 已提供同一开发板、应用、模型、输入尺寸及线程条件下的两组实板记录：CPU 使用双三次缩放，FPGA 使用双线性缩放；两组先后采集实时画面，每组 35 帧、剔除前 5 帧后统计 30 帧。PicoDet 模型推理在两组均由 ARM 执行。完整条件、原始日志和重算方法见 [预处理 A/B 实板结果](preproc_ab_20261028_zh.md)。
+现场已提供同一开发板、应用、模型、输入尺寸及线程条件下的两组实板记录：CPU 使用双三次缩放，FPGA 使用双线性缩放；两组先后采集实时画面，每组 35 帧、剔除前 5 帧后统计 30 帧。PicoDet 模型推理在两组均由 ARM 执行。完整条件、原始日志和重算方法见 [预处理 A/B 实板结果](preproc_ab_20261028_zh.md)。
 
 | 指标 | CPU 双三次 | FPGA 双线性 |
 |---|---:|---:|
@@ -158,13 +158,13 @@ A 已提供同一开发板、应用、模型、输入尺寸及线程条件下的
 
 `report/ai_collaboration_record.md` 为已有的协作整理稿，不是完整原始会话。[技能索引](../skill/index.md)将视频、检测、ROI、构建及 PYNQ 相关技能按用途统一列出，记录各自适用范围、使用方式、验证及失效条件；足球检测和 AX7020 资料是独立参考案例。Lanczos 验证反馈与历史记录见 [验证说明](../sim/lanczos_legacy_readme.md)。完整提示词、回复、纠错轨迹和团队确认需另行补充。
 
-可复核的协作案例包括：针对板端 BusyBox 差异修订只读采集；从固定输入的 V2/R3 实测发现卸载比 ARM 慢，保留真实日志而不将局部 Golden 等同整网提速；依据团队要求仅移除 Lanczos 的独立 Skill 展示，保留旧测试及失败记录；A 回传启动串口后，将 U-Boot 至 Linux 登录与登录后的现场功能反馈分开。各案例的来源、纠错和局限见 `report/ai_collaboration_record.md` 和相关证据页面，不应把整理稿冒充完整聊天逐字稿。
+可复核的协作案例包括：针对板端 BusyBox 差异修订只读采集；从固定输入的 V2/R3 实测发现卸载比 ARM 慢，保留真实日志而不将局部 Golden 等同整网提速；依据团队要求仅移除 Lanczos 的独立 Skill 展示，保留旧测试及失败记录；现场回传启动串口后，将 U-Boot 至 Linux 登录与登录后的现场功能反馈分开。各案例的来源、纠错和局限见 `report/ai_collaboration_record.md` 和相关证据页面，不应把整理稿冒充完整聊天逐字稿。
 
 ## 6. 复现
 
 1. 执行 `python tools/verify_submission.py` 验证当前仓库与原始快照。
-2. 先运行 `python tools/restore_a_repro.py --output <新目录>` 恢复 A 快照，再按 `report/reproduction_zh.md` 使用 `build/build_full_vivado.tcl` 运行 Vivado 2022.2。
-3. 按 `report/reproduction_zh.md` 及原快照 `sim/README.md`、`src/ps/build_arm.sh` 准备工具链、Paddle-Lite 依赖及测试输入。独立构建已覆盖 Eyes FPGA、稳定 ARM 应用和固定源码 Linux 内核；A 所提供的板测 BIT 与 2026-10-27 复现 BIT 哈希一致；2026-10-28 干净复现 BIT 的配置数据一致但整文件哈希不同。实验卡读回清单和现场运行文件独立哈希仍待核对。
+2. 先运行 `python tools/restore_a_repro.py --output <新目录>` 恢复工程快照，再按 `report/reproduction_zh.md` 使用 `build/build_full_vivado.tcl` 运行 Vivado 2022.2。
+3. 按 `report/reproduction_zh.md` 及原快照 `sim/README.md`、`src/ps/build_arm.sh` 准备工具链、Paddle-Lite 依赖及测试输入。独立构建已覆盖 Eyes FPGA、稳定 ARM 应用和固定源码 Linux 内核；现场记录提供的板测 BIT 与 2026-10-27 复现 BIT 哈希一致；2026-10-28 干净复现 BIT 的配置数据一致但整文件哈希不同。实验卡读回清单和现场运行文件独立哈希仍待核对。
 4. 上板验证应使用获准的独立介质，记录镜像身份、测试条件、原始输出和恢复情况；不覆盖稳定系统。
 
 提交材料逐项核查见 [提交检查](submission_check_20261028_zh.md)，详细缺口和证据边界见 `submission_audit.md`。

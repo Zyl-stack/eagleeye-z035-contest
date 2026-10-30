@@ -1,6 +1,6 @@
 # Eyes 实现的硬件与软件接口表
 
-本表对应 A 回传并确认功能正常的 `b286f480...` BIT 所配套的 [`system.hwh`](../board/reproduced_20261028/system.hwh) 与 `src/ps/src/` AttentionPolicy 源码；用于报告和版本核对，不是操作寄存器的指导。HWH 所列区间为地址空间分配，应用实际映射通常为 4 KiB。独立 PicoDet+C 候选的执行文件不同，需以其对应构建资料为准。
+本表对应现场回传并确认功能正常的 `b286f480...` BIT 所配套的 [`system.hwh`](../board/reproduced_20261028/system.hwh) 与 `src/ps/src/` AttentionPolicy 源码；用于报告和版本核对，不是操作寄存器的指导。HWH 所列区间为地址空间分配，应用实际映射通常为 4 KiB。独立 PicoDet 注意力候选的执行文件不同，需以其对应构建资料为准。
 
 | 模块 | HWH 分配的 AXI 地址区间（含两端） | 在现有程序中的用途 |
 |---|---|---|

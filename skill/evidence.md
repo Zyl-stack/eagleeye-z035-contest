@@ -12,11 +12,11 @@
 | 实现 PicoDet FPGA 图像预处理 IP | 01a14925-beb8-7d33-a67a-317beea43911 | 2 | 完整张量、FP32 Golden、源码重建、DDR 延迟边界 |
 | 梳理仓库并综合 XC7Z100 | 01a1384e-da44-7412-877b-d32951847fb4 | 10 | 仓库分工、HLS 迁移、器件与工具授权预检 |
 | 构建 PetaLinux 2022.2 镜像 | 01a11905-f068-7a22-bccd-aef23950cca8 | 5 | 宿主环境、ext4、工具版本、阻塞日志 |
-| 实现 AX7020 实时 PicoDet 推理 | 01a11192-e05f-7542-bab7-882dfe2da4f6 | 5 | VDMA 快照、硬件接管、QEMU 与板端区分 |
+| 实现 AX7020 实时 PicoDet 推理 | 01a11192-e05f-7542-bab7-882dfe2da4f6 | 5 | VDM工程快照、硬件接管、QEMU 与板端区分 |
 | 准备 AX7020 Paddle-Lite 人体检测 | 01a104f9-ae8d-7f92-8bfa-254815010327 | 2 | ARMv7hf、glibc、静态链接、模型转换 |
 | 搭建 AX7020 ONNX 单图推理 | 01a0ec5b-52fe-7d81-9dd7-608083c5be46 | 1 | 单图移植边界、letterbox、NMS、缺失产物 |
 | 梳理持球队员跟踪任务 | 01a0a436-6e99-7893-bfab-7c11cb61735d | 36 | 数据审计、小目标训练、真实视频、源尺寸/时间基准 |
-| 指导 GitHub 协作流程 | 01a08969-85e7-7eb2-8ad6-0a974caefa89 | 17 | 复用旧工程、字段换算、B/C 闭环与分支交接 |
+| 指导 GitHub 协作流程 | 01a08969-85e7-7eb2-8ad6-0a974caefa89 | 17 | 复用旧工程、字段换算、检测与注意力闭环与分支交接 |
 | 优化车载危险识别比赛方案 | 01a06618-1b7d-76b2-8064-1f871d716470 | 12 | 技术因果链、ROI 配对消融、训练与领域差异 |
 
 ## 证据案例
@@ -73,7 +73,7 @@ VOC2007 代理数据，训练 1200 ROI、验证 400 ROI、同一 TinyFoveaCNN。
 
 来源：`Qiansai/B_C_Integration/README.md`、`build/closed_loop_report.json` 及指导 GitHub 协作流程对话。
 
-旧 B 置信度 0..255，C 为 0..100；速度 Q8.8 与整数不同；OBSTACLE 不可直接转为 BICYCLE；区域枚举语义不同。现存 12 帧软件闭环报告为 PASS，正常结果接受、过期结果拒绝、request ID 唯一。输入为合成视频、软件 Lanczos 和 VOC 模型，未证明 FPGA ROI/板端闭环。
+旧检测流置信度为 0..255，注意力输入为 0..100；速度 Q8.8 与整数不同；OBSTACLE 不可直接转为 BICYCLE；区域枚举语义不同。现存 12 帧软件闭环报告为 PASS，正常结果接受、过期结果拒绝、request ID 唯一。输入为合成视频、软件 Lanczos 和 VOC 模型，未证明 FPGA ROI/板端闭环。
 
 ### E10：综合阻塞要定位在真实阶段
 
