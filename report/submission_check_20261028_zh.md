@@ -7,7 +7,7 @@
 | 要求 | 仓库现有内容 | 保留事项 |
 |---|---|---|
 | 工程与源码 | Eyes 源码、PicoDet 与注意力应用、原始源码快照及 Linux 固定源码；根目录和 `original/` 说明来源 | 已整理 [实测版本](release_identity_zh.md)和 [第三方来源/许可核对](third_party_sources_zh.md)；最终演示应用选择及未找到的权重和部分 IP 再分发授权仍需团队确认，原始源文件保留。 |
-| 仿真和正确性 | [仿真说明](../sim/verification_zh.md)与对应 Golden 和日志；另有[独立板端 Golden 对比](preproc_board_golden_20261029_zh.md) | 一次固定输入逐位通过；本次 BIT 独立哈希未核实。旧 Lanczos 测试报告失败，版本关系未核实。 |
+| 仿真和正确性 | [仿真说明](../sim/verification_zh.md)与对应 Golden 和日志；另有[独立板端 Golden 对比](preproc_board_golden_20261029_zh.md) | 一次固定输入逐位通过；本次 BIT 独立哈希未核实。Lanczos 历史独立工程通过日志和旧失败日志分别保留，与当前 Eyes 的版本关系尚未完整核实。 |
 | 资源与时序 | [干净复现记录](clean_reproduction_20261028_zh.md)保留 Vivado 日志、报告、BIT/XSA；[告警说明](warning_review_zh.md)按类型汇总 | WNS/WHS 为已约束路径结果；I/O、CDC 和方法学问题仍未闭环。 |
 | 上板及运行 | [启动证据](board_reproduced_20261028_zh.md)、[Attention 应用日志及现场六项功能确认](board_app_evidence_20261028_zh.md)，另有独立注意力候选现场功能确认 | 应用日志含 VDMA 警告与 `freshness=unverified`，不否定现场功能确认；已有 CPU/FPGA A/B 计时，但缩放算法和实时帧不同，见 [实板结果](preproc_ab_20261028_zh.md)。 |
 | 构建复现 | [复现步骤](reproduction_zh.md)、`build/build_full_vivado.tcl`、源码及归档校验脚本；干净克隆后从中断的检查点续跑生成 BIT/XSA | 所需 Vivado、交叉工具链、sysroot 和设备环境不全部随仓库提供；新内核与现场镜像二进制一致性未证明。 |

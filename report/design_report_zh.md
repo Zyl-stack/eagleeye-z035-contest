@@ -46,7 +46,9 @@
 
 **二、人体检测驱动的规则型注意力与 ROI 决策。** [`fovea_roi.hpp`](../src/ps/src/fovea_roi.hpp) 对 PicoDet 人体框进行筛选、去重和相邻推理结果的临时关联，并综合区域、运动、向画面中心接近、小目标和检测不确定度评分；保持次数与切换门槛用于减少目标频繁切换。选中的 ROI 可经过轨迹平滑，暂停时支持人工调整。处理流程为“人体框 → 候选关联 → 多因素评分 → 保持或切换 → ROI 平滑 → 视频观察与控制”。[Attention 应用日志](board_app_evidence_20261028_zh.md)保存了相应输出；权重是工程规则参数，不是训练得到的神经注意力；临时 ID 不代表跨遮挡稳定跟踪，不同应用版本的日志也不能混用。
 
-**三、面向视频 ROI 的 Lanczos 放大与资源约束设计。** PL 视频链路将 ROI、双线性/Lanczos 插值、显示模式及 OSD 组合，用于保留全景的同时观察局部；[模式选择源码](../src/vivado/eagleeye_7035_eyes.srcs/sources_1/imports/rtl/video_mode_switch_top.v)与 [Lanczos 系数 ROM](../src/vivado/eagleeye_7035_eyes.srcs/sources_1/imports/rtl/lanczos_coeff_2d_rom.v)可供复核。已有[整工程资源和时序记录](clean_reproduction_20261028_zh.md)及 HDMI 等功能正常的现场确认。团队反馈该设计节省 67% DSP，逐像素验证通过；验证口径和历史记录见 [Lanczos 验证说明](../sim/lanczos_legacy_readme.md)。
+**三、面向视频 ROI 的 Lanczos 放大与资源约束设计。** PL 视频链路将 ROI、双线性/Lanczos 插值、显示模式及 OSD 组合，用于保留全景的同时观察局部。固定 2× 放大利用整数与半像素相位的特点组织计算：整数相位直接取样，半像素相位利用系数对称性折叠计算；[模式选择源码](../src/vivado/eagleeye_7035_eyes.srcs/sources_1/imports/rtl/video_mode_switch_top.v)、[相位核心](../src/vivado/eagleeye_7035_eyes.srcs/sources_1/imports/rtl/lanczos_scaler_core3.v)和 [Q10 系数 ROM](../src/vivado/eagleeye_7035_eyes.srcs/sources_1/imports/rtl/lanczos_coeff_2d_rom.v)可供复核，更多结构说明见[技术材料](lanczos_fpga_brief_20261030.docx)。
+
+团队记录该设计节省约 67% DSP；目前没有随附的优化前后综合报告供独立重算。新增历史独立工程 XSim 日志分别记录单通道 768 个、RGB 1,536 个输出像素零错误；这些日志不直接证明当前 Eyes RTL 的逐像素结果。当前工程的[资源和时序记录](clean_reproduction_20261028_zh.md)、现场功能确认，以及各版[仿真记录的范围](../sim/lanczos_legacy_readme.md)分别保留。
 
 **四、与 PicoDet 对接的 FPGA 预处理 IP。** PL 侧将 640×360 RGB888 输入经双线性缩放和归一化，形成 `1×3×320×320` FP32 NCHW 张量；数据经一路输入 DMA 和三路 R/G/B 输出 DMA 在 IP 与 DDR 之间搬运，PS 侧负责将张量交给 Paddle-Lite 并提供 CPU 回退。见[预处理源码](../src/ip_repo/preproc/)及[硬件接口表](hardware_interfaces_zh.md)。五类帧 RTL 仿真与 Golden 逐位一致；另一次[独立板端固定输入测试](preproc_board_golden_20261029_zh.md)中 307,200/307,200 个值逐位一致，本次独立 BIT 哈希未核实。[A/B 计时](preproc_ab_20261028_zh.md)中 CPU 双三次和 FPGA 双线性预处理的平均耗时分别为 416.960 ms、17.537 ms；由于算法及实时帧不同，这只是两种系统配置的计时，不能称为同算法加速比或整网精度对照。模型推理仍由 ARM 执行。
 
@@ -115,6 +117,7 @@ Fovea AXI-Lite、预处理 IP、四路预处理 DMA 和视频 VDMA 的地址，�
 | ROI 硬件合同检查器 | `sim/host_roi.log`：1 项主机测试通过 | 检查器测试，不证明按键、鼠标和舵机实板功能 |
 | 预处理 IP 独立历史记录 | `sim/preproc_standalone_readme.md` 报告五类帧；六个 RTL/ROM 哈希见 `sim/preproc_standalone_rtl_sha256.txt` | 这是交接文档的历史结果，原始逐帧仿真日志未随本材料提供；不是整个 Eyes 系统的板端输出 |
 | Lanczos 源码来源 | `sim/host_lanczos_source.log`：7 个文件哈希匹配 | 不验证像素；原始旧 XSim 日志 `sim/lanczos_legacy_xsim.txt` 显示 768 项错误，不能写成 PASS |
+| Lanczos 历史独立仿真 | [单通道日志](../sim/lanczos_single_xsim_pass_legacy.txt)、[RGB 日志](../sim/lanczos_rgb_xsim_pass_legacy.txt) | 分别记录 768 和 1,536 个输出像素零错误；不等同于当前 Eyes RTL 同版本的逐像素验证 |
 | 历史实现资源 | `build/z100_top_utilization_placed.rpt`：LUT 24,789；FF 28,234；BRAM 303/500；DSP 49 | 历史 Eyes 布局报告，不是本次重新综合 |
 | 历史时序 | `build/z100_top_timing_summary_routed.rpt`：WNS +0.505 ns，WHS +0.051 ns | Vivado 2022.2，已约束路径；不能代替外设时序和稳定性验证 |
 | 独立 Eyes 重建 | `build/full_rebuild_20261027/`：LUT 24,986、FF 28,246、BRAM 303、DSP 49；WNS +0.608 ns、WHS +0.007 ns | 本机独立源码副本完成实现；12 项输入/33 项输出延迟缺失，CDC 和方法学仍有 Critical，不能代表完整时序签核 |

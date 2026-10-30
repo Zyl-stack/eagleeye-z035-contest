@@ -1,0 +1,20 @@
+Time resolution is 1 ps
+[TB] First valid output at time 1795000: data=0 xy=(0,0)
+[TB] Output[0] time=1795000 xy=(0,0) data=0 expected=0
+[TB] Output[1] time=1805000 xy=(1,0) data=8 expected=8
+[TB] Output[2] time=1815000 xy=(2,0) data=22 expected=22
+[TB] Output[3] time=1825000 xy=(3,0) data=35 expected=35
+[TB] Output[4] time=1835000 xy=(4,0) data=50 expected=50
+[TB] Output[5] time=1845000 xy=(5,0) data=66 expected=66
+[TB] Output[6] time=1865000 xy=(6,0) data=84 expected=84
+[TB] Output[7] time=1895000 xy=(7,0) data=103 expected=103
+[TB] All 192 input pixels from 1 frame(s) accepted; waiting for final output.
+============================================================
+[TB] Input size          : 16x12
+[TB] Output size         : 32x24
+[TB] Frames checked      : 1
+[TB] Pixels checked      : 768
+[TB] Pixel/control errors: 0
+[TB] PASS: golden pixels, clamp edges and AXI stalls all match.
+============================================================
+$finish called at time : 15875 ns : File "C:/Users/Dai tianhao/Desktop/lanczos project/lanczos_single channel/lanczos_single channel_1/lanczos_single channel_1.srcs/sources_1/imports/scaler_single_channel_fixed/tb_lanczos_scaler_top.v" Line 314

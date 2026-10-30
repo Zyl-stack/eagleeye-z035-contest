@@ -42,6 +42,8 @@ cd ../roi-review-control && python -B -m unittest discover -s tests -v
 
 [旧 XSim 原始记录](lanczos_legacy_xsim.txt)报告 1536 个输出像素中 768 处错误；旧测试台与当前 RTL 的版本、参考算法对应关系尚未确认。既不能声称当前 RTL 逐像素通过，也不能单凭旧日志断言当前实板像素错误。工程源码和记录保留，独立 Lanczos Skill 不再展示；详见 [说明](lanczos_legacy_readme.md)。
 
+另有历史独立测试工程的 [单通道](lanczos_single_xsim_pass_legacy.txt)和 [RGB](lanczos_rgb_xsim_pass_legacy.txt) XSim 日志，分别记录 768 和 1,536 个输出像素零错误。它们的测试工程源码未随本次材料提供，不能将结果直接套用于当前 Eyes RTL，也不能与上述失败日志混为同一次测试。[测试范围与来源](lanczos_legacy_readme.md)
+
 现已收到 Attention 应用日志，现场已确认六项功能上板正常；后续[独立板端固定输入测试](../report/preproc_board_golden_20261029_zh.md)记录 307,200 个输出与 Golden 逐位一致，本次 BIT 哈希未核实。所需材料列于 [现场证据清单](../report/field_evidence_needed_zh.md)。[BIT 上板记录](../report/board_reproduced_20261028_zh.md)保存启动串口；[应用证据](../report/board_app_evidence_20261028_zh.md)记录了应用输出和 VDMA 警告，该次应用日志不包含实板张量比较。
 
 ## 2026-10-28 脱离工程复用补充
