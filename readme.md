@@ -1,56 +1,58 @@
-# EagleEye｜让快速运动的画面看得更清楚
+# EagleEye Z035：实时视频辅助观察系统
 
-在体育运动中，有时候重要的细节只出现一瞬间：全景里的人物太小，想仔细看看某个区域，又不希望丢掉整幅画面的上下文。
+EagleEye 是一套基于 **Xilinx Zynq XC7Z035** 的视频辅助观察原型，面向快速运动场景，将摄像头视频、人体检测和局部观察结合在一起。系统保留全景画面，依据人体检测结果选择关注区域，并支持暂停、鼠标调整 ROI 和舵机控制，帮助使用者观察画面细节。
 
-EagleEye 是我们基于 **Xilinx Zynq XC7Z035** 做的一套视频辅助观察原型。它接入摄像头画面，在保留全景的同时展示感兴趣的局部区域；使用者也可以暂停画面，用鼠标调整观察位置。系统结合 PicoDet 人体检测和注意力选择，让关注区域能够随目标变化，并通过舵机提供机械动作反馈。
+本项目使用 **Vivado 2022.2** 构建 FPGA 工程；人体检测使用 **PicoDet-XS 与 Paddle-Lite**，模型推理运行在 ARM 端。项目用于辅助观察，不是自动裁判系统。
 
-这个项目面向辅助观察和复判，不代替裁判作出判断。
+## 系统功能
 
-## 它是怎么工作的？
-
-摄像头采集的视频经过 FPGA 视频链路，一路用于 HDMI 显示，一路经过图像预处理后送入 ARM 上的 PicoDet。程序根据检测到的人体框选择关注目标，再更新 ROI 和相关控制。
+- **实时视频**：OV5640 摄像头采集，经过 FPGA 视频链路与 VDMA，输出至 HDMI。
+- **FPGA 图像预处理**：将视频输入转换为 PicoDet 所需的 `1×3×320×320` FP32 NCHW 张量。
+- **人体检测与注意力**：ARM 端运行 PicoDet，依据人体框选择关注目标和 ROI。
+- **人工复判与控制**：支持画面暂停、鼠标调整 ROI、按键操作和双路舵机控制。
 
 ```text
-                       ┌→ HDMI 全景与局部画面
-摄像头 → FPGA 视频链路 ┤
-                       └→ FPGA 图像预处理 → ARM 人体检测
-                                                 ↓
-                               注意力选择 → ROI / 舵机控制
+OV5640 摄像头 → FPGA 视频通路 / VDMA → HDMI 全景与局部显示
+                         ↓
+                 FPGA 图像预处理 → ARM PicoDet 人体检测
+                                         ↓
+                          注意力选择 → ROI / 鼠标 / 舵机控制
 ```
 
-画面暂停后，可以通过鼠标调整 ROI，并通过按键控制显示。图像预处理在 FPGA 上完成；**PicoDet 模型推理运行在 ARM 端**。仓库中还保留了独立的卷积加速实验，但它不等同于当前视频系统已启用 FPGA 卷积推理。
+系统原理、软硬件接口及团队分工见 [设计报告](report/design_report_zh.md) 和 [硬件接口表](report/hardware_interfaces_zh.md)。当前系统以 PicoDet 人体检测为准；仓库中的足球 YOLO 是独立参考路线，不代表已在当前 Z035 系统部署。
 
-想了解接口和设计细节，可以直接看[设计报告](report/design_report_zh.md)和[硬件接口表](report/hardware_interfaces_zh.md)。
+## 验证与实现结果
 
-## 我们已经做到哪里？
+| 项目 | 已有结果 |
+|---|---|
+| 上板功能 | 现场已确认摄像头、人体检测、鼠标 ROI、按键、舵机和 HDMI 功能正常；[上板记录](report/board_reproduced_20261028_zh.md)与[应用日志](report/board_app_evidence_20261028_zh.md)已保存。 |
+| 预处理板端 Golden | 一次独立固定输入测试中，**307,200 / 307,200 个 FP32 值**与参考逐位一致；[结果与复核方式](report/preproc_board_golden_20261029_zh.md)。 |
+| RTL 仿真 | 预处理五类输入、AXI-Lite 和舵机等测试记录见 [仿真与验证说明](sim/verification_zh.md)。 |
+| Vivado 构建 | 干净克隆后的独立构建生成 BIT/XSA：LUT 24,986、FF 28,246、BRAM36 303/500、DSP 49；已约束路径 WNS +0.608 ns、WHS +0.007 ns。[构建记录和报告](report/clean_reproduction_20261028_zh.md) |
+| 预处理计时 | 已有 CPU 与 FPGA 两组板端记录；两组使用不同缩放算法和不同实时帧，不能直接作为同算法加速比或精度对比。[测试条件与结果](report/preproc_ab_20261028_zh.md) |
 
-- **整机功能**：现场已确认摄像头、人体检测、鼠标 ROI、按键、舵机和 HDMI 功能正常。[上板记录](report/board_reproduced_20261028_zh.md)和[应用日志](report/board_app_evidence_20261028_zh.md)已保存。
-- **预处理正确性**：一次独立固定输入的板端测试中，输出的 **307,200 个 FP32 值**与 Golden 逐位一致。[查看对比结果](report/preproc_board_golden_20261029_zh.md)。
-- **工程构建**：使用 Vivado 2022.2 完成独立工程构建并生成 BIT/XSA。资源使用为 LUT 24,986、FF 28,246、BRAM36 303/500、DSP 49；已约束路径 WNS 为 +0.608 ns、WHS 为 +0.007 ns。[查看构建记录](report/clean_reproduction_20261028_zh.md)。
-- **运行耗时**：已有 CPU 和 FPGA 预处理的板端计时记录。两组采用不同的缩放算法和实时画面，因此应作为两种配置的测试结果阅读，不能直接当作同算法加速比。[查看测试条件与数据](report/preproc_ab_20261028_zh.md)。
+固定输入 Golden 使用独立测试程序，该次测试的独立 BIT 哈希未核实；它不能直接证明其他版本或整网精度。I/O 时序、CDC 和 VDMA 告警的现有记录及限制见 [告警说明](report/warning_review_zh.md)。独立 V2/R3 卷积实验不等同于当前 Eyes 系统已实现 FPGA 卷积卸载。
 
-这些结果各有对应的测试条件：固定输入 Golden 来自独立测试程序，不能代替整条视频链的所有验证；构建时的外部 I/O、CDC 和 VDMA 告警也如实保留在[告警说明](report/warning_review_zh.md)中。
-
-## 仓库里有什么？
-
-如果是第一次看这个项目，建议从[设计报告](report/design_report_zh.md)开始；需要找比赛材料或具体证据时，可以查看[材料索引](report/contest_evidence_index_zh.md)。
+## 仓库目录
 
 | 目录 | 内容 |
-| --- | --- |
-| [`src/`](src/) | FPGA 工程、RTL、IP 和 ARM 应用源码 |
-| [`sim/`](sim/) | 仿真脚本、测试记录与说明 |
+|---|---|
+| [`src/`](src/) | RTL、IP、FPGA 工程及 PS 应用源码 |
+| [`sim/`](sim/) | 仿真脚本、日志和验证说明 |
 | [`build/`](build/) | 构建脚本、综合与实现报告 |
-| [`board/`](board/) | 上板文件、运行日志和板端对比数据 |
+| [`board/`](board/) | 上板文件、实测日志和 Golden 对比数据 |
 | [`data/`](data/) | 模型、测试输入和参考结果 |
-| [`skill/`](skill/) | 开发过程中整理的可复用工具与方法 |
-| [`report/`](report/) | 设计报告、复现说明与 AI 协作记录 |
-| [`tools/`](tools/) | 文件、构建产物和日志核验脚本 |
-| [`reference/`](reference/) | 参考源码和固定版本的 Linux 源码 |
-| [`original/`](original/) | 保留原始大小写的工程及材料快照 |
+| [`skill/`](skill/) | 可复用技能、示例和验证说明 |
+| [`report/`](report/) | 设计报告、AI 协作记录与证据索引 |
+| [`tools/`](tools/) | 完整性、复现产物与日志核验脚本 |
+| [`reference/`](reference/) | 参考源码及 Linux 固定版本源码 |
+| [`original/`](original/) | 原工程和补充材料快照，保留原文件大小写 |
 
-## 想自己复现？
+按比赛要求查找具体文件，请从 [比赛材料与证据索引](report/contest_evidence_index_zh.md) 开始。
 
-FPGA 工程使用 **Vivado 2022.2**。获取仓库需要 Git LFS；检查脚本需要 Python 3.10 或更新版本。
+## 获取与复现
+
+需要 Git LFS、Python 3.10+ 和 **Vivado 2022.2**；ARM/Linux 构建还需要匹配的 PetaLinux 交叉工具链、sysroot 和相应依赖。部分大文件通过 Git LFS 保存：
 
 ```sh
 git lfs install
@@ -60,14 +62,16 @@ git lfs pull
 python -B tools/verify_submission.py
 ```
 
-仓库中的展开文件使用小写命名，而原工程部分脚本和约束依赖原始大小写。请按照[复现指南](report/reproduction_zh.md)，先使用 `tools/restore_a_repro.py` 将原始快照恢复到**新的独立目录**，再运行 Vivado 构建脚本。ARM 和 Linux 构建还需要匹配的交叉工具链、sysroot 与依赖。
+仓库中展开的文件名采用小写；原工程脚本和约束可能依赖原始大小写。请先按 [复现指南](report/reproduction_zh.md) 使用 `tools/restore_a_repro.py` 将原快照恢复到**新的独立目录**，再运行 `build/build_full_vivado.tcl`。不要直接使用小写副本重建或覆盖稳定 SD。
 
-已有的[干净克隆复现记录](report/clean_reproduction_20261028_zh.md)保存了命令、日志和产物：该次构建在布线期间中断，随后从检查点续跑生成了 BIT/XSA。请使用独立实验环境，不覆盖稳定启动卡。
+使用 Vivado 2025.2 的人员可参考 [实验性迁移脚本及说明](build/vivado_2025_2_zh.md)；该脚本尚未在 2025.2 实际验证，不替代已记录的 2022.2 构建结果。
 
-使用 Vivado 2025.2 的话，可以参考[实验性迁移说明](build/vivado_2025_2_zh.md)；目前尚未在该版本上完成实际验证。
+已记录的干净克隆构建曾在布线阶段中断，随后从检查点续跑生成 BIT/XSA；具体命令、日志和验证范围见 [干净复现记录](report/clean_reproduction_20261028_zh.md)。文件哈希核验、仿真、上板记录分别证明不同内容。
 
-## 还有一些可以复用的东西
+## 报告与技能包
 
-开发过程中，我们把接口检查、Golden 对比、视频流验证和工程复现等经验整理到了 [Skill 目录](skill/index.md)。其中 PYNQ 示例已完成离线模拟测试，暂时没有 PYNQ 实板或真实跨项目验证记录。
+- [报告目录导航](report/readme.md) · [设计报告](report/design_report_zh.md) · [比赛材料与证据索引](report/contest_evidence_index_zh.md) · [版本身份](report/release_identity_zh.md)
+- [AI 协作记录](report/ai_collaboration_record.md) · [Skill 索引](skill/index.md) · [第三方来源与授权](report/third_party_sources_zh.md)
+- [预处理板端 Golden](report/preproc_board_golden_20261029_zh.md) · [CPU/FPGA 计时](report/preproc_ab_20261028_zh.md) · [复现指南](report/reproduction_zh.md)
 
-项目中的模型及第三方 IP 来源列在[来源与授权说明](report/third_party_sources_zh.md)中；部分权重和 IP 的比赛使用及公开再分发权限仍需核对。
+PYNQ Skill 提供可复用示例并完成离线模拟测试，尚无 PYNQ 实板或真实跨项目验证。模型权重及部分第三方 IP 的使用与再分发授权仍需按 [来源与授权说明](report/third_party_sources_zh.md) 核对。
