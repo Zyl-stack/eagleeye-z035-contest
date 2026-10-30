@@ -70,7 +70,7 @@ python -B tools/verify_submission.py
 
 ## 报告与技能包
 
-- [设计报告](report/design_report_zh.md) · [比赛材料与证据索引](report/contest_evidence_index_zh.md) · [版本身份](report/release_identity_zh.md)
+- [报告目录导航](report/readme.md) · [设计报告](report/design_report_zh.md) · [比赛材料与证据索引](report/contest_evidence_index_zh.md) · [版本身份](report/release_identity_zh.md)
 - [AI 协作记录](report/ai_collaboration_record.md) · [Skill 索引](skill/index.md) · [第三方来源与授权](report/third_party_sources_zh.md)
 - [预处理板端 Golden](report/preproc_board_golden_20261029_zh.md) · [CPU/FPGA 计时](report/preproc_ab_20261028_zh.md) · [复现指南](report/reproduction_zh.md)
 

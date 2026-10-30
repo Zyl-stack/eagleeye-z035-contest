@@ -56,6 +56,8 @@ def main():
                 rel = 'original/source_ai_collaboration_record.txt'
             elif rel == 'report/design_report_draft.md':
                 rel = 'original/source_design_report_draft.txt'
+            elif rel == 'report/readme.md':
+                rel = 'original/source_report_readme.txt'
             elif rel == 'skill/lanczos-2x-stream/build/xsim.log':
                 rel = 'sim/lanczos_legacy_xsim.txt'
             elif rel == 'skill/lanczos-2x-stream/sha256sums.txt':
