@@ -1,0 +1,28 @@
+#-----------------------------------------------------------
+# Vivado v2022.2 (64-bit)
+# SW Build 3671981 on Fri Oct 14 05:00:03 MDT 2022
+# IP Build 3669848 on Fri Oct 14 08:30:02 MDT 2022
+# Start of session at: Fri Oct 30 15:46:13 2026
+# Process ID: 63040
+# Current directory: D:/ee25_smoke_20261030
+# Command line: vivado.exe -mode batch -source D:\eagleeye_a_submission_20261027\build\build_vivado_2025_2.tcl -log D:\ee25_smoke_20261030\guard.log -journal D:\ee25_smoke_20261030\guard.jou -tclargs D:/ee25_smoke_20261030/snapshot/eagleeye_z035 D:/ee25_smoke_20261030/no_output project
+# Log file: D:/ee25_smoke_20261030/guard.log
+# Journal file: D:\ee25_smoke_20261030\guard.jou
+# Running On: beixiao, OS: Windows, CPU Frequency: 2419 MHz, CPU Physical cores: 24, Host memory: 68501 MB
+#-----------------------------------------------------------
+source {D:\eagleeye_a_submission_20261027\build\build_vivado_2025_2.tcl}
+# if {$argc < 2 || $argc > 4} {
+#     error "Expected: <restored-snapshot> <new-output> ?project|bit? ?jobs?"
+# }
+# if {![string match "2025.2*" [version -short]]} {
+#     error "This experimental migration requires Vivado 2025.2"
+# }
+This experimental migration requires Vivado 2025.2
+    while executing
+"error "This experimental migration requires Vivado 2025.2""
+    invoked from within
+"if {![string match "2025.2*" [version -short]]} {
+    error "This experimental migration requires Vivado 2025.2"
+}"
+    (file "D:\eagleeye_a_submission_20261027\build\build_vivado_2025_2.tcl" line 8)
+INFO: [Common 17-206] Exiting Vivado at Fri Oct 30 15:46:15 2026...

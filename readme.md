@@ -64,6 +64,8 @@ python -B tools/verify_submission.py
 
 仓库中展开的文件名采用小写；原工程脚本和约束可能依赖原始大小写。请先按 [复现指南](report/reproduction_zh.md) 使用 `tools/restore_a_repro.py` 将原快照恢复到**新的独立目录**，再运行 `build/build_full_vivado.tcl`。不要直接使用小写副本重建或覆盖稳定 SD。
 
+使用 Vivado 2025.2 的人员可参考 [实验性迁移脚本及说明](build/vivado_2025_2_zh.md)；该脚本尚未在 2025.2 实际验证，不替代已记录的 2022.2 构建结果。
+
 已记录的干净克隆构建曾在布线阶段中断，随后从检查点续跑生成 BIT/XSA；具体命令、日志和验证范围见 [干净复现记录](report/clean_reproduction_20261028_zh.md)。文件哈希核验、仿真、上板记录分别证明不同内容。
 
 ## 报告与技能包
