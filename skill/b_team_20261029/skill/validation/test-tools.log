@@ -1,0 +1,23 @@
+test_exit_codes (test_tools.CliTests.test_exit_codes) ... ok
+test_candidate_and_wrong_architecture (test_tools.ElfTests.test_candidate_and_wrong_architecture) ... ok
+test_float_flags_and_truncation (test_tools.ElfTests.test_float_flags_and_truncation) ... ok
+test_identical_and_signed_zero (test_tools.FloatTests.test_identical_and_signed_zero) ... ok
+test_invalid_format_or_tolerance (test_tools.FloatTests.test_invalid_format_or_tolerance) ... ok
+test_nonfinite_even_if_bit_exact (test_tools.FloatTests.test_nonfinite_even_if_bit_exact) ... ok
+test_tolerance_and_first_difference (test_tools.FloatTests.test_tolerance_and_first_difference) ... ok
+test_truncated_and_count (test_tools.FloatTests.test_truncated_and_count) ... ok
+test_change_extra_and_missing (test_tools.ManifestTests.test_change_extra_and_missing) ... ok
+test_no_overwrite (test_tools.ManifestTests.test_no_overwrite) ... ok
+test_reject_path_escape_and_self_reference (test_tools.ManifestTests.test_reject_path_escape_and_self_reference) ... ok
+test_bad_confidence_flags_and_repeated_frame (test_tools.StreamTests.test_bad_confidence_flags_and_repeated_frame) ... ok
+test_duplicate_reserved_and_changed_identity (test_tools.StreamTests.test_duplicate_reserved_and_changed_identity) ... ok
+test_missing_dimensions_and_explicit_override (test_tools.StreamTests.test_missing_dimensions_and_explicit_override) ... ok
+test_truncated_and_count_mismatch (test_tools.StreamTests.test_truncated_and_count_mismatch) ... ok
+test_valid_hold_and_recovery (test_tools.StreamTests.test_valid_hold_and_recovery) ... ok
+test_ambiguous_member_requires_selection (test_tools.XsaTests.test_ambiguous_member_requires_selection) ... ok
+test_identity_and_replaced_bitstream (test_tools.XsaTests.test_identity_and_replaced_bitstream) ... ok
+
+----------------------------------------------------------------------
+Ran 18 tests in 1.578s
+
+OK

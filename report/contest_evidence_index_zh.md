@@ -9,7 +9,7 @@
 | 综合与实现 | [干净复现报告](clean_reproduction_20261028_zh.md)、[资源报告](../build/clean_rebuild_20261028/reports/impl_utilization.rpt)、[时序报告](../build/clean_rebuild_20261028/reports/timing_summary.rpt)、[告警说明](warning_review_zh.md) | Vivado 2022.2 实现记录含资源和 WNS/WHS；WNS/WHS 只覆盖已约束路径。外部 I/O、CDC 和方法学告警尚未闭环，不能称为完整时序签核。 |
 | 上板、运行及实测 | [A 的 BIT 和启动记录](board_reproduced_20261028_zh.md)、[应用日志与功能确认](board_app_evidence_20261028_zh.md)、[CPU/FPGA 预处理 A/B 计时](preproc_ab_20261028_zh.md)、[板端 Golden](preproc_board_golden_20261029_zh.md) | A 确认六项功能正常；应用日志含 VDMA 错误位提示、帧新鲜度未验证。独立板端固定输入 Golden 通过；A/B 两组缩放算法及实时帧不同，不是同算法精度或加速比结论。 |
 | 可复现构建 | [复现说明](reproduction_zh.md)、[Vivado 构建 Tcl](../build/build_full_vivado.tcl)、[干净复现记录](clean_reproduction_20261028_zh.md) | 干净克隆构建在布线中断后从检查点续跑完成，生成 BIT/XSA；工具链、许可证和部分运行依赖需另行准备。独立重建内核与现场镜像一致性尚未证明。 |
-| Skill | [技能索引](../skill/index.md)、[独立复用测试](../sim/skill_portability_20261028.txt)、[PYNQ 模拟测试](../sim/pynq_skill_mock_20261028.txt) | 已提供运行示例、适用范围和边界；PYNQ 没有实板及真实跨项目验证，不宣称加分已取得。 |
+| Skill | [技能索引](../skill/index.md)、[独立复用测试](../sim/skill_portability_20261028.txt)、[PYNQ 模拟测试](../sim/pynq_skill_mock_20261028.txt)、[B 交接的技能包](../skill/b_team_20261029/readme.md) | 已提供运行示例、适用范围和边界；B 的资料保留独立验证记录。PYNQ 没有实板及真实跨项目验证，不宣称加分已取得。 |
 | 设计报告 | [设计报告](design_report_zh.md)、[AI 协作记录](ai_collaboration_record.md)、[版本说明](release_identity_zh.md) | 有背景、相关工作、原理、分工、性能、资源和复现说明；AI 协作材料为整理稿。现有 CPU/FPGA 计时和两份硬件构建不能分别冒充同算法加速比和资源优化前后对照。 |
 
 ## 本地已有结果复核

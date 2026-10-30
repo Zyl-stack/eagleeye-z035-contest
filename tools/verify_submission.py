@@ -17,7 +17,7 @@ def digest(path):
 
 def files():
     for p in sorted(ROOT.rglob('*')):
-        if '.git' in p.relative_to(ROOT).parts:
+        if '.git' in p.relative_to(ROOT).parts or '__pycache__' in p.relative_to(ROOT).parts:
             continue
         if p.is_symlink():
             raise ValueError('symlink: ' + str(p))

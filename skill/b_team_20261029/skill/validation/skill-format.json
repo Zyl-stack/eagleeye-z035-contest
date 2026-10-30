@@ -1,0 +1,57 @@
+[
+  {
+    "skill": "01-axi-video-regression",
+    "exit_code": 0,
+    "output": "Skill is valid!"
+  },
+  {
+    "skill": "02-tensor-preprocess-golden",
+    "exit_code": 0,
+    "output": "Skill is valid!"
+  },
+  {
+    "skill": "03-armv7-inference-deploy",
+    "exit_code": 0,
+    "output": "Skill is valid!"
+  },
+  {
+    "skill": "04-petalinux-xsa-rebuild",
+    "exit_code": 0,
+    "output": "Skill is valid!"
+  },
+  {
+    "skill": "05-vdma-frame-snapshot",
+    "exit_code": 0,
+    "output": "Skill is valid!"
+  },
+  {
+    "skill": "06-detection-stream-contract",
+    "exit_code": 0,
+    "output": "Skill is valid!"
+  },
+  {
+    "skill": "07-small-object-tracking-regression",
+    "exit_code": 0,
+    "output": "Skill is valid!"
+  },
+  {
+    "skill": "08-roi-ablation-evaluation",
+    "exit_code": 0,
+    "output": "Skill is valid!"
+  },
+  {
+    "skill": "09-roi-transaction-integration",
+    "exit_code": 0,
+    "output": "Skill is valid!"
+  },
+  {
+    "skill": "10-hls-cross-platform-port",
+    "exit_code": 0,
+    "output": "Skill is valid!"
+  },
+  {
+    "skill": "11-reproducible-evidence-release",
+    "exit_code": 0,
+    "output": "Skill is valid!"
+  }
+]

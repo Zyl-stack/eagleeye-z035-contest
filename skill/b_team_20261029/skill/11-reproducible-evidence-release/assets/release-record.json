@@ -1,0 +1,21 @@
+{
+  "schema_version": 1,
+  "release_id": null,
+  "task_and_classes": null,
+  "source": {"repository": null, "commit": null, "dirty": null, "as_built_source_sha256": null},
+  "hardware": {"board": null, "part": null, "tool_version": null, "xsa_sha256": null, "bitstream_sha256": null},
+  "model": {
+    "file": null, "sha256": null, "base_weights_url": null, "base_weights_sha256": null,
+    "team_training_status": "待确认", "training_log": null, "dataset_version": null,
+    "split_manifest_sha256": null, "input_contract": null, "class_map": null,
+    "export_config_sha256": null, "optimizer_version": null, "runtime_version": null
+  },
+  "application": {"file": null, "sha256": null, "config_sha256": null, "boot_image_sha256": null},
+  "permissions": {
+    "code_license_evidence": null, "weights_license_evidence": null, "data_license_evidence": null,
+    "competition_submission": "待确认", "public_redistribution": "待确认", "notice_files": []
+  },
+  "evidence": [],
+  "known_failures_and_unverified_items": [],
+  "reproduction_command": null
+}

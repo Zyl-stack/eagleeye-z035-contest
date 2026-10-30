@@ -1,0 +1,272 @@
+[
+  {
+    "path_from_original_workspace": "Code/scaler_single_channel_fixed/README.md",
+    "bytes": 2012,
+    "sha256": "8a5d826fd5598c530a9758ea0f092d3b2324ce1215c376e159e40d6425a410e1"
+  },
+  {
+    "path_from_original_workspace": "Code/scaler_rgb_fixed/README.md",
+    "bytes": 2054,
+    "sha256": "7291ff9c4836b6554a164add7b6f2ef5b1b76a94ec67b9ce4f4998934e5126a1"
+  },
+  {
+    "path_from_original_workspace": "Qiansai/picodet_preproc_ip/README.md",
+    "bytes": 7452,
+    "sha256": "36e625c678c7b570533eee694c539a84694126702da9efb8bf1b17d4d6501c4f"
+  },
+  {
+    "path_from_original_workspace": "Qiansai/picodet_preproc_ip/tools/generate.py",
+    "bytes": 3248,
+    "sha256": "26068ae993167267cc737d2f5f4f589c97455902f99530955bd580bac3c56f85"
+  },
+  {
+    "path_from_original_workspace": "Qiansai/picodet_preproc_ip/build/vivado_impl/utilization_impl.rpt",
+    "bytes": 11579,
+    "sha256": "f2b073fa1740320f5fe46afaf7152c9cf3a2dcbe60305ddf10fa21386e4fef82"
+  },
+  {
+    "path_from_original_workspace": "Qiansai/picodet_preproc_ip/build/vivado_impl/timing_impl.rpt",
+    "bytes": 17694,
+    "sha256": "c66cbbd57dca09291a9d81034df0fd80b6da90a63ddf498ccc424b51d7567a95"
+  },
+  {
+    "path_from_original_workspace": "Qiansai/交付文件/paddle_person_ax7020/README.md",
+    "bytes": 4345,
+    "sha256": "699587dfdc3c5f95078c008fb61c2709e7695eedafcd816d4511c1bf41d87acc"
+  },
+  {
+    "path_from_original_workspace": "Qiansai/交付文件/paddle_person_ax7020/model.nb",
+    "bytes": 3315510,
+    "sha256": "7c8a381bb5ba4a6a3c5c2b3277fd2cfb6ba1f802ddffd854c73bf75e747bfff4"
+  },
+  {
+    "path_from_original_workspace": "Qiansai/交付文件/paddle_person_ax7020/paddle_person",
+    "bytes": 12266800,
+    "sha256": "83c2a17e10af8eb038a53ce07c00b4c9c82a1a11f142c10e983dbc67c0aa24cb"
+  },
+  {
+    "path_from_original_workspace": "Qiansai/交付文件/paddle_person_ax7020/SHA256SUMS",
+    "bytes": 1775,
+    "sha256": "3cc92937ae6d10fca32a58af4e718e0f0ed7a23a7e6a64a8461c74c800ca34ee"
+  },
+  {
+    "path_from_original_workspace": "Qiansai/README.md",
+    "bytes": 4409,
+    "sha256": "e2675a8dbd03a759e1057d17bba833c8d312355e34d8fa0289d088c587520e30"
+  },
+  {
+    "path_from_original_workspace": "Qiansai/ax7020_paddle_person_work/src/PaddleDetection/command_qat.txt",
+    "bytes": 7566,
+    "sha256": "ecd4764c8f0ab283949421aad150867f1a2708b7201b66a94254a5d7c5357b2e"
+  },
+  {
+    "path_from_original_workspace": "team_handoff_20261005_v1/DELIVERY_README.md",
+    "bytes": 3984,
+    "sha256": "61e9480148bd43ca807a5a10ff2b625df692233f0e21d87ab90949ef375580c7"
+  },
+  {
+    "path_from_original_workspace": "team_handoff_20261005_v1/paddle_person_ax7020/model.nb",
+    "bytes": 3315510,
+    "sha256": "7c8a381bb5ba4a6a3c5c2b3277fd2cfb6ba1f802ddffd854c73bf75e747bfff4"
+  },
+  {
+    "path_from_original_workspace": "team_handoff_20261005_v1/integration/linux_ov5640_picodet/README.md",
+    "bytes": 6541,
+    "sha256": "29bfc9b2a002e35e142a3d37298597fb9e893c4dabc85feb0c79a11687846f0b"
+  },
+  {
+    "path_from_original_workspace": "team_handoff_20261005_v1/deliverables/logs/qemu_offline_validation.log",
+    "bytes": 831,
+    "sha256": "bb12fcadace312da1ba79904880497dcf0c890c87103a7fbf32d56770021fc20"
+  },
+  {
+    "path_from_original_workspace": "Qiansai/EagleEye_C_Attention_Sim_git/B_DETECTION_INTERFACE.md",
+    "bytes": 4553,
+    "sha256": "716dcf1a4aec6d10d3c5aef048023ffa77174bbb834d7acd5186441df673b233"
+  },
+  {
+    "path_from_original_workspace": "Qiansai/EagleEye_C_Attention_Sim_git/build/quality_cases/ball_static_b_target_stream.txt",
+    "bytes": 1047,
+    "sha256": "5a7b31ff9b7ea0055b989bee17aab657002baf011ca9876dd1a2c3ceee665c3a"
+  },
+  {
+    "path_from_original_workspace": "Qiansai/EagleEye_C_Attention_Sim_git/build/real_match/real_match_b_target_stream.txt",
+    "bytes": 88545,
+    "sha256": "356f6fc762ad6a75809ebe3b236e9755d63f9702013cbc982de0949791cee39e"
+  },
+  {
+    "path_from_original_workspace": "Qiansai/EagleEye_C_Attention_Sim_git/build/real_match/real_match_metrics.json",
+    "bytes": 340,
+    "sha256": "2557af3f5142fd70056f9744dce2b5881502c5822c17f44a70e7e79139a96034"
+  },
+  {
+    "path_from_original_workspace": "Qiansai/B_Perception/RESULTS_V1.md",
+    "bytes": 2426,
+    "sha256": "e5aac8dfb1189c1a424b5df331ddfe3bac73ee7907486851e27f13365073975b"
+  },
+  {
+    "path_from_original_workspace": "Qiansai/B_Perception/results/ablation_v1/SUMMARY.md",
+    "bytes": 1127,
+    "sha256": "7609d220a5a0e614e605d0b8e343a405227f984f4bc59e8ed673e44c9bb2031e"
+  },
+  {
+    "path_from_original_workspace": "Qiansai/B_Perception/results/refine_v1/training_report.json",
+    "bytes": 18796,
+    "sha256": "1b88853d18443e6f4ac7a26bd13ef51d55a07922a35e64344a631a21572ff694"
+  },
+  {
+    "path_from_original_workspace": "Qiansai/B_C_Integration/README.md",
+    "bytes": 1896,
+    "sha256": "03796a742d377fe34fa4600b05313a5187231524a8ae415717b7495ff98e39bb"
+  },
+  {
+    "path_from_original_workspace": "Qiansai/B_C_Integration/build/closed_loop_report.json",
+    "bytes": 8585,
+    "sha256": "6ff7f27468c9d2392669eb610dd8bda3720817b1c6e5426938404824da74e1f2"
+  },
+  {
+    "path_from_original_workspace": "Qiansai/Accelerator/xc7z100_hls/README.md",
+    "bytes": 5548,
+    "sha256": "5bab47c72d4c1ccc5331272fd335d6d7e2127dad882caaaf7e6c5c2afe5bb33f"
+  },
+  {
+    "path_from_original_workspace": "team_handoff_20261005_v1/hardware/system_wrapper.xsa",
+    "bytes": 948669,
+    "sha256": "117b206b7372ba4f408db6789676aac2f0f4d0f92e169ecebf9c4ff725585208"
+  },
+  {
+    "path_from_original_workspace": "team_handoff_20261005_v1/hardware/system_wrapper.bit",
+    "bytes": 2037636,
+    "sha256": "bc5d35a5a414006309d0057ad6b99277847bd2f9e25162e99c92ea38d9336ed0"
+  },
+  {
+    "path_from_original_workspace": "Qiansai/picodet_preproc_ip/vectors/captured.golden.f32",
+    "bytes": 1228800,
+    "sha256": "aece2b12ba154bf37dc209440bdc8fa0a0b1bc9a44936d12c4e327b03f7d447f"
+  },
+  {
+    "path_from_original_workspace": "Qiansai/picodet_preproc_ip/vectors/distinct.golden.f32",
+    "bytes": 1228800,
+    "sha256": "9f87a5399e81be022a7c5d96829be6502af9451c3cb5cb18ead0fc3065e629de"
+  },
+  {
+    "path_from_original_workspace": "Qiansai/picodet_preproc_ip/vectors/edge.golden.f32",
+    "bytes": 1228800,
+    "sha256": "56f9cc97c838307dc1a3fd065d1948fd8e87721d39ebd036dca6b0adb6ceeeec"
+  },
+  {
+    "path_from_original_workspace": "Qiansai/picodet_preproc_ip/vectors/full.golden.f32",
+    "bytes": 1228800,
+    "sha256": "aa9582bd682ee31452bea7c213555002f0df1a01f29672f887e1818cf915fe70"
+  },
+  {
+    "path_from_original_workspace": "Qiansai/picodet_preproc_ip/vectors/zero.golden.f32",
+    "bytes": 1228800,
+    "sha256": "4c047a455edc28e4f4d4b11d2f5cd128e242ea54925cda8e22824349e315535b"
+  },
+  {
+    "path_from_original_workspace": "Qiansai/picodet_preproc_ip/build/captured_b.hex",
+    "bytes": 1024000,
+    "sha256": "158c4b036b27f6f078e40320b3b3febbcd27b334528540fcaf069c0abcb92488"
+  },
+  {
+    "path_from_original_workspace": "Qiansai/picodet_preproc_ip/build/captured_dma_b.hex",
+    "bytes": 1024000,
+    "sha256": "158c4b036b27f6f078e40320b3b3febbcd27b334528540fcaf069c0abcb92488"
+  },
+  {
+    "path_from_original_workspace": "Qiansai/picodet_preproc_ip/build/captured_dma_g.hex",
+    "bytes": 1024000,
+    "sha256": "146d8e831f18eb91ac69fa85e3ad39c0434b56d5c6e6cd71997d65815b7bff85"
+  },
+  {
+    "path_from_original_workspace": "Qiansai/picodet_preproc_ip/build/captured_dma_r.hex",
+    "bytes": 1024000,
+    "sha256": "3fd1d07ea187f46a2360b70a96cb10be760b8e5dca7b1ffb67bd96fdf4de5b65"
+  },
+  {
+    "path_from_original_workspace": "Qiansai/picodet_preproc_ip/build/captured_g.hex",
+    "bytes": 1024000,
+    "sha256": "146d8e831f18eb91ac69fa85e3ad39c0434b56d5c6e6cd71997d65815b7bff85"
+  },
+  {
+    "path_from_original_workspace": "Qiansai/picodet_preproc_ip/build/captured_r.hex",
+    "bytes": 1024000,
+    "sha256": "3fd1d07ea187f46a2360b70a96cb10be760b8e5dca7b1ffb67bd96fdf4de5b65"
+  },
+  {
+    "path_from_original_workspace": "Qiansai/picodet_preproc_ip/build/captured_xsim_b.hex",
+    "bytes": 1024000,
+    "sha256": "158c4b036b27f6f078e40320b3b3febbcd27b334528540fcaf069c0abcb92488"
+  },
+  {
+    "path_from_original_workspace": "Qiansai/picodet_preproc_ip/build/captured_xsim_g.hex",
+    "bytes": 1024000,
+    "sha256": "146d8e831f18eb91ac69fa85e3ad39c0434b56d5c6e6cd71997d65815b7bff85"
+  },
+  {
+    "path_from_original_workspace": "Qiansai/picodet_preproc_ip/build/captured_xsim_r.hex",
+    "bytes": 1024000,
+    "sha256": "3fd1d07ea187f46a2360b70a96cb10be760b8e5dca7b1ffb67bd96fdf4de5b65"
+  },
+  {
+    "path_from_original_workspace": "Qiansai/picodet_preproc_ip/build/distinct_b.hex",
+    "bytes": 1024000,
+    "sha256": "5655ff46e67d3d3853d8d8abf5f48692528bdd871aeba9a715dbae8e08ea395d"
+  },
+  {
+    "path_from_original_workspace": "Qiansai/picodet_preproc_ip/build/distinct_g.hex",
+    "bytes": 1024000,
+    "sha256": "44eda5f73ace83928602c7c3390819eac0bf129e4c9ad5e4f3dcc202f55360fa"
+  },
+  {
+    "path_from_original_workspace": "Qiansai/picodet_preproc_ip/build/distinct_r.hex",
+    "bytes": 1024000,
+    "sha256": "05ad2cbdd68f2463fa00a4b90b8e542adb4595fe17cab1189f72bdd42c0429aa"
+  },
+  {
+    "path_from_original_workspace": "Qiansai/picodet_preproc_ip/build/edge_b.hex",
+    "bytes": 1024000,
+    "sha256": "c4163eeeceb65cac5a056bf66ac7049142e8aa7d3ac1eb739d5c683ee6b4acdb"
+  },
+  {
+    "path_from_original_workspace": "Qiansai/picodet_preproc_ip/build/edge_g.hex",
+    "bytes": 1024000,
+    "sha256": "8677667d9ebbfa05d5a2f3a0c1de1dad878771209f227a6a90a638f234a83483"
+  },
+  {
+    "path_from_original_workspace": "Qiansai/picodet_preproc_ip/build/edge_r.hex",
+    "bytes": 1024000,
+    "sha256": "e0b2022b1747cf21ef8fa073c875867a19ec83ba802c65ff7654d2d4a4883cbb"
+  },
+  {
+    "path_from_original_workspace": "Qiansai/picodet_preproc_ip/build/full_b.hex",
+    "bytes": 1024000,
+    "sha256": "5901ebad001a468fd16147d04d77032cb91441b1efe3b108e5404e360f7105de"
+  },
+  {
+    "path_from_original_workspace": "Qiansai/picodet_preproc_ip/build/full_g.hex",
+    "bytes": 1024000,
+    "sha256": "5fba4a1281cca76455aec584e2bc858ce9ea2124dc283402e908df4ec3f1e023"
+  },
+  {
+    "path_from_original_workspace": "Qiansai/picodet_preproc_ip/build/full_r.hex",
+    "bytes": 1024000,
+    "sha256": "3e8af872008300d42dabcdcd98e87791ce1ab329c33c382917ef848c3869bab6"
+  },
+  {
+    "path_from_original_workspace": "Qiansai/picodet_preproc_ip/build/zero_b.hex",
+    "bytes": 1024000,
+    "sha256": "6dc934e228032af8eceb926d0633ca654380f37d36e283281f7d44f745f44914"
+  },
+  {
+    "path_from_original_workspace": "Qiansai/picodet_preproc_ip/build/zero_g.hex",
+    "bytes": 1024000,
+    "sha256": "83867573c080baaa1d40e7f00875f8e23f3a838ee7ae5e99133277d13b9515bb"
+  },
+  {
+    "path_from_original_workspace": "Qiansai/picodet_preproc_ip/build/zero_r.hex",
+    "bytes": 1024000,
+    "sha256": "3dac471830daaef5b30792d1cd2d5ea3ad094a3270873f89fa84c980c02a9a7b"
+  }
+]

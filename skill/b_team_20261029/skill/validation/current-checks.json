@@ -1,0 +1,196 @@
+{
+  "date": "2026-10-29",
+  "scope": "new validators and existing saved artifacts; no RTL rebuild/training/board run",
+  "unit_tests": {
+    "exit_code": 0,
+    "log": "test-tools.log"
+  },
+  "saved_tensor_dumps": [
+    {
+      "case": "zero",
+      "saved_dump_only": true,
+      "result": {
+        "pass": true,
+        "count": 307200,
+        "mode": "bit_exact",
+        "atol": 1e-06,
+        "rtol": 0.0,
+        "bit_equal": 307200,
+        "violations": 0,
+        "nonfinite_pairs": 0,
+        "max_absolute_error": 0.0,
+        "rmse_finite_pairs": 0.0,
+        "first_failure": null
+      }
+    },
+    {
+      "case": "full",
+      "saved_dump_only": true,
+      "result": {
+        "pass": true,
+        "count": 307200,
+        "mode": "bit_exact",
+        "atol": 1e-06,
+        "rtol": 0.0,
+        "bit_equal": 307200,
+        "violations": 0,
+        "nonfinite_pairs": 0,
+        "max_absolute_error": 0.0,
+        "rmse_finite_pairs": 0.0,
+        "first_failure": null
+      }
+    },
+    {
+      "case": "distinct",
+      "saved_dump_only": true,
+      "result": {
+        "pass": true,
+        "count": 307200,
+        "mode": "bit_exact",
+        "atol": 1e-06,
+        "rtol": 0.0,
+        "bit_equal": 307200,
+        "violations": 0,
+        "nonfinite_pairs": 0,
+        "max_absolute_error": 0.0,
+        "rmse_finite_pairs": 0.0,
+        "first_failure": null
+      }
+    },
+    {
+      "case": "edge",
+      "saved_dump_only": true,
+      "result": {
+        "pass": true,
+        "count": 307200,
+        "mode": "bit_exact",
+        "atol": 1e-06,
+        "rtol": 0.0,
+        "bit_equal": 307200,
+        "violations": 0,
+        "nonfinite_pairs": 0,
+        "max_absolute_error": 0.0,
+        "rmse_finite_pairs": 0.0,
+        "first_failure": null
+      }
+    },
+    {
+      "case": "captured",
+      "saved_dump_only": true,
+      "result": {
+        "pass": true,
+        "count": 307200,
+        "mode": "bit_exact",
+        "atol": 1e-06,
+        "rtol": 0.0,
+        "bit_equal": 307200,
+        "violations": 0,
+        "nonfinite_pairs": 0,
+        "max_absolute_error": 0.0,
+        "rmse_finite_pairs": 0.0,
+        "first_failure": null
+      }
+    },
+    {
+      "case": "captured_dma",
+      "saved_dump_only": true,
+      "result": {
+        "pass": true,
+        "count": 307200,
+        "mode": "bit_exact",
+        "atol": 1e-06,
+        "rtol": 0.0,
+        "bit_equal": 307200,
+        "violations": 0,
+        "nonfinite_pairs": 0,
+        "max_absolute_error": 0.0,
+        "rmse_finite_pairs": 0.0,
+        "first_failure": null
+      }
+    },
+    {
+      "case": "captured_xsim",
+      "saved_dump_only": true,
+      "result": {
+        "pass": true,
+        "count": 307200,
+        "mode": "bit_exact",
+        "atol": 1e-06,
+        "rtol": 0.0,
+        "bit_equal": 307200,
+        "violations": 0,
+        "nonfinite_pairs": 0,
+        "max_absolute_error": 0.0,
+        "rmse_finite_pairs": 0.0,
+        "first_failure": null
+      }
+    }
+  ],
+  "legacy_stream": {
+    "pass": true,
+    "source_size": [
+      640,
+      640
+    ],
+    "explicit_stream_info": false,
+    "frames": 24,
+    "targets": 12,
+    "held_records": 0,
+    "observed_invalid_to_valid": 0,
+    "scope": "syntax/range/observed ID type only; identity accuracy and timebase need source evidence"
+  },
+  "legacy_without_dimensions": {
+    "expected_rejection": true,
+    "reason": "source dimensions unknown: provide STREAM_INFO or verified --legacy-size W H"
+  },
+  "real_video_stream": {
+    "pass": true,
+    "source_size": [
+      1920,
+      1080
+    ],
+    "explicit_stream_info": true,
+    "frames": 272,
+    "targets": 1616,
+    "held_records": 507,
+    "observed_invalid_to_valid": 134,
+    "scope": "syntax/range/observed ID type only; identity accuracy and timebase need source evidence"
+  },
+  "real_video_metrics": {
+    "source": "datasets\\originals\\real_match_source.webm",
+    "model": "runs\\football_detector\\yolo11n_1280\\weights\\best.pt",
+    "image_size": 1280,
+    "frame_stride": 2,
+    "tile_size": 960,
+    "source_fps": 25.0,
+    "source_frames_read": 543,
+    "frames_processed": 272,
+    "detector_seconds": 332.911836,
+    "detector_fps": 0.817
+  },
+  "arm_binary_header": {
+    "pass": true,
+    "checks": {
+      "elf32": true,
+      "little_endian": true,
+      "em_arm": true,
+      "elf_version": true,
+      "header_size": true,
+      "eabi5": true,
+      "hard_float_flag": true,
+      "no_soft_float_flag": true
+    },
+    "machine": 40,
+    "flags": "0x5000400",
+    "scope": "ELF header only; not CPU/NEON/library/runtime proof"
+  },
+  "xsa_bit_identity": {
+    "pass": true,
+    "member": "system_wrapper.bit",
+    "embedded_sha256": "bc5d35a5a414006309d0057ad6b99277847bd2f9e25162e99c92ea38d9336ed0",
+    "external_sha256": "bc5d35a5a414006309d0057ad6b99277847bd2f9e25162e99c92ea38d9336ed0",
+    "embedded_bytes": 2037636,
+    "external_bytes": 2037636,
+    "scope": "file identity only; verify hardware/PS config and tool versions separately"
+  }
+}

@@ -1,0 +1,21 @@
+B Skill 交接整理与本机核验
+日期：2026-10-30
+
+原始 ZIP：eagleeye_skills_20261029_v1.zip
+SHA256：972f1caebdc25bdb9b2c0a9d4deaef41faea2b1cad1734ff5c998bf04f756d7a
+ZIP CRC：通过；原始 manifest 文件列表及 27 项 SHA256：通过。
+
+展开副本将路径转为小写并更新 Markdown 本地链接。下列测试均在本机运行，未操作开发板。
+
+在 skill/b_team_20261029 目录执行：
+  python -B -m unittest discover -s skill/tests -v
+  结果：18 项通过，退出码 0。
+
+  python -B skill/11-reproducible-evidence-release/scripts/manifest.py check skill skill-manifest.json
+  结果：expected_files=27，actual_files=27，missing/extra/changed 均为空，退出码 0。
+
+从仓库根目录执行：
+  python -B skill/b_team_20261029/skill/02-tensor-preprocess-golden/scripts/compare_f32.py data/captured.golden.f32 board/measurements/preproc_golden_20261029/board_tensor.f32 --count 307200 --exact
+  结果：307200 个值、307200 个位模式一致，误差及超限数量为 0，退出码 0。
+
+最后一项是对已有回传文件的离线重算，不代表本次重新上板；原板端测试身份、条件和限制见 report/preproc_board_golden_20261029_zh.md。B 的足球检测、AX7020、QEMU 和其他历史记录不因此成为当前 Z035 的实板结果。
