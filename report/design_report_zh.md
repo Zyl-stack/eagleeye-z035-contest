@@ -46,7 +46,7 @@
 
 **二、人体检测驱动的规则型注意力与 ROI 决策。** [`fovea_roi.hpp`](../src/ps/src/fovea_roi.hpp) 对 PicoDet 人体框进行筛选、去重和相邻推理结果的临时关联，并综合区域、运动、向画面中心接近、小目标和检测不确定度评分；保持次数与切换门槛用于减少目标频繁切换。选中的 ROI 可经过轨迹平滑，暂停时支持人工调整。处理流程为“人体框 → 候选关联 → 多因素评分 → 保持或切换 → ROI 平滑 → 视频观察与控制”。[Attention 应用日志](board_app_evidence_20261028_zh.md)保存了相应输出；权重是工程规则参数，不是训练得到的神经注意力；临时 ID 不代表跨遮挡稳定跟踪，不同应用版本的日志也不能混用。
 
-**三、面向视频 ROI 的 Lanczos 放大与资源约束设计。** PL 视频链路将 ROI、双线性/Lanczos 插值、显示模式及 OSD 组合，用于保留全景的同时观察局部；[模式选择源码](../src/vivado/eagleeye_7035_eyes.srcs/sources_1/imports/rtl/video_mode_switch_top.v)与 [Lanczos 系数 ROM](../src/vivado/eagleeye_7035_eyes.srcs/sources_1/imports/rtl/lanczos_coeff_2d_rom.v)可供复核。已有[整工程资源和时序记录](clean_reproduction_20261028_zh.md)与 A 对 HDMI 等功能正常的现场确认；这些不单独证明 Lanczos 每像素数值正确或资源节省比例。现有旧 [XSim 日志](../sim/lanczos_legacy_xsim.txt)报告 768 项错误，测试版本与当前 RTL 的对应关系未确认；尚无同功能、同器件和同约束的优化前后资源对照，因此不能声称“节省 67% DSP”或“当前 Lanczos 像素逐位通过”。
+**三、面向视频 ROI 的 Lanczos 放大与资源约束设计。** PL 视频链路将 ROI、双线性/Lanczos 插值、显示模式及 OSD 组合，用于保留全景的同时观察局部；[模式选择源码](../src/vivado/eagleeye_7035_eyes.srcs/sources_1/imports/rtl/video_mode_switch_top.v)与 [Lanczos 系数 ROM](../src/vivado/eagleeye_7035_eyes.srcs/sources_1/imports/rtl/lanczos_coeff_2d_rom.v)可供复核。已有[整工程资源和时序记录](clean_reproduction_20261028_zh.md)与 A 对 HDMI 等功能正常的现场确认。团队最新反馈 Lanczos 设计“节省 67% DSP”并且“逐像素通过”；目前没有对应的优化前后 DSP 数量、构建条件及逐像素测试记录可供核对，因此这两项暂按**团队反馈、未独立核实**记录，不作为已验证的定量结论。现有旧 [XSim 日志](../sim/lanczos_legacy_xsim.txt)报告 768 项错误，其测试版本与上述反馈及当前 RTL 的对应关系未确认；旧结果和最新反馈分别保留，不将它们视为同一次测试。
 
 **四、与 PicoDet 对接的 FPGA 预处理 IP。** PL 侧将 640×360 RGB888 输入经双线性缩放和归一化，形成 `1×3×320×320` FP32 NCHW 张量；数据经一路输入 DMA 和三路 R/G/B 输出 DMA 在 IP 与 DDR 之间搬运，PS 侧负责将张量交给 Paddle-Lite 并提供 CPU 回退。见[预处理源码](../src/ip_repo/preproc/)及[硬件接口表](hardware_interfaces_zh.md)。五类帧 RTL 仿真与 Golden 逐位一致；另一次[独立板端固定输入测试](preproc_board_golden_20261029_zh.md)中 307,200/307,200 个值逐位一致，本次独立 BIT 哈希未核实。[A/B 计时](preproc_ab_20261028_zh.md)中 CPU 双三次和 FPGA 双线性预处理的平均耗时分别为 416.960 ms、17.537 ms；由于算法及实时帧不同，这只是两种系统配置的计时，不能称为同算法加速比或整网精度对照。模型推理仍由 ARM 执行。
 
@@ -156,7 +156,7 @@ A 已提供同一开发板、应用、模型、输入尺寸及线程条件下的
 
 团队目前没有 PYNQ 实板和跨项目复用验证资料；PYNQ 示例按离线模拟候选展示，不作为需要队友补交的既有材料，也不声称已获得加分。
 
-`report/ai_collaboration_record.md` 为已有的协作整理稿，不是完整原始会话。`skill/index.md` 索引两项已有校验内容及一项 PYNQ 模拟候选，分别记录适用范围、使用方式、已有验证及失效条件；Lanczos 旧测试日志失败，测试台与当前版本的对应关系未核实；当前逐像素验证仍未完成，不得作为通过案例。完整提示词、回复、纠错轨迹和团队确认需另行补充。
+`report/ai_collaboration_record.md` 为已有的协作整理稿，不是完整原始会话。`skill/index.md` 索引两项已有校验内容及一项 PYNQ 模拟候选，分别记录适用范围、使用方式、已有验证及失效条件；Lanczos 旧测试日志失败，团队最新反馈逐像素通过，但对应记录和版本关系尚未独立核实，不将其作为已核验的通过案例。完整提示词、回复、纠错轨迹和团队确认需另行补充。
 
 可复核的协作案例包括：针对板端 BusyBox 差异修订只读采集；从固定输入的 V2/R3 实测发现卸载比 ARM 慢，保留真实日志而不将局部 Golden 等同整网提速；依据团队要求仅移除 Lanczos 的独立 Skill 展示，保留旧测试及失败记录；A 回传启动串口后，将 U-Boot 至 Linux 登录与登录后的现场功能反馈分开。各案例的来源、纠错和局限见 `report/ai_collaboration_record.md` 和相关证据页面，不应把整理稿冒充完整聊天逐字稿。
 
