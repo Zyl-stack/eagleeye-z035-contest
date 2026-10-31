@@ -21,18 +21,6 @@
 
 项目分别完成了 FPGA 预处理的独立板端 Golden 一致性验证，以及 CPU/FPGA 两种预处理配置的性能测试。各项测试的输入、算法、版本和结果详见对应验证报告。
 
-本次文档表述调整的逐项前后对照见[文档语言修订记录](document_language_revision.md)。
 
-## 历史记录和补充材料
 
-以下文件保留作过程记录，可能描述当时状态；了解当前情况请优先使用上面的主要入口：
-
-| 类别 | 文件 |
-|---|---|
-| 早期工程复现 | [复现检查表](a_repro_checklist_20261027.md) · [复现状态](a_repro_status_20261027.md) · [补充结果](a_supplement_results_20261027.md) |
-| 早期板端记录 | [历史板端证据](board_evidence_20261027.md) · [历史计时说明](board_measurements.md) |
-| 提交核查 | [检查表](submission_check_20261028_zh.md) · [早期核查](submission_audit.md) · [现场证据范围](field_evidence_needed_zh.md) |
-| 原始说明和草稿 | [英文报告草稿](design_report_draft.md) · [原始项目说明](source_readme.md) · [原始文件哈希](source_sha256sums.txt)；早期说明保留在原工程归档中 |
-| 图和许可文件 | [`figures/`](figures/) · [`third_party/`](third_party/) |
-
-项目建立了覆盖源码、构建、仿真、板端测试及版本管理的资料体系，通过工程归档与原始记录支持成果追溯。授权核对、历史仿真版本及工程告警集中在各专题页说明。
+项目建立了覆盖源码、构建、仿真、板端测试及版本管理的资料体系。
