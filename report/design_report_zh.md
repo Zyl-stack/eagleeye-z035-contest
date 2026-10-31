@@ -193,7 +193,7 @@ AttentionPolicy 的五项权重为 3、1、3、2、3，用于人体目标选择�
 
 项目提炼了视频处理、软硬件接口、模型部署和数据验证的可复用 Skill。PYNQ Overlay、寄存器、DMA 和缓存示例已完成离线模拟验证，为平台迁移提供参考，实板及真实跨项目复用留待后续验证。
 
-[AI 协作记录](ai_collaboration_record.md)整理六个工程案例，结合真实提示词、模型回答、纠错轨迹及工具结果；[会话证据索引](ai_collaboration_evidence_20261030.md)保存相关原文节选与来源信息。[技能索引](../skill/index.md)按用途提供工作流、最小示例、适用条件和验证方法，AX7020 经验按独立参考案例收录。Lanczos 历史记录见[验证说明](../sim/lanczos_legacy_readme.md)。
+[AI 协作记录](ai_collaboration_record.md)整理六个工程案例，并补充[显示、交互及机械眼协作记录](ai_collaboration_supplement_20261031.md)，结合真实提示词、模型回答、纠错轨迹及工具结果；[会话证据索引](ai_collaboration_evidence_20261030.md)保存相关原文节选与来源信息。[技能索引](../skill/index.md)按用途提供工作流、最小示例、适用条件和验证方法，AX7020 经验按独立参考案例收录。Lanczos 历史记录见[验证说明](../sim/lanczos_legacy_readme.md)。
 
 协作案例展示了 AI 在环境排障、接口适配、统计复核及资料整理中的效率价值：依据真实 BusyBox 功能修订采集工具，将固定输入 Golden 和配置性能分别评估，并以版本化记录连接构建产物与现场结果。各案例提供来源、修正过程及测试结果，读者可按证据索引追溯相关会话。
 

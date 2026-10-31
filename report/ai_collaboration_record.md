@@ -112,6 +112,8 @@ python -B skill/preproc-fp32-golden/tools/verify_tensor.py --actual board/measur
 
 **可核查材料：**[原始反馈和模型判断摘录](ai_collaboration_evidence_20261030.md)、[独立实板数据及复核方法](board_evidence_20261027.md)、[测量日志摘录](../board/measurements/v2_r3_20261024/serial_measurement_excerpt.txt)、[复核脚本](../tools/verify_field_evidence.py)。
 
+补充的预处理、显示交互、USB 鼠标和机械眼案例见 [2026-10-31 协作记录](ai_collaboration_supplement_20261031.md)，具体提示词与复盘摘录见 [来源摘录](ai_collaboration_excerpts_20261031.md)。
+
 ## 三、Codex 智能体工作流
 
 下面的流程概括上述案例中实际执行过的步骤。不是每个任务都涉及源码修改或实板测试；例如 Golden 的现场执行由团队完成，Codex 负责整理方法和复核回传数据。
