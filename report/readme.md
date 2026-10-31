@@ -10,7 +10,7 @@
 | [比赛材料与证据索引](contest_evidence_index_zh.md) | 按比赛要求查找源码、仿真、实现报告、板端资料和 Skill。 |
 | [复现指南](reproduction_zh.md) | 获取源码、恢复原始工程、Vivado 2022.2 构建及仿真步骤。 |
 | [AI 协作记录](ai_collaboration_record.md) | 工程问题、真实会话摘录、纠错及验证案例；[会话证据索引](ai_collaboration_evidence_20261030.md)记录来源。 |
-| [技能包](../skill/index.md) | 可复用工具、使用方法、验证范围及限制。 |
+| [技能包](../skill/index.md) | 可复用工具、最小示例、使用方法及适用条件。 |
 
 ## 主要验证和版本资料
 
@@ -19,7 +19,9 @@
 - **版本与来源**：[实测版本身份](release_identity_zh.md) · [硬件与软件接口表](hardware_interfaces_zh.md) · [第三方来源与授权](third_party_sources_zh.md)。
 - **Lanczos 补充材料**：[技术说明（Word）](lanczos_fpga_brief_20261030.docx) · [历史独立仿真记录及适用范围](../sim/lanczos_legacy_readme.md)。
 
-板端 Golden 是一次独立固定输入测试；CPU/FPGA 计时使用不同缩放算法和实时帧。两类结果的条件和范围分别写在对应记录中，不应混作同一次测试。
+项目分别完成了 FPGA 预处理的独立板端 Golden 一致性验证，以及 CPU/FPGA 两种预处理配置的性能测试。各项测试的输入、算法、版本和结果详见对应验证报告。
+
+本次文档表述调整的逐项前后对照见[文档语言修订记录](document_language_revision.md)。
 
 ## 历史记录和补充材料
 
@@ -34,4 +36,4 @@
 | 原始说明和草稿 | [英文报告草稿](design_report_draft.md) · [原始项目说明](source_readme.md) · [原始文件哈希](source_sha256sums.txt)；早期说明保留在原工程归档中 |
 | 图和许可文件 | [`figures/`](figures/) · [`third_party/`](third_party/) |
 
-原工程归档和验证记录用于追溯来源。当前设计报告仍是提交整理稿；未核实的授权、旧仿真记录及告警按各自证据范围说明。
+项目建立了覆盖源码、构建、仿真、板端测试及版本管理的资料体系，通过工程归档与原始记录支持成果追溯。授权核对、历史仿真版本及工程告警集中在各专题页说明。

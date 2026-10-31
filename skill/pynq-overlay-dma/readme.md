@@ -4,7 +4,7 @@
 
 EagleEye 开发中曾出现硬件描述与实际工程不匹配、数据搬运和缓存状态难以区分的问题。本 Skill 将可复用的文件身份核对、寄存器访问边界、简单 AXI DMA 和缓存维护顺序拆成小例子，适用于**自行核实过接口契约的 PYNQ 项目**。代码不依赖 EagleEye 的 IP 名称、地址、图像大小或模型。
 
-**团队目前没有 PYNQ 实板和真实外部项目复用验证资料；本项仅作为 Python 离线模拟验证的 Skill 候选提交，不再作为需要队友提供的既有材料。** 示例不是完整设备驱动、隔离机制、硬件安全准入或可直接部署的 Overlay；不提供实际 BIT/HWH。哈希核对只验证文件与给定值一致，不能证明来源可信、BIT 与 HWH 真实配套或适用于某块板。
+**验证状态：已完成 Python 离线模拟。**示例覆盖 Overlay 文件检查、寄存器白名单与简单 DMA 调用顺序；PYNQ 实板和真实跨项目复用为后续验证项。BIT/HWH 由目标工程提供，设备驱动、隔离、硬件准入和故障恢复由目标平台负责。SHA256 用于文件完整性核对，来源认证及 BIT/HWH 与板卡的实际配套关系单独核验。
 
 ## 脱离工程运行模拟示例
 
@@ -15,7 +15,7 @@ python -B examples/mock_demo.py
 python -B -m unittest discover -s tests -v
 ```
 
-第一条只打印带 `MOCK` 的缓存和传输顺序，没有产生 FPGA 事务或数值结果；第二条使用 Python 假对象检查成功、身份不符、未授权寄存器写、DMA 异常、长度错误及中断。验证记录见 [本仓库记录](../../sim/pynq_skill_mock_20261028.txt)。复制到别的项目时只复制本目录即可，仓库记录链接不属于运行依赖。
+第一条以 `MOCK` 标记演示缓存和传输顺序；第二条使用 Python 假对象检查成功、身份不符、未授权寄存器写、DMA 异常、长度错误及中断。验证记录见 [本仓库记录](../../sim/pynq_skill_mock_20261028.txt)。复制到别的项目时只复制本目录即可，仓库记录链接不属于运行依赖。
 
 ## 硬件使用前的契约
 
@@ -80,4 +80,4 @@ result = session.run()  # 完成后才允许读取；按实际协议对照 Golde
 
 ## 官方资料与验证边界
 
-参考 [PYNQ allocate 与缓存 API](https://pynq.readthedocs.io/en/latest/pynq_libraries/allocate.html)、[PYNQ 2.7 DMA 实现](https://pynq.readthedocs.io/en/v2.7.0/_modules/pynq/lib/dma.html) 和 [PYNQ Overlay 接口](https://pynq.readthedocs.io/en/v3.0.0/_modules/pynq/overlay.html)。实际使用须对照所装版本。当前仅在 PC 的模拟对象上测试控制流，未验证 Overlay 重配置、寄存器、DMA、缓存一致性、目标板资源隔离或跨板复用；不能以此申请“实板已验证”结论。
+参考 [PYNQ allocate 与缓存 API](https://pynq.readthedocs.io/en/latest/pynq_libraries/allocate.html)、[PYNQ 2.7 DMA 实现](https://pynq.readthedocs.io/en/v2.7.0/_modules/pynq/lib/dma.html) 和 [PYNQ Overlay 接口](https://pynq.readthedocs.io/en/v3.0.0/_modules/pynq/overlay.html)，实际使用对照安装版本。本项已用 PC 模拟对象验证控制流；Overlay 重配置、寄存器、真实 DMA/cache、资源隔离及跨板复用待目标平台实测。

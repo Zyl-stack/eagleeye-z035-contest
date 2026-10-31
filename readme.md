@@ -4,7 +4,7 @@ EagleEye 是一套基于 **Xilinx Zynq XC7Z035** 的仿生视觉辅助观察原�
 
 摄像头提供全局视频，PicoDet 检测人体候选目标；注意力策略综合目标的区域、运动、接近趋势、尺寸和检测不确定性，选择关注对象并生成动态 ROI。视频画面与局部窗口共同显示，使用者也可以暂停画面，通过鼠标调整观察区域；双轴机械眼随关注位置联动。
 
-本项目使用 **Vivado 2022.2** 构建 FPGA 工程；人体检测使用 **PicoDet-XS 与 Paddle-Lite**，模型推理运行在 ARM 端。局部放大是对已有像素的重采样，不代表恢复了原图中不存在的细节；项目用于辅助观察，不是自动裁判系统。
+本项目使用 **Vivado 2022.2** 构建 FPGA 工程，采用 **PicoDet-XS 与 Paddle-Lite** 在 ARM 端完成人体检测，并在 PL 侧实现视频处理与模型输入预处理。
 
 ## 系统功能
 
@@ -26,9 +26,9 @@ OV5640 摄像头 → FPGA 视频通路 / VDMA → HDMI 全景与局部显示
                         鼠标 / 按键 / 舵机
 ```
 
-系统原理、软硬件接口及团队分工见 [设计报告](report/design_report_zh.md) 和 [硬件接口表](report/hardware_interfaces_zh.md)。当前系统以 PicoDet 人体检测为准；仓库中的足球 YOLO 是独立参考路线，不代表已在当前 Z035 系统部署。
+系统原理、软硬件接口及团队分工见 [设计报告](report/design_report_zh.md) 和 [硬件接口表](report/hardware_interfaces_zh.md)。当前演示采用 PicoDet 人体检测；足球 YOLO 参考路线单独保存在参考资料中。
 
-视频显示、检测推理和 ROI 更新具有不同节奏：显示持续更新，并不意味着每一帧都产生了新的检测结果。现有临时目标编号用于相邻检测结果关联，不代表跨遮挡的稳定跟踪。
+系统将视频显示、检测推理和 ROI 更新异步组织，使画面展示与智能感知按各自节奏运行。
 
 ## 验证与实现结果
 
@@ -38,11 +38,13 @@ OV5640 摄像头 → FPGA 视频通路 / VDMA → HDMI 全景与局部显示
 | 预处理板端 Golden | 一次独立固定输入测试中，**307,200 / 307,200 个 FP32 值**与参考逐位一致；[结果与复核方式](report/preproc_board_golden_20261029_zh.md)。 |
 | RTL 仿真 | 预处理五类输入、AXI-Lite 和舵机等测试记录见 [仿真与验证说明](sim/verification_zh.md)。 |
 | Vivado 构建 | 干净克隆后的独立构建生成 BIT/XSA：LUT 24,986、FF 28,246、BRAM36 303/500、DSP 49；已约束路径 WNS +0.608 ns、WHS +0.007 ns。[构建记录和报告](report/clean_reproduction_20261028_zh.md) |
-| 预处理计时 | 已有 CPU 与 FPGA 两组板端记录；两组使用不同缩放算法和不同实时帧，不能直接作为同算法加速比或精度对比。[测试条件与结果](report/preproc_ab_20261028_zh.md) |
+| 预处理计时 | CPU 双三次与 FPGA 双线性两种预处理配置均已完成板端计时，输入条件、算法及统计口径见对应报告。[测试条件与结果](report/preproc_ab_20261028_zh.md) |
 
-技术文档记录的阶段联调观察为检测更新约 **2 FPS**、视频显示约 **30 FPS**；两者是不同指标。现有[应用日志](report/board_app_evidence_20261028_zh.md)可重算检测路径耗时，视频显示帧率未见独立计时记录，不将显示帧率当作检测速度。
+阶段联调观察中，检测更新约 **2 FPS**、视频显示约 **30 FPS**，分别对应智能感知和视频展示路径。[应用日志](report/board_app_evidence_20261028_zh.md)提供检测路径的计时记录；30 FPS 为阶段观察值，独立显示帧率计时留待后续测量。
 
-固定输入 Golden 使用独立测试程序，该次测试的独立 BIT 哈希未核实；它不能直接证明其他版本或整网精度。I/O 时序、CDC 和 VDMA 告警的现有记录及限制见 [告警说明](report/warning_review_zh.md)。独立 V2/R3 卷积实验不等同于当前 Eyes 系统已实现 FPGA 卷积卸载。
+### 测试条件与工程说明
+
+固定输入 Golden 使用独立测试程序，其 BOOT 身份已记录，独立 BIT 哈希及与视频测试版本的对应关系待核对。CPU/FPGA 计时比较双三次与双线性两种配置，使用先后采集的实时帧。PicoDet 推理保持在 ARM 端，独立 V2/R3 卷积实验作为历史研究资料保存。I/O 时序、CDC 和 VDMA 的处理状态集中见 [工程告警说明](report/warning_review_zh.md)。
 
 ## 仓库目录
 
@@ -73,11 +75,11 @@ git lfs pull
 python -B tools/verify_submission.py
 ```
 
-仓库中展开的文件名采用小写；原工程脚本和约束可能依赖原始大小写。请先按 [复现指南](report/reproduction_zh.md) 使用 `tools/restore_a_repro.py` 将原快照恢复到**新的独立目录**，再运行 `build/build_full_vivado.tcl`。不要直接使用小写副本重建或覆盖稳定 SD。
+仓库中展开的文件名采用小写。为保留构建所需的原始大小写，请按 [复现指南](report/reproduction_zh.md) 使用 `tools/restore_a_repro.py` 将快照恢复到**新的独立目录**，再运行 `build/build_full_vivado.tcl`。构建和上板试验均使用独立工作区及实验介质，保留稳定 SD。
 
-使用 Vivado 2025.2 的人员可参考 [实验性迁移脚本及说明](build/vivado_2025_2_zh.md)；该脚本尚未在 2025.2 实际验证，不替代已记录的 2022.2 构建结果。
+使用 Vivado 2025.2 可参考 [实验性迁移脚本及说明](build/vivado_2025_2_zh.md)。已记录的完整构建基于 2022.2；2025.2 脚本的目标版本运行验证为后续迁移步骤。
 
-已记录的干净克隆构建曾在布线阶段中断，随后从检查点续跑生成 BIT/XSA；具体命令、日志和验证范围见 [干净复现记录](report/clean_reproduction_20261028_zh.md)。文件哈希核验、仿真、上板记录分别证明不同内容。
+已完成从干净克隆恢复工程、综合与实现；布线中断后从检查点续跑生成 BIT/XSA。具体命令、原始日志及验证范围见 [干净复现记录](report/clean_reproduction_20261028_zh.md)。
 
 ## 报告与技能包
 
@@ -85,4 +87,4 @@ python -B tools/verify_submission.py
 - [AI 协作记录](report/ai_collaboration_record.md) · [Skill 索引](skill/index.md) · [第三方来源与授权](report/third_party_sources_zh.md)
 - [预处理板端 Golden](report/preproc_board_golden_20261029_zh.md) · [CPU/FPGA 计时](report/preproc_ab_20261028_zh.md) · [复现指南](report/reproduction_zh.md)
 
-PYNQ Skill 提供可复用示例并完成离线模拟测试，尚无 PYNQ 实板或真实跨项目验证。模型权重及部分第三方 IP 的使用与再分发授权仍需按 [来源与授权说明](report/third_party_sources_zh.md) 核对。
+PYNQ Skill 提供 Overlay、寄存器、DMA 和缓存一致性的可复用示例，已完成离线模拟验证，实板及跨项目复用留待平台迁移时验证。模型权重及部分第三方 IP 的授权核对状态详见 [来源与授权说明](report/third_party_sources_zh.md)。

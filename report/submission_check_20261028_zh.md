@@ -1,6 +1,6 @@
 # 比赛提交材料检查（2026-10-28）
 
-按已提供的 3.3.5 截图核对，最终格式和评分以赛事组织方完整规则为准。本文件索引已有结果，不构造新的上板结论。
+按已提供的 3.3.5 截图核对，最终格式和评分以赛事组织方完整规则为准。本文件将各项要求与已有实现、验证记录对应。
 
 逐项材料入口及本地复核结果见 [比赛材料与证据索引](contest_evidence_index_zh.md)。后续提供的一次[独立板端同输入 Golden](preproc_board_golden_20261029_zh.md)逐位对比通过；时序与告警尚未签核；团队关于模型来源的反馈见 [来源与授权](third_party_sources_zh.md)。
 
@@ -11,8 +11,8 @@
 | 资源与时序 | [干净复现记录](clean_reproduction_20261028_zh.md)保留 Vivado 日志、报告、BIT/XSA；[告警说明](warning_review_zh.md)按类型汇总 | WNS/WHS 为已约束路径结果；I/O、CDC 和方法学问题仍未闭环。 |
 | 上板及运行 | [启动证据](board_reproduced_20261028_zh.md)、[Attention 应用日志及现场六项功能确认](board_app_evidence_20261028_zh.md)，另有独立注意力候选现场功能确认 | 应用日志含 VDMA 警告与 `freshness=unverified`，不否定现场功能确认；已有 CPU/FPGA A/B 计时，但缩放算法和实时帧不同，见 [实板结果](preproc_ab_20261028_zh.md)。 |
 | 构建复现 | [复现步骤](reproduction_zh.md)、`build/build_full_vivado.tcl`、源码及归档校验脚本；干净克隆后从中断的检查点续跑生成 BIT/XSA | 所需 Vivado、交叉工具链、sysroot 和设备环境不全部随仓库提供；新内核与现场镜像二进制一致性未证明。 |
-| Skill | [Skill 索引](../skill/index.md)：FP32 比较、ROI 接口检查、PYNQ 示例 | PYNQ 示例仅模拟对象验证；团队确认无 PYNQ 实板及真实跨项目复用资料，按模拟候选提交，不列为需要队友补交的既有材料，也不宣称获得加分。 |
-| 设计报告和 AI 协作 | [设计报告](design_report_zh.md)、[AI 协作记录](ai_collaboration_record.md)及图示、参考资料 | 团队主要分工已按团队确认记录；仍需核对具体贡献与引用，AI 记录为整理稿而非完整逐字对话。 |
+| Skill | [Skill 索引](../skill/index.md)：FP32 比较、ROI 接口检查、PYNQ 示例 | PYNQ 示例已完成模拟对象验证，以离线参考方案提交，实板与真实跨项目复用留待后续验证。 |
+| 设计报告和 AI 协作 | [设计报告](design_report_zh.md)、[AI 协作记录](ai_collaboration_record.md)及图示、参考资料 | 团队主要职责及引用来源已整理；AI 记录提供工程案例、真实会话节选和验证路径。 |
 
 ## 本地可重复检查
 
@@ -27,6 +27,6 @@ python -B -m unittest discover -s skill/roi-review-control/tests -v
 python -B -m unittest discover -s skill/pynq-overlay-dma/tests -v
 ```
 
-链接检查只检查报告、仿真和 Skill 的 Markdown 行内本地文件路径，不检查网页可用性、段落锚点、代码块或所有脚本内部路径。文件哈希与主机测试不等于实板验证。
+链接检查只检查报告、仿真和 Skill 的 Markdown 行内本地文件路径，不检查网页可用性、段落锚点、代码块或所有脚本内部路径。文件完整性、工具行为和板端功能分别对应各自验证记录。
 
-现场已确认六项功能正常，且 BIT、BOOT、启动串口、应用日志及独立固定输入板端 Golden 已收到，不再要求重复提供。该 Golden 不能证明 A/B 计时两组使用同算法或相同帧，也不能代替视频帧新鲜度验证。
+现场六项功能确认、BIT、BOOT、启动串口、应用日志和独立固定输入 Golden 均已归档。Golden 用于固定输入张量一致性，A/B 日志用于两种实际配置计时；同算法配对及帧新鲜度按专项评估。

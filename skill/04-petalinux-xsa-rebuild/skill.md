@@ -35,7 +35,7 @@ python scripts/verify_xsa_bit.py hardware.xsa hardware.bit --member path/inside/
 
 ## 已验证效果与失败来源
 
-[E04](../evidence.md#e04镜像重建前先识别工具代际)：XSA 为 2022.2，而原课程环境为 2017.4；本机还曾打开不同 Ubuntu 版本且无 PetaLinux。既有记录据此明确阻塞阶段，未伪造镜像产物。本技能抽取的是预检与绑定方法，不声称这些历史镜像已构建成功。
+[E04](../evidence.md#e04镜像重建前先识别工具代际)：XSA 为 2022.2，而原课程环境为 2017.4；本机还曾打开不同 Ubuntu 版本且无 PetaLinux。既有记录据此明确阻塞阶段，未伪造镜像产物。本技能提炼环境预检与文件绑定方法，该历史任务的镜像构建仍受上述环境条件限制。
 
 ## 可直接使用的提示词
 

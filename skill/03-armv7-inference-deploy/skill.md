@@ -7,7 +7,7 @@ description: 将视觉模型分阶段移植到 Zynq Cortex-A9 ARMv7 Linux，排�
 
 ## 适用范围
 
-目标为 ARM32 Linux CPU 推理，典型平台为 Zynq-7000 Cortex-A9。不要从板名推断 aarch64、驱动或加速后端。模型训练、PL 卷积迁移和实时摄像头链路分别验收。
+目标为 ARM32 Linux CPU 推理，典型平台为 Zynq-7000 Cortex-A9。根据 SoC 和实际系统资料确认指令集、驱动及后端。模型训练、PL 卷积迁移和实时摄像头链路分别验收。
 
 ## 工作流
 
@@ -28,7 +28,7 @@ arm-linux-gnueabihf-objdump -T ./paddle_person
 qemu-arm -cpu cortex-a9 ./paddle_person <实际支持的单图参数>
 ```
 
-最后一行参数必须查实际程序帮助，不能把示意参数直接当作可执行命令。
+最后一行按实际程序帮助替换单图参数后执行。
 
 ## 失效条件
 

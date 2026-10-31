@@ -1,5 +1,7 @@
 # EagleEye: FPGA-assisted video review (draft)
 
+> Historical English draft. The current design, board evidence and performance results are maintained in the [Chinese design report](design_report_zh.md); the text below records the earlier drafting stage.
+
 ## 1. Problem and contribution
 
 The project explores a camera-based aid for reviewing fast-moving sports

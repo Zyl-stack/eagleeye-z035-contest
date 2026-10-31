@@ -1,6 +1,6 @@
 # 发给队友的复现清单
 
-**2026-10-28 更新：**以下为 10 月 27 日的历史材料；A 此后已确认摄像头、人体检测、鼠标 ROI、按键、舵机和 HDMI 六项功能上板正常，Attention 应用日志也已收录。无需再为这些功能重复索要资料；最新范围见 [上板应用证据](board_app_evidence_20261028_zh.md)。
+**历史记录导读：**下文保留 2026-10-27 的工程状态与步骤。后续已完成 BIT/XSA 构建，收到六项功能现场确认和 Attention 应用日志；当前结果见 [上板应用记录](board_app_evidence_20261028_zh.md)及[干净复现记录](clean_reproduction_20261028_zh.md)。本页的待办列表按当时日期理解。
 
 目前同一提交目录区分两版：原稳定 GridPolicy 见 `src/ps_as_built/` 和 `board/sd_boot/`；后续实板通过反馈的注意力 ROI 版见 `src/ps/` 和 `board/attention/`。两版共用原稳定 BOOT、image.ub、boot.scr 和 model.nb。`src/attention_reference/` 仅是 C 算法参考子集，未作为板端程序直接运行。
 

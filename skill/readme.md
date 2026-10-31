@@ -33,7 +33,7 @@
 
 ## 使用与验证
 
-每项都有适用范围和验证边界。部分工具功能相近，但输入契约和输出有所不同，按任务选用即可。足球检测、AX7020 和历史工程案例仅作为可复用经验，不代表当前 Z035 系统已完成相同板端功能。
+每项 Skill 提供适用范围、输入输出契约和验证方法。可根据任务选择工具；足球检测、AX7020 和历史工程案例用于展示可迁移的方法，当前 Z035 的板端功能见各自测试记录。
 
 从仓库根目录运行主要离线检查：
 
@@ -44,6 +44,6 @@ python -B -m unittest discover -s skill/roi-review-control/tests -v
 python -B -m unittest discover -s skill/pynq-overlay-dma/tests -v
 ```
 
-已有测试和来源见 [验证记录](validation.md)、[整理与复核记录](validation_local_20261030.txt)、[经验来源](evidence.md) 和 [Skill 复用测试](../sim/skill_portability_20261028.txt)。PYNQ 示例尚无实板或真实跨项目验证，不能把模拟结果写成实板结果。
+已有测试和来源见 [验证记录](validation.md)、[整理与复核记录](validation_local_20261030.txt)、[经验来源](evidence.md) 和 [Skill 复用测试](../sim/skill_portability_20261028.txt)。PYNQ 示例已完成模拟对象验证，实板和真实跨项目复用留待迁移时验证。
 
 为符合比赛仓库命名要求，展开后的技能入口使用小写 `skill.md`。若需安装到要求大写入口 `SKILL.md` 的工具，请在自己的独立副本中改名。

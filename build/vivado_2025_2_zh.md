@@ -1,6 +1,6 @@
 # Vivado 2025.2 实验性迁移入口
 
-仓库原始 Eyes 工程使用 Vivado 2022.2；[`build_vivado_2025_2.tcl`](build_vivado_2025_2.tcl) 是为 Vivado 2025.2 准备的独立迁移脚本。**当前机器只有 2022.2，尚未在 2025.2 运行本脚本；不能将其视为 2025.2 综合、时序、BIT 或板端验证通过。**
+仓库原始 Eyes 工程使用 Vivado 2022.2；[`build_vivado_2025_2.tcl`](build_vivado_2025_2.tcl) 是为 Vivado 2025.2 准备的独立迁移脚本。**验证状态：已在 2022.2 检查脚本流程及版本拒绝路径，2025.2 的综合、时序、BIT 和板端验证待目标环境执行。**
 
 ## 前提
 
@@ -28,11 +28,11 @@ vivado -mode batch -source build/build_vivado_2025_2.tcl -tclargs D:/EE25_SRC/ea
 vivado -mode batch -source build/build_vivado_2025_2.tcl -tclargs D:/EE25_SRC/eagleeye_z035 D:/EE25_BIT bit 4
 ```
 
-最后的 `4` 是并行任务数，可为 1～16。`bit` 模式完成后会写出资源、时序、DRC、CDC 和 Methodology 报告，以及 `eagleeye_z035.xsa`；BIT 位于 `vivado_work/eagleeye_z035.runs/impl_1/z100_top.bit`。任何一步报错即停止，不修改 2022.2 原工程。工程升级可能改变 IP 行为、接口或输出；必须重新核查地址、时钟、复位、约束、升级报告及软件兼容性，并通过所需仿真、时序和实板验证，不能直接套用旧测试结论。
+最后的 `4` 是并行任务数，可为 1～16。`bit` 模式完成后会写出资源、时序、DRC、CDC 和 Methodology 报告，以及 `eagleeye_z035.xsa`；BIT 位于 `vivado_work/eagleeye_z035.runs/impl_1/z100_top.bit`。任何一步报错即停止，不修改 2022.2 原工程。工程升级可能改变 IP 行为、接口或输出；必须重新核查地址、时钟、复位、约束、升级报告及软件兼容性，并通过所需仿真、时序和实板验证，升级后的测试结果按新版本独立记录。
 
 ## 已执行的本机检查
 
-2026-10-30 使用 **Vivado 2022.2**，对脚本临时副本仅替换版本检查，运行 `project` 模式：BD 打开和校验、IP 输出产品生成及工程创建成功；过程有原有的 AXI 宽度等警告。该临时副本仅用于检查脚本流程，不是 2025.2 版本验证，也没有进行综合、BIT 或上板。原始日志见 [2022.2 流程检查](vivado_2025_2_checks/smoke_2022.log)。
+2026-10-30 使用 **Vivado 2022.2**，对脚本临时副本仅替换版本检查，运行 `project` 模式：BD 打开和校验、IP 输出产品生成及工程创建成功；过程有原有的 AXI 宽度等警告。该临时副本完成 2022.2 的脚本流程检查，2025.2 运行、综合、BIT 和上板按目标版本单独验证。原始日志见 [2022.2 流程检查](vivado_2025_2_checks/smoke_2022.log)。
 
 对未修改的 2025.2 脚本，在本机 2022.2 运行时按预期退出并拒绝继续，见 [版本检查日志](vivado_2025_2_checks/version_guard_2022.log)。完整脚本使用 `upgrade_ip` 处理目录 IP，不把模块引用当作 IP，也不使用 `get_ips -all`。
 

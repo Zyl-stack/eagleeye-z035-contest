@@ -2,11 +2,11 @@
 
 ## 问题来源与提炼
 
-在摄像头、四路 DMA 和 FPGA 预处理对接时，仅看到 IP 完成或画面正常，并不能确认模型实际收到的张量正确：输入帧可能被覆盖，通道顺序、缩放或缓存状态也可能不一致。因此将“固定同一输入、比较完整参考张量、检查错误和退出码”整理成可复用流程；项目背景与局限见 [AI 协作记录](../../report/ai_collaboration_record.md)的预处理案例。
+在摄像头、四路 DMA 和 FPGA 预处理对接时，需要同时检查 IP 完成状态和模型实际收到的完整张量：输入帧可能被覆盖，通道顺序、缩放或缓存状态也可能不一致。因此将“固定同一输入、比较完整参考张量、检查错误和退出码”整理成可复用流程；项目背景与局限见 [AI 协作记录](../../report/ai_collaboration_record.md)的预处理案例。
 
 ## 适用范围
 
-验证 RGB888 摄像头帧经 FPGA 预处理后生成的 FP32 NCHW 张量。默认示例契约为 640x360 RGB888 输入、`1x3x320x320` 输出；换模型或输入尺寸时，应先修改参考程序和 DMA 长度，再使用本 Skill。它是验证流程，不包含队友 IP 的所有权或许可证。
+验证 RGB888 摄像头帧经 FPGA 预处理后生成的 FP32 NCHW 张量。默认示例契约为 640x360 RGB888 输入、`1x3x320x320` 输出；换模型或输入尺寸时，应先修改参考程序和 DMA 长度，再使用本 Skill。IP 的来源和使用许可由对应工程资料另行记录。
 
 ## 输入与结果
 
@@ -16,7 +16,7 @@
 
 ## 不依赖开发板的最小示例
 
-将本目录完整复制到任意位置，在该目录下用 Python 3.10 或更新版本运行；脚本仅使用标准库。`examples/` 中是人工构造的 2×2 小端 FP32 测试数据，**不是真实摄像头或板端输出**：
+将本目录完整复制到任意位置，在该目录下用 Python 3.10 或更新版本运行；脚本仅使用标准库。`examples/` 提供人工构造的 2×2 小端 FP32 正反例，适合在主机验证比较器：
 
 ```sh
 python -B tools/verify_tensor.py --actual examples/actual_pass.f32 --golden examples/golden.f32 --shape 2x2 --require-exact
@@ -28,14 +28,14 @@ python -B -m unittest discover -s tests -v
 
 ## 非 EagleEye 形状的复用示例
 
-以下是合成的 2×3 小端 FP32 数据，展示比较工具不依赖摄像头或具体模型；不是板端数据：
+以下是合成的 2×3 小端 FP32 数据，展示比较工具在不同张量形状下的复用，数据来源为主机构造：
 
 ```sh
 python -B tools/verify_tensor.py --actual examples/other_pass.f32 --golden examples/other_golden.f32 --shape 2x3 --require-exact
 python -B tools/verify_tensor.py --actual examples/other_fail.f32 --golden examples/other_golden.f32 --shape 2x3 --require-exact
 ```
 
-正例退出码 0；第二个例子改动了一个值，退出码 1。其他项目先确认输入来源一致、元素类型、布局、字节序和预先确定的容差；本工具不执行格式转换。用于 PYNQ 项目时，仅比较导出的数据，不负责 Overlay、缓存同步或 DMA。PYNQ 板端适配尚未验证。
+正例退出码 0；第二个例子改动了一个值，退出码 1。其他项目先确认输入来源一致、元素类型、布局、字节序和预先确定的容差；比较器接收符合契约的原始文件；格式转换、Overlay、缓存与 DMA 由目标工程负责。PYNQ 文件比较可复用本工具，板端适配待实际迁移验证。
 
 ## 用法
 
@@ -48,11 +48,11 @@ python -m unittest discover -s tests -v
 
 板端顺序：确认 HWH 地址/时钟与驱动一致；锁定输入帧槽；CPU 写过输入时先 clean cache；启动一条 MM2S 和三条 S2MM；等待三条输出、检查 DMA/IP 状态与超时；invalidate 输出 cache；导出张量比对。不得把摄像头仍在写入的槽当作固定输入。
 
-测速要分别记录 IP `cycles`、DMA/DDR/cache 的端到端 `preprocess_ms`、纯 PS 参考 `preprocess_ms` 和检测结果。**IP 流接口仿真时延不是板端实测。**已收到当前版本的 [CPU/FPGA A/B 原始日志](../../report/preproc_ab_20261028_zh.md)：两组使用相同模型与线程，但 CPU 为双三次、FPGA 为双线性且实时帧不同；只能报告两种配置的计时比，不能称为同算法加速比或数值一致。
+测速分别记录 IP `cycles`、包含 DMA/DDR/cache 的端到端 `preprocess_ms`、PS 参考 `preprocess_ms` 和检测结果。流接口仿真周期按仿真条件报告，板端时间按现场计时报告。已有 [CPU/FPGA A/B 日志](../../report/preproc_ab_20261028_zh.md)保持相同模型与线程，比较 CPU 双三次和 FPGA 双线性两种配置，使用先后采集的实时帧；同算法收益及同输入数值一致性分别验证。
 
 ## 已验证效果与边界
 
-仓库内 [Icarus 仿真记录](../../sim/preproc_iverilog_20261027.log)显示五类帧各 307200 个值与参考逐位一致；采集帧的三路仿真输出和独立复核方法见 [仿真数据说明](../../sim/preproc_captured_dma_20261027/readme.md)。这证明指定测试台和输入下的离线结果，不证明实板 DMA 与缓存行为。
+仓库内 [Icarus 仿真记录](../../sim/preproc_iverilog_20261027.log)显示五类帧各 307200 个值与参考逐位一致；采集帧的三路仿真输出和独立复核方法见 [仿真数据说明](../../sim/preproc_captured_dma_20261027/readme.md)。该记录覆盖指定测试台和输入下的离线结果，实板 DMA 与缓存行为由独立板端测试核验。
 
 现场已确认复现 BIT 上板功能正常，登录后应用输出已收到；后续[独立板端固定输入测试](../../report/preproc_board_golden_20261029_zh.md)中 307,200 个输出与 Golden 逐位一致，BIT 哈希未核实。本 Skill 不自动锁帧、操作 DMA 或维护缓存；板端采集必须由匹配系统的驱动和流程完成。
 

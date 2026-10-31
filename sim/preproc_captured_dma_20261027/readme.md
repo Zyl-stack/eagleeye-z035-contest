@@ -1,6 +1,6 @@
 # 采集帧预处理仿真输出
 
-`captured_dma_r.hex`、`captured_dma_g.hex`、`captured_dma_b.hex` 是 2026-10-27 Icarus 适配器加预处理核心仿真的原始三路输出，每路 102,400 个 32 位字；来源和原始运行命令见 [仿真日志](../preproc_iverilog_20261027.log)。本地使用的 `captured.rgb` 和 `captured.golden.f32` 哈希与仓库 `data/` 下文件一致。该数据不是板端采集输出。
+`captured_dma_r.hex`、`captured_dma_g.hex`、`captured_dma_b.hex` 是 2026-10-27 Icarus 适配器加预处理核心仿真的原始三路输出，每路 102,400 个 32 位字；来源和原始运行命令见 [仿真日志](../preproc_iverilog_20261027.log)。本地使用的 `captured.rgb` 和 `captured.golden.f32` 哈希与仓库 `data/` 下文件一致。该目录记录 Icarus 仿真输出，板端输出另见[固定输入 Golden](../../report/preproc_board_golden_20261029_zh.md)。
 
 在仓库根目录执行：
 

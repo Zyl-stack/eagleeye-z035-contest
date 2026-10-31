@@ -26,7 +26,7 @@ python scripts/check_stream.py targets.txt
 python scripts/check_stream.py legacy.txt --legacy-size 640 640
 ```
 
-校验器检查帧序、计数、字段、范围、越界、同帧重复 ID，以及已观测到的 ID 类别变化。它无法仅由坐标证明跨遮挡身份正确，也不证明接收方实现正确。保留窗口之后 ID 可重新分配时，须更换会话或扩充带 generation 的协议。
+校验器检查帧序、计数、字段、范围、越界、同帧重复 ID，以及已观测到的 ID 类别变化。跨遮挡身份及接收方行为还需真值评价与端到端回放。保留窗口之后 ID 可重新分配时，须更换会话或扩充带 generation 的协议。
 
 ## 失效条件
 
