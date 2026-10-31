@@ -18,7 +18,6 @@
 | [04-petalinux-xsa-rebuild](04-petalinux-xsa-rebuild/skill.md) | XSA、bitstream、系统镜像版本混用 | XSA/外部 bitstream 校验脚本、环境预检清单 | 硬件身份检查与环境预检已记录，镜像构建按目标环境执行 |
 | [05-vdma-frame-snapshot](05-vdma-frame-snapshot/skill.md) | 推理期间摄像头覆盖 DDR，出现撕裂或旧帧 | 缓冲所有权、时间界限、cache 排查与时延拆分 | 实现及离线运行有记录；真实 DMA 所有权须实测 |
 | [06-detection-stream-contract](06-detection-stream-contract/skill.md) | 检测与注意力接口的坐标、速度、帧率和 ID 语义不一致 | 独立流校验器、旧流显式尺寸覆盖、时间基准模板 | STREAM_INFO 与实际视频 metrics 可核验 |
-| [07-small-object-tracking-regression](07-small-object-tracking-regression/skill.md) | 小球漏检、目标预算挤掉球、遮挡后 ID 变化 | 两类数据审计、场景回归矩阵、分块检测评价 | 训练/真实视频 PC 测试；非板上实时指标 |
 | [08-roi-ablation-evaluation](08-roi-ablation-evaluation/skill.md) | 无法证明插值方式对识别的真实影响 | 配对实验模板、UNKNOWN 指标、负结果写法 | 400 个配对 ROI；Lanczos 并未全面优于双线性 |
 | [09-roi-transaction-integration](09-roi-transaction-integration/skill.md) | 分类返回到错误目标、旧结果覆盖新请求 | 三 ID 匹配、语义适配、故障注入与接口模板 | 12 帧软件闭环及过期结果拒绝报告 |
 | [10-hls-cross-platform-port](10-hls-cross-platform-port/skill.md) | 将上游 FPGA 后端误当可直接部署的 Zynq 工程 | 仓库职责图、寄存器/内存迁移表、器件支持预检 | Z100 的 set_part 器件预检定位了环境依赖 |

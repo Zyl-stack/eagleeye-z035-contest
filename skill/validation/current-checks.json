@@ -126,48 +126,6 @@
       }
     }
   ],
-  "legacy_stream": {
-    "pass": true,
-    "source_size": [
-      640,
-      640
-    ],
-    "explicit_stream_info": false,
-    "frames": 24,
-    "targets": 12,
-    "held_records": 0,
-    "observed_invalid_to_valid": 0,
-    "scope": "syntax/range/observed ID type only; identity accuracy and timebase need source evidence"
-  },
-  "legacy_without_dimensions": {
-    "expected_rejection": true,
-    "reason": "source dimensions unknown: provide STREAM_INFO or verified --legacy-size W H"
-  },
-  "real_video_stream": {
-    "pass": true,
-    "source_size": [
-      1920,
-      1080
-    ],
-    "explicit_stream_info": true,
-    "frames": 272,
-    "targets": 1616,
-    "held_records": 507,
-    "observed_invalid_to_valid": 134,
-    "scope": "syntax/range/observed ID type only; identity accuracy and timebase need source evidence"
-  },
-  "real_video_metrics": {
-    "source": "datasets\\originals\\real_match_source.webm",
-    "model": "runs\\football_detector\\yolo11n_1280\\weights\\best.pt",
-    "image_size": 1280,
-    "frame_stride": 2,
-    "tile_size": 960,
-    "source_fps": 25.0,
-    "source_frames_read": 543,
-    "frames_processed": 272,
-    "detector_seconds": 332.911836,
-    "detector_fps": 0.817
-  },
   "arm_binary_header": {
     "pass": true,
     "checks": {
@@ -192,5 +150,6 @@
     "embedded_bytes": 2037636,
     "external_bytes": 2037636,
     "scope": "file identity only; verify hardware/PS config and tool versions separately"
-  }
+  },
+  "curation": "2026-10-31: retained preprocessing, ARM ABI and hardware identity results; unrelated detector cases archived locally."
 }

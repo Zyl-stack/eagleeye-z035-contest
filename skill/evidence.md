@@ -51,17 +51,9 @@
 
 代码选择最近完成槽、复制到私有内存并复查写指针。该策略依赖复制期间写者未回绕覆盖所选槽。仅前后两次环形指针相同不能排除多次回绕；复用必须增加可证明的时间界限、单调帧序号或显式缓冲所有权。本包将上述条件纳入验收清单，真实 DMA 并发按目标板证据评估。
 
-### E06：源坐标系曾被旧说明误判
+### E06：检测流需要显式坐标与时间契约
 
-来源：持球队员跟踪任务及回答项目复现问题对话；`Qiansai/EagleEye_C_Attention_Sim_git/B_DETECTION_INTERFACE.md`、`build/quality_cases/ball_static_b_target_stream.txt`、`build/real_match/real_match_metrics.json`。
-
-旧对话曾依据 PC demo 默认约定和框落点，误把静态流解释为 640×360；2026-10-27 后续复核其生成图像为 640×640。框落在某个范围内不足以确定源分辨率。新流增加 `STREAM_INFO,width,height`；`imgsz=1280` 与源尺寸无等价关系。真实视频 metrics 记录 source_fps=25、frame_stride=2、frames_processed=272、detector_fps=0.817；12.5 Hz 是源时间下的采样频率，不是推理吞吐。
-
-### E07：小球回归需要保留失败案例
-
-来源：持球队员跟踪任务对话；`VISION_DETECTION.md`、`B_TO_C_YOLO_HANDOFF.md`、`tests_py/`、`build/real_match/`。
-
-历史记录：两类数据合并 6111 张图片，训练集 12228 个 PLAYER 框、1011 个 BALL 框；CPU 1 epoch、1% 数据冒烟 mAP50=0.00063，只证明链路能运行。队友正式训练报告指标为 P=96.1%、R=91.4%、mAP50=95.8%、mAP50-95=69.9%，该训练集指标与真实视频/板端性能按各自测试条件记录。真实视频分块检测仍有低置信假球；目标数上限内增加 BALL 保留策略，遮挡时保留 valid=0 的短时轨迹。上述数值引用历史训练记录。
+检测输入分辨率、模型张量尺寸、显示尺寸及处理吞吐分别记录。通用校验器要求新流提供 `STREAM_INFO,width,height`，旧流使用已确认的 `--legacy-size`；对应主机正反例见 [工具验证记录](validation.md)。目标 ID 的真实稳定性及视频时间基准在目标工程单独验证。
 
 ### E08：负消融结果同样是可复用结论
 
@@ -85,7 +77,7 @@ VOC2007 代理数据，训练 1200 ROI、验证 400 ROI、同一 TinyFoveaCNN。
 
 来源：回答项目复现问题与当前聊天；PicoDet 交付 README、训练 README、各 SHA256SUMS。
 
-官方 XS-320 model.nb 与本地 S-416 QAT picos416.nb 记录属不同路线；YOLO 1280 导出 ONNX 与 ARM 512 ONNX 也不是同一文件。`runs/`、`build/` 被忽略时，分支名不能交付产物。2026-10-27 复现包的历史核对记录区分 GridPolicy as-built 与后续 AttentionPolicy，并注明用户反馈上板通过但无原始当次日志。该段保留当时的交接核对状态，后续 Z035 板端证据见仓库主报告。历史未登录访问的 404 记录按权限或可达性问题处理，仓库存在性需在有权限的环境核对。权重/数据及比赛用途授权不明处为“待确认”。
+官方 XS-320 model.nb 与本地 S-416 QAT picos416.nb 记录属不同路线。`runs/`、`build/` 被忽略时，分支名不能交付产物。2026-10-27 复现包的历史核对记录区分 GridPolicy as-built 与后续 AttentionPolicy，并注明用户反馈上板通过但无原始当次日志。该段保留当时的交接核对状态，后续 Z035 板端证据见仓库主报告。历史未登录访问的 404 记录按权限或可达性问题处理，仓库存在性需在有权限的环境核对。权重/数据及比赛用途授权不明处为“待确认”。
 
 ## 如何复核这些依据
 

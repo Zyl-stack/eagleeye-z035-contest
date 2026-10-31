@@ -171,36 +171,6 @@ if errorlevel 1 (
 )
 
 cl /nologo /std:c11 /W4 /Iinclude ^
-  tests\test_b_yolo_handoff.c ^
-  src\a_fovea_adapter.c ^
-  src\attention.c ^
-  src\attention_scheduler.c ^
-  src\ball_challenger_gate.c ^
-  src\bc_adapter.c ^
-  src\c_config.c ^
-  src\player_attention_features.c ^
-  src\director_state.c ^
-  src\eagleeye_types.c ^
-  src\enhance_policy.c ^
-  src\feedback_attention.c ^
-  src\fovea_transaction.c ^
-  src\motion_predictor.c ^
-  src\possession_estimator.c ^
-  src\roi_motion_controller.c ^
-  src\roi_smoother.c ^
-  /Fo:build\obj\ ^
-  /Fe:build\test_b_yolo_handoff.exe
-if errorlevel 1 (
-  echo B YOLO handoff test build failed.
-  exit /b 1
-)
-build\test_b_yolo_handoff.exe
-if errorlevel 1 (
-  echo B YOLO handoff tests failed.
-  exit /b 1
-)
-
-cl /nologo /std:c11 /W4 /Iinclude ^
   tests\test_c_stability.c ^
   src\attention.c ^
   src\feedback_attention.c ^

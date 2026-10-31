@@ -4,7 +4,7 @@
 
 ## 技能格式与工具测试
 
-- 11 个 `SKILL.md` 均通过 skill-creator 的 `quick_validate.py`。为运行该官方校验器使用了本机自带 PyYAML 的 Python；技能包中的五个工具及测试本身仅使用 Python 标准库。
+- 当前保留的 10 个编号技能在历史记录中均通过 skill-creator 的 `quick_validate.py`。为运行该官方校验器使用了本机自带 PyYAML 的 Python；技能包中的五个工具及测试本身仅使用 Python 标准库。
 - `python -B -m unittest discover -s skill/tests -v`：18 项测试通过。
 - 故障测试覆盖：FP32 截断、数量不符、NaN/Inf、误差超限和有符号零；ARM64/soft-float/截断 ELF；XSA bitstream 不同与多成员歧义；缺源尺寸、错误范围、重复/保留 ID、类别变化、帧截断；manifest 的修改、缺失、新增、路径逃逸、自引用和覆盖拒绝；CLI 的 0/1/2 退出码。
 
@@ -17,13 +17,11 @@
 | zero/full/distinct/edge/captured 五组保存 RTL 输出 | 各 307200/307200 个 FP32 位模式相同 | 保存的完整张量与对应 Golden 相同 |
 | captured_dma、captured_xsim 两组保存输出 | 各 307200/307200 个 FP32 位模式相同 | 保存的适配器联测/XSim 输出与 Golden 相同 |
 | JPEG 版 paddle_person ELF 头 | ARM32、小端、EABI5、hard-float 标记通过 | ELF 头部验证；NEON、动态依赖和实际运行分别检查 |
-| 旧静态球流，显式 640×640 | 24 帧、12 条目标记录通过 | 语法/范围检查；缺尺寸时按预期拒绝，不猜默认 |
-| 真实视频流，声明 1920×1080 | 272 帧、1616 条记录通过；507 条 held、134 次观测到 invalid→valid | 跨类别总体统计，球的恢复真值和 ID 准确率另需标注评价 |
 | XSA 内嵌/外部 system_wrapper.bit | 相同，2037636 bytes | 内嵌与外部文件身份核验，板级配置及启动分别验证 |
 
 bitstream SHA-256：`bc5d35a5a414006309d0057ad6b99277847bd2f9e25162e99c92ea38d9336ed0`。
 
-完整结果：[current-checks.json](validation/current-checks.json)。54 个原始依据文件的大小与 SHA-256 见 [source-fingerprints.json](validation/source-fingerprints.json)，其中不包含原始权重、数据或完整源码内容。
+完整结果：[current-checks.json](validation/current-checks.json)。保留的原始依据文件的大小与 SHA-256 见 [source-fingerprints.json](validation/source-fingerprints.json)，其中不包含原始权重、数据或完整源码内容。
 
 ## 接收方复核
 

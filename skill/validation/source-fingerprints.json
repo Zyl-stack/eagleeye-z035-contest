@@ -80,26 +80,6 @@
     "sha256": "bb12fcadace312da1ba79904880497dcf0c890c87103a7fbf32d56770021fc20"
   },
   {
-    "path_from_original_workspace": "Qiansai/EagleEye_C_Attention_Sim_git/B_DETECTION_INTERFACE.md",
-    "bytes": 4553,
-    "sha256": "716dcf1a4aec6d10d3c5aef048023ffa77174bbb834d7acd5186441df673b233"
-  },
-  {
-    "path_from_original_workspace": "Qiansai/EagleEye_C_Attention_Sim_git/build/quality_cases/ball_static_b_target_stream.txt",
-    "bytes": 1047,
-    "sha256": "5a7b31ff9b7ea0055b989bee17aab657002baf011ca9876dd1a2c3ceee665c3a"
-  },
-  {
-    "path_from_original_workspace": "Qiansai/EagleEye_C_Attention_Sim_git/build/real_match/real_match_b_target_stream.txt",
-    "bytes": 88545,
-    "sha256": "356f6fc762ad6a75809ebe3b236e9755d63f9702013cbc982de0949791cee39e"
-  },
-  {
-    "path_from_original_workspace": "Qiansai/EagleEye_C_Attention_Sim_git/build/real_match/real_match_metrics.json",
-    "bytes": 340,
-    "sha256": "2557af3f5142fd70056f9744dce2b5881502c5822c17f44a70e7e79139a96034"
-  },
-  {
     "path_from_original_workspace": "Qiansai/B_Perception/RESULTS_V1.md",
     "bytes": 2426,
     "sha256": "e5aac8dfb1189c1a424b5df331ddfe3bac73ee7907486851e27f13365073975b"

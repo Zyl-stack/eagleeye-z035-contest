@@ -15,7 +15,7 @@ END_FRAME
 
 ## Frozen semantics
 
-- `source_width,source_height` describe the original video-frame coordinate system. They are not the YOLO `imgsz` used during inference.
+- `source_width,source_height` describe the original video-frame coordinate system. Model input dimensions and source-frame dimensions are recorded separately.
 - If `STREAM_INFO` is absent, legacy V1 input defaults to a 640x360 source frame.
 - `x,y,w,h` and `vx,vy` are expressed in the declared source-video coordinates.
 - Bounding box is `x,y,w,h`; `x,y` is the top-left corner.
@@ -38,7 +38,7 @@ The B-to-C adapter is the sole resolution boundary. It converts every accepted s
 - Boxes are converted by scaling both corners (`x`, `x+w`; `y`, `y+h`) and then deriving `w,h`, so edge rounding cannot create an inconsistent box.
 - Converted boxes are clamped to the canonical frame and must remain non-empty. A source box that becomes empty after conversion is rejected by the adapter.
 - `vx` scales by `640/source_width` and `vy` by `360/source_height`, preserving sign with safe saturation to `int16_t`.
-- No YOLO inference image size participates in these conversions.
+- The coordinate conversion uses only the declared source-frame dimensions.
 
 V1 field meanings must not be changed in place. Future `team_id`, `jersey_id`, `field_zone`, or timestamp data must use optional extension fields with an explicit compatibility rule, or a new `EE_B_TARGET_STREAM_V2` protocol.
 

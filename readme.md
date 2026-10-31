@@ -26,7 +26,7 @@ OV5640 摄像头 → FPGA 视频通路 / VDMA → HDMI 全景与局部显示
                         鼠标 / 按键 / 舵机
 ```
 
-系统原理、软硬件接口及团队分工见 [设计报告](report/design_report_zh.md) 和 [硬件接口表](report/hardware_interfaces_zh.md)。当前演示采用 PicoDet 人体检测；足球 YOLO 参考路线单独保存在参考资料中。
+系统原理、软硬件接口及团队分工见 [设计报告](report/design_report_zh.md) 和 [硬件接口表](report/hardware_interfaces_zh.md)。当前演示采用 PicoDet-XS 320 人体检测，模型推理运行在 ARM 端。
 
 系统将视频显示、检测推理和 ROI 更新异步组织，使画面展示与智能感知按各自节奏运行。
 
@@ -84,7 +84,7 @@ python -B tools/verify_submission.py
 ## 报告与技能包
 
 - [报告目录导航](report/readme.md) · [设计报告](report/design_report_zh.md) · [比赛材料与证据索引](report/contest_evidence_index_zh.md) · [版本身份](report/release_identity_zh.md)
-- [AI 协作记录](report/ai_collaboration_record.md) · [Skill 索引](skill/index.md) · [第三方来源与授权](report/third_party_sources_zh.md)
+- [AI 协作记录](report/ai_collaboration_record.md) · [Skill 索引](skill/index.md) · [第三方许可文本](report/third_party/)
 - [预处理板端 Golden](report/preproc_board_golden_20261029_zh.md) · [CPU/FPGA 计时](report/preproc_ab_20261028_zh.md) · [复现指南](report/reproduction_zh.md)
 
-PYNQ Skill 提供 Overlay、寄存器、DMA 和缓存一致性的可复用示例，已完成离线模拟验证，实板及跨项目复用留待平台迁移时验证。模型权重及部分第三方 IP 的授权核对状态详见 [来源与授权说明](report/third_party_sources_zh.md)。
+PYNQ Skill 提供 Overlay、寄存器、DMA 和缓存一致性的可复用示例，已完成离线模拟验证，实板及跨项目复用留待平台迁移时验证。已收录许可文本见 [许可资料](report/third_party/)；模型权重及部分第三方 IP 的具体授权范围仍待核对。

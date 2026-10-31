@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Verify hashes and exact source provenance of the contest copy."""
+"""Verify source provenance and the matching curated reference archives."""
 import hashlib
 from pathlib import Path
 import re
@@ -72,7 +72,7 @@ def main():
                 raise ValueError('source mismatch: ' + entry.filename)
             compared += 1
         print('SOURCE_PASS compared=' + str(compared) + ' archive_only=' + str(archive_only))
-    for name in ('github_a_fovea', 'github_b_detection', 'github_c_attention', 'github_linux_petalinux'):
+    for name in ('github_a_fovea', 'github_c_attention', 'github_linux_petalinux'):
         mirror = ROOT / 'reference' / name
         with zipfile.ZipFile(ROOT / 'original' / (name + '.zip')) as z:
             bad = z.testzip()

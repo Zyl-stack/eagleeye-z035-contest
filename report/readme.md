@@ -16,7 +16,7 @@
 
 - **板端与正确性**：[上板记录](board_reproduced_20261028_zh.md) · [应用日志与功能确认](board_app_evidence_20261028_zh.md) · [预处理板端 Golden 对比](preproc_board_golden_20261029_zh.md) · [仿真与验证说明](../sim/verification_zh.md)。
 - **性能与硬件实现**：[CPU/FPGA 预处理计时](preproc_ab_20261028_zh.md) · [Vivado 干净复现](clean_reproduction_20261028_zh.md) · [时序与告警说明](warning_review_zh.md)。
-- **版本与来源**：[实测版本身份](release_identity_zh.md) · [硬件与软件接口表](hardware_interfaces_zh.md) · [第三方来源与授权](third_party_sources_zh.md)。
+- **版本与来源**：[实测版本身份](release_identity_zh.md) · [硬件与软件接口表](hardware_interfaces_zh.md) · [第三方来源与授权](third_party/)。
 - **Lanczos 补充材料**：[技术说明（Word）](lanczos_fpga_brief_20261030.docx) · [历史独立仿真记录及适用范围](../sim/lanczos_legacy_readme.md)。
 
 项目分别完成了 FPGA 预处理的独立板端 Golden 一致性验证，以及 CPU/FPGA 两种预处理配置的性能测试。各项测试的输入、算法、版本和结果详见对应验证报告。
@@ -30,7 +30,6 @@
 | 类别 | 文件 |
 |---|---|
 | 早期工程复现 | [复现检查表](a_repro_checklist_20261027.md) · [复现状态](a_repro_status_20261027.md) · [补充结果](a_supplement_results_20261027.md) |
-| 检测参考路线 | [足球检测联调说明](b_detection_integration_20261027.md)，与当前 PicoDet 路线区分。 |
 | 早期板端记录 | [历史板端证据](board_evidence_20261027.md) · [历史计时说明](board_measurements.md) |
 | 提交核查 | [检查表](submission_check_20261028_zh.md) · [早期核查](submission_audit.md) · [现场证据范围](field_evidence_needed_zh.md) |
 | 原始说明和草稿 | [英文报告草稿](design_report_draft.md) · [原始项目说明](source_readme.md) · [原始文件哈希](source_sha256sums.txt)；早期说明保留在原工程归档中 |

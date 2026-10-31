@@ -30,11 +30,6 @@
     "output": "Skill is valid!"
   },
   {
-    "skill": "07-small-object-tracking-regression",
-    "exit_code": 0,
-    "output": "Skill is valid!"
-  },
-  {
     "skill": "08-roi-ablation-evaluation",
     "exit_code": 0,
     "output": "Skill is valid!"

@@ -30,4 +30,4 @@ BALL 遮挡时球员仍可保持关注，界面会标记 `BALL TEMP LOST`。Play
 
 ## 当前限制和未来接口
 
-当前不包含 YOLO、OpenCV、Kalman、号码识别、战术分析、判罚、摄像头、DMA/VDMA 或真实视频。未来 B 侧只需提供同样的 `EE_GlobalTargetList` 和 frame/target 生命周期，C 侧即可复用估计、Attention、Scheduler、ROI 和事务链。
+当前不包含 OpenCV、Kalman、号码识别、战术分析、判罚、摄像头、DMA/VDMA 或真实视频。未来 B 侧只需提供同样的 `EE_GlobalTargetList` 和 frame/target 生命周期，C 侧即可复用估计、Attention、Scheduler、ROI 和事务链。

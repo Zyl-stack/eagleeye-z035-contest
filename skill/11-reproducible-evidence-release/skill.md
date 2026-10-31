@@ -37,7 +37,7 @@ check 会拒绝遗漏、修改、新增文件和不安全路径。大工程先�
 
 ## 已验证效果与失败来源
 
-[E11](../evidence.md#e11发布身份必须细化到文件)：XS-320 官方模型、S-416 QAT 训练、YOLO1280/512、GridPolicy/AttentionPolicy 多路线并存，暴露仅用“PicoDet/最终版”命名无法复现的问题。已有程序和接口不重复提供，只给来源位置与明确状态。本技能新增 manifest 工具在 [VALIDATION.md](../validation.md) 中记录验证。
+[E11](../evidence.md#e11发布身份必须细化到文件)：XS-320 官方模型、S-416 QAT 训练、GridPolicy/AttentionPolicy 多路线并存，暴露仅用“PicoDet/最终版”命名无法复现的问题。已有程序和接口不重复提供，只给来源位置与明确状态。本技能新增 manifest 工具在 [VALIDATION.md](../validation.md) 中记录验证。
 
 ## 可直接使用的提示词
 

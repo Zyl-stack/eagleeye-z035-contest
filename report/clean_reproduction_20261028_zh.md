@@ -6,7 +6,7 @@
 
 Git LFS 获取后 `tools/verify_submission.py` 通过（原始文件 226、仓库文件 991）；Linux 固定源码归档哈希核验通过，归档包含 78975 个条目；工程快照恢复核验通过，共 275 项。这里的文件数量对应上述源提交，后续仓库添加材料后会变化。
 
-Skill 单元测试 5 项通过；PicoDet 注意力主机测试及模拟无目标保持测试通过。足球检测参考代码的 12 项 PC 测试及样例流解析通过，其范围为足球参考路线的 PC 软件验证。上述主机测试没有单独留存本次原始日志，仅记录当次执行结果。
+Skill 单元测试 5 项通过；PicoDet 注意力主机测试及模拟无目标保持测试通过。上述主机测试没有单独留存本次原始日志，仅记录当次执行结果。
 
 RTL 测试采用 Windows Python 3.13 / NumPy 2.5.2 生成和比较，WSL Ubuntu 20.04 中 Icarus Verilog 10.3 运行仿真；实际命令和输出见 [RTL 日志](../build/clean_rebuild_20261028/logs/rtl_simulation.log)及[历史运行器](../build/clean_rebuild_20261028/commands/rtl_runner_historical.txt)。五类输入各 307200 项与参考逐位一致，RGB 适配器、采集帧适配器与核心、AXI-Lite 和舵机 RTL 测试通过。本次是分环境执行，并未原样执行仓库 `run_verification.py`；标准单环境执行方式见[复现说明](reproduction_zh.md)。该阶段完成 RTL 离线验证，板端结果按对应现场记录列示。
 

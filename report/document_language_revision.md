@@ -1,96 +1,75 @@
 # EagleEye 文档语言修订记录
 
-修订日期：2026-10-30。基准提交：`b1190d173e6889a734129c9a834a16692a945f84`。本次只进行本地文档编辑及核验，未提交或推送 GitHub。
+历史修订日期：2026-10-30。基准提交：`b1190d173e6889a734129c9a834a16692a945f84`。原轮次调整了 50 份 Markdown、259 处文本块；完整历史对照保留在本文件的 Git 历史中。
 
-## 1. 修改汇总
+2026-10-31 按最终 PicoDet 提交范围整理，本页保留 48 份现存文档的 240 处相关历史对照，其他路线材料已从当前提交移出并在本地归档。Before/After 引用当时准确文字；后续修改以各文档当前版本为准。
 
-- 全仓扫描 **147 份 Markdown**：62 份说明与展示文档，80 份源码/参考快照文档，5 份原始结果或会话证据文档。另读取桌面原始交付目录的 16 份 Markdown 作来源核对，合计 163 个文件位置；该补充数包含重复的来源文档，不计作仓库独立文件。
-- 实际修改 **50 份现有 Markdown，259 处文本修改块**；新增本修订报告 1 份。根目录 `sha256sums.txt` 随文件变化同步更新。
-- 计数规则：按基准与最终文本的逐行差异计算，每个连续差异块计 1 处；一块可含完整段落或相邻表格行。下文逐块列出准确文字，新增导读和导航也计入。报告本身不递归计入修改数。
-- 工作区：`D:/eagleeye_a_submission_20261027`。桌面 `C:/Users/LENOVO/Desktop/提交材料/eagleeye_z035` 为原始交付快照，本次读取并保持其文件原样；编辑对象为上述当前 GitHub 提交工作区。
+## 修改概要
 
-### 问题分类与处理
+本轮语言调整将功能和验证成果放在前面，把重复说明集中到测试条件、版本说明和工程注意事项。计算结果、原始日志及源码在该轮文档修改中保持原样。
 
-| 类别 | 处理方式 | 主要位置 |
-|---|---|---|
-| A：可直接改善的表述 | 用实现内容、验证结果和工程方法开篇，减少自我否定与内部审稿口吻 | 首页、设计报告、AI 协作、Skill 说明 |
-| B：重复说明 | 精简重复的“不能证明”“不代表”等句式，保留必要上下文及专题入口 | 首页、资料索引、性能和版本说明 |
-| C：关键条件 | 集中到设计报告第 3.1 节、计时条件、版本表、告警及授权专题 | 设计报告、A/B 计时、告警与第三方来源 |
-| D：原始事实与记录 | 原始日志、数据、源码快照、会话摘录原样保留；历史说明仅增加或调整导读 | `original/`、参考快照、板端原文、历史报告 |
+| 文档 | 保留的历史对照数 |
+|---|---:|
+| [build/vivado_2025_2_zh.md](../build/vivado_2025_2_zh.md) | 3 |
+| [readme.md](../readme.md) | 8 |
+| [reference/linux_z035/readme.md](../reference/linux_z035/readme.md) | 4 |
+| [reference/readme.md](../reference/readme.md) | 3 |
+| [report/a_repro_checklist_20261027.md](../report/a_repro_checklist_20261027.md) | 1 |
+| [report/a_repro_status_20261027.md](../report/a_repro_status_20261027.md) | 1 |
+| [report/a_supplement_results_20261027.md](../report/a_supplement_results_20261027.md) | 1 |
+| [report/ai_collaboration_record.md](../report/ai_collaboration_record.md) | 18 |
+| [report/board_app_evidence_20261028_zh.md](../report/board_app_evidence_20261028_zh.md) | 10 |
+| [report/board_evidence_20261027.md](../report/board_evidence_20261027.md) | 5 |
+| [report/board_measurements.md](../report/board_measurements.md) | 5 |
+| [report/board_reproduced_20261028_zh.md](../report/board_reproduced_20261028_zh.md) | 5 |
+| [report/clean_reproduction_20261028_zh.md](../report/clean_reproduction_20261028_zh.md) | 11 |
+| [report/contest_evidence_index_zh.md](../report/contest_evidence_index_zh.md) | 9 |
+| [report/design_report_draft.md](../report/design_report_draft.md) | 1 |
+| [report/design_report_zh.md](../report/design_report_zh.md) | 38 |
+| [report/field_evidence_needed_zh.md](../report/field_evidence_needed_zh.md) | 5 |
+| [report/hardware_interfaces_zh.md](../report/hardware_interfaces_zh.md) | 4 |
+| [report/preproc_ab_20261028_zh.md](../report/preproc_ab_20261028_zh.md) | 6 |
+| [report/preproc_board_golden_20261029_zh.md](../report/preproc_board_golden_20261029_zh.md) | 5 |
+| [report/readme.md](../report/readme.md) | 3 |
+| [report/release_identity_zh.md](../report/release_identity_zh.md) | 4 |
+| [report/reproduction_zh.md](../report/reproduction_zh.md) | 7 |
+| [report/submission_audit.md](../report/submission_audit.md) | 2 |
+| [report/submission_check_20261028_zh.md](../report/submission_check_20261028_zh.md) | 4 |
+| [report/warning_review_zh.md](../report/warning_review_zh.md) | 4 |
+| [sim/lanczos_legacy_readme.md](../sim/lanczos_legacy_readme.md) | 3 |
+| [sim/preproc_captured_dma_20261027/readme.md](../sim/preproc_captured_dma_20261027/readme.md) | 1 |
+| [sim/verification_zh.md](../sim/verification_zh.md) | 11 |
+| [skill/01-axi-video-regression/skill.md](../skill/01-axi-video-regression/skill.md) | 1 |
+| [skill/02-tensor-preprocess-golden/skill.md](../skill/02-tensor-preprocess-golden/skill.md) | 1 |
+| [skill/03-armv7-inference-deploy/skill.md](../skill/03-armv7-inference-deploy/skill.md) | 2 |
+| [skill/04-petalinux-xsa-rebuild/skill.md](../skill/04-petalinux-xsa-rebuild/skill.md) | 1 |
+| [skill/05-vdma-frame-snapshot/skill.md](../skill/05-vdma-frame-snapshot/skill.md) | 2 |
+| [skill/06-detection-stream-contract/skill.md](../skill/06-detection-stream-contract/skill.md) | 1 |
+| [skill/08-roi-ablation-evaluation/skill.md](../skill/08-roi-ablation-evaluation/skill.md) | 1 |
+| [skill/09-roi-transaction-integration/skill.md](../skill/09-roi-transaction-integration/skill.md) | 1 |
+| [skill/10-hls-cross-platform-port/skill.md](../skill/10-hls-cross-platform-port/skill.md) | 1 |
+| [skill/11-reproducible-evidence-release/skill.md](../skill/11-reproducible-evidence-release/skill.md) | 1 |
+| [skill/evidence.md](../skill/evidence.md) | 10 |
+| [skill/experience_notes.md](../skill/experience_notes.md) | 7 |
+| [skill/preproc-fp32-golden/readme.md](../skill/preproc-fp32-golden/readme.md) | 7 |
+| [skill/pynq-overlay-dma/readme.md](../skill/pynq-overlay-dma/readme.md) | 3 |
+| [skill/readme.md](../skill/readme.md) | 2 |
+| [skill/roi-review-control/readme.md](../skill/roi-review-control/readme.md) | 7 |
+| [skill/validation.md](../skill/validation.md) | 4 |
+| [src/attention_reference/readme.md](../src/attention_reference/readme.md) | 2 |
+| [src/picodet_c_candidate/readme.md](../src/picodet_c_candidate/readme.md) | 4 |
 
-### 逐文件改动数量
-
-下表链接指向修改后的实际文档；详细位置、全文 Before/After 与原因见第 2 节。
-
-| 文件 | 修改块数 | 主要调整 |
-|---|---:|---|
-| [build/vivado_2025_2_zh.md](../build/vivado_2025_2_zh.md) | 3 | 以可复现步骤和实际完成阶段组织说明 |
-| [readme.md](../readme.md) | 10 | 突出系统功能和验证成果，集中测试条件与复现说明 |
-| [reference/linux_z035/readme.md](../reference/linux_z035/readme.md) | 4 | 精简重复否定，明确结果、条件及版本归属 |
-| [reference/readme.md](../reference/readme.md) | 4 | 精简重复否定，明确结果、条件及版本归属 |
-| [report/a_repro_checklist_20261027.md](../report/a_repro_checklist_20261027.md) | 1 | 历史资料导读及当前入口 |
-| [report/a_repro_status_20261027.md](../report/a_repro_status_20261027.md) | 1 | 历史资料导读及当前入口 |
-| [report/a_supplement_results_20261027.md](../report/a_supplement_results_20261027.md) | 1 | 历史资料导读及当前入口 |
-| [report/ai_collaboration_record.md](../report/ai_collaboration_record.md) | 18 | 突出分析、排障和自动化的协作价值，保留真实错误及修正过程 |
-| [report/board_app_evidence_20261028_zh.md](../report/board_app_evidence_20261028_zh.md) | 10 | 精简重复否定，明确结果、条件及版本归属 |
-| [report/board_evidence_20261027.md](../report/board_evidence_20261027.md) | 5 | 精简重复否定，明确结果、条件及版本归属 |
-| [report/board_measurements.md](../report/board_measurements.md) | 5 | 精简重复否定，明确结果、条件及版本归属 |
-| [report/board_reproduced_20261028_zh.md](../report/board_reproduced_20261028_zh.md) | 5 | 以可复现步骤和实际完成阶段组织说明 |
-| [report/clean_reproduction_20261028_zh.md](../report/clean_reproduction_20261028_zh.md) | 11 | 以可复现步骤和实际完成阶段组织说明 |
-| [report/contest_evidence_index_zh.md](../report/contest_evidence_index_zh.md) | 9 | 精简重复否定，明确结果、条件及版本归属 |
-| [report/design_report_draft.md](../report/design_report_draft.md) | 1 | 历史资料导读及当前入口 |
-| [report/design_report_zh.md](../report/design_report_zh.md) | 44 | 重排贡献、系统架构、验证范围与性能口径，更新已有协作资料入口 |
-| [report/field_evidence_needed_zh.md](../report/field_evidence_needed_zh.md) | 6 | 精简重复否定，明确结果、条件及版本归属 |
-| [report/hardware_interfaces_zh.md](../report/hardware_interfaces_zh.md) | 4 | 精简重复否定，明确结果、条件及版本归属 |
-| [report/preproc_ab_20261028_zh.md](../report/preproc_ab_20261028_zh.md) | 6 | 以可复现步骤和实际完成阶段组织说明 |
-| [report/preproc_board_golden_20261029_zh.md](../report/preproc_board_golden_20261029_zh.md) | 5 | 以可复现步骤和实际完成阶段组织说明 |
-| [report/readme.md](../report/readme.md) | 3 | 精简重复否定，明确结果、条件及版本归属 |
-| [report/release_identity_zh.md](../report/release_identity_zh.md) | 6 | 精简重复否定，明确结果、条件及版本归属 |
-| [report/reproduction_zh.md](../report/reproduction_zh.md) | 7 | 以可复现步骤和实际完成阶段组织说明 |
-| [report/submission_audit.md](../report/submission_audit.md) | 3 | 精简重复否定，明确结果、条件及版本归属 |
-| [report/submission_check_20261028_zh.md](../report/submission_check_20261028_zh.md) | 4 | 精简重复否定，明确结果、条件及版本归属 |
-| [report/third_party_sources_zh.md](../report/third_party_sources_zh.md) | 4 | 集中授权核对，保留待确认项 |
-| [report/warning_review_zh.md](../report/warning_review_zh.md) | 4 | 中性呈现告警、影响与处理状态 |
-| [sim/lanczos_legacy_readme.md](../sim/lanczos_legacy_readme.md) | 3 | 明确仿真来源与测试范围，历史通过及失败记录继续保留 |
-| [sim/preproc_captured_dma_20261027/readme.md](../sim/preproc_captured_dma_20261027/readme.md) | 1 | 明确仿真来源与测试范围，历史通过及失败记录继续保留 |
-| [sim/verification_zh.md](../sim/verification_zh.md) | 11 | 明确仿真来源与测试范围，历史通过及失败记录继续保留 |
-| [skill/01-axi-video-regression/skill.md](../skill/01-axi-video-regression/skill.md) | 1 | 说明可复用方法、正反例与验证层级，保留操作和失效条件 |
-| [skill/02-tensor-preprocess-golden/skill.md](../skill/02-tensor-preprocess-golden/skill.md) | 1 | 说明可复用方法、正反例与验证层级，保留操作和失效条件 |
-| [skill/03-armv7-inference-deploy/skill.md](../skill/03-armv7-inference-deploy/skill.md) | 2 | 说明可复用方法、正反例与验证层级，保留操作和失效条件 |
-| [skill/04-petalinux-xsa-rebuild/skill.md](../skill/04-petalinux-xsa-rebuild/skill.md) | 1 | 说明可复用方法、正反例与验证层级，保留操作和失效条件 |
-| [skill/05-vdma-frame-snapshot/skill.md](../skill/05-vdma-frame-snapshot/skill.md) | 2 | 说明可复用方法、正反例与验证层级，保留操作和失效条件 |
-| [skill/06-detection-stream-contract/skill.md](../skill/06-detection-stream-contract/skill.md) | 1 | 说明可复用方法、正反例与验证层级，保留操作和失效条件 |
-| [skill/07-small-object-tracking-regression/skill.md](../skill/07-small-object-tracking-regression/skill.md) | 1 | 说明可复用方法、正反例与验证层级，保留操作和失效条件 |
-| [skill/08-roi-ablation-evaluation/skill.md](../skill/08-roi-ablation-evaluation/skill.md) | 1 | 说明可复用方法、正反例与验证层级，保留操作和失效条件 |
-| [skill/09-roi-transaction-integration/skill.md](../skill/09-roi-transaction-integration/skill.md) | 1 | 说明可复用方法、正反例与验证层级，保留操作和失效条件 |
-| [skill/10-hls-cross-platform-port/skill.md](../skill/10-hls-cross-platform-port/skill.md) | 1 | 说明可复用方法、正反例与验证层级，保留操作和失效条件 |
-| [skill/11-reproducible-evidence-release/skill.md](../skill/11-reproducible-evidence-release/skill.md) | 1 | 说明可复用方法、正反例与验证层级，保留操作和失效条件 |
-| [skill/evidence.md](../skill/evidence.md) | 11 | 说明可复用方法、正反例与验证层级，保留操作和失效条件 |
-| [skill/experience_notes.md](../skill/experience_notes.md) | 7 | 说明可复用方法、正反例与验证层级，保留操作和失效条件 |
-| [skill/preproc-fp32-golden/readme.md](../skill/preproc-fp32-golden/readme.md) | 7 | 说明可复用方法、正反例与验证层级，保留操作和失效条件 |
-| [skill/pynq-overlay-dma/readme.md](../skill/pynq-overlay-dma/readme.md) | 3 | 说明可复用方法、正反例与验证层级，保留操作和失效条件 |
-| [skill/readme.md](../skill/readme.md) | 2 | 说明可复用方法、正反例与验证层级，保留操作和失效条件 |
-| [skill/roi-review-control/readme.md](../skill/roi-review-control/readme.md) | 7 | 说明可复用方法、正反例与验证层级，保留操作和失效条件 |
-| [skill/validation.md](../skill/validation.md) | 4 | 说明可复用方法、正反例与验证层级，保留操作和失效条件 |
-| [src/attention_reference/readme.md](../src/attention_reference/readme.md) | 2 | 精简重复否定，明确结果、条件及版本归属 |
-| [src/picodet_c_candidate/readme.md](../src/picodet_c_candidate/readme.md) | 4 | 精简重复否定，明确结果、条件及版本归属 |
-
-改动最多的文档：`report/design_report_zh.md`（44 处）、`report/ai_collaboration_record.md`（18 处）、`report/clean_reproduction_20261028_zh.md`（11 处）、`sim/verification_zh.md`（11 处）、`skill/evidence.md`（11 处）、`readme.md`（10 处）。
-
-## 2. 全部修改的准确对照
-
-以下每一项对应基准提交到本地最终文本的一处差异块，位置为一基行号。Before/After 代码块保留完整文字、链接和标记；它们是修订记录引用，当前成果展示以实际文档正文为准。纯新增项标明原位置为空。
+## 逐项 Before/After
 
 ### build/vivado_2025_2_zh.md
 
-文件：[build/vivado_2025_2_zh.md](../build/vivado_2025_2_zh.md)。
+#### 原修改 001
 
-<a id="change-001"></a>
-#### 修改 001：原第 3 行 → 现第 3 行
+原行号：3–3；当时修改后行号：3–3。
 
 位置：Vivado 2025.2 实验性迁移入口
 
-修改原因：A：以中性工程语言介绍成果，保留事实与适用范围。
+原因：A：以中性工程语言介绍成果，保留事实与适用范围
 
 **Before**
 
@@ -104,12 +83,13 @@
 仓库原始 Eyes 工程使用 Vivado 2022.2；[`build_vivado_2025_2.tcl`](build_vivado_2025_2.tcl) 是为 Vivado 2025.2 准备的独立迁移脚本。**验证状态：已在 2022.2 检查脚本流程及版本拒绝路径，2025.2 的综合、时序、BIT 和板端验证待目标环境执行。**
 ~~~~
 
-<a id="change-002"></a>
-#### 修改 002：原第 31 行 → 现第 31 行
+#### 原修改 002
+
+原行号：31–31；当时修改后行号：31–31。
 
 位置：Vivado 2025.2 实验性迁移入口 / 使用方法
 
-修改原因：A：以中性工程语言介绍成果，保留事实与适用范围。
+原因：A：以中性工程语言介绍成果，保留事实与适用范围
 
 **Before**
 
@@ -123,12 +103,13 @@
 最后的 `4` 是并行任务数，可为 1～16。`bit` 模式完成后会写出资源、时序、DRC、CDC 和 Methodology 报告，以及 `eagleeye_z035.xsa`；BIT 位于 `vivado_work/eagleeye_z035.runs/impl_1/z100_top.bit`。任何一步报错即停止，不修改 2022.2 原工程。工程升级可能改变 IP 行为、接口或输出；必须重新核查地址、时钟、复位、约束、升级报告及软件兼容性，并通过所需仿真、时序和实板验证，升级后的测试结果按新版本独立记录。
 ~~~~
 
-<a id="change-003"></a>
-#### 修改 003：原第 35 行 → 现第 35 行
+#### 原修改 003
+
+原行号：35–35；当时修改后行号：35–35。
 
 位置：Vivado 2025.2 实验性迁移入口 / 已执行的本机检查
 
-修改原因：A：以中性工程语言介绍成果，保留事实与适用范围。
+原因：A：以中性工程语言介绍成果，保留事实与适用范围
 
 **Before**
 
@@ -144,14 +125,13 @@
 
 ### readme.md
 
-文件：[readme.md](../readme.md)。
+#### 原修改 004
 
-<a id="change-004"></a>
-#### 修改 004：原第 7 行 → 现第 7 行
+原行号：7–7；当时修改后行号：7–7。
 
 位置：EagleEye：仿生视觉转播系统
 
-修改原因：B/C：合并重复边界说明，在成果之后集中交代测试条件。
+原因：B/C：合并重复边界说明，在成果之后集中交代测试条件
 
 **Before**
 
@@ -165,31 +145,13 @@
 本项目使用 **Vivado 2022.2** 构建 FPGA 工程，采用 **PicoDet-XS 与 Paddle-Lite** 在 ARM 端完成人体检测，并在 PL 侧实现视频处理与模型输入预处理。
 ~~~~
 
-<a id="change-005"></a>
-#### 修改 005：原第 29 行 → 现第 29 行
+#### 原修改 006
+
+原行号：31–31；当时修改后行号：31–31。
 
 位置：EagleEye：仿生视觉转播系统 / 系统功能
 
-修改原因：B/C：合并重复边界说明，在成果之后集中交代测试条件。
-
-**Before**
-
-~~~~text
-系统原理、软硬件接口及团队分工见 [设计报告](report/design_report_zh.md) 和 [硬件接口表](report/hardware_interfaces_zh.md)。当前系统以 PicoDet 人体检测为准；仓库中的足球 YOLO 是独立参考路线，不代表已在当前 Z035 系统部署。
-~~~~
-
-**After**
-
-~~~~text
-系统原理、软硬件接口及团队分工见 [设计报告](report/design_report_zh.md) 和 [硬件接口表](report/hardware_interfaces_zh.md)。当前演示采用 PicoDet 人体检测；足球 YOLO 参考路线单独保存在参考资料中。
-~~~~
-
-<a id="change-006"></a>
-#### 修改 006：原第 31 行 → 现第 31 行
-
-位置：EagleEye：仿生视觉转播系统 / 系统功能
-
-修改原因：B/C：合并重复边界说明，在成果之后集中交代测试条件。
+原因：B/C：合并重复边界说明，在成果之后集中交代测试条件
 
 **Before**
 
@@ -203,12 +165,13 @@
 系统将视频显示、检测推理和 ROI 更新异步组织，使画面展示与智能感知按各自节奏运行。
 ~~~~
 
-<a id="change-007"></a>
-#### 修改 007：原第 41 行 → 现第 41 行
+#### 原修改 007
+
+原行号：41–41；当时修改后行号：41–41。
 
 位置：EagleEye：仿生视觉转播系统 / 验证与实现结果
 
-修改原因：A：以中性工程语言介绍成果，保留事实与适用范围。
+原因：A：以中性工程语言介绍成果，保留事实与适用范围
 
 **Before**
 
@@ -222,12 +185,13 @@
 | 预处理计时 | CPU 双三次与 FPGA 双线性两种预处理配置均已完成板端计时，输入条件、算法及统计口径见对应报告。[测试条件与结果](report/preproc_ab_20261028_zh.md) |
 ~~~~
 
-<a id="change-008"></a>
-#### 修改 008：原第 43 行 → 现第 43 行
+#### 原修改 008
+
+原行号：43–43；当时修改后行号：43–43。
 
 位置：EagleEye：仿生视觉转播系统 / 验证与实现结果
 
-修改原因：B/C：合并重复边界说明，在成果之后集中交代测试条件。
+原因：B/C：合并重复边界说明，在成果之后集中交代测试条件
 
 **Before**
 
@@ -241,12 +205,13 @@
 阶段联调观察中，检测更新约 **2 FPS**、视频显示约 **30 FPS**，分别对应智能感知和视频展示路径。[应用日志](report/board_app_evidence_20261028_zh.md)提供检测路径的计时记录；30 FPS 为阶段观察值，独立显示帧率计时留待后续测量。
 ~~~~
 
-<a id="change-009"></a>
-#### 修改 009：原第 45 行 → 现第 45–47 行
+#### 原修改 009
+
+原行号：45–45；当时修改后行号：45–47。
 
 位置：验证与实现结果 / 测试条件与工程说明
 
-修改原因：B/C：合并重复边界说明，在成果之后集中交代测试条件。
+原因：B/C：合并重复边界说明，在成果之后集中交代测试条件
 
 **Before**
 
@@ -262,12 +227,13 @@
 固定输入 Golden 使用独立测试程序，其 BOOT 身份已记录，独立 BIT 哈希及与视频测试版本的对应关系待核对。CPU/FPGA 计时比较双三次与双线性两种配置，使用先后采集的实时帧。PicoDet 推理保持在 ARM 端，独立 V2/R3 卷积实验作为历史研究资料保存。I/O 时序、CDC 和 VDMA 的处理状态集中见 [工程告警说明](report/warning_review_zh.md)。
 ~~~~
 
-<a id="change-010"></a>
-#### 修改 010：原第 76 行 → 现第 78 行
+#### 原修改 010
+
+原行号：76–76；当时修改后行号：78–78。
 
 位置：EagleEye：仿生视觉转播系统 / 获取与复现
 
-修改原因：B/C：合并重复边界说明，在成果之后集中交代测试条件。
+原因：B/C：合并重复边界说明，在成果之后集中交代测试条件
 
 **Before**
 
@@ -281,12 +247,13 @@
 仓库中展开的文件名采用小写。为保留构建所需的原始大小写，请按 [复现指南](report/reproduction_zh.md) 使用 `tools/restore_a_repro.py` 将快照恢复到**新的独立目录**，再运行 `build/build_full_vivado.tcl`。构建和上板试验均使用独立工作区及实验介质，保留稳定 SD。
 ~~~~
 
-<a id="change-011"></a>
-#### 修改 011：原第 78 行 → 现第 80 行
+#### 原修改 011
+
+原行号：78–78；当时修改后行号：80–80。
 
 位置：EagleEye：仿生视觉转播系统 / 获取与复现
 
-修改原因：B/C：合并重复边界说明，在成果之后集中交代测试条件。
+原因：B/C：合并重复边界说明，在成果之后集中交代测试条件
 
 **Before**
 
@@ -300,12 +267,13 @@
 使用 Vivado 2025.2 可参考 [实验性迁移脚本及说明](build/vivado_2025_2_zh.md)。已记录的完整构建基于 2022.2；2025.2 脚本的目标版本运行验证为后续迁移步骤。
 ~~~~
 
-<a id="change-012"></a>
-#### 修改 012：原第 80 行 → 现第 82 行
+#### 原修改 012
+
+原行号：80–80；当时修改后行号：82–82。
 
 位置：EagleEye：仿生视觉转播系统 / 获取与复现
 
-修改原因：B/C：合并重复边界说明，在成果之后集中交代测试条件。
+原因：B/C：合并重复边界说明，在成果之后集中交代测试条件
 
 **Before**
 
@@ -319,35 +287,15 @@
 已完成从干净克隆恢复工程、综合与实现；布线中断后从检查点续跑生成 BIT/XSA。具体命令、原始日志及验证范围见 [干净复现记录](report/clean_reproduction_20261028_zh.md)。
 ~~~~
 
-<a id="change-013"></a>
-#### 修改 013：原第 88 行 → 现第 90 行
-
-位置：EagleEye：仿生视觉转播系统 / 报告与技能包
-
-修改原因：B/C：合并重复边界说明，在成果之后集中交代测试条件。
-
-**Before**
-
-~~~~text
-PYNQ Skill 提供可复用示例并完成离线模拟测试，尚无 PYNQ 实板或真实跨项目验证。模型权重及部分第三方 IP 的使用与再分发授权仍需按 [来源与授权说明](report/third_party_sources_zh.md) 核对。
-~~~~
-
-**After**
-
-~~~~text
-PYNQ Skill 提供 Overlay、寄存器、DMA 和缓存一致性的可复用示例，已完成离线模拟验证，实板及跨项目复用留待平台迁移时验证。模型权重及部分第三方 IP 的授权核对状态详见 [来源与授权说明](report/third_party_sources_zh.md)。
-~~~~
-
 ### reference/linux_z035/readme.md
 
-文件：[reference/linux_z035/readme.md](../reference/linux_z035/readme.md)。
+#### 原修改 014
 
-<a id="change-014"></a>
-#### 修改 014：原第 3 行 → 现第 3 行
+原行号：3–3；当时修改后行号：3–3。
 
 位置：Z035 Linux 构建资料与版本边界
 
-修改原因：A：以中性工程语言介绍成果，保留事实与适用范围。
+原因：A：以中性工程语言介绍成果，保留事实与适用范围
 
 **Before**
 
@@ -361,12 +309,13 @@ PYNQ Skill 提供 Overlay、寄存器、DMA 和缓存一致性的可复用示例
 本目录提供固定版本 Linux 源码、**配置和补丁**，用于在独立环境重建系统；板端镜像按匹配的启动资料管理。
 ~~~~
 
-<a id="change-015"></a>
-#### 修改 015：原第 9 行 → 现第 9 行
+#### 原修改 015
+
+原行号：9–9；当时修改后行号：9–9。
 
 位置：Z035 Linux 构建资料与版本边界 / 稳定系统资料
 
-修改原因：A：以中性工程语言介绍成果，保留事实与适用范围。
+原因：A：以中性工程语言介绍成果，保留事实与适用范围
 
 **Before**
 
@@ -380,12 +329,13 @@ PYNQ Skill 提供 Overlay、寄存器、DMA 和缓存一致性的可复用示例
 已有构建记录使用 [Xilinx linux-xlnx commit 19984dd147fa7fbb7cb14b17400263ad0925c189](https://github.com/Xilinx/linux-xlnx/tree/19984dd147fa7fbb7cb14b17400263ad0925c189)，其 Makefile 为 Linux 5.15.36。完整上游固定提交源码保存在 `source/linux_xlnx_19984dd.tar.gz`，通过 Git LFS 分发，SHA256 为 `139cbe4ad3b6e21f243f21e0fd272640b295d50737d666c055a54784f0e954a9`。使用 `git lfs pull` 后执行 `python3 tools/verify_kernel_source.py` 校验。归档内容与基线提交重新导出的结果一致（78975 项）；它是通用上游基线，不直接等于现场完整系统。重建还需要匹配的 PetaLinux 2022.2、工具链、设备树/XSA 等依赖。重建后通过文件哈希另行核对与现场 image.ub 的二进制关系。
 ~~~~
 
-<a id="change-016"></a>
-#### 修改 016：原第 13 行 → 现第 13 行
+#### 原修改 016
+
+原行号：13–13；当时修改后行号：13–13。
 
 位置：Z035 Linux 构建资料与版本边界 / 独立实验内核
 
-修改原因：A：以中性工程语言介绍成果，保留事实与适用范围。
+原因：A：以中性工程语言介绍成果，保留事实与适用范围
 
 **Before**
 
@@ -399,12 +349,13 @@ PYNQ Skill 提供 Overlay、寄存器、DMA 和缓存一致性的可复用示例
 `experimental/` 是 `5.15.36-xilinx-v2022.2-eeiso22` 隔离实验版本的配置、补丁和模块符号。它与稳定内核独立构建，模块按各自版本和 ABI 配套使用。`historical_build_kernel.sh` 保留原始构建命令，包含本机绝对路径，只用于审阅，不能直接运行以免修改既有工程。签名私钥没有收录；本次未重新构建或验证签名。
 ~~~~
 
-<a id="change-017"></a>
-#### 修改 017：原第 15 行 → 现第 15 行
+#### 原修改 017
+
+原行号：15–15；当时修改后行号：15–15。
 
 位置：Z035 Linux 构建资料与版本边界 / 独立实验内核
 
-修改原因：A：以中性工程语言介绍成果，保留事实与适用范围。
+原因：A：以中性工程语言介绍成果，保留事实与适用范围
 
 **Before**
 
@@ -420,14 +371,13 @@ PYNQ Skill 提供 Overlay、寄存器、DMA 和缓存一致性的可复用示例
 
 ### reference/readme.md
 
-文件：[reference/readme.md](../reference/readme.md)。
+#### 原修改 018
 
-<a id="change-018"></a>
-#### 修改 018：原第 1 行 → 现第 1 行
+原行号：1–1；当时修改后行号：1–1。
 
 位置：视频、检测、注意力与 Linux 参考源码
 
-修改原因：A：以中性工程语言介绍成果，保留事实与适用范围。
+原因：A：以中性工程语言介绍成果，保留事实与适用范围
 
 **Before**
 
@@ -441,12 +391,13 @@ PYNQ Skill 提供 Overlay、寄存器、DMA 和缓存一致性的可复用示例
 # 视频、检测、注意力与 Linux 参考源码
 ~~~~
 
-<a id="change-019"></a>
-#### 修改 019：原第 7 行 → 现第 7 行
+#### 原修改 019
+
+原行号：7–7；当时修改后行号：7–7。
 
 位置：视频、检测、注意力与 Linux 参考源码
 
-修改原因：A：以中性工程语言介绍成果，保留事实与适用范围。
+原因：A：以中性工程语言介绍成果，保留事实与适用范围
 
 **Before**
 
@@ -460,31 +411,13 @@ PYNQ Skill 提供 Overlay、寄存器、DMA 和缓存一致性的可复用示例
 | `github_a_fovea/` | `a-fovea`：`729a8d05a01ecac1b97351dfc5d1d6654294f304` | 视频、ROI 和 Vivado/Vitis 参考；其中 XPR 以 XC7Z020 为目标，Z035 主工程另行构建 |
 ~~~~
 
-<a id="change-020"></a>
-#### 修改 020：原第 12 行 → 现第 12 行
+#### 原修改 021
+
+原行号：16–16；当时修改后行号：16–16。
 
 位置：视频、检测、注意力与 Linux 参考源码
 
-修改原因：A：以中性工程语言介绍成果，保留事实与适用范围。
-
-**Before**
-
-~~~~text
-`sim/github_b_tests.log`、`sim/github_c_build.log`、`sim/github_c_simulation.log`、`sim/github_linux_reproduce.log` 和 `sim/github_a_inspection.txt` 是先前整理过程留下的记录。B/C/Linux 的主机测试与 A 的静态检查均不表示本仓库主版本完成了板端联调。使用这些材料前请核对器件、提交版本、接口、模型和测试环境。
-~~~~
-
-**After**
-
-~~~~text
-`sim/github_b_tests.log`、`sim/github_c_build.log`、`sim/github_c_simulation.log`、`sim/github_linux_reproduce.log` 和 `sim/github_a_inspection.txt` 是先前整理过程留下的记录。这些记录覆盖各参考模块的主机测试及静态检查，主工程板端联调见正式报告的现场资料。使用这些材料前请核对器件、提交版本、接口、模型和测试环境。
-~~~~
-
-<a id="change-021"></a>
-#### 修改 021：原第 16 行 → 现第 16 行
-
-位置：视频、检测、注意力与 Linux 参考源码
-
-修改原因：A：以中性工程语言介绍成果，保留事实与适用范围。
+原因：A：以中性工程语言介绍成果，保留事实与适用范围
 
 **Before**
 
@@ -500,14 +433,13 @@ PYNQ Skill 提供 Overlay、寄存器、DMA 和缓存一致性的可复用示例
 
 ### report/a_repro_checklist_20261027.md
 
-文件：[report/a_repro_checklist_20261027.md](../report/a_repro_checklist_20261027.md)。
+#### 原修改 022
 
-<a id="change-022"></a>
-#### 修改 022：原第 3 行 → 现第 3 行
+原行号：3–3；当时修改后行号：3–3。
 
 位置：发给队友的复现清单
 
-修改原因：C/D：仅调整历史资料导读，原阶段事实与记录继续保留。
+原因：C/D：仅调整历史资料导读，原阶段事实与记录继续保留
 
 **Before**
 
@@ -523,14 +455,13 @@ PYNQ Skill 提供 Overlay、寄存器、DMA 和缓存一致性的可复用示例
 
 ### report/a_repro_status_20261027.md
 
-文件：[report/a_repro_status_20261027.md](../report/a_repro_status_20261027.md)。
+#### 原修改 023
 
-<a id="change-023"></a>
-#### 修改 023：原第 3 行 → 现第 3 行
+原行号：3–3；当时修改后行号：3–3。
 
 位置：工程复现状态说明（2026-10-27）
 
-修改原因：C/D：仅调整历史资料导读，原阶段事实与记录继续保留。
+原因：C/D：仅调整历史资料导读，原阶段事实与记录继续保留
 
 **Before**
 
@@ -546,14 +477,13 @@ PYNQ Skill 提供 Overlay、寄存器、DMA 和缓存一致性的可复用示例
 
 ### report/a_supplement_results_20261027.md
 
-文件：[report/a_supplement_results_20261027.md](../report/a_supplement_results_20261027.md)。
+#### 原修改 024
 
-<a id="change-024"></a>
-#### 修改 024：原第 3 行 → 现第 3 行
+原行号：3–3；当时修改后行号：3–3。
 
 位置：现场团队的 2026-10-27 复现材料补充
 
-修改原因：C/D：仅调整历史资料导读，原阶段事实与记录继续保留。
+原因：C/D：仅调整历史资料导读，原阶段事实与记录继续保留
 
 **Before**
 
@@ -569,14 +499,13 @@ PYNQ Skill 提供 Overlay、寄存器、DMA 和缓存一致性的可复用示例
 
 ### report/ai_collaboration_record.md
 
-文件：[report/ai_collaboration_record.md](../report/ai_collaboration_record.md)。
+#### 原修改 025
 
-<a id="change-025"></a>
-#### 修改 025：原第 7 行 → 现第 7 行
+原行号：7–7；当时修改后行号：7–7。
 
 位置：EagleEye 大模型协作与工程实践 / 一、协作总体方案
 
-修改原因：A/B：以成果和方法为主线精简重复否定，保留案例事实和适用条件。
+原因：A/B：以成果和方法为主线精简重复否定，保留案例事实和适用条件
 
 **Before**
 
@@ -590,12 +519,13 @@ PYNQ Skill 提供 Overlay、寄存器、DMA 和缓存一致性的可复用示例
 本报告选取能够找到会话记录及相应工程材料的六个案例。用户指令和 Codex 判断使用会话原文节选；[会话证据索引](ai_collaboration_evidence_20261030.md)列出摘录、时间、来源文件、行号和会话文件哈希。索引以相关会话节选和来源元数据支持案例追溯。
 ~~~~
 
-<a id="change-026"></a>
-#### 修改 026：原第 15 行 → 现第 15 行
+#### 原修改 026
+
+原行号：15–15；当时修改后行号：15–15。
 
 位置：EagleEye 大模型协作与工程实践 / 一、协作总体方案
 
-修改原因：A/B：以成果和方法为主线精简重复否定，保留案例事实和适用条件。
+原因：A/B：以成果和方法为主线精简重复否定，保留案例事实和适用条件
 
 **Before**
 
@@ -609,12 +539,13 @@ PYNQ Skill 提供 Overlay、寄存器、DMA 和缓存一致性的可复用示例
 当前视频系统的模型推理在 ARM 端执行，FPGA 用于视频及图像预处理。文末的 V2 卷积卸载按**历史独立实验**记录，当前 Eyes 的功能与性能采用视频系统自身的测试资料。
 ~~~~
 
-<a id="change-027"></a>
-#### 修改 027：原第 25 行 → 现第 25 行
+#### 原修改 027
+
+原行号：25–25；当时修改后行号：25–25。
 
 位置：二、典型协作案例 / 案例 1：Vivado 无法启动，逐步恢复工程构建
 
-修改原因：A/B：以成果和方法为主线精简重复否定，保留案例事实和适用条件。
+原因：A/B：以成果和方法为主线精简重复否定，保留案例事实和适用条件
 
 **Before**
 
@@ -628,12 +559,13 @@ PYNQ Skill 提供 Overlay、寄存器、DMA 和缓存一致性的可复用示例
 这次排查也暴露了操作边界：旧路径处理期间，Vivado 曾在安装目录自动生成临时文件；会话保留了临时文件的生成位置，便于后续排查和恢复环境。首次复现中的源码补充和路径处理与后续仓库构建脚本更新是不同步骤。
 ~~~~
 
-<a id="change-028"></a>
-#### 修改 028：原第 27 行 → 现第 27 行
+#### 原修改 028
+
+原行号：27–27；当时修改后行号：27–27。
 
 位置：二、典型协作案例 / 案例 1：Vivado 无法启动，逐步恢复工程构建
 
-修改原因：A/B：以成果和方法为主线精简重复否定，保留案例事实和适用条件。
+原因：A/B：以成果和方法为主线精简重复否定，保留案例事实和适用条件
 
 **Before**
 
@@ -647,12 +579,13 @@ PYNQ Skill 提供 Overlay、寄存器、DMA 和缓存一致性的可复用示例
 **验证与后续纠错。** 之后团队再次要求从 GitHub 干净复现。那次布线开始后中断，Codex 先确认综合和布局检查点，再从布线阶段续跑，而非将中间状态当成完成。最终生成 BIT/XSA，已约束路径 WNS **+0.608 ns**、WHS **+0.007 ns**；该 STA 结果覆盖已约束路径；I/O 与 CDC 的专项状态见告警说明，该次新文件独立板测为后续验证项。
 ~~~~
 
-<a id="change-029"></a>
-#### 修改 029：原第 37 行 → 现第 37 行
+#### 原修改 029
+
+原行号：37–37；当时修改后行号：37–37。
 
 位置：二、典型协作案例 / 案例 2：人体框接入注意力模块时发现 Python 兼容错误
 
-修改原因：A/B：以成果和方法为主线精简重复否定，保留案例事实和适用条件。
+原因：A/B：以成果和方法为主线精简重复否定，保留案例事实和适用条件
 
 **Before**
 
@@ -666,12 +599,13 @@ PYNQ Skill 提供 Overlay、寄存器、DMA 和缓存一致性的可复用示例
 **首次方案。** Codex 将保存的检测结果转换为下游可读取的数据流，检查坐标、置信度和人数边界；对无有效目标的情况停止生成旧目标请求，同时清理调度及平滑状态。目标编号采用本地临时关联，PicoDet 输出与关联 ID 分别定义。
 ~~~~
 
-<a id="change-030"></a>
-#### 修改 030：原第 45 行 → 现第 45 行
+#### 原修改 030
+
+原行号：45–45；当时修改后行号：45–45。
 
 位置：二、典型协作案例 / 案例 2：人体框接入注意力模块时发现 Python 兼容错误
 
-修改原因：A/B：以成果和方法为主线精简重复否定，保留案例事实和适用条件。
+原因：A/B：以成果和方法为主线精简重复否定，保留案例事实和适用条件
 
 **Before**
 
@@ -685,12 +619,13 @@ Codex 随后将写入方式改为通过文件对象 `open(..., newline='\\n')` �
 Codex 随后将写入方式改为通过文件对象 `open(..., newline='\\n')` 输出，并增加命令行生成与防覆盖检查。定向测试记录为 **5 项通过**；该项完成离线适配器验证，实时硬件接入按后续阶段测试。
 ~~~~
 
-<a id="change-031"></a>
-#### 修改 031：原第 49 行 → 现第 49 行
+#### 原修改 031
+
+原行号：49–49；当时修改后行号：49–49。
 
 位置：二、典型协作案例 / 案例 2：人体框接入注意力模块时发现 Python 兼容错误
 
-修改原因：A/B：以成果和方法为主线精简重复否定，保留案例事实和适用条件。
+原因：A/B：以成果和方法为主线精简重复否定，保留案例事实和适用条件
 
 **Before**
 
@@ -704,12 +639,13 @@ Codex 随后将写入方式改为通过文件对象 `open(..., newline='\\n')` �
 现场后来确认使用新候选程序上板功能正常；仓库中另有 AttentionPolicy 的应用日志，两者对应不同 ELF，现场反馈与应用日志分别归档。
 ~~~~
 
-<a id="change-032"></a>
-#### 修改 032：原第 59 行 → 现第 59 行
+#### 原修改 032
+
+原行号：59–59；当时修改后行号：59–59。
 
 位置：二、典型协作案例 / 案例 3：从仿真通过到板端固定输入 Golden
 
-修改原因：A/B：以成果和方法为主线精简重复否定，保留案例事实和适用条件。
+原因：A/B：以成果和方法为主线精简重复否定，保留案例事实和适用条件
 
 **Before**
 
@@ -723,12 +659,13 @@ Codex 随后将写入方式改为通过文件对象 `open(..., newline='\\n')` �
 **方案与反馈。** 流程要求固定输入图像，保存 FPGA 预处理的完整 FP32 张量，以相同算法的参考张量逐值比较，并记录版本和运行日志。现场返回数据后，Codex 核验归档及内部文件哈希，再用仓库工具复核张量，并将主机复核、RTL 与真实板端结果分别记录：
 ~~~~
 
-<a id="change-033"></a>
-#### 修改 033：原第 65 行 → 现第 65 行
+#### 原修改 033
+
+原行号：65–65；当时修改后行号：65–65。
 
 位置：二、典型协作案例 / 案例 3：从仿真通过到板端固定输入 Golden
 
-修改原因：A/B：以成果和方法为主线精简重复否定，保留案例事实和适用条件。
+原因：A/B：以成果和方法为主线精简重复否定，保留案例事实和适用条件
 
 **Before**
 
@@ -742,12 +679,13 @@ Codex 随后将写入方式改为通过文件对象 `open(..., newline='\\n')` �
 **结果。** 在记录的这一张固定输入上，**307,200/307,200 个 FP32 值逐位一致**，最大和平均绝对误差均为 0。该结果覆盖此固定输入的预处理张量；独立 BIT 关联仍待核对，整网精度和实时视频帧新鲜度由各自专项验证。
 ~~~~
 
-<a id="change-034"></a>
-#### 修改 034：原第 67 行 → 现第 67 行
+#### 原修改 034
+
+原行号：67–67；当时修改后行号：67–67。
 
 位置：二、典型协作案例 / 案例 3：从仿真通过到板端固定输入 Golden
 
-修改原因：A/B：以成果和方法为主线精简重复否定，保留案例事实和适用条件。
+原因：A/B：以成果和方法为主线精简重复否定，保留案例事实和适用条件
 
 **Before**
 
@@ -761,12 +699,13 @@ Codex 随后将写入方式改为通过文件对象 `open(..., newline='\\n')` �
 这一案例展示了从 RTL 到**新增实板证据后更新结论**的验证递进。
 ~~~~
 
-<a id="change-035"></a>
-#### 修改 035：原第 87 行 → 现第 87 行
+#### 原修改 035
+
+原行号：87–87；当时修改后行号：87–87。
 
 位置：二、典型协作案例 / 案例 4：性能统计中区分配置收益与同算法加速比
 
-修改原因：A/B：以成果和方法为主线精简重复否定，保留案例事实和适用条件。
+原因：A/B：以成果和方法为主线精简重复否定，保留案例事实和适用条件
 
 **Before**
 
@@ -780,12 +719,13 @@ Codex 随后将写入方式改为通过文件对象 `open(..., newline='\\n')` �
 这些结果反映两种实际配置的计时收益；同算法性能及 HDMI 刷新、检测更新分别使用对应测量口径。日志中的 VDMA 错误位提示和 `freshness=unverified` 同时保留。
 ~~~~
 
-<a id="change-036"></a>
-#### 修改 036：原第 89 行 → 现第 89 行
+#### 原修改 036
+
+原行号：89–89；当时修改后行号：89–89。
 
 位置：二、典型协作案例 / 案例 4：性能统计中区分配置收益与同算法加速比
 
-修改原因：A/B：以成果和方法为主线精简重复否定，保留案例事实和适用条件。
+原因：A/B：以成果和方法为主线精简重复否定，保留案例事实和适用条件
 
 **Before**
 
@@ -799,12 +739,13 @@ Codex 随后将写入方式改为通过文件对象 `open(..., newline='\\n')` �
 该案例体现 AI 对配置、计时区间与统计口径的联合核对，帮助团队形成可复算的性能分析。
 ~~~~
 
-<a id="change-037"></a>
-#### 修改 037：原第 99 行 → 现第 99 行
+#### 原修改 037
+
+原行号：99–99；当时修改后行号：99–99。
 
 位置：二、典型协作案例 / 案例 5：BusyBox 功能差异暴露现场采集脚本问题
 
-修改原因：A/B：以成果和方法为主线精简重复否定，保留案例事实和适用条件。
+原因：A/B：以成果和方法为主线精简重复否定，保留案例事实和适用条件
 
 **Before**
 
@@ -818,12 +759,13 @@ Codex 随后将写入方式改为通过文件对象 `open(..., newline='\\n')` �
 这次纠错补齐了**不同 BusyBox 构建所提供命令选项的兼容性测试**。退出码、采集结果及现场启动准入各自有不同含义；这一采集脚本属于历史 V2 实验，不是当前视频应用的运行步骤。
 ~~~~
 
-<a id="change-038"></a>
-#### 修改 038：原第 109 行 → 现第 109 行
+#### 原修改 038
+
+原行号：109–109；当时修改后行号：109–109。
 
 位置：二、典型协作案例 / 案例 6：历史独立卷积实验——从驱动拒绝到整网变慢
 
-修改原因：A/B：以成果和方法为主线精简重复否定，保留案例事实和适用条件。
+原因：A/B：以成果和方法为主线精简重复否定，保留案例事实和适用条件
 
 **Before**
 
@@ -837,12 +779,13 @@ Codex 随后将写入方式改为通过文件对象 `open(..., newline='\\n')` �
 **真实结果与反思。** 后续独立实验记录驱动初始化成功，单次及 20 次重复 Golden 共 **21/21 零差异**；但固定输入的完整 Predictor 平均耗时为 ARM **815.568 ms**、V2 **861.566 ms**。日志中的 pack、decode 和驱动监测区间分别约为 51.685、22.308 和 16.209 ms；驱动监测区间包含等待，并作为完整卸载的子区间统计；纯 PL 周期由独立硬件计时获得。
 ~~~~
 
-<a id="change-039"></a>
-#### 修改 039：原第 111 行 → 现第 111 行
+#### 原修改 039
+
+原行号：111–111；当时修改后行号：111–111。
 
 位置：二、典型协作案例 / 案例 6：历史独立卷积实验——从驱动拒绝到整网变慢
 
-修改原因：A/B：以成果和方法为主线精简重复否定，保留案例事实和适用条件。
+原因：A/B：以成果和方法为主线精简重复否定，保留案例事实和适用条件
 
 **Before**
 
@@ -856,12 +799,13 @@ Codex 随后将写入方式改为通过文件对象 `open(..., newline='\\n')` �
 这个案例纠正了“局部计算正确就会提升整网 FPS”的推断：数值正确、真实完成和整网净收益需要分别验证。该实验为历史架构评估提供实测依据，当前 Eyes 的摄像头检测 FPS 与功能另由自身记录呈现。
 ~~~~
 
-<a id="change-040"></a>
-#### 修改 040：原第 143 行 → 现第 143 行
+#### 原修改 040
+
+原行号：143–143；当时修改后行号：143–143。
 
 位置：EagleEye 大模型协作与工程实践 / 四、Skill 与工程经验复用
 
-修改原因：A/B：以成果和方法为主线精简重复否定，保留案例事实和适用条件。
+原因：A/B：以成果和方法为主线精简重复否定，保留案例事实和适用条件
 
 **Before**
 
@@ -875,12 +819,13 @@ Codex 随后将写入方式改为通过文件对象 `open(..., newline='\\n')` �
 这些技能包含适用范围、使用方法、示例或测试与失败条件。主机夹具用于验证工具行为，目标硬件按板端流程验收；PYNQ 示例已完成离线模拟，实板及真实跨项目复用留待后续迁移验证。各项结果见 [Skill 验证说明](../skill/validation.md)。
 ~~~~
 
-<a id="change-041"></a>
-#### 修改 041：原第 147 行 → 现第 147 行
+#### 原修改 041
+
+原行号：147–147；当时修改后行号：147–147。
 
 位置：EagleEye 大模型协作与工程实践 / 五、协作成果与反思
 
-修改原因：A/B：以成果和方法为主线精简重复否定，保留案例事实和适用条件。
+原因：A/B：以成果和方法为主线精简重复否定，保留案例事实和适用条件
 
 **Before**
 
@@ -894,12 +839,13 @@ Codex 随后将写入方式改为通过文件对象 `open(..., newline='\\n')` �
 本项目中，AI 将复杂工程问题转化为可执行的接口检查、构建命令和验证脚本，帮助团队快速定位依赖、复核数据并组织可复现材料。现场反馈推动工具迭代：BusyBox 的真实选项差异进入回归，局部数值结果与整网性能分开评估，BIT 构建与外设时序及板端功能分别验收。
 ~~~~
 
-<a id="change-042"></a>
-#### 修改 042：原第 149 行 → 现第 149 行
+#### 原修改 042
+
+原行号：149–149；当时修改后行号：149–149。
 
 位置：EagleEye 大模型协作与工程实践 / 五、协作成果与反思
 
-修改原因：A/B：以成果和方法为主线精简重复否定，保留案例事实和适用条件。
+原因：A/B：以成果和方法为主线精简重复否定，保留案例事实和适用条件
 
 **Before**
 
@@ -915,14 +861,13 @@ Codex 随后将写入方式改为通过文件对象 `open(..., newline='\\n')` �
 
 ### report/board_app_evidence_20261028_zh.md
 
-文件：[report/board_app_evidence_20261028_zh.md](../report/board_app_evidence_20261028_zh.md)。
+#### 原修改 043
 
-<a id="change-043"></a>
-#### 修改 043：原第 5 行 → 现第 5 行
+原行号：5–5；当时修改后行号：5–5。
 
 位置：实板应用日志及功能反馈（2026-10-28） / 回传与核验
 
-修改原因：A：以中性工程语言介绍成果，保留事实与适用范围。
+原因：A：以中性工程语言介绍成果，保留事实与适用范围
 
 **Before**
 
@@ -936,12 +881,13 @@ Codex 随后将写入方式改为通过文件对象 `open(..., newline='\\n')` �
 现场回传 `eagleeye_z035_repro_with_app_log_20261028.zip`，SHA256 `6e7210373081177ac8f14c0f63833afb4799ccca874509478b20f4cd2524c070`，ZIP CRC 通过；包内 `SHA256SUMS.txt` 的 280 项逐项核验通过。本仓库收录 [应用日志原文](../board/reproduced_20261028/attention_app_20261028.log)与 [现场结果说明原文](../board/reproduced_20261028/board_result_app_source_zh.md)，并与已有 BIT、BOOT 和启动串口记录共同归档。
 ~~~~
 
-<a id="change-044"></a>
-#### 修改 044：原第 11 行 → 现第 11 行
+#### 原修改 044
+
+原行号：11–11；当时修改后行号：11–11。
 
 位置：实板应用日志及功能反馈（2026-10-28） / 回传与核验
 
-修改原因：A：以中性工程语言介绍成果，保留事实与适用范围。
+原因：A：以中性工程语言介绍成果，保留事实与适用范围
 
 **Before**
 
@@ -955,12 +901,13 @@ Codex 随后将写入方式改为通过文件对象 `open(..., newline='\\n')` �
 | Attention 应用归档 | `b41241dd9db598af66a6cb46d52c744c9b53a6c6461633823c1f62fbecdfdc59` | 已存于 `original/a_repro_delta_20261027.zip`。包内可执行文件哈希 `785948413759d4478d8b99578da3a406f7d5870304756e386518fb6b4d73c57f`；模型哈希 `7c8a381bb5ba4a6a3c5c2b3277fd2cfb6ba1f802ddffd854c73bf75e747bfff4`。以上为归档及交接身份，现场运行文件的独立读回哈希仍待核对。 |
 ~~~~
 
-<a id="change-045"></a>
-#### 修改 045：原第 13 行 → 现第 13 行
+#### 原修改 045
+
+原行号：13–13；当时修改后行号：13–13。
 
 位置：实板应用日志及功能反馈（2026-10-28） / 回传与核验
 
-修改原因：A：以中性工程语言介绍成果，保留事实与适用范围。
+原因：A：以中性工程语言介绍成果，保留事实与适用范围
 
 **Before**
 
@@ -974,12 +921,13 @@ Codex 随后将写入方式改为通过文件对象 `open(..., newline='\\n')` �
 旧版 [U-Boot 至登录串口和 BIT 记录](board_reproduced_20261028_zh.md) 已收录。现场团队的归档说明将本次应用日志与同一 BOOT、Attention 归档关联；两份日志按交接关系归档，共同启动会话标识仍待核对。
 ~~~~
 
-<a id="change-046"></a>
-#### 修改 046：原第 17 行 → 现第 17 行
+#### 原修改 046
+
+原行号：17–17；当时修改后行号：17–17。
 
 位置：实板应用日志及功能反馈（2026-10-28） / 日志实际内容
 
-修改原因：A：以中性工程语言介绍成果，保留事实与适用范围。
+原因：A：以中性工程语言介绍成果，保留事实与适用范围
 
 **Before**
 
@@ -993,12 +941,13 @@ Codex 随后将写入方式改为通过文件对象 `open(..., newline='\\n')` �
 按行首统计，日志含 179 条 `ATTENTION`、179 条 `PREPROC backend=fpga`、179 条 `TIME` 和 179 条 `SNAPSHOT`；未发现 `PREPROC_FALLBACK`。其中 79 条注意力记录为 `no_player`，100 条含本地 `target_id`。这些记录呈现应用行为，ID 用于相邻推理结果临时匹配；跨遮挡稳定性另需跟踪验证。
 ~~~~
 
-<a id="change-047"></a>
-#### 修改 047：原第 19 行 → 现第 19 行
+#### 原修改 047
+
+原行号：19–19；当时修改后行号：19–19。
 
 位置：实板应用日志及功能反馈（2026-10-28） / 日志实际内容
 
-修改原因：A：以中性工程语言介绍成果，保留事实与适用范围。
+原因：A：以中性工程语言介绍成果，保留事实与适用范围
 
 **Before**
 
@@ -1012,12 +961,13 @@ Codex 随后将写入方式改为通过文件对象 `open(..., newline='\\n')` �
 179 条 `SNAPSHOT` 均为 `freshness=unverified`；日志明确警告 `WARNING VDMA error bits present; snapshot consistency is not frame-completion proof`。该日志用于分析应用调用与计时；DMA 帧完成、新鲜度及张量 Golden 一致性按各自专项测试记录。
 ~~~~
 
-<a id="change-048"></a>
-#### 修改 048：原第 21 行 → 现第 21 行
+#### 原修改 048
+
+原行号：21–21；当时修改后行号：21–21。
 
 位置：实板应用日志及功能反馈（2026-10-28） / 日志实际内容
 
-修改原因：A：以中性工程语言介绍成果，保留事实与适用范围。
+原因：A：以中性工程语言介绍成果，保留事实与适用范围
 
 **Before**
 
@@ -1031,12 +981,13 @@ Codex 随后将写入方式改为通过文件对象 `open(..., newline='\\n')` �
 运行 `python -B tools/summarize_board_log.py board/reproduced_20261028/attention_app_20261028.log` 可复核 179 条时间记录：平均捕获 16.290 ms、预处理 18.329 ms、推理 477.883 ms、后处理 0.028 ms、`total` 512.566 ms，`1000 / mean(total)` 为 **1.951 FPS**；日志中 FPS 字段的算术均值为 1.953 FPS，两种统计口径不同。以上为日志计时区间的统计；CPU/FPGA 配置对比见专项报告，HDMI 刷新及经帧新鲜度确认的检测更新率分别测量。日志 RTC 为 2018 年，现场测试日期按回传记录标注。
 ~~~~
 
-<a id="change-049"></a>
-#### 修改 049：原第 23 行 → 现第 23 行
+#### 原修改 049
+
+原行号：23–23；当时修改后行号：23–23。
 
 位置：实板应用日志及功能反馈（2026-10-28） / 日志实际内容
 
-修改原因：B/C：合并重复边界说明，在成果之后集中交代测试条件。
+原因：B/C：合并重复边界说明，在成果之后集中交代测试条件
 
 **Before**
 
@@ -1050,12 +1001,13 @@ Codex 随后将写入方式改为通过文件对象 `open(..., newline='\\n')` �
 **应用版本：**该日志对应 AttentionPolicy，未出现 `C_ATTENTION`；归档 ELF 与独立 PicoDet 注意力候选 `1421b51b...` 分别管理。后者的板端功能已有现场确认，其当次原始日志尚待归档。
 ~~~~
 
-<a id="change-050"></a>
-#### 修改 050：原第 25 行 → 现第 25 行
+#### 原修改 050
+
+原行号：25–25；当时修改后行号：25–25。
 
 位置：实板应用日志及功能反馈（2026-10-28） / 现场功能与后续验证
 
-修改原因：A：以中性工程语言介绍成果，保留事实与适用范围。
+原因：A：以中性工程语言介绍成果，保留事实与适用范围
 
 **Before**
 
@@ -1069,12 +1021,13 @@ Codex 随后将写入方式改为通过文件对象 `open(..., newline='\\n')` �
 ## 现场功能与后续验证
 ~~~~
 
-<a id="change-051"></a>
-#### 修改 051：原第 27 行 → 现第 27 行
+#### 原修改 051
+
+原行号：27–27；当时修改后行号：27–27。
 
 位置：实板应用日志及功能反馈（2026-10-28） / 现场功能与后续验证
 
-修改原因：B/C：合并重复边界说明，在成果之后集中交代测试条件。
+原因：B/C：合并重复边界说明，在成果之后集中交代测试条件
 
 **Before**
 
@@ -1088,12 +1041,13 @@ Codex 随后将写入方式改为通过文件对象 `open(..., newline='\\n')` �
 现场已确认摄像头、人体检测、鼠标 ROI、按键、舵机和 HDMI 六项功能均正常，作为本次功能验证结论。记录来源为现场确认；逐项操作时间及照片/视频未随包归档。应用日志中的 VDMA 提示保留在[告警说明](warning_review_zh.md)，与功能记录共同呈现工程状态。
 ~~~~
 
-<a id="change-052"></a>
-#### 修改 052：原第 29 行 → 现第 29–31 行
+#### 原修改 052
+
+原行号：29–29；当时修改后行号：29–31。
 
 位置：现场功能与后续验证 / 后续补充与测试范围
 
-修改原因：B/C：合并重复边界说明，在成果之后集中交代测试条件。
+原因：B/C：合并重复边界说明，在成果之后集中交代测试条件
 
 **Before**
 
@@ -1111,14 +1065,13 @@ Codex 随后将写入方式改为通过文件对象 `open(..., newline='\\n')` �
 
 ### report/board_evidence_20261027.md
 
-文件：[report/board_evidence_20261027.md](../report/board_evidence_20261027.md)。
+#### 原修改 053
 
-<a id="change-053"></a>
-#### 修改 053：原第 3 行 → 现第 3 行
+原行号：3–3；当时修改后行号：3–3。
 
 位置：本地实板证据补充（2026-10-27）
 
-修改原因：B/C：合并重复边界说明，在成果之后集中交代测试条件。
+原因：B/C：合并重复边界说明，在成果之后集中交代测试条件
 
 **Before**
 
@@ -1132,12 +1085,13 @@ Codex 随后将写入方式改为通过文件对象 `open(..., newline='\\n')` �
 本页汇总两次历史独立开发板实验：ARM98 逐层计时与 V2/R3 卷积卸载。它们为后续架构选择提供实测依据，与当前 Eyes 视频程序的测试按独立版本归档。仓库收录分析记录和输出，启动镜像、设备序列号及现场个人信息保留在本地原始交接资料中。
 ~~~~
 
-<a id="change-054"></a>
-#### 修改 054：原第 9–10 行 → 现第 9–10 行
+#### 原修改 054
+
+原行号：9–10；当时修改后行号：9–10。
 
 位置：本地实板证据补充（2026-10-27） / ARM98：纯 ARM 的完整 Predictor 与逐层计时
 
-修改原因：A：以中性工程语言介绍成果，保留事实与适用范围。
+原因：A：以中性工程语言介绍成果，保留事实与适用范围
 
 **Before**
 
@@ -1153,12 +1107,13 @@ Codex 随后将写入方式改为通过文件对象 `open(..., newline='\\n')` �
 - 同一输出张量在 20 次运行中逐字节一致；该项验证重复运行一致性，Golden 精度按独立对照评估。
 ~~~~
 
-<a id="change-055"></a>
-#### 修改 055：原第 16–18 行 → 现第 16–18 行
+#### 原修改 055
+
+原行号：16–18；当时修改后行号：16–18。
 
 位置：本地实板证据补充（2026-10-27） / V2/R3：历史独立卷积 Golden 和固定输入推理
 
-修改原因：A：以中性工程语言介绍成果，保留事实与适用范围。
+原因：A：以中性工程语言介绍成果，保留事实与适用范围
 
 **Before**
 
@@ -1176,12 +1131,13 @@ Codex 随后将写入方式改为通过文件对象 `open(..., newline='\\n')` �
 - 20 次固定输入全模型准确性记录 `pass=1`；其范围为本次固定输入和指定检查；14 图全模型资格属于另一测试集合。实验日志同时标记 `diagnostic_only=1`、`formal_offload=0`。
 ~~~~
 
-<a id="change-056"></a>
-#### 修改 056：原第 20 行 → 现第 20 行
+#### 原修改 056
+
+原行号：20–20；当时修改后行号：20–20。
 
 位置：本地实板证据补充（2026-10-27） / V2/R3：历史独立卷积 Golden 和固定输入推理
 
-修改原因：A：以中性工程语言介绍成果，保留事实与适用范围。
+原因：A：以中性工程语言介绍成果，保留事实与适用范围
 
 **Before**
 
@@ -1195,12 +1151,13 @@ Codex 随后将写入方式改为通过文件对象 `open(..., newline='\\n')` �
 - 20 次卸载明细的平均值：输入 pack **51.685 ms**、输出 decode **22.308 ms**、驱动计算监测区间 **16.209 ms**、完整卸载 **105.256 ms**。驱动监测区间包含等待，作为完整卸载的子区间统计；纯 PL 计算需单独硬件计时。
 ~~~~
 
-<a id="change-057"></a>
-#### 修改 057：原第 24 行 → 现第 24 行
+#### 原修改 057
+
+原行号：24–24；当时修改后行号：24–24。
 
 位置：本地实板证据补充（2026-10-27） / 可复核性与现有缺口
 
-修改原因：A：以中性工程语言介绍成果，保留事实与适用范围。
+原因：A：以中性工程语言介绍成果，保留事实与适用范围
 
 **Before**
 
@@ -1216,14 +1173,13 @@ Codex 随后将写入方式改为通过文件对象 `open(..., newline='\\n')` �
 
 ### report/board_measurements.md
 
-文件：[report/board_measurements.md](../report/board_measurements.md)。
+#### 原修改 058
 
-<a id="change-058"></a>
-#### 修改 058：原第 5 行 → 现第 5 行
+原行号：5–5；当时修改后行号：5–5。
 
 位置：已有板端数据与口径
 
-修改原因：A：以中性工程语言介绍成果，保留事实与适用范围。
+原因：A：以中性工程语言介绍成果，保留事实与适用范围
 
 **Before**
 
@@ -1237,12 +1193,13 @@ Codex 随后将写入方式改为通过文件对象 `open(..., newline='\\n')` �
 复现命令：`python tools/summarize_board_log.py board/attach_100.log`。脚本从日志字段重算统计，硬件身份及配对条件见各次测试说明。
 ~~~~
 
-<a id="change-059"></a>
-#### 修改 059：原第 17 行 → 现第 17 行
+#### 原修改 059
+
+原行号：17–17；当时修改后行号：17–17。
 
 位置：已有板端数据与口径
 
-修改原因：B/C：合并重复边界说明，在成果之后集中交代测试条件。
+原因：B/C：合并重复边界说明，在成果之后集中交代测试条件
 
 **Before**
 
@@ -1256,12 +1213,13 @@ Codex 随后将写入方式改为通过文件对象 `open(..., newline='\\n')` �
 该记录提供历史 CPU 基线；与当前 Eyes FPGA 预处理测试的版本及场景不同，按各自条件列示。`board/attach_100_result.json` 保存第 100 帧结果，均值由完整 100 条记录计算。
 ~~~~
 
-<a id="change-060"></a>
-#### 修改 060：原第 21 行 → 现第 21 行
+#### 原修改 060
+
+原行号：21–21；当时修改后行号：21–21。
 
 位置：已有板端数据与口径
 
-修改原因：A：以中性工程语言介绍成果，保留事实与适用范围。
+原因：A：以中性工程语言介绍成果，保留事实与适用范围
 
 **Before**
 
@@ -1275,12 +1233,13 @@ Codex 随后将写入方式改为通过文件对象 `open(..., newline='\\n')` �
 另有历史 ARM98 单线程实板逐层计时和独立 V2/R3 实板 Golden 与固定输入推理记录，原始数据摘录、输出及其验证方法见 [本地实板证据补充](board_evidence_20261027.md)。这些固定输入实验与当前 Eyes 视频测试按各自条件统计。
 ~~~~
 
-<a id="change-061"></a>
-#### 修改 061：原第 25 行 → 现第 25 行
+#### 原修改 061
+
+原行号：25–25；当时修改后行号：25–25。
 
 位置：已有板端数据与口径 / 新收到的 Attention 应用记录
 
-修改原因：A：以中性工程语言介绍成果，保留事实与适用范围。
+原因：A：以中性工程语言介绍成果，保留事实与适用范围
 
 **Before**
 
@@ -1294,12 +1253,13 @@ Codex 随后将写入方式改为通过文件对象 `open(..., newline='\\n')` �
 2026-10-28 应用日志含 179 条 `TIME`，平均预处理 18.329 ms、平均 total 512.566 ms，`1000 / 平均 total` 为 1.951 FPS；详见 [日志证据及限制](board_app_evidence_20261028_zh.md)。日志含 VDMA 错误位警告且 `freshness=unverified`；该数据属于本次日志计时区间的结果，与历史 CPU 记录分别列示；帧新鲜度确认后的检测更新率仍待测量。
 ~~~~
 
-<a id="change-062"></a>
-#### 修改 062：原第 29 行 → 现第 29 行
+#### 原修改 062
+
+原行号：29–29；当时修改后行号：29–29。
 
 位置：已有板端数据与口径 / CPU/FPGA 预处理 A/B 实测
 
-修改原因：A：以中性工程语言介绍成果，保留事实与适用范围。
+原因：A：以中性工程语言介绍成果，保留事实与适用范围
 
 **Before**
 
@@ -1315,14 +1275,13 @@ Codex 随后将写入方式改为通过文件对象 `open(..., newline='\\n')` �
 
 ### report/board_reproduced_20261028_zh.md
 
-文件：[report/board_reproduced_20261028_zh.md](../report/board_reproduced_20261028_zh.md)。
+#### 原修改 063
 
-<a id="change-063"></a>
-#### 修改 063：原第 16 行 → 现第 16 行
+原行号：16–16；当时修改后行号：16–16。
 
 位置：复现 BIT 的上板记录（2026-10-28） / 版本和资料来源
 
-修改原因：B/C：合并重复边界说明，在成果之后集中交代测试条件。
+原因：B/C：合并重复边界说明，在成果之后集中交代测试条件
 
 **Before**
 
@@ -1336,12 +1295,13 @@ Codex 随后将写入方式改为通过文件对象 `open(..., newline='\\n')` �
 **后续验证：**登录后的 Attention 应用日志和六项功能确认见 [应用证据](board_app_evidence_20261028_zh.md)，固定输入预处理结果见[独立板端 Golden](preproc_board_golden_20261029_zh.md)。原启动串口与登录后应用记录分别归档。
 ~~~~
 
-<a id="change-064"></a>
-#### 修改 064：原第 20–23 行 → 现第 20–23 行
+#### 原修改 064
+
+原行号：20–23；当时修改后行号：20–23。
 
 位置：复现 BIT 的上板记录（2026-10-28） / 已核验的启动记录和版本关系
 
-修改原因：A：以中性工程语言介绍成果，保留事实与适用范围。
+原因：A：以中性工程语言介绍成果，保留事实与适用范围
 
 **Before**
 
@@ -1361,12 +1321,13 @@ Codex 随后将写入方式改为通过文件对象 `open(..., newline='\\n')` �
 - 现场已确认使用本次复现 BIT 上板后，摄像头、人体检测、鼠标 ROI、按键、舵机和 HDMI 均正常。本项依据现场功能确认；量化性能由后续专项测试记录。
 ~~~~
 
-<a id="change-065"></a>
-#### 修改 065：原第 25 行 → 现第 25 行
+#### 原修改 065
+
+原行号：25–25；当时修改后行号：25–25。
 
 位置：复现 BIT 的上板记录（2026-10-28） / 验证范围与后续检查
 
-修改原因：A：以中性工程语言介绍成果，保留事实与适用范围。
+原因：A：以中性工程语言介绍成果，保留事实与适用范围
 
 **Before**
 
@@ -1380,12 +1341,13 @@ Codex 随后将写入方式改为通过文件对象 `open(..., newline='\\n')` �
 ## 验证范围与后续检查
 ~~~~
 
-<a id="change-066"></a>
-#### 修改 066：原第 27 行 → 现第 27 行
+#### 原修改 066
+
+原行号：27–27；当时修改后行号：27–27。
 
 位置：复现 BIT 的上板记录（2026-10-28） / 验证范围与后续检查
 
-修改原因：B/C：合并重复边界说明，在成果之后集中交代测试条件。
+原因：B/C：合并重复边界说明，在成果之后集中交代测试条件
 
 **Before**
 
@@ -1399,12 +1361,13 @@ Codex 随后将写入方式改为通过文件对象 `open(..., newline='\\n')` �
 本页覆盖复现 BIT 文件关联、U-Boot 至 Linux 登录及现场功能确认。实验卡 BOOT 读回清单和运行应用、模型的独立读回哈希待核对。后续 [应用日志](board_app_evidence_20261028_zh.md)、[CPU/FPGA 配置计时](preproc_ab_20261028_zh.md)及[独立固定输入 Golden](preproc_board_golden_20261029_zh.md)按各自条件补充验证，独立 Golden 的 BIT 关联仍待核对。同算法性能、经帧新鲜度确认的检测更新率及长期稳定性为后续测试项。旧 `board/attach_100.log` 和独立 V2/R3 实验分别归档，外部 I/O 与 CDC 的专项状态见[告警说明](warning_review_zh.md)。
 ~~~~
 
-<a id="change-067"></a>
-#### 修改 067：原第 29 行 → 现第 29 行
+#### 原修改 067
+
+原行号：29–29；当时修改后行号：29–29。
 
 位置：复现 BIT 的上板记录（2026-10-28） / 验证范围与后续检查
 
-修改原因：A：以中性工程语言介绍成果，保留事实与适用范围。
+原因：A：以中性工程语言介绍成果，保留事实与适用范围
 
 **Before**
 
@@ -1420,14 +1383,13 @@ Codex 随后将写入方式改为通过文件对象 `open(..., newline='\\n')` �
 
 ### report/clean_reproduction_20261028_zh.md
 
-文件：[report/clean_reproduction_20261028_zh.md](../report/clean_reproduction_20261028_zh.md)。
+#### 原修改 068
 
-<a id="change-068"></a>
-#### 修改 068：原第 3 行 → 现第 3 行
+原行号：3–3；当时修改后行号：3–3。
 
 位置：GitHub 干净克隆复现记录（2026-10-28）
 
-修改原因：A：以中性工程语言介绍成果，保留事实与适用范围。
+原因：A：以中性工程语言介绍成果，保留事实与适用范围
 
 **Before**
 
@@ -1441,12 +1403,13 @@ Codex 随后将写入方式改为通过文件对象 `open(..., newline='\\n')` �
 复现对象：GitHub `main` 提交 `8588b389aacab349c8cae3132730d7ed1bac6669`，独立克隆和独立构建目录；本页的复现对象固定为该源提交。本次没有操作开发板或稳定 SD。原始日志、实际历史命令、报告和 BIT/XSA 归档在 [`build/clean_rebuild_20261028`](../build/clean_rebuild_20261028/)，文件哈希见 [sha256sums.txt](../build/clean_rebuild_20261028/sha256sums.txt)。运行 `python -B tools/verify_clean_rebuild_20261028.py` 可核验归档及 BIT/XSA 对应关系。历史命令保留本机路径以支持复核，在其他电脑执行时按[复现指南](reproduction_zh.md)设置独立目录。
 ~~~~
 
-<a id="change-069"></a>
-#### 修改 069：原第 9 行 → 现第 9 行
+#### 原修改 069
+
+原行号：9–9；当时修改后行号：9–9。
 
 位置：GitHub 干净克隆复现记录（2026-10-28） / 获取、源码与功能验证
 
-修改原因：A：以中性工程语言介绍成果，保留事实与适用范围。
+原因：A：以中性工程语言介绍成果，保留事实与适用范围
 
 **Before**
 
@@ -1460,12 +1423,13 @@ Skill 单元测试 5 项通过；PicoDet 注意力主机测试及模拟无目标
 Skill 单元测试 5 项通过；PicoDet 注意力主机测试及模拟无目标保持测试通过。足球检测参考代码的 12 项 PC 测试及样例流解析通过，其范围为足球参考路线的 PC 软件验证。上述主机测试没有单独留存本次原始日志，仅记录当次执行结果。
 ~~~~
 
-<a id="change-070"></a>
-#### 修改 070：原第 11 行 → 现第 11 行
+#### 原修改 070
+
+原行号：11–11；当时修改后行号：11–11。
 
 位置：GitHub 干净克隆复现记录（2026-10-28） / 获取、源码与功能验证
 
-修改原因：A：以中性工程语言介绍成果，保留事实与适用范围。
+原因：A：以中性工程语言介绍成果，保留事实与适用范围
 
 **Before**
 
@@ -1479,12 +1443,13 @@ RTL 测试采用 Windows Python 3.13 / NumPy 2.5.2 生成和比较，WSL Ubuntu 
 RTL 测试采用 Windows Python 3.13 / NumPy 2.5.2 生成和比较，WSL Ubuntu 20.04 中 Icarus Verilog 10.3 运行仿真；实际命令和输出见 [RTL 日志](../build/clean_rebuild_20261028/logs/rtl_simulation.log)及[历史运行器](../build/clean_rebuild_20261028/commands/rtl_runner_historical.txt)。五类输入各 307200 项与参考逐位一致，RGB 适配器、采集帧适配器与核心、AXI-Lite 和舵机 RTL 测试通过。本次是分环境执行，并未原样执行仓库 `run_verification.py`；标准单环境执行方式见[复现说明](reproduction_zh.md)。该阶段完成 RTL 离线验证，板端结果按对应现场记录列示。
 ~~~~
 
-<a id="change-071"></a>
-#### 修改 071：原第 15 行 → 现第 15 行
+#### 原修改 071
+
+原行号：15–15；当时修改后行号：15–15。
 
 位置：GitHub 干净克隆复现记录（2026-10-28） / 完整 Vivado 工程
 
-修改原因：A：以中性工程语言介绍成果，保留事实与适用范围。
+原因：A：以中性工程语言介绍成果，保留事实与适用范围
 
 **Before**
 
@@ -1498,12 +1463,13 @@ Vivado 2022.2 对恢复的 工程快照完成 BD 校验、26 个 IP 子综合及
 Vivado 2022.2 对恢复的 工程快照完成 BD 校验、26 个 IP 子综合及顶层综合、布局和物理优化。首次运行在布线期间中断；保留[首次日志](../build/clean_rebuild_20261028/logs/vivado_initial.log)和[中断前实现日志](../build/clean_rebuild_20261028/logs/vivado_impl_before_resume.log)。确认已完成物理优化检查点后，仅重置布线步骤并从检查点继续，生成 BIT 和 XSA；[续跑命令](../build/clean_rebuild_20261028/commands/vivado_resume_historical.txt)和[日志](../build/clean_rebuild_20261028/logs/vivado_resume.log)保留原貌。本次以干净输入完成构建，过程包含一次布线中断及检查点续跑，相关日志完整保留。
 ~~~~
 
-<a id="change-072"></a>
-#### 修改 072：原第 28 行 → 现第 28 行
+#### 原修改 072
+
+原行号：28–28；当时修改后行号：28–28。
 
 位置：GitHub 干净克隆复现记录（2026-10-28） / 完整 Vivado 工程
 
-修改原因：A：以中性工程语言介绍成果，保留事实与适用范围。
+原因：A：以中性工程语言介绍成果，保留事实与适用范围
 
 **Before**
 
@@ -1517,12 +1483,13 @@ Vivado 2022.2 对恢复的 工程快照完成 BD 校验、26 个 IP 子综合及
 原始[资源](../build/clean_rebuild_20261028/reports/impl_utilization.rpt)、[时序](../build/clean_rebuild_20261028/reports/timing_summary.rpt)、[DRC](../build/clean_rebuild_20261028/reports/drc.rpt)、[CDC](../build/clean_rebuild_20261028/reports/cdc.rpt)、[Methodology](../build/clean_rebuild_20261028/reports/methodology.rpt)报告供逐项核查。首次日志亦有 XDC 端口未匹配和管脚告警；必须结合设计与板级资料判断。WNS 描述已约束路径，外部接口和 CDC 的专项签核状态见[告警说明](warning_review_zh.md)。
 ~~~~
 
-<a id="change-073"></a>
-#### 修改 073：原第 30 行 → 现第 30 行
+#### 原修改 073
+
+原行号：30–30；当时修改后行号：30–30。
 
 位置：GitHub 干净克隆复现记录（2026-10-28） / 完整 Vivado 工程
 
-修改原因：A：以中性工程语言介绍成果，保留事实与适用范围。
+原因：A：以中性工程语言介绍成果，保留事实与适用范围
 
 **Before**
 
@@ -1536,12 +1503,13 @@ Vivado 2022.2 对恢复的 工程快照完成 BD 校验、26 个 IP 子综合及
 本次 BIT 与现场此前上板反馈使用的 [`b286f480...`](../board/reproduced_20261028/z100_top.bit) 文件长度相同，仅 7 字节不同，均位于生成日期/时间头部；从同步字 `aa995566` 起的配置数据逐字节一致，SHA256 均为 `02c426b197721f9b367e33d9047dfe3e7c84191c90227a18f45411bd94526076`。新旧 XSA 中 HWH 只有 TIMESTAMP 不同，XSA 内 BIT 均与对应独立 BIT 一致。两文件具有相同配置数据及不同整文件哈希；本次新 BIT 的独立板测为后续验证项。此前现场反馈和串口范围见[既有板端记录](board_reproduced_20261028_zh.md)。
 ~~~~
 
-<a id="change-074"></a>
-#### 修改 074：原第 34 行 → 现第 34 行
+#### 原修改 074
+
+原行号：34–34；当时修改后行号：34–34。
 
 位置：GitHub 干净克隆复现记录（2026-10-28） / ARM 程序、QEMU 与 Linux
 
-修改原因：A：以中性工程语言介绍成果，保留事实与适用范围。
+原因：A：以中性工程语言介绍成果，保留事实与适用范围
 
 **Before**
 
@@ -1555,12 +1523,13 @@ Vivado 2022.2 对恢复的 工程快照完成 BD 校验、26 个 IP 子综合及
 使用本机外部 PetaLinux 2022.2 ARM 交叉工具链/sysroot、工程快照内 Paddle-Lite 静态库，独立编译 PicoDet 注意力候选，ELF SHA256 `1421b51bb95c448fe8ed244a21aff300d13156ecbf02ef9bde4b7b4a5c9a19f5`；独立编译原 GridPolicy 稳定应用 SHA256 `a16025dacfb8f02cee60a82b8c236e32319f724514baa50a0898b2c189f18aea`，分别与已有候选和稳定记录一致。见[候选构建日志](../build/clean_rebuild_20261028/logs/app_build.log)和[稳定应用构建日志](../build/clean_rebuild_20261028/logs/stable_app_build.log)。链接警告指出静态应用调用 `dlopen` 时仍可能需要匹配的 glibc 动态库，部署仍需核对相应 glibc 运行依赖。
 ~~~~
 
-<a id="change-075"></a>
-#### 修改 075：原第 36 行 → 现第 36 行
+#### 原修改 075
+
+原行号：36–36；当时修改后行号：36–36。
 
 位置：GitHub 干净克隆复现记录（2026-10-28） / ARM 程序、QEMU 与 Linux
 
-修改原因：A：以中性工程语言介绍成果，保留事实与适用范围。
+原因：A：以中性工程语言介绍成果，保留事实与适用范围
 
 **Before**
 
@@ -1574,12 +1543,13 @@ QEMU 固定 RGB、单线程 CPU 预处理用例产生 7 个人体框及 `C_ATTEN
 QEMU 固定 RGB、单线程 CPU 预处理用例产生 7 个人体框及 `C_ATTENTION` 请求；无目标用例也执行，见[检测](../build/clean_rebuild_20261028/logs/qemu_person.log)和[无目标](../build/clean_rebuild_20261028/logs/qemu_empty.log)日志。`hardware_commit=not_attempted`；该用例覆盖 QEMU 离线推理及软件请求生成；板端速度、摄像头、HDMI、舵机和 FPGA 行为按实际硬件测试记录。
 ~~~~
 
-<a id="change-076"></a>
-#### 修改 076：原第 38 行 → 现第 38 行
+#### 原修改 076
+
+原行号：38–38；当时修改后行号：38–38。
 
 位置：GitHub 干净克隆复现记录（2026-10-28） / ARM 程序、QEMU 与 Linux
 
-修改原因：A：以中性工程语言介绍成果，保留事实与适用范围。
+原因：A：以中性工程语言介绍成果，保留事实与适用范围
 
 **Before**
 
@@ -1593,12 +1563,13 @@ QEMU 固定 RGB、单线程 CPU 预处理用例产生 7 个人体框及 `C_ATTEN
 仓库固定 Linux 源码与稳定配置在独立目录通过 ARM 交叉构建，`kernel.release=5.15.36-xilinx-v2022.2`，生成 zImage 和 172 个模块；配置 SHA256 `6f1063a6e7a38c1f0d264db258a1987c9e46c7ec70c9a3bfcfb527df5aa005c4`，zImage SHA256 `dd442f1a509f453a7931ce47ebf1cdb00d65ce0235275bdb354dbbf8ccaa7bf4`，`Module.symvers` SHA256 `23ff35be01e406a61776b708685a96aa5922309029f7e12eada2d5fdebfb82e0`。见[内核日志](../build/clean_rebuild_20261028/logs/kernel_build.log)和[历史构建命令](../build/clean_rebuild_20261028/commands/kernel_runner_historical.txt)。与实板 `image.ub` 的二进制对应、模块兼容和启动状态待核验；编译依赖本机外部交叉工具链。
 ~~~~
 
-<a id="change-077"></a>
-#### 修改 077：原第 40 行 → 现第 40 行
+#### 原修改 077
+
+原行号：40–40；当时修改后行号：40–40。
 
 位置：GitHub 干净克隆复现记录（2026-10-28） / 原始记录与验证范围
 
-修改原因：A：以中性工程语言介绍成果，保留事实与适用范围。
+原因：A：以中性工程语言介绍成果，保留事实与适用范围
 
 **Before**
 
@@ -1612,12 +1583,13 @@ QEMU 固定 RGB、单线程 CPU 预处理用例产生 7 个人体框及 `C_ATTEN
 ## 原始记录与验证范围
 ~~~~
 
-<a id="change-078"></a>
-#### 修改 078：原第 42 行 → 现第 42 行
+#### 原修改 078
+
+原行号：42–42；当时修改后行号：42–42。
 
 位置：GitHub 干净克隆复现记录（2026-10-28） / 原始记录与验证范围
 
-修改原因：A：以中性工程语言介绍成果，保留事实与适用范围。
+原因：A：以中性工程语言介绍成果，保留事实与适用范围
 
 **Before**
 
@@ -1633,14 +1605,13 @@ QEMU 固定 RGB、单线程 CPU 预处理用例产生 7 个人体框及 `C_ATTEN
 
 ### report/contest_evidence_index_zh.md
 
-文件：[report/contest_evidence_index_zh.md](../report/contest_evidence_index_zh.md)。
+#### 原修改 079
 
-<a id="change-079"></a>
-#### 修改 079：原第 3 行 → 现第 3 行
+原行号：3–3；当时修改后行号：3–3。
 
 位置：比赛材料与证据索引（2026-10-29）
 
-修改原因：B/C：合并重复边界说明，在成果之后集中交代测试条件。
+原因：B/C：合并重复边界说明，在成果之后集中交代测试条件
 
 **Before**
 
@@ -1654,12 +1625,13 @@ QEMU 固定 RGB、单线程 CPU 预处理用例产生 7 个人体框及 `C_ATTEN
 本索引按比赛 3.3.5 的工程包、Skill 和设计报告要求组织材料，连接源码、构建产物、验证结果及版本记录。提交格式与评分以赛事完整规则为准。
 ~~~~
 
-<a id="change-080"></a>
-#### 修改 080：原第 8–10 行 → 现第 8–10 行
+#### 原修改 080
+
+原行号：8–10；当时修改后行号：8–10。
 
 位置：比赛材料与证据索引（2026-10-29）
 
-修改原因：A：以中性工程语言介绍成果，保留事实与适用范围。
+原因：A：以中性工程语言介绍成果，保留事实与适用范围
 
 **Before**
 
@@ -1677,12 +1649,13 @@ QEMU 固定 RGB、单线程 CPU 预处理用例产生 7 个人体框及 `C_ATTEN
 | 上板、运行及实测 | [现场团队的 BIT 和启动记录](board_reproduced_20261028_zh.md)、[应用日志与功能确认](board_app_evidence_20261028_zh.md)、[CPU/FPGA 预处理 A/B 计时](preproc_ab_20261028_zh.md)、[板端 Golden](preproc_board_golden_20261029_zh.md) | 现场确认六项功能正常；应用日志含 VDMA 错误位提示、帧新鲜度未验证。独立板端固定输入 Golden 通过；A/B 两组缩放算法及实时帧不同，按两种系统配置的计时结果报告。 |
 ~~~~
 
-<a id="change-081"></a>
-#### 修改 081：原第 12–13 行 → 现第 12–13 行
+#### 原修改 081
+
+原行号：12–13；当时修改后行号：12–13。
 
 位置：比赛材料与证据索引（2026-10-29）
 
-修改原因：A：以中性工程语言介绍成果，保留事实与适用范围。
+原因：A：以中性工程语言介绍成果，保留事实与适用范围
 
 **Before**
 
@@ -1698,12 +1671,13 @@ QEMU 固定 RGB、单线程 CPU 预处理用例产生 7 个人体框及 `C_ATTEN
 | 设计报告 | [设计报告](design_report_zh.md)、[AI 协作记录](ai_collaboration_record.md)、[版本说明](release_identity_zh.md) | 有背景、相关工作、原理、分工、性能、资源和复现说明；AI 协作包含真实会话节选和六个案例；性能按配置条件比较，资源按各构建版本列示。 |
 ~~~~
 
-<a id="change-082"></a>
-#### 修改 082：原第 30 行 → 现第 30 行
+#### 原修改 082
+
+原行号：30–30；当时修改后行号：30–30。
 
 位置：比赛材料与证据索引（2026-10-29） / 本地已有结果复核
 
-修改原因：A：以中性工程语言介绍成果，保留事实与适用范围。
+原因：A：以中性工程语言介绍成果，保留事实与适用范围
 
 **Before**
 
@@ -1717,12 +1691,13 @@ QEMU 固定 RGB、单线程 CPU 预处理用例产生 7 个人体框及 `C_ATTEN
 第三条从已保存日志重算：两组各记录 35 帧、去除前 5 帧；CPU 双三次预处理平均 416.960 ms，FPGA 双线性预处理平均 17.537 ms，`total_ms` 分别为 903.150 ms 和 502.665 ms。完整输入和输出见[A/B 记录](preproc_ab_20261028_zh.md)；该核验重算已保存日志，输入配对、张量一致性及硬件帧完成按专项记录核验。
 ~~~~
 
-<a id="change-083"></a>
-#### 修改 083：原第 32 行 → 现第 32 行
+#### 原修改 083
+
+原行号：32–32；当时修改后行号：32–32。
 
 位置：比赛材料与证据索引（2026-10-29） / 验证范围与后续完善
 
-修改原因：A：以中性工程语言介绍成果，保留事实与适用范围。
+原因：A：以中性工程语言介绍成果，保留事实与适用范围
 
 **Before**
 
@@ -1736,12 +1711,13 @@ QEMU 固定 RGB、单线程 CPU 预处理用例产生 7 个人体框及 `C_ATTEN
 ## 验证范围与后续完善
 ~~~~
 
-<a id="change-084"></a>
-#### 修改 084：原第 34 行 → 现第 34 行
+#### 原修改 084
+
+原行号：34–34；当时修改后行号：34–34。
 
 位置：比赛材料与证据索引（2026-10-29） / 验证范围与后续完善
 
-修改原因：A：以中性工程语言介绍成果，保留事实与适用范围。
+原因：A：以中性工程语言介绍成果，保留事实与适用范围
 
 **Before**
 
@@ -1755,12 +1731,13 @@ QEMU 固定 RGB、单线程 CPU 预处理用例产生 7 个人体框及 `C_ATTEN
 1. 已收到一次独立预处理固定输入板端 Golden 通过记录；独立 BIT 哈希未核实，按该次固定输入版本记录，跨版本 BIT 关联和完整视频链按各自测试核验。
 ~~~~
 
-<a id="change-085"></a>
-#### 修改 085：原第 36 行 → 现第 36 行
+#### 原修改 085
+
+原行号：36–36；当时修改后行号：36–36。
 
 位置：比赛材料与证据索引（2026-10-29） / 验证范围与后续完善
 
-修改原因：A：以中性工程语言介绍成果，保留事实与适用范围。
+原因：A：以中性工程语言介绍成果，保留事实与适用范围
 
 **Before**
 
@@ -1774,12 +1751,13 @@ QEMU 固定 RGB、单线程 CPU 预处理用例产生 7 个人体框及 `C_ATTEN
 3. 明确最终演示选用的应用版本，按[版本说明](release_identity_zh.md)绑定证据；现场确认及原始日志分别绑定对应程序。
 ~~~~
 
-<a id="change-086"></a>
-#### 修改 086：原第 38 行 → 现第 38 行
+#### 原修改 086
+
+原行号：38–38；当时修改后行号：38–38。
 
 位置：比赛材料与证据索引（2026-10-29） / 验证范围与后续完善
 
-修改原因：A：以中性工程语言介绍成果，保留事实与适用范围。
+原因：A：以中性工程语言介绍成果，保留事实与适用范围
 
 **Before**
 
@@ -1793,12 +1771,13 @@ QEMU 固定 RGB、单线程 CPU 预处理用例产生 7 个人体框及 `C_ATTEN
 5. PYNQ 以离线模拟示例提交；实板与真实跨项目复用记录作为可选扩展。
 ~~~~
 
-<a id="change-087"></a>
-#### 修改 087：原第 40 行 → 现第 40 行
+#### 原修改 087
+
+原行号：40–40；当时修改后行号：40–40。
 
 位置：比赛材料与证据索引（2026-10-29） / 验证范围与后续完善
 
-修改原因：B/C：合并重复边界说明，在成果之后集中交代测试条件。
+原因：B/C：合并重复边界说明，在成果之后集中交代测试条件
 
 **Before**
 
@@ -1814,18 +1793,17 @@ BIT、BOOT、启动日志、Attention 应用日志、功能确认、模型及 A/
 
 ### report/design_report_draft.md
 
-文件：[report/design_report_draft.md](../report/design_report_draft.md)。
+#### 原修改 088
 
-<a id="change-088"></a>
-#### 修改 088：原第 2 行前新增 → 现第 2–3 行
+原行号：2–1；当时修改后行号：2–3。
 
 位置：EagleEye: FPGA-assisted video review (draft)
 
-修改原因：C/D：仅调整历史资料导读，原阶段事实与记录继续保留。
+原因：C/D：仅调整历史资料导读，原阶段事实与记录继续保留
 
 **Before**
 
-（原位置无文本，本项为新增。）
+（原位置为空，本项为新增。）
 
 **After**
 
@@ -1836,14 +1814,13 @@ BIT、BOOT、启动日志、Attention 应用日志、功能确认、模型及 A/
 
 ### report/design_report_zh.md
 
-文件：[report/design_report_zh.md](../report/design_report_zh.md)。
+#### 原修改 089
 
-<a id="change-089"></a>
-#### 修改 089：原第 3 行 → 现第 3 行
+原行号：3–3；当时修改后行号：3–3。
 
 位置：EagleEye 仿生视觉转播系统——设计报告
 
-修改原因：B/C：合并重复边界说明，在成果之后集中交代测试条件。
+原因：B/C：合并重复边界说明，在成果之后集中交代测试条件
 
 **Before**
 
@@ -1857,12 +1834,13 @@ BIT、BOOT、启动日志、Attention 应用日志、功能确认、模型及 A/
 本报告介绍 EagleEye 在 XC7Z035 上的仿生视觉系统设计与实现，涵盖视频处理、FPGA 预处理、ARM 人体检测、注意力决策和机械眼联动。项目已完成源码构建、RTL 仿真、板端功能确认、CPU/FPGA 预处理计时及[独立固定输入 Golden 对比](preproc_board_golden_20261029_zh.md)。具体 BIT、应用和模型身份见 [版本说明](release_identity_zh.md)，各项测试条件和验证范围集中于第 3、4 节。
 ~~~~
 
-<a id="change-090"></a>
-#### 修改 090：原第 11 行 → 现第 11 行
+#### 原修改 090
+
+原行号：11–11；当时修改后行号：11–11。
 
 位置：EagleEye 仿生视觉转播系统——设计报告 / 1. 背景、目标和范围
 
-修改原因：B/C：合并重复边界说明，在成果之后集中交代测试条件。
+原因：B/C：合并重复边界说明，在成果之后集中交代测试条件
 
 **Before**
 
@@ -1876,12 +1854,13 @@ BIT、BOOT、启动日志、Attention 应用日志、功能确认、模型及 A/
 系统采用 XC7Z035、OV5640、HDMI 和 ARM/Paddle-Lite：PS 承担人体检测与视觉决策，PL 承担视频处理、模型输入预处理和 PWM 输出。设计定位为辅助观察，ROI 通过局部重采样改善展示，裁判判断由使用者完成。
 ~~~~
 
-<a id="change-091"></a>
-#### 修改 091：原第 17 行 → 现第 17 行
+#### 原修改 091
+
+原行号：17–17；当时修改后行号：17–17。
 
 位置：1. 背景、目标和范围 / 1.1 选题动机与实际需求
 
-修改原因：B/C：合并重复边界说明，在成果之后集中交代测试条件。
+原因：B/C：合并重复边界说明，在成果之后集中交代测试条件
 
 **Before**
 
@@ -1895,12 +1874,13 @@ BIT、BOOT、启动日志、Attention 应用日志、功能确认、模型及 A/
 团队选择“全景观察与局部复判相结合”作为切入点：在嵌入式设备上保留全景，根据人体检测结果提出关注区域，并支持暂停后用鼠标调整 ROI，双路舵机随关注位置联动。这里的“复判”指对**当前暂停画面**的人工观察；多机位、历史片段、慢动作及轨迹回放属于本原型范围之外的功能。
 ~~~~
 
-<a id="change-092"></a>
-#### 修改 092：原第 19 行 → 现第 19 行
+#### 原修改 092
+
+原行号：19–19；当时修改后行号：19–19。
 
 位置：1. 背景、目标和范围 / 1.1 选题动机与实际需求
 
-修改原因：B/C：合并重复边界说明，在成果之后集中交代测试条件。
+原因：B/C：合并重复边界说明，在成果之后集中交代测试条件
 
 **Before**
 
@@ -1914,12 +1894,13 @@ BIT、BOOT、启动日志、Attention 应用日志、功能确认、模型及 A/
 该方案面向全景与局部之间的目标定位和观察操作。当前模型输出人体框，足球检测、球员身份识别和观察效率对照评估留待后续研究。系统的使用条件包括单摄像头视角、遮挡、输入分辨率和检测误差；放大所呈现的细节来自原始采样。
 ~~~~
 
-<a id="change-093"></a>
-#### 修改 093：原第 21 行 → 现第 21 行
+#### 原修改 093
+
+原行号：21–21；当时修改后行号：21–21。
 
 位置：1. 背景、目标和范围 / 1.1 选题动机与实际需求
 
-修改原因：B/C：合并重复边界说明，在成果之后集中交代测试条件。
+原因：B/C：合并重复边界说明，在成果之后集中交代测试条件
 
 **Before**
 
@@ -1933,12 +1914,13 @@ BIT、BOOT、启动日志、Attention 应用日志、功能确认、模型及 A/
 本项目定位为教学与研究性质的画面观察辅助原型，专业 VAR 的认证和裁判流程属于另一应用层级。报告以源码、工具输出及现场记录介绍已实现功能，使用效果的量化评估按实际测试范围展开。
 ~~~~
 
-<a id="change-094"></a>
-#### 修改 094：原第 27–29 行 → 现第 27–29 行
+#### 原修改 094
+
+原行号：27–29；当时修改后行号：27–29。
 
 位置：1. 背景、目标和范围 / 1.2 相关工作及本项目的区别
 
-修改原因：A：以中性工程语言介绍成果，保留事实与适用范围。
+原因：A：以中性工程语言介绍成果，保留事实与适用范围
 
 **Before**
 
@@ -1956,12 +1938,13 @@ BIT、BOOT、启动日志、Attention 应用日志、功能确认、模型及 A/
 | FPGA 图像处理与预处理 | AMD 的 Vitis Vision 库提供颜色转换、分辨率变换等硬件图像处理功能 [5]，说明这类运算已有成熟的可编程逻辑实现思路。 | 本项目将 PL 预处理集成到摄像头、PicoDet 与视频观察链路，完成张量 Golden 仿真及独立固定输入板端验证，并比较两种预处理配置的板端耗时；同算法的配对性能与检测精度比较为后续评估项。 |
 ~~~~
 
-<a id="change-095"></a>
-#### 修改 095：原第 31 行 → 现第 31 行
+#### 原修改 095
+
+原行号：31–31；当时修改后行号：31–31。
 
 位置：1. 背景、目标和范围 / 1.2 相关工作及本项目的区别
 
-修改原因：B/C：合并重复边界说明，在成果之后集中交代测试条件。
+原因：B/C：合并重复边界说明，在成果之后集中交代测试条件
 
 **Before**
 
@@ -1975,12 +1958,13 @@ BIT、BOOT、启动日志、Attention 应用日志、功能确认、模型及 A/
 **本项目的设计贡献**在于面向快速运动观察场景的软硬件协同：将视频显示、PL 预处理、PS 人体检测、ROI 人工接管及舵机控制组织成一套 XC7Z035 原型，并提供源码、测试记录和复现工具。相关工作提供技术基础，本报告以本项目的实现与测试说明系统价值，与其他完整系统的同条件横向评价留待后续开展。
 ~~~~
 
-<a id="change-096"></a>
-#### 修改 096：原第 39 行 → 现第 39 行
+#### 原修改 096
+
+原行号：39–39；当时修改后行号：39–39。
 
 位置：1. 背景、目标和范围 / 1.2 相关工作及本项目的区别
 
-修改原因：A：以中性工程语言介绍成果，保留事实与适用范围。
+原因：A：以中性工程语言介绍成果，保留事实与适用范围
 
 **Before**
 
@@ -1994,31 +1978,13 @@ BIT、BOOT、启动日志、Attention 应用日志、功能确认、模型及 A/
 5. AMD. [Vitis Vision Library User Guide](https://docs.amd.com/r/en-US/Vitis_Libraries/vision/overview.html?contentId=tllvbqJ7TwA66BDW6JeAcw). 图像处理库功能参考，用于说明相关技术背景。
 ~~~~
 
-<a id="change-097"></a>
-#### 修改 097：原第 43 行 → 现第 43 行
+#### 原修改 098
+
+原行号：45–45；当时修改后行号：45–45。
 
 位置：1. 背景、目标和范围 / 1.3 四项可核查的设计贡献
 
-修改原因：B/C：合并重复边界说明，在成果之后集中交代测试条件。
-
-**Before**
-
-~~~~text
-以下贡献着重于本项目的系统组合和工程实现，不将 PicoDet、Lanczos 或第三方 IP 本身称为团队首创。各项证据和限制分别列出，独立 V2/V3 卷积实验不计入当前视频系统的功能结论。
-~~~~
-
-**After**
-
-~~~~text
-以下四项围绕系统组合、规则型视觉决策、资源约束下的视频处理和模型输入适配展开。PicoDet、Lanczos 算法及厂商 IP 的来源见 [第三方资料](third_party_sources_zh.md)；独立卷积研究的范围见第 3 节。
-~~~~
-
-<a id="change-098"></a>
-#### 修改 098：原第 45 行 → 现第 45 行
-
-位置：1. 背景、目标和范围 / 1.3 四项可核查的设计贡献
-
-修改原因：A：以中性工程语言介绍成果，保留事实与适用范围。
+原因：A：以中性工程语言介绍成果，保留事实与适用范围
 
 **Before**
 
@@ -2032,12 +1998,13 @@ BIT、BOOT、启动日志、Attention 应用日志、功能确认、模型及 A/
 **一、视觉关注与机械眼协同。** 系统将关注区域与双路舵机动作联系起来，为屏幕上的 ROI 提供可观察的物理反馈。[`roi_servo_pwm.v`](../src/servo/roi_servo_pwm.v) 将 ROI 坐标映射为水平、垂直 PWM 目标，并设置中心、范围和渐变步进；暂停后也可通过鼠标调整 ROI。现场已确认鼠标 ROI、按键和舵机等功能正常，[舵机 RTL 仿真](../sim/servo_iverilog_20261027.log)覆盖中心、周期及渐变。机械眼采用 PWM 开环位置控制；机械误差与响应延迟的量化测量列为后续验证项。
 ~~~~
 
-<a id="change-099"></a>
-#### 修改 099：原第 47 行 → 现第 47 行
+#### 原修改 099
+
+原行号：47–47；当时修改后行号：47–47。
 
 位置：1. 背景、目标和范围 / 1.3 四项可核查的设计贡献
 
-修改原因：A：以中性工程语言介绍成果，保留事实与适用范围。
+原因：A：以中性工程语言介绍成果，保留事实与适用范围
 
 **Before**
 
@@ -2051,12 +2018,13 @@ BIT、BOOT、启动日志、Attention 应用日志、功能确认、模型及 A/
 **二、人体检测驱动的规则型注意力与 ROI 决策。** [`fovea_roi.hpp`](../src/ps/src/fovea_roi.hpp) 对 PicoDet 人体框进行筛选、去重和相邻推理结果的临时关联，并综合区域、运动、向画面中心接近、小目标和检测不确定度评分；保持次数与切换门槛用于减少目标频繁切换。选中的 ROI 可经过轨迹平滑，暂停时支持人工调整。处理流程为“人体框 → 候选关联 → 多因素评分 → 保持或切换 → ROI 平滑 → 视频观察与控制”。[Attention 应用日志](board_app_evidence_20261028_zh.md)保存了相应输出。权重采用工程规则参数，临时 ID 服务于相邻推理结果关联；其验证范围及应用版本对应关系见第 3 节。
 ~~~~
 
-<a id="change-100"></a>
-#### 修改 100：原第 53 行 → 现第 53 行
+#### 原修改 100
+
+原行号：53–53；当时修改后行号：53–53。
 
 位置：1. 背景、目标和范围 / 1.3 四项可核查的设计贡献
 
-修改原因：A：以中性工程语言介绍成果，保留事实与适用范围。
+原因：A：以中性工程语言介绍成果，保留事实与适用范围
 
 **Before**
 
@@ -2070,12 +2038,13 @@ BIT、BOOT、启动日志、Attention 应用日志、功能确认、模型及 A/
 如图所示，固定倍率下输出位置分为四种相位：整数相位直接取样，水平和垂直半像素分别将六个抽头对称合并为三组，双向半像素将 6×6 邻域合并为九组。该图描述 RTL 运算组织，实际 DSP 用量以综合与实现报告统计。
 ~~~~
 
-<a id="change-101"></a>
-#### 修改 101：原第 55 行 → 现第 55 行
+#### 原修改 101
+
+原行号：55–55；当时修改后行号：55–55。
 
 位置：1. 背景、目标和范围 / 1.3 四项可核查的设计贡献
 
-修改原因：B/C：合并重复边界说明，在成果之后集中交代测试条件。
+原因：B/C：合并重复边界说明，在成果之后集中交代测试条件
 
 **Before**
 
@@ -2089,12 +2058,13 @@ BIT、BOOT、启动日志、Attention 应用日志、功能确认、模型及 A/
 团队记录该设计节省约 67% DSP；该比例的独立复算仍需优化前后综合报告。历史独立工程 XSim 日志记录单通道 768 个、RGB 1,536 个输出像素零错误，当前 Eyes 工程另有[资源和时序记录](clean_reproduction_20261028_zh.md)及现场功能确认。不同测试版本的对应关系集中见[仿真记录说明](../sim/lanczos_legacy_readme.md)。
 ~~~~
 
-<a id="change-102"></a>
-#### 修改 102：原第 57 行 → 现第 57 行
+#### 原修改 102
+
+原行号：57–57；当时修改后行号：57–57。
 
 位置：1. 背景、目标和范围 / 1.3 四项可核查的设计贡献
 
-修改原因：A：以中性工程语言介绍成果，保留事实与适用范围。
+原因：A：以中性工程语言介绍成果，保留事实与适用范围
 
 **Before**
 
@@ -2108,12 +2078,13 @@ BIT、BOOT、启动日志、Attention 应用日志、功能确认、模型及 A/
 **四、与 PicoDet 对接的 FPGA 预处理 IP。** PL 侧将 640×360 RGB888 输入经双线性缩放和归一化，形成 `1×3×320×320` FP32 NCHW 张量；数据经一路输入 DMA 和三路 R/G/B 输出 DMA 在 IP 与 DDR 之间搬运，PS 侧负责将张量交给 Paddle-Lite 并提供 CPU 回退。见[预处理源码](../src/ip_repo/preproc/)及[硬件接口表](hardware_interfaces_zh.md)。五类帧 RTL 仿真与 Golden 逐位一致；另一次[独立板端固定输入测试](preproc_board_golden_20261029_zh.md)中 307,200/307,200 个值逐位一致。[A/B 计时](preproc_ab_20261028_zh.md)中 CPU 双三次和 FPGA 双线性预处理的平均耗时分别为 416.960 ms、17.537 ms。两组属于不同算法及实时输入的系统配置比较，测试条件见第 4 节；模型推理由 ARM 执行。
 ~~~~
 
-<a id="change-103"></a>
-#### 修改 103：原第 59 行 → 现第 59 行
+#### 原修改 103
+
+原行号：59–59；当时修改后行号：59–59。
 
 位置：1. 背景、目标和范围 / 1.3 四项可核查的设计贡献
 
-修改原因：B/C：合并重复边界说明，在成果之后集中交代测试条件。
+原因：B/C：合并重复边界说明，在成果之后集中交代测试条件
 
 **Before**
 
@@ -2127,50 +2098,13 @@ BIT、BOOT、启动日志、Attention 应用日志、功能确认、模型及 A/
 项目还提供测试输入、参考张量、RTL 日志、构建报告、BIT/XSA/HWH 和核验脚本，形成由实现到验证的资料链；见[比赛材料与证据索引](contest_evidence_index_zh.md)。
 ~~~~
 
-<a id="change-104"></a>
-#### 修改 104：原第 61 行 → 现第 61 行
+#### 原修改 106
 
-位置：1. 背景、目标和范围 / 1.3 四项可核查的设计贡献
-
-修改原因：B/C：合并重复边界说明，在成果之后集中交代测试条件。
-
-**Before**
-
-~~~~text
-这些特点是已有部件的系统组合与实现方法，不代表 PicoDet、Lanczos 或厂商 IP 均为团队原创。第三方来源、本地许可文件和尚需确认的授权范围逐项见 [来源与授权核对](third_party_sources_zh.md)。
-~~~~
-
-**After**
-
-~~~~text
-第三方来源、已有许可及待确认授权范围统一见 [来源与授权核对](third_party_sources_zh.md)。
-~~~~
-
-<a id="change-105"></a>
-#### 修改 105：原第 63 行 → 现第 63 行
-
-位置：1. 背景、目标和范围 / 1.3 四项可核查的设计贡献
-
-修改原因：B/C：合并重复边界说明，在成果之后集中交代测试条件。
-
-**Before**
-
-~~~~text
-团队反馈当前 `model.nb` 为官方 PicoDet-XS 320 COCO LCNet 导出后转 Paddle-Lite ARM，未由团队训练或量化；PicoDet-S 416 的训练记录属于另一模型。当前仓库模型哈希与反馈一致，但另一台机器的交接文件和转换过程未在本机独立核验，权重使用和再分发授权仍待确认；详见[来源与授权核对](third_party_sources_zh.md)。
-~~~~
-
-**After**
-
-~~~~text
-当前 `model.nb` 按团队来源记录为官方 PicoDet-XS 320 COCO LCNet 导出后转换的 Paddle-Lite ARM 模型，采用原始预训练权重，未由团队训练或量化。PicoDet-S 416 属另一训练路线；模型哈希、转换资料核对情况和权重使用及再分发授权状态见[来源与授权核对](third_party_sources_zh.md)。
-~~~~
-
-<a id="change-106"></a>
-#### 修改 106：原第 71 行 → 现第 71 行
+原行号：71–71；当时修改后行号：71–71。
 
 位置：EagleEye 仿生视觉转播系统——设计报告 / 2. 设计原理与软硬件分工
 
-修改原因：B/C：合并重复边界说明，在成果之后集中交代测试条件。
+原因：B/C：合并重复边界说明，在成果之后集中交代测试条件
 
 **Before**
 
@@ -2184,12 +2118,13 @@ BIT、BOOT、启动日志、Attention 应用日志、功能确认、模型及 A/
 系统架构如图所示：PL 侧包括摄像头/视频通路、VDMA、ROI 放大及 OSD、图像预处理和 PWM；PS 侧负责 PicoDet 人体检测、ROI 策略、鼠标及控制交互。源码分别位于 `src/vivado/`、`src/ip_repo/`、`src/servo/` 和 `src/ps/`。
 ~~~~
 
-<a id="change-107"></a>
-#### 修改 107：原第 75 行 → 现第 75 行
+#### 原修改 107
+
+原行号：75–75；当时修改后行号：75–75。
 
 位置：EagleEye 仿生视觉转播系统——设计报告 / 2. 设计原理与软硬件分工
 
-修改原因：B/C：合并重复边界说明，在成果之后集中交代测试条件。
+原因：B/C：合并重复边界说明，在成果之后集中交代测试条件
 
 **Before**
 
@@ -2203,12 +2138,13 @@ BIT、BOOT、启动日志、Attention 应用日志、功能确认、模型及 A/
 预处理将 640×360 RGB888 转为 `1×3×320×320` FP32 NCHW。位宽、DMA/cache、时钟、地址和复位的版本化定义见匹配的源码、XSA 与[接口表](hardware_interfaces_zh.md)。
 ~~~~
 
-<a id="change-108"></a>
-#### 修改 108：原第 79 行 → 现第 79 行
+#### 原修改 108
+
+原行号：79–79；当时修改后行号：79–79。
 
 位置：2. 设计原理与软硬件分工 / 数据流与接口边界
 
-修改原因：A：以中性工程语言介绍成果，保留事实与适用范围。
+原因：A：以中性工程语言介绍成果，保留事实与适用范围
 
 **Before**
 
@@ -2222,12 +2158,13 @@ BIT、BOOT、启动日志、Attention 应用日志、功能确认、模型及 A/
 1. 摄像头数据进入 Eyes 视频链路，PS 程序从视频帧获取检测输入。HDMI 显示与检测更新异步运行，分别记录显示和感知速率。
 ~~~~
 
-<a id="change-109"></a>
-#### 修改 109：原第 82 行 → 现第 82 行
+#### 原修改 109
+
+原行号：82–82；当时修改后行号：82–82。
 
 位置：2. 设计原理与软硬件分工 / 数据流与接口边界
 
-修改原因：A：以中性工程语言介绍成果，保留事实与适用范围。
+原因：A：以中性工程语言介绍成果，保留事实与适用范围
 
 **Before**
 
@@ -2241,12 +2178,13 @@ BIT、BOOT、启动日志、Attention 应用日志、功能确认、模型及 A/
 4. 鼠标与 Fovea 请求经过已有控制路径，舵机由相应 PWM RTL 控制。独立 `src/picodet_c_candidate/` 还将人体框送入注意力与调度逻辑；该候选、稳定 GridPolicy 和后续 AttentionPolicy 按独立软件版本管理。
 ~~~~
 
-<a id="change-110"></a>
-#### 修改 110：原第 84 行 → 现第 84 行
+#### 原修改 110
+
+原行号：84–84；当时修改后行号：84–84。
 
 位置：2. 设计原理与软硬件分工 / 数据流与接口边界
 
-修改原因：B/C：合并重复边界说明，在成果之后集中交代测试条件。
+原因：B/C：合并重复边界说明，在成果之后集中交代测试条件
 
 **Before**
 
@@ -2260,12 +2198,13 @@ BIT、BOOT、启动日志、Attention 应用日志、功能确认、模型及 A/
 项目以接口源码定义数据与控制行为，并通过现场确认记录系统功能。AttentionPolicy 登录后应用日志与独立 PicoDet 注意力候选的现场反馈分别绑定各自 ELF，详见 [应用证据](board_app_evidence_20261028_zh.md)。
 ~~~~
 
-<a id="change-111"></a>
-#### 修改 111：原第 92 行 → 现第 92 行
+#### 原修改 111
+
+原行号：92–92；当时修改后行号：92–92。
 
 位置：2. 设计原理与软硬件分工 / 2.1 关键接口及版本
 
-修改原因：A：以中性工程语言介绍成果，保留事实与适用范围。
+原因：A：以中性工程语言介绍成果，保留事实与适用范围
 
 **Before**
 
@@ -2279,12 +2218,13 @@ Fovea AXI-Lite、预处理 IP、四路预处理 DMA 和视频 VDMA 的地址，�
 Fovea AXI-Lite、预处理 IP、四路预处理 DMA 和视频 VDMA 的地址，已按现场提供的 HWH 与 AttentionPolicy 应用源码逐项整理在 [硬件与软件接口表](hardware_interfaces_zh.md)。该表同时列出帧缓冲与预处理张量的尺寸、格式、源码出处，以及时钟与复位的核对边界。跨板移植时，按目标 XSA、设备树和资源归属更新配置。
 ~~~~
 
-<a id="change-112"></a>
-#### 修改 112：原第 94 行 → 现第 94 行
+#### 原修改 112
+
+原行号：94–94；当时修改后行号：94–94。
 
 位置：2. 设计原理与软硬件分工 / 2.1 关键接口及版本
 
-修改原因：A：以中性工程语言介绍成果，保留事实与适用范围。
+原因：A：以中性工程语言介绍成果，保留事实与适用范围
 
 **Before**
 
@@ -2298,12 +2238,13 @@ Fovea AXI-Lite、预处理 IP、四路预处理 DMA 和视频 VDMA 的地址，�
 系统将连续视频接入、显示和格式转换放在 PL 侧，以匹配视频接口和固定数据流；PS 侧承担模型推理、目标选择及交互控制，便于复用 Paddle-Lite 和调整策略。实际预处理配置的性能收益见第 4 节，分工本身的独立贡献仍需同条件实验量化。
 ~~~~
 
-<a id="change-113"></a>
-#### 修改 113：原第 106 行 → 现第 106 行
+#### 原修改 113
+
+原行号：106–106；当时修改后行号：106–106。
 
 位置：2. 设计原理与软硬件分工 / 2.2 五因素注意力与动态中央凹
 
-修改原因：A：以中性工程语言介绍成果，保留事实与适用范围。
+原因：A：以中性工程语言介绍成果，保留事实与适用范围
 
 **Before**
 
@@ -2317,12 +2258,13 @@ Fovea AXI-Lite、预处理 IP、四路预处理 DMA 和视频 VDMA 的地址，�
 其中，“区域”采用图像中心的空间先验；“接近”描述目标到画面中心的距离变化；“不确定性”由检测置信度构造。五项均为图像空间的工程特征，权重为当前策略配置；球场语义、物理速度和权重最优性的评估属于后续研究。
 ~~~~
 
-<a id="change-114"></a>
-#### 修改 114：原第 112 行 → 现第 112 行
+#### 原修改 114
+
+原行号：112–112；当时修改后行号：112–112。
 
 位置：2. 设计原理与软硬件分工 / 2.2 五因素注意力与动态中央凹
 
-修改原因：A：以中性工程语言介绍成果，保留事实与适用范围。
+原因：A：以中性工程语言介绍成果，保留事实与适用范围
 
 **Before**
 
@@ -2336,12 +2278,13 @@ Fovea AXI-Lite、预处理 IP、四路预处理 DMA 和视频 VDMA 的地址，�
 选中目标后，系统在 640×360 全局画面上生成固定 320×180 ROI，并对原点进行边界钳位。局部分支横纵各放大 2 倍，形成 640×360 观察窗口；ROI 面积占全局画面的四分之一；该几何比例及其补数 75% 仅描述画面面积，整机计算、功耗和 DDR 流量按各自路径单独测量。ROI 动画按步长向目标移动，每轴单次最多 12 像素；平滑更新负责显示运动，检测 FPS 按新的推理结果统计。
 ~~~~
 
-<a id="change-115"></a>
-#### 修改 115：原第 116 行 → 现第 116 行
+#### 原修改 115
+
+原行号：116–116；当时修改后行号：116–116。
 
 位置：2. 设计原理与软硬件分工 / 2.3 团队分工与接口
 
-修改原因：A：以中性工程语言介绍成果，保留事实与适用范围。
+原因：A：以中性工程语言介绍成果，保留事实与适用范围
 
 **Before**
 
@@ -2355,73 +2298,13 @@ Fovea AXI-Lite、预处理 IP、四路预处理 DMA 和视频 VDMA 的地址，�
 按团队确认的 A、B、C 职责，并结合原仓库四个分支的源码整理。分工表归纳主要职责，文件实现与系统集成由团队协作完成。
 ~~~~
 
-<a id="change-116"></a>
-#### 修改 116：原第 121–123 行 → 现第 121–123 行
+#### 原修改 119
+
+原行号：129–129；当时修改后行号：129–129。
 
 位置：2. 设计原理与软硬件分工 / 2.3 团队分工与接口
 
-修改原因：A：以中性工程语言介绍成果，保留事实与适用范围。
-
-**Before**
-
-~~~~text
-| B：PicoDet 人体检测 | 负责 PicoDet 模型与 ARM/Paddle-Lite 推理，产生人体检测框及置信度，供后续关注区域选择使用。 | 当前 Z035 路线的模型与程序见 [`data/model.nb`](../data/model.nb) 和 [`src/ps/`](../src/ps/)；[预处理 A/B 记录](preproc_ab_20261028_zh.md)中两组 PicoDet 推理均在 ARM。原 [b-detection](https://github.com/Zyl-stack/EagleEye_C_Attention_Sim/tree/a4d9226b401c878c6a83a6e520966f997262b492) 分支中的足球 YOLO、目标跟踪及 `EE_B_TARGET_STREAM_V1` 是独立参考路线，不能说该分支就是当前板上的 PicoDet 程序，也不能把 YOLO 的 PLAYER/BALL 结果当作当前系统实测。 |
-| C：注意力与 ROI 调度 | 接收人体目标信息，计算关注度并选择目标；处理保持、切换、ROI 平滑及向 A 的 Fovea 控制接口发出请求。 | 原 [c-attention](https://github.com/Zyl-stack/EagleEye_C_Attention_Sim/tree/e91d713a5b42153d29f7b80ad53ae6709c656716) 分支包含 `attention_score.c`、`attention_scheduler.c`、`bc_adapter.c`、`roi_smoother.c` 和 `a_fovea_adapter.c`。当前 PicoDet+C 独立候选见 [`src/picodet_c_candidate/`](../src/picodet_c_candidate/readme.md)；现场已确认该候选上板功能正常。分支中足球场景的其他功能不自动等同于当前板端已经部署。 |
-| 团队与 AI 协作 | 需求拆分、接口核对、构建测试与交付资料整理；现场上板由团队执行与确认。 | [AI 协作记录](ai_collaboration_record.md)为整理稿，不是完整对话逐字稿；第三方模型和 IP 需注明来源和授权。 |
-~~~~
-
-**After**
-
-~~~~text
-| B：PicoDet 人体检测 | 负责 PicoDet 模型与 ARM/Paddle-Lite 推理，产生人体检测框及置信度，供后续关注区域选择使用。 | 当前 Z035 路线的模型与程序见 [`data/model.nb`](../data/model.nb) 和 [`src/ps/`](../src/ps/)；[预处理 A/B 记录](preproc_ab_20261028_zh.md)中两组 PicoDet 推理均在 ARM。原 [b-detection](https://github.com/Zyl-stack/EagleEye_C_Attention_Sim/tree/a4d9226b401c878c6a83a6e520966f997262b492) 分支中的足球 YOLO、目标跟踪及 `EE_B_TARGET_STREAM_V1` 为独立足球检测参考路线，其模型、类别及测试记录单独管理；当前板端采用 PicoDet PERSON 检测。 |
-| C：注意力与 ROI 调度 | 接收人体目标信息，计算关注度并选择目标；处理保持、切换、ROI 平滑及向 A 的 Fovea 控制接口发出请求。 | 原 [c-attention](https://github.com/Zyl-stack/EagleEye_C_Attention_Sim/tree/e91d713a5b42153d29f7b80ad53ae6709c656716) 分支包含 `attention_score.c`、`attention_scheduler.c`、`bc_adapter.c`、`roi_smoother.c` 和 `a_fovea_adapter.c`。当前 PicoDet+C 独立候选见 [`src/picodet_c_candidate/`](../src/picodet_c_candidate/readme.md)；现场已确认该候选上板功能正常。足球场景的扩展功能按参考分支的验证范围记录。 |
-| 团队与 AI 协作 | 需求拆分、接口核对、构建测试与交付资料整理；现场上板由团队执行与确认。 | [AI 协作记录](ai_collaboration_record.md)以案例和真实会话节选呈现开发过程；第三方模型与 IP 的来源和授权单独记录。 |
-~~~~
-
-<a id="change-117"></a>
-#### 修改 117：原第 125 行 → 现第 125 行
-
-位置：2. 设计原理与软硬件分工 / 2.3 团队分工与接口
-
-修改原因：A：以中性工程语言介绍成果，保留事实与适用范围。
-
-**Before**
-
-~~~~text
-原 [main](https://github.com/Zyl-stack/EagleEye_C_Attention_Sim/tree/d1253a65f09451d2c48cffbc70d22d12bba3003a) 分支的 `src/main.c` 使用模拟目标数据串联注意力、调度、运动预测与事务状态，属于 PC 软件模拟，不能直接作为当前 Z035 实板证据。本仓库的 `reference/github_a_fovea/`、`reference/github_b_detection/`、`reference/github_c_attention/` 保存了对应参考快照；原仓库链接的可访问范围由其权限决定。
-~~~~
-
-**After**
-
-~~~~text
-原 [main](https://github.com/Zyl-stack/EagleEye_C_Attention_Sim/tree/d1253a65f09451d2c48cffbc70d22d12bba3003a) 分支的 `src/main.c` 使用模拟目标数据串联注意力、调度、运动预测与事务状态，属于 PC 软件模拟，板端功能由各自上板资料记录。本仓库的 `reference/github_a_fovea/`、`reference/github_b_detection/`、`reference/github_c_attention/` 保存了对应参考快照；原仓库链接的可访问范围由其权限决定。
-~~~~
-
-<a id="change-118"></a>
-#### 修改 118：原第 127 行 → 现第 127 行
-
-位置：2. 设计原理与软硬件分工 / 2.3 团队分工与接口
-
-修改原因：B/C：合并重复边界说明，在成果之后集中交代测试条件。
-
-**Before**
-
-~~~~text
-当前板端 PicoDet 输出 PERSON 人体框；原足球 YOLO 路线可输出 PLAYER/BALL 并通过其跟踪模块形成目标流。**两条路线的模型、接口和验证范围分开记录**。当前 AttentionPolicy 中的本地匹配 ID 不能当作跨遮挡稳定追踪 ID。注意力候选的上板功能采用现场确认；仓库中的 AttentionPolicy 原始应用日志属于另一应用归档，不能混作该候选的原始日志。
-~~~~
-
-**After**
-
-~~~~text
-当前板端 PicoDet 输出 PERSON 人体框；足球 YOLO 参考路线输出 PLAYER/BALL 并形成跟踪目标流。两条路线的模型、接口及验证记录独立管理。AttentionPolicy 的本地匹配 ID 用于相邻推理结果关联；独立注意力候选的现场反馈与另一 ELF 的 AttentionPolicy 原始日志见各自版本记录。
-~~~~
-
-<a id="change-119"></a>
-#### 修改 119：原第 129 行 → 现第 129 行
-
-位置：2. 设计原理与软硬件分工 / 2.3 团队分工与接口
-
-修改原因：B/C：合并重复边界说明，在成果之后集中交代测试条件。
+原因：B/C：合并重复边界说明，在成果之后集中交代测试条件
 
 **Before**
 
@@ -2435,12 +2318,13 @@ Fovea AXI-Lite、预处理 IP、四路预处理 DMA 和视频 VDMA 的地址，�
 AttentionPolicy 的五项权重为 3、1、3、2、3，用于人体目标选择。评分对象和图像空间特征见第 2.2 节；独立注意力候选采用自身源码和配置。
 ~~~~
 
-<a id="change-120"></a>
-#### 修改 120：原第 135–145 行 → 现第 135–145 行
+#### 原修改 120
+
+原行号：135–145；当时修改后行号：135–145。
 
 位置：EagleEye 仿生视觉转播系统——设计报告 / 3. 验证、资源与时序
 
-修改原因：A：以中性工程语言介绍成果，保留事实与适用范围。
+原因：A：以中性工程语言介绍成果，保留事实与适用范围
 
 **Before**
 
@@ -2474,12 +2358,13 @@ AttentionPolicy 的五项权重为 3、1、3、2、3，用于人体目标选择�
 | 独立 Eyes 重建 | `build/full_rebuild_20261027/`：LUT 24,986、FF 28,246、BRAM 303、DSP 49；WNS +0.608 ns、WHS +0.007 ns | 本机独立源码副本完成实现；12 项输入/33 项输出延迟缺失，CDC 和方法学 Critical 及外部接口时序仍待签核 |
 ~~~~
 
-<a id="change-121"></a>
-#### 修改 121：原第 147–149 行 → 现第 147–149 行
+#### 原修改 121
+
+原行号：147–149；当时修改后行号：147–149。
 
 位置：EagleEye 仿生视觉转播系统——设计报告 / 3. 验证、资源与时序
 
-修改原因：A：以中性工程语言介绍成果，保留事实与适用范围。
+原因：A：以中性工程语言介绍成果，保留事实与适用范围
 
 **Before**
 
@@ -2497,12 +2382,13 @@ AttentionPolicy 的五项权重为 3、1、3、2、3，用于人体目标选择�
 | 历史 CPU 预处理 | `board/attach_100.log` 和 `report/board_measurements.md` | 历史 100 帧基线，按自身版本与条件统计 |
 ~~~~
 
-<a id="change-122"></a>
-#### 修改 122：原第 151 行 → 现第 151 行
+#### 原修改 122
+
+原行号：151–151；当时修改后行号：151–151。
 
 位置：EagleEye 仿生视觉转播系统——设计报告 / 3. 验证、资源与时序
 
-修改原因：B/C：合并重复边界说明，在成果之后集中交代测试条件。
+原因：B/C：合并重复边界说明，在成果之后集中交代测试条件
 
 **Before**
 
@@ -2516,12 +2402,13 @@ AttentionPolicy 的五项权重为 3、1、3、2、3，用于人体目标选择�
 工具报告与板端日志中的时钟、I/O、CDC 和 VDMA 状态集中见 [工程告警说明](warning_review_zh.md)。现场六项功能确认与这些专项检查共同描述系统状态。
 ~~~~
 
-<a id="change-123"></a>
-#### 修改 123：原第 153 行 → 现第 153 行
+#### 原修改 123
+
+原行号：153–153；当时修改后行号：153–153。
 
 位置：EagleEye 仿生视觉转播系统——设计报告 / 3. 验证、资源与时序
 
-修改原因：B/C：合并重复边界说明，在成果之后集中交代测试条件。
+原因：B/C：合并重复边界说明，在成果之后集中交代测试条件
 
 **Before**
 
@@ -2535,12 +2422,13 @@ AttentionPolicy 的五项权重为 3、1、3、2、3，用于人体目标选择�
 文件完整性由 `tools/verify_submission.py` 核验，主机工具、RTL、QEMU 及板端验证按上表分层记录。
 ~~~~
 
-<a id="change-124"></a>
-#### 修改 124：原第 155 行 → 现第 155–163 行
+#### 原修改 124
+
+原行号：155–155；当时修改后行号：155–163。
 
 位置：3. 验证、资源与时序 / 3.1 测试条件与适用范围
 
-修改原因：B/C：合并重复边界说明，在成果之后集中交代测试条件。
+原因：B/C：合并重复边界说明，在成果之后集中交代测试条件
 
 **Before**
 
@@ -2562,12 +2450,13 @@ AttentionPolicy 的五项权重为 3、1、3、2、3，用于人体目标选择�
 - **工程条件**：板级 I/O、CDC/方法学告警及 VDMA 错误位和帧新鲜度问题，按[告警说明](warning_review_zh.md)记录。
 ~~~~
 
-<a id="change-125"></a>
-#### 修改 125：原第 169 行 → 现第 177 行
+#### 原修改 125
+
+原行号：169–169；当时修改后行号：177–177。
 
 位置：EagleEye 仿生视觉转播系统——设计报告 / 4. 优化过程与性能、资源记录
 
-修改原因：B/C：合并重复边界说明，在成果之后集中交代测试条件。
+原因：B/C：合并重复边界说明，在成果之后集中交代测试条件
 
 **Before**
 
@@ -2581,12 +2470,13 @@ AttentionPolicy 的五项权重为 3、1、3、2、3，用于人体目标选择�
 两种配置的预处理均值比为 **23.776 倍**，`1000 / 平均 total_ms` 比值为 **1.797 倍**，平均 `total_ms` 缩短约 44.3%。该结果描述 CPU 双三次与 FPGA 双线性两种实际配置的计时收益。
 ~~~~
 
-<a id="change-126"></a>
-#### 修改 126：原第 171 行 → 现第 179–181 行
+#### 原修改 126
+
+原行号：171–171；当时修改后行号：179–181。
 
 位置：EagleEye 仿生视觉转播系统——设计报告 / 4. 优化过程与性能、资源记录
 
-修改原因：B/C：合并重复边界说明，在成果之后集中交代测试条件；A：以中性工程语言介绍成果，保留事实与适用范围。
+原因：B/C：合并重复边界说明，在成果之后集中交代测试条件；A：以中性工程语言介绍成果，保留事实与适用范围
 
 **Before**
 
@@ -2602,12 +2492,13 @@ AttentionPolicy 的五项权重为 3、1、3、2、3，用于人体目标选择�
 历史 `board/attach_100.log` 的 CPU 记录和另一份 179 条 Attention 应用日志，按各自条件保留，见 [计时记录说明](board_measurements.md)。后续[独立板端固定输入 Golden](preproc_board_golden_20261029_zh.md)提供完整张量的一致性结果；实时 A/B 输入的配对检测框精度仍需专项比较。
 ~~~~
 
-<a id="change-127"></a>
-#### 修改 127：原第 178 行 → 现第 188 行
+#### 原修改 127
+
+原行号：178–178；当时修改后行号：188–188。
 
 位置：EagleEye 仿生视觉转播系统——设计报告 / 4. 优化过程与性能、资源记录
 
-修改原因：B/C：合并重复边界说明，在成果之后集中交代测试条件。
+原因：B/C：合并重复边界说明，在成果之后集中交代测试条件
 
 **Before**
 
@@ -2621,12 +2512,13 @@ AttentionPolicy 的五项权重为 3、1、3、2、3，用于人体目标选择�
 两行分别展示历史构建与干净复现的资源和已约束时序结果，按版本保留。外部 I/O、CDC 与方法学问题见 [工程告警说明](warning_review_zh.md)。
 ~~~~
 
-<a id="change-128"></a>
-#### 修改 128：原第 180 行 → 现第 190 行
+#### 原修改 128
+
+原行号：180–180；当时修改后行号：190–190。
 
 位置：EagleEye 仿生视觉转播系统——设计报告 / 4. 优化过程与性能、资源记录
 
-修改原因：B/C：合并重复边界说明，在成果之后集中交代测试条件。
+原因：B/C：合并重复边界说明，在成果之后集中交代测试条件
 
 **Before**
 
@@ -2640,12 +2532,13 @@ AttentionPolicy 的五项权重为 3、1、3、2、3，用于人体目标选择�
 系统采用显示与 AI 检测异步运行的架构。技术文档中的阶段观察为检测更新约 2 FPS、视频显示约 30 FPS；前者有应用日志供计时复核，后者为观察值，尚待独立显示计时。早期约 0.5 FPS 也为不同条件的阶段观察，保留作开发背景。
 ~~~~
 
-<a id="change-129"></a>
-#### 修改 129：原第 184 行 → 现第 194 行
+#### 原修改 129
+
+原行号：184–184；当时修改后行号：194–194。
 
 位置：EagleEye 仿生视觉转播系统——设计报告 / 5. 大模型协作与技能包
 
-修改原因：B/C：合并重复边界说明，在成果之后集中交代测试条件。
+原因：B/C：合并重复边界说明，在成果之后集中交代测试条件
 
 **Before**
 
@@ -2659,12 +2552,13 @@ AttentionPolicy 的五项权重为 3、1、3、2、3，用于人体目标选择�
 项目提炼了视频处理、软硬件接口、模型部署和数据验证的可复用 Skill。PYNQ Overlay、寄存器、DMA 和缓存示例已完成离线模拟验证，为平台迁移提供参考，实板及真实跨项目复用留待后续验证。
 ~~~~
 
-<a id="change-130"></a>
-#### 修改 130：原第 186 行 → 现第 196 行
+#### 原修改 130
+
+原行号：186–186；当时修改后行号：196–196。
 
 位置：EagleEye 仿生视觉转播系统——设计报告 / 5. 大模型协作与技能包
 
-修改原因：B/C：合并重复边界说明，在成果之后集中交代测试条件。
+原因：B/C：合并重复边界说明，在成果之后集中交代测试条件
 
 **Before**
 
@@ -2678,12 +2572,13 @@ AttentionPolicy 的五项权重为 3、1、3、2、3，用于人体目标选择�
 [AI 协作记录](ai_collaboration_record.md)整理六个工程案例，结合真实提示词、模型回答、纠错轨迹及工具结果；[会话证据索引](ai_collaboration_evidence_20261030.md)保存相关原文节选与来源信息。[技能索引](../skill/index.md)按用途提供工作流、最小示例、适用条件和验证方法，足球检测与 AX7020 经验按独立参考案例收录。Lanczos 历史记录见[验证说明](../sim/lanczos_legacy_readme.md)。
 ~~~~
 
-<a id="change-131"></a>
-#### 修改 131：原第 188 行 → 现第 198 行
+#### 原修改 131
+
+原行号：188–188；当时修改后行号：198–198。
 
 位置：EagleEye 仿生视觉转播系统——设计报告 / 5. 大模型协作与技能包
 
-修改原因：B/C：合并重复边界说明，在成果之后集中交代测试条件。
+原因：B/C：合并重复边界说明，在成果之后集中交代测试条件
 
 **Before**
 
@@ -2697,12 +2592,13 @@ AttentionPolicy 的五项权重为 3、1、3、2、3，用于人体目标选择�
 协作案例展示了 AI 在环境排障、接口适配、统计复核及资料整理中的效率价值：依据真实 BusyBox 功能修订采集工具，将固定输入 Golden 和配置性能分别评估，并以版本化记录连接构建产物与现场结果。各案例提供来源、修正过程及测试结果，读者可按证据索引追溯相关会话。
 ~~~~
 
-<a id="change-132"></a>
-#### 修改 132：原第 194 行 → 现第 204 行
+#### 原修改 132
+
+原行号：194–194；当时修改后行号：204–204。
 
 位置：EagleEye 仿生视觉转播系统——设计报告 / 6. 复现
 
-修改原因：A：以中性工程语言介绍成果，保留事实与适用范围。
+原因：A：以中性工程语言介绍成果，保留事实与适用范围
 
 **Before**
 
@@ -2718,14 +2614,13 @@ AttentionPolicy 的五项权重为 3、1、3、2、3，用于人体目标选择�
 
 ### report/field_evidence_needed_zh.md
 
-文件：[report/field_evidence_needed_zh.md](../report/field_evidence_needed_zh.md)。
+#### 原修改 133
 
-<a id="change-133"></a>
-#### 修改 133：原第 3 行 → 现第 3 行
+原行号：3–3；当时修改后行号：3–3。
 
 位置：现场证据与待确认事项
 
-修改原因：B/C：合并重复边界说明，在成果之后集中交代测试条件。
+原因：B/C：合并重复边界说明，在成果之后集中交代测试条件
 
 **Before**
 
@@ -2739,12 +2634,13 @@ AttentionPolicy 的五项权重为 3、1、3、2、3，用于人体目标选择�
 本页集中记录已有结果的验证范围及后续完善事项。源码、模型、BOOT、启动和应用日志按仓库索引直接查阅。
 ~~~~
 
-<a id="change-134"></a>
-#### 修改 134：原第 5 行 → 现第 5 行
+#### 原修改 134
+
+原行号：5–5；当时修改后行号：5–5。
 
 位置：现场证据与待确认事项
 
-修改原因：B/C：合并重复边界说明，在成果之后集中交代测试条件。
+原因：B/C：合并重复边界说明，在成果之后集中交代测试条件
 
 **Before**
 
@@ -2758,12 +2654,13 @@ AttentionPolicy 的五项权重为 3、1、3、2、3，用于人体目标选择�
 历史 ARM98 逐层计时及 V2/R3 Golden、性能记录见 [独立实板实验](board_evidence_20261027.md)。当前 Eyes/PicoDet 注意力按相应版本的现场记录管理。
 ~~~~
 
-<a id="change-135"></a>
-#### 修改 135：原第 9 行 → 现第 9 行
+#### 原修改 135
+
+原行号：9–9；当时修改后行号：9–9。
 
 位置：现场证据与待确认事项 / 板级系统与当前候选
 
-修改原因：A：以中性工程语言介绍成果，保留事实与适用范围。
+原因：A：以中性工程语言介绍成果，保留事实与适用范围
 
 **Before**
 
@@ -2777,12 +2674,13 @@ AttentionPolicy 的五项权重为 3、1、3、2、3，用于人体目标选择�
 - 现场已提供 `b286f480...` BIT、实验 BOOT、U-Boot 至 Linux 登录的串口原文和现场功能正常反馈，详见 [复现 BIT 的上板记录](board_reproduced_20261028_zh.md)，无需重复提供。若已有，补充实验卡 BOOT 读回清单和板上 `paddle_person_live`、`model.nb` 的身份记录；未保存的读回信息标记“暂无”；旧 `attach_100.log` 按历史 CPU 运行记录单独列示。
 ~~~~
 
-<a id="change-136"></a>
-#### 修改 136：原第 11 行 → 现第 11 行
+#### 原修改 136
+
+原行号：11–11；当时修改后行号：11–11。
 
 位置：现场证据与待确认事项 / 板级系统与当前候选
 
-修改原因：A：以中性工程语言介绍成果，保留事实与适用范围。
+原因：A：以中性工程语言介绍成果，保留事实与适用范围
 
 **Before**
 
@@ -2796,12 +2694,13 @@ AttentionPolicy 的五项权重为 3、1、3、2、3，用于人体目标选择�
 - **输出对比：**后续已提供[独立板端固定输入 Golden](preproc_board_golden_20261029_zh.md)，307,200 个值逐位一致；无需再索要该次输出或比较数据。此前现场团队的“未测试”反馈指更早状态；本次测试的独立 BIT 哈希未核实。已有 CPU/FPGA 预处理 A/B 计时，无需重复提供；两组缩放算法及实时帧不同，见 [A/B 证据](preproc_ab_20261028_zh.md)。经帧新鲜度验证的更新率为后续测试项，历史 V2/R3 和 ARM98 则提供固定输入实验背景。
 ~~~~
 
-<a id="change-137"></a>
-#### 修改 137：原第 18 行 → 现第 18 行
+#### 原修改 137
+
+原行号：18–18；当时修改后行号：18–18。
 
 位置：现场证据与待确认事项 / 检测模型与接口
 
-修改原因：A：以中性工程语言介绍成果，保留事实与适用范围。
+原因：A：以中性工程语言介绍成果，保留事实与适用范围
 
 **Before**
 
@@ -2815,35 +2714,15 @@ AttentionPolicy 的五项权重为 3、1、3、2、3，用于人体目标选择�
 - 若比赛明确采用足球 PLAYER/BALL，则需指出已使用的模型/程序和已存在的证据位置；如尚无可用板端版本，标记未完成。足球参考分支、QEMU 和 Z035 板测分别标注执行环境。
 ~~~~
 
-<a id="change-138"></a>
-#### 修改 138：原第 22 行 → 现第 22 行
-
-位置：现场证据与待确认事项 / 团队共用
-
-修改原因：A：以中性工程语言介绍成果，保留事实与适用范围。
-
-**Before**
-
-~~~~text
-团队主要分工和 [实测版本](release_identity_zh.md)已记录；核对最终演示应用选择、具体贡献及 [第三方来源与许可](third_party_sources_zh.md)中尚缺的权重和部分 IP 再分发授权；设计报告定稿应绑定真实版本。保留现场已确认的功能结果；未提供的量化数据和输出对比不编造。
-~~~~
-
-**After**
-
-~~~~text
-团队主要分工和 [实测版本](release_identity_zh.md)已记录；核对最终演示应用选择、具体贡献及 [第三方来源与许可](third_party_sources_zh.md)中尚缺的权重和部分 IP 再分发授权；设计报告定稿应绑定真实版本。现场已确认的功能结果继续保留，量化指标按实际取得的数据补充。
-~~~~
-
 ### report/hardware_interfaces_zh.md
 
-文件：[report/hardware_interfaces_zh.md](../report/hardware_interfaces_zh.md)。
+#### 原修改 139
 
-<a id="change-139"></a>
-#### 修改 139：原第 3 行 → 现第 3 行
+原行号：3–3；当时修改后行号：3–3。
 
 位置：Eyes 实现的硬件与软件接口表
 
-修改原因：A：以中性工程语言介绍成果，保留事实与适用范围。
+原因：A：以中性工程语言介绍成果，保留事实与适用范围
 
 **Before**
 
@@ -2857,12 +2736,13 @@ AttentionPolicy 的五项权重为 3、1、3、2、3，用于人体目标选择�
 本表对应现场回传并确认功能正常的 `b286f480...` BIT 所配套的 [`system.hwh`](../board/reproduced_20261028/system.hwh) 与 `src/ps/src/` AttentionPolicy 源码；用于设计说明和版本核对；实际寄存器操作遵循匹配程序与目标设备的控制协议。HWH 所列区间为地址空间分配，应用实际映射通常为 4 KiB。独立 PicoDet 注意力候选的执行文件不同，需以其对应构建资料为准。
 ~~~~
 
-<a id="change-140"></a>
-#### 修改 140：原第 14 行 → 现第 14 行
+#### 原修改 140
+
+原行号：14–14；当时修改后行号：14–14。
 
 位置：Eyes 实现的硬件与软件接口表
 
-修改原因：A：以中性工程语言介绍成果，保留事实与适用范围。
+原因：A：以中性工程语言介绍成果，保留事实与适用范围
 
 **Before**
 
@@ -2876,12 +2756,13 @@ AttentionPolicy 的五项权重为 3、1、3、2、3，用于人体目标选择�
 上述 HWH 地址可对照 [`paddle_person.cpp`](../src/ps/src/paddle_person.cpp)、[`frame_layout.h`](../src/ps/src/frame_layout.h) 与 [`eagleeye_hw.cpp`](../src/ps/src/eagleeye_hw.cpp)；移植地址前需复核目标 HWH、设备树及资源所有权。
 ~~~~
 
-<a id="change-141"></a>
-#### 修改 141：原第 18 行 → 现第 18 行
+#### 原修改 141
+
+原行号：18–18；当时修改后行号：18–18。
 
 位置：Eyes 实现的硬件与软件接口表 / 缓冲、数据类型和控制
 
-修改原因：A：以中性工程语言介绍成果，保留事实与适用范围。
+原因：A：以中性工程语言介绍成果，保留事实与适用范围
 
 **Before**
 
@@ -2895,12 +2776,13 @@ AttentionPolicy 的五项权重为 3、1、3、2、3，用于人体目标选择�
 - 视频：源码配置 640×360、RGB 三字节、stride 1920，三个大小各 `0xb0000` 的帧槽，从 `0x1e000000` 起共 `0x210000` 字节。源码中的长度和设备树预留区应一起核对；现场 DMA 停止及共享条件由资源所有权和硬件状态核验。
 ~~~~
 
-<a id="change-142"></a>
-#### 修改 142：原第 20–21 行 → 现第 20–21 行
+#### 原修改 142
+
+原行号：20–21；当时修改后行号：20–21。
 
 位置：Eyes 实现的硬件与软件接口表 / 缓冲、数据类型和控制
 
-修改原因：A：以中性工程语言介绍成果，保留事实与适用范围。
+原因：A：以中性工程语言介绍成果，保留事实与适用范围
 
 **Before**
 
@@ -2918,14 +2800,13 @@ AttentionPolicy 的五项权重为 3、1、3、2、3，用于人体目标选择�
 
 ### report/preproc_ab_20261028_zh.md
 
-文件：[report/preproc_ab_20261028_zh.md](../report/preproc_ab_20261028_zh.md)。
+#### 原修改 143
 
-<a id="change-143"></a>
-#### 修改 143：原第 9 行 → 现第 9 行
+原行号：9–9；当时修改后行号：9–9。
 
 位置：Eyes 预处理 CPU/FPGA A/B 实板结果（2026-10-28） / 资料来源与条件
 
-修改原因：A：以中性工程语言介绍成果，保留事实与适用范围。
+原因：A：以中性工程语言介绍成果，保留事实与适用范围
 
 **Before**
 
@@ -2939,12 +2820,13 @@ AttentionPolicy 的五项权重为 3、1、3、2、3，用于人体目标选择�
 **测试配置：CPU 采用双三次缩放与归一化，FPGA 采用双线性缩放与归一化。**两组使用相同帧尺寸、先后采集的实时画面，下表评价这两种实际配置的耗时；同算法、逐帧配对性能另需测试。两组 PicoDet 模型推理均由 ARM 执行。
 ~~~~
 
-<a id="change-144"></a>
-#### 修改 144：原第 24 行 → 现第 24 行
+#### 原修改 144
+
+原行号：24–24；当时修改后行号：24–24。
 
 位置：Eyes 预处理 CPU/FPGA A/B 实板结果（2026-10-28） / 独立重算的结果
 
-修改原因：A：以中性工程语言介绍成果，保留事实与适用范围。
+原因：A：以中性工程语言介绍成果，保留事实与适用范围
 
 **Before**
 
@@ -2958,12 +2840,13 @@ AttentionPolicy 的五项权重为 3、1、3、2、3，用于人体目标选择�
 上述两种配置的预处理均值比为 **23.776 倍**；`1000 / 平均 total_ms` 的比值为 **1.797 倍**，对应总耗时均值减少 400.485 ms（约 44.3%）。以上为本次两种配置的计时收益；同算法硬件收益及检测框精度一致性分别验证，20 FPS 仍为独立性能目标。
 ~~~~
 
-<a id="change-145"></a>
-#### 修改 145：原第 26 行 → 现第 26 行
+#### 原修改 145
+
+原行号：26–26；当时修改后行号：26–26。
 
 位置：Eyes 预处理 CPU/FPGA A/B 实板结果（2026-10-28） / 独立重算的结果
 
-修改原因：A：以中性工程语言介绍成果，保留事实与适用范围。
+原因：A：以中性工程语言介绍成果，保留事实与适用范围
 
 **Before**
 
@@ -2977,12 +2860,13 @@ AttentionPolicy 的五项权重为 3、1、3、2、3，用于人体目标选择�
 根据应用源码，`total_ms` 从采集开始到检测结果解析结束，包含该时间区间内的快照记录等开销；不包含之后的 ROI 控制和结果打印。以上 FPS 按日志计时区间换算；经帧新鲜度确认的摄像头至 ROI 更新率及 HDMI 刷新率分别测量。FPGA 预处理计时包含当前源码中的输入/输出复制、寄存器与 DMA 调用和写入模型输入；没有独立拆出 cache 维护或内核驱动时间。
 ~~~~
 
-<a id="change-146"></a>
-#### 修改 146：原第 28 行 → 现第 28 行
+#### 原修改 146
+
+原行号：28–28；当时修改后行号：28–28。
 
 位置：Eyes 预处理 CPU/FPGA A/B 实板结果（2026-10-28） / 正确性与计时适用范围
 
-修改原因：A：以中性工程语言介绍成果，保留事实与适用范围。
+原因：A：以中性工程语言介绍成果，保留事实与适用范围
 
 **Before**
 
@@ -2996,12 +2880,13 @@ AttentionPolicy 的五项权重为 3、1、3、2、3，用于人体目标选择�
 ## 正确性与计时适用范围
 ~~~~
 
-<a id="change-147"></a>
-#### 修改 147：原第 30–33 行 → 现第 30–33 行
+#### 原修改 147
+
+原行号：30–33；当时修改后行号：30–33。
 
 位置：Eyes 预处理 CPU/FPGA A/B 实板结果（2026-10-28） / 正确性与计时适用范围
 
-修改原因：A：以中性工程语言介绍成果，保留事实与适用范围。
+原因：A：以中性工程语言介绍成果，保留事实与适用范围
 
 **Before**
 
@@ -3021,12 +2906,13 @@ AttentionPolicy 的五项权重为 3、1、3、2、3，用于人体目标选择�
 - 如需量化这两套配置之间的精度差异，还需要相同输入的检测框比较；当前记录提供两套配置的**计时**依据，检测框精度按同输入配对流程评估。
 ~~~~
 
-<a id="change-148"></a>
-#### 修改 148：原第 44 行 → 现第 44 行
+#### 原修改 148
+
+原行号：44–44；当时修改后行号：44–44。
 
 位置：Eyes 预处理 CPU/FPGA A/B 实板结果（2026-10-28） / 复核方式
 
-修改原因：A：以中性工程语言介绍成果，保留事实与适用范围。
+原因：A：以中性工程语言介绍成果，保留事实与适用范围
 
 **Before**
 
@@ -3042,14 +2928,13 @@ AttentionPolicy 的五项权重为 3、1、3、2、3，用于人体目标选择�
 
 ### report/preproc_board_golden_20261029_zh.md
 
-文件：[report/preproc_board_golden_20261029_zh.md](../report/preproc_board_golden_20261029_zh.md)。
+#### 原修改 149
 
-<a id="change-149"></a>
-#### 修改 149：原第 5 行 → 现第 5 行
+原行号：5–5；当时修改后行号：5–5。
 
 位置：固定输入的 FPGA 预处理板端 Golden 对比（2026-10-29） / 结果与范围
 
-修改原因：A：以中性工程语言介绍成果，保留事实与适用范围。
+原因：A：以中性工程语言介绍成果，保留事实与适用范围
 
 **Before**
 
@@ -3063,12 +2948,13 @@ AttentionPolicy 的五项权重为 3、1、3、2、3，用于人体目标选择�
 现场回传的[原始归档](../board/measurements/preproc_golden_20261029/source_board_return.zip)记录了一次独立 Z035 板端 FPGA 预处理测试。输入为固定的 640×360 RGB888，输出为小端 FP32、NCHW、`1×3×320×320`：**307,200/307,200 个值与对应双线性缩放及归一化 Golden 的 32 位表示完全一致，差异 0 个，最大和平均绝对误差均为 0**。测试覆盖一次固定输入、独立程序运行，比较单位为张量中的 FP32 元素。
 ~~~~
 
-<a id="change-150"></a>
-#### 修改 150：原第 15 行 → 现第 15 行
+#### 原修改 150
+
+原行号：15–15；当时修改后行号：15–15。
 
 位置：固定输入的 FPGA 预处理板端 Golden 对比（2026-10-29） / 测试身份与适用范围
 
-修改原因：A：以中性工程语言介绍成果，保留事实与适用范围。
+原因：A：以中性工程语言介绍成果，保留事实与适用范围
 
 **Before**
 
@@ -3082,12 +2968,13 @@ AttentionPolicy 的五项权重为 3、1、3、2、3，用于人体目标选择�
 ## 测试身份与适用范围
 ~~~~
 
-<a id="change-151"></a>
-#### 修改 151：原第 17–18 行 → 现第 17–18 行
+#### 原修改 151
+
+原行号：17–18；当时修改后行号：17–18。
 
 位置：固定输入的 FPGA 预处理板端 Golden 对比（2026-10-29） / 测试身份与适用范围
 
-修改原因：A：以中性工程语言介绍成果，保留事实与适用范围。
+原因：A：以中性工程语言介绍成果，保留事实与适用范围
 
 **Before**
 
@@ -3103,12 +2990,13 @@ AttentionPolicy 的五项权重为 3、1、3、2、3，用于人体目标选择�
 - 内核版本记录为 `5.15.36-xilinx-v2022.2`；IP 版本寄存器为 `0x00010000`。测试使用独立 `preproc_board_golden_arm`，SHA256 `9043743a6ca54f8417af9e861b62eb29f776b93dbd652d96586336bfe182fa19`；本次运行独立测试程序，`paddle_person_live` 和 `model.nb` 的版本由应用测试记录管理。
 ~~~~
 
-<a id="change-152"></a>
-#### 修改 152：原第 20–21 行 → 现第 20–21 行
+#### 原修改 152
+
+原行号：20–21；当时修改后行号：20–21。
 
 位置：固定输入的 FPGA 预处理板端 Golden 对比（2026-10-29） / 测试身份与适用范围
 
-修改原因：A：以中性工程语言介绍成果，保留事实与适用范围。
+原因：A：以中性工程语言介绍成果，保留事实与适用范围
 
 **Before**
 
@@ -3124,12 +3012,13 @@ AttentionPolicy 的五项权重为 3、1、3、2、3，用于人体目标选择�
 - 本次结论限定为固定输入的预处理张量一致性。摄像头帧新鲜度、完整视频共存、模型检测精度、性能及跨版本 BIT 身份分别评估；既有 VDMA、外部 I/O 和 CDC 状态见[告警说明](warning_review_zh.md)。
 ~~~~
 
-<a id="change-153"></a>
-#### 修改 153：原第 31 行 → 现第 31 行
+#### 原修改 153
+
+原行号：31–31；当时修改后行号：31–31。
 
 位置：固定输入的 FPGA 预处理板端 Golden 对比（2026-10-29） / 离线复核
 
-修改原因：A：以中性工程语言介绍成果，保留事实与适用范围。
+原因：A：以中性工程语言介绍成果，保留事实与适用范围
 
 **Before**
 
@@ -3145,14 +3034,13 @@ AttentionPolicy 的五项权重为 3、1、3、2、3，用于人体目标选择�
 
 ### report/readme.md
 
-文件：[report/readme.md](../report/readme.md)。
+#### 原修改 154
 
-<a id="change-154"></a>
-#### 修改 154：原第 13 行 → 现第 13 行
+原行号：13–13；当时修改后行号：13–13。
 
 位置：EagleEye 比赛报告与资料导航 / 报告正文与主要入口
 
-修改原因：A：以中性工程语言介绍成果，保留事实与适用范围。
+原因：A：以中性工程语言介绍成果，保留事实与适用范围
 
 **Before**
 
@@ -3166,12 +3054,13 @@ AttentionPolicy 的五项权重为 3、1、3、2、3，用于人体目标选择�
 | [技能包](../skill/index.md) | 可复用工具、最小示例、使用方法及适用条件。 |
 ~~~~
 
-<a id="change-155"></a>
-#### 修改 155：原第 22 行 → 现第 22–24 行
+#### 原修改 155
+
+原行号：22–22；当时修改后行号：22–24。
 
 位置：EagleEye 比赛报告与资料导航 / 主要验证和版本资料
 
-修改原因：B/C：合并重复边界说明，在成果之后集中交代测试条件。
+原因：B/C：合并重复边界说明，在成果之后集中交代测试条件
 
 **Before**
 
@@ -3187,12 +3076,13 @@ AttentionPolicy 的五项权重为 3、1、3、2、3，用于人体目标选择�
 本次文档表述调整的逐项前后对照见[文档语言修订记录](document_language_revision.md)。
 ~~~~
 
-<a id="change-156"></a>
-#### 修改 156：原第 37 行 → 现第 39 行
+#### 原修改 156
+
+原行号：37–37；当时修改后行号：39–39。
 
 位置：EagleEye 比赛报告与资料导航 / 历史记录和补充材料
 
-修改原因：B/C：合并重复边界说明，在成果之后集中交代测试条件。
+原因：B/C：合并重复边界说明，在成果之后集中交代测试条件
 
 **Before**
 
@@ -3208,52 +3098,13 @@ AttentionPolicy 的五项权重为 3、1、3、2、3，用于人体目标选择�
 
 ### report/release_identity_zh.md
 
-文件：[report/release_identity_zh.md](../report/release_identity_zh.md)。
+#### 原修改 159
 
-<a id="change-157"></a>
-#### 修改 157：原第 3 行 → 现第 3 行
-
-位置：当前 PicoDet 演示版本与实测身份
-
-修改原因：B/C：合并重复边界说明，在成果之后集中交代测试条件。
-
-**Before**
-
-~~~~text
-本页把已核验文件、现场确认和不同程序的日志分开记录。当前团队确认使用 PicoDet 人体检测；原仓库的足球 YOLO 是独立参考路线，不作为当前上板模型。
-~~~~
-
-**After**
-
-~~~~text
-本页按版本整理文件身份、实测日志及现场反馈。当前 Z035 系统采用 PicoDet 人体检测，足球 YOLO 作为独立参考路线保存。
-~~~~
-
-<a id="change-158"></a>
-#### 修改 158：原第 5 行 → 现第 5 行
-
-位置：当前 PicoDet 演示版本与实测身份
-
-修改原因：A：以中性工程语言介绍成果，保留事实与适用范围。
-
-**Before**
-
-~~~~text
-团队后续反馈，另一台机器上的 AX7020 交付说明将同哈希模型描述为官方 PicoDet-XS 320 COCO LCNet 导出后转为 Paddle-Lite ARM，且未由团队训练或量化；不同的 PicoDet-S 416 训练记录不对应此文件。该机器文件本次无法独立读取，权重授权仍待确认，见[第三方来源](third_party_sources_zh.md)。
-~~~~
-
-**After**
-
-~~~~text
-团队后续反馈，另一台机器上的 AX7020 交付说明将同哈希模型描述为官方 PicoDet-XS 320 COCO LCNet 导出后转为 Paddle-Lite ARM，且未由团队训练或量化；不同的 PicoDet-S 416 训练记录不对应此文件。来源说明按团队反馈记录，原始转换文件的独立核对及权重授权仍待确认，见[第三方来源](third_party_sources_zh.md)。
-~~~~
-
-<a id="change-159"></a>
-#### 修改 159：原第 19 行 → 现第 19 行
+原行号：19–19；当时修改后行号：19–19。
 
 位置：当前 PicoDet 演示版本与实测身份 / 已有实测组合
 
-修改原因：A：以中性工程语言介绍成果，保留事实与适用范围。
+原因：A：以中性工程语言介绍成果，保留事实与适用范围
 
 **Before**
 
@@ -3267,12 +3118,13 @@ AttentionPolicy 的五项权重为 3、1、3、2、3，用于人体目标选择�
 上述应用日志和 A/B 测试证明的范围见 [应用证据](board_app_evidence_20261028_zh.md)和 [A/B 计时](preproc_ab_20261028_zh.md)。后续[独立固定输入板端 Golden](preproc_board_golden_20261029_zh.md)逐位通过，但本次 BOOT 哈希与上表不同，独立 BIT 哈希与上表组合的对应关系待核对，按独立测试版本记录。
 ~~~~
 
-<a id="change-160"></a>
-#### 修改 160：原第 21 行 → 现第 21 行
+#### 原修改 160
+
+原行号：21–21；当时修改后行号：21–21。
 
 位置：当前 PicoDet 演示版本与实测身份 / 历史与独立候选版本
 
-修改原因：A：以中性工程语言介绍成果，保留事实与适用范围。
+原因：A：以中性工程语言介绍成果，保留事实与适用范围
 
 **Before**
 
@@ -3286,12 +3138,13 @@ AttentionPolicy 的五项权重为 3、1、3、2、3，用于人体目标选择�
 ## 历史与独立候选版本
 ~~~~
 
-<a id="change-161"></a>
-#### 修改 161：原第 23–25 行 → 现第 23–25 行
+#### 原修改 161
+
+原行号：23–25；当时修改后行号：23–25。
 
 位置：当前 PicoDet 演示版本与实测身份 / 历史与独立候选版本
 
-修改原因：A：以中性工程语言介绍成果，保留事实与适用范围。
+原因：A：以中性工程语言介绍成果，保留事实与适用范围
 
 **Before**
 
@@ -3309,12 +3162,13 @@ AttentionPolicy 的五项权重为 3、1、3、2、3，用于人体目标选择�
 - 独立 PicoDet 注意力候选的本地交叉编译 ELF SHA256 为 `1421b51bb95c448fe8ed244a21aff300d13156ecbf02ef9bde4b7b4a5c9a19f5`；现场已确认该候选上板功能正常。AttentionPolicy 的原始日志对应上表的另一个 ELF，按 AttentionPolicy 单独归档，见 [`src/picodet_c_candidate/readme.md`](../src/picodet_c_candidate/readme.md)。
 ~~~~
 
-<a id="change-162"></a>
-#### 修改 162：原第 28 行 → 现第 28 行
+#### 原修改 162
+
+原行号：28–28；当时修改后行号：28–28。
 
 位置：当前 PicoDet 演示版本与实测身份 / 历史与独立候选版本
 
-修改原因：A：以中性工程语言介绍成果，保留事实与适用范围。
+原因：A：以中性工程语言介绍成果，保留事实与适用范围
 
 **Before**
 
@@ -3330,14 +3184,13 @@ AttentionPolicy 的五项权重为 3、1、3、2、3，用于人体目标选择�
 
 ### report/reproduction_zh.md
 
-文件：[report/reproduction_zh.md](../report/reproduction_zh.md)。
+#### 原修改 163
 
-<a id="change-163"></a>
-#### 修改 163：原第 1 行 → 现第 1 行
+原行号：1–1；当时修改后行号：1–1。
 
 位置：干净目录复现指南
 
-修改原因：A：以中性工程语言介绍成果，保留事实与适用范围。
+原因：A：以中性工程语言介绍成果，保留事实与适用范围
 
 **Before**
 
@@ -3351,12 +3204,13 @@ AttentionPolicy 的五项权重为 3、1、3、2、3，用于人体目标选择�
 # 干净目录复现指南
 ~~~~
 
-<a id="change-164"></a>
-#### 修改 164：原第 20 行 → 现第 20 行
+#### 原修改 164
+
+原行号：20–20；当时修改后行号：20–20。
 
 位置：干净目录复现指南 / 1. 获取与验证
 
-修改原因：A：以中性工程语言介绍成果，保留事实与适用范围。
+原因：A：以中性工程语言介绍成果，保留事实与适用范围
 
 **Before**
 
@@ -3370,12 +3224,13 @@ AttentionPolicy 的五项权重为 3、1、3、2、3，用于人体目标选择�
 源码包约 240 MiB，若没有 Git LFS 或未拉取对象，源码路径可能只有 LFS 指针；核验脚本会拒绝。`verify_submission.py` 还会核对原始 Eyes 快照、各模块与 Linux 参考快照及清单。文件完整性、来源认证及板端运行分别使用对应验证方式。
 ~~~~
 
-<a id="change-165"></a>
-#### 修改 165：原第 32 行 → 现第 32 行
+#### 原修改 165
+
+原行号：32–32；当时修改后行号：32–32。
 
 位置：干净目录复现指南 / 2. 恢复大小写并构建 Vivado 工程
 
-修改原因：A：以中性工程语言介绍成果，保留事实与适用范围。
+原因：A：以中性工程语言介绍成果，保留事实与适用范围
 
 **Before**
 
@@ -3389,12 +3244,13 @@ AttentionPolicy 的五项权重为 3、1、3、2、3，用于人体目标选择�
 先执行 `git lfs pull`。恢复工具将原始快照与补充材料合并并核验 275 项哈希；`build_full_vivado.tcl` 在独立输出目录进行 BD 校验、综合、实现、BIT/XSA 和资源/时序/CDC/DRC 报告。最后的校验脚本确认 XSA 内 BIT 与独立 BIT 一致，并输出 BIT/XSA/HWH SHA256。实际运行以本机 Vivado 2022.2 与许可证为准。上述完整入口已在本机从还原的工程快照实际完成 BD、综合、实现和 BIT/XSA；报告与哈希见 `build/full_rebuild_20261027/`。此前独立构建报告保存在 `build/independent_rebuild_20261027/`。板端功能与 BIT 身份见[上板记录](board_reproduced_20261028_zh.md)，I/O 延迟和 CDC Critical 的处理状态见[告警说明](warning_review_zh.md)。
 ~~~~
 
-<a id="change-166"></a>
-#### 修改 166：原第 46 行 → 现第 46 行
+#### 原修改 166
+
+原行号：46–46；当时修改后行号：46–46。
 
 位置：干净目录复现指南 / 3. 预处理 IP RTL 仿真
 
-修改原因：A：以中性工程语言介绍成果，保留事实与适用范围。
+原因：A：以中性工程语言介绍成果，保留事实与适用范围
 
 **Before**
 
@@ -3408,12 +3264,13 @@ AttentionPolicy 的五项权重为 3、1、3、2、3，用于人体目标选择�
 本次实际使用 Windows Python 3.13/NumPy 2.5.2 生成与比较，WSL Ubuntu 20.04 中 Icarus 10.3 执行 RTL，命令和输出在 `sim/preproc_iverilog_20261027.log`。五帧各 307200 个值逐位一致；采集帧的输入适配器加核心亦一致。该项覆盖 RTL 数值与流接口，板端 DMA 及系统结果见对应实板记录。
 ~~~~
 
-<a id="change-167"></a>
-#### 修改 167：原第 55 行 → 现第 55 行
+#### 原修改 167
+
+原行号：55–55；当时修改后行号：55–55。
 
 位置：干净目录复现指南 / 3. 预处理 IP RTL 仿真
 
-修改原因：A：以中性工程语言介绍成果，保留事实与适用范围。
+原因：A：以中性工程语言介绍成果，保留事实与适用范围
 
 **Before**
 
@@ -3427,12 +3284,13 @@ AttentionPolicy 的五项权重为 3、1、3、2、3，用于人体目标选择�
 实际输出及工具路径见 `sim/servo_iverilog_20261027.log`；实物限位、供电与机械安全按现场操作条件核验。
 ~~~~
 
-<a id="change-168"></a>
-#### 修改 168：原第 67 行 → 现第 67 行
+#### 原修改 168
+
+原行号：67–67；当时修改后行号：67–67。
 
 位置：干净目录复现指南 / 4. Linux 源码和构建输入
 
-修改原因：A：以中性工程语言介绍成果，保留事实与适用范围。
+原因：A：以中性工程语言介绍成果，保留事实与适用范围
 
 **Before**
 
@@ -3446,12 +3304,13 @@ AttentionPolicy 的五项权重为 3、1、3、2、3，用于人体目标选择�
 该补丁仅用于 `eeiso22` 实验内核，不能施用于声称不变的稳定内核。实际构建还需匹配的 PetaLinux 2022.2 交叉工具链、内核配置、设备树/XSA、rootfs 和外部依赖；生成并核对 `kernel.release`、`.config`、`Module.symvers` 与镜像哈希。稳定配置启用 `CONFIG_LOCALVERSION_AUTO`，单纯解压源码并不保证得到原构建版本字符串；必须核验，二进制对应关系以实际哈希核对。
 ~~~~
 
-<a id="change-169"></a>
-#### 修改 169：原第 69 行 → 现第 69 行
+#### 原修改 169
+
+原行号：69–69；当时修改后行号：69–69。
 
 位置：干净目录复现指南 / 4. Linux 源码和构建输入
 
-修改原因：A：以中性工程语言介绍成果，保留事实与适用范围。
+原因：A：以中性工程语言介绍成果，保留事实与适用范围
 
 **Before**
 
@@ -3467,14 +3326,13 @@ AttentionPolicy 的五项权重为 3、1、3、2、3，用于人体目标选择�
 
 ### report/submission_audit.md
 
-文件：[report/submission_audit.md](../report/submission_audit.md)。
+#### 原修改 170
 
-<a id="change-170"></a>
-#### 修改 170：原第 3 行 → 现第 3 行
+原行号：3–3；当时修改后行号：3–3。
 
 位置：竞赛提交材料核查与缺口（2026-10-27）
 
-修改原因：A/B：以成果和方法为主线精简重复否定，保留案例事实和适用条件。
+原因：A/B：以成果和方法为主线精简重复否定，保留案例事实和适用条件
 
 **Before**
 
@@ -3488,31 +3346,13 @@ AttentionPolicy 的五项权重为 3、1、3、2、3，用于人体目标选择�
 本页保存比赛 3.3.5 材料的阶段核查表。当前提交导航见[比赛材料与证据索引](contest_evidence_index_zh.md)，以下各项按对应工程和测试日期引用。
 ~~~~
 
-<a id="change-171"></a>
-#### 修改 171：原第 7 行 → 现第 7 行
+#### 原修改 172
+
+原行号：9–9；当时修改后行号：9–9。
 
 位置：竞赛提交材料核查与缺口（2026-10-27）
 
-修改原因：A/B：以成果和方法为主线精简重复否定，保留案例事实和适用条件。
-
-**Before**
-
-~~~~text
-| 工程与代码 | Z035 Eyes RTL、BD、XDC、IP、PicoDet 应用、注意力候选和 Linux 固定源码；原快照与补充材料均可哈希核验 | 团队主要分工及 [实测版本](release_identity_zh.md)已记录；仍需确认最终演示应用选择及具体版本对应关系，并核对 [第三方许可](third_party_sources_zh.md)；若足球检测列为实际参赛功能，需补齐其最终模型及板端链路，不能把 PERSON 模型冒充 PLAYER/BALL |
-~~~~
-
-**After**
-
-~~~~text
-| 工程与代码 | Z035 Eyes RTL、BD、XDC、IP、PicoDet 应用、注意力候选和 Linux 固定源码；原快照与补充材料均可哈希核验 | 团队主要分工及 [实测版本](release_identity_zh.md)已记录；仍需确认最终演示应用选择及具体版本对应关系，并核对 [第三方许可](third_party_sources_zh.md)；若足球检测列为实际参赛功能，需补齐其最终模型及板端链路，PERSON 与 PLAYER/BALL 按独立模型路线管理 |
-~~~~
-
-<a id="change-172"></a>
-#### 修改 172：原第 9 行 → 现第 9 行
-
-位置：竞赛提交材料核查与缺口（2026-10-27）
-
-修改原因：A/B：以成果和方法为主线精简重复否定，保留案例事实和适用条件。
+原因：A/B：以成果和方法为主线精简重复否定，保留案例事实和适用条件
 
 **Before**
 
@@ -3528,14 +3368,13 @@ AttentionPolicy 的五项权重为 3、1、3、2、3，用于人体目标选择�
 
 ### report/submission_check_20261028_zh.md
 
-文件：[report/submission_check_20261028_zh.md](../report/submission_check_20261028_zh.md)。
+#### 原修改 173
 
-<a id="change-173"></a>
-#### 修改 173：原第 3 行 → 现第 3 行
+原行号：3–3；当时修改后行号：3–3。
 
 位置：比赛提交材料检查（2026-10-28）
 
-修改原因：A：以中性工程语言介绍成果，保留事实与适用范围。
+原因：A：以中性工程语言介绍成果，保留事实与适用范围
 
 **Before**
 
@@ -3549,12 +3388,13 @@ AttentionPolicy 的五项权重为 3、1、3、2、3，用于人体目标选择�
 按已提供的 3.3.5 截图核对，最终格式和评分以赛事组织方完整规则为准。本文件将各项要求与已有实现、验证记录对应。
 ~~~~
 
-<a id="change-174"></a>
-#### 修改 174：原第 14–15 行 → 现第 14–15 行
+#### 原修改 174
+
+原行号：14–15；当时修改后行号：14–15。
 
 位置：比赛提交材料检查（2026-10-28）
 
-修改原因：A：以中性工程语言介绍成果，保留事实与适用范围。
+原因：A：以中性工程语言介绍成果，保留事实与适用范围
 
 **Before**
 
@@ -3570,12 +3410,13 @@ AttentionPolicy 的五项权重为 3、1、3、2、3，用于人体目标选择�
 | 设计报告和 AI 协作 | [设计报告](design_report_zh.md)、[AI 协作记录](ai_collaboration_record.md)及图示、参考资料 | 团队主要职责及引用来源已整理；AI 记录提供工程案例、真实会话节选和验证路径。 |
 ~~~~
 
-<a id="change-175"></a>
-#### 修改 175：原第 30 行 → 现第 30 行
+#### 原修改 175
+
+原行号：30–30；当时修改后行号：30–30。
 
 位置：比赛提交材料检查（2026-10-28） / 本地可重复检查
 
-修改原因：A：以中性工程语言介绍成果，保留事实与适用范围。
+原因：A：以中性工程语言介绍成果，保留事实与适用范围
 
 **Before**
 
@@ -3589,12 +3430,13 @@ AttentionPolicy 的五项权重为 3、1、3、2、3，用于人体目标选择�
 链接检查只检查报告、仿真和 Skill 的 Markdown 行内本地文件路径，不检查网页可用性、段落锚点、代码块或所有脚本内部路径。文件完整性、工具行为和板端功能分别对应各自验证记录。
 ~~~~
 
-<a id="change-176"></a>
-#### 修改 176：原第 32 行 → 现第 32 行
+#### 原修改 176
+
+原行号：32–32；当时修改后行号：32–32。
 
 位置：比赛提交材料检查（2026-10-28） / 本地可重复检查
 
-修改原因：B/C：合并重复边界说明，在成果之后集中交代测试条件。
+原因：B/C：合并重复边界说明，在成果之后集中交代测试条件
 
 **Before**
 
@@ -3608,102 +3450,15 @@ AttentionPolicy 的五项权重为 3、1、3、2、3，用于人体目标选择�
 现场六项功能确认、BIT、BOOT、启动串口、应用日志和独立固定输入 Golden 均已归档。Golden 用于固定输入张量一致性，A/B 日志用于两种实际配置计时；同算法配对及帧新鲜度按专项评估。
 ~~~~
 
-### report/third_party_sources_zh.md
-
-文件：[report/third_party_sources_zh.md](../report/third_party_sources_zh.md)。
-
-<a id="change-177"></a>
-#### 修改 177：原第 3 行 → 现第 3 行
-
-位置：第三方模型、软件与 IP 来源核对
-
-修改原因：C：将告警或授权状态集中为专题说明，保留未闭环事实和影响。
-
-**Before**
-
-~~~~text
-本清单记录本地已有的来源及许可文件，**不是对全部组件公开分发、比赛提交或商用授权的最终法律结论**。模型权重、框架和厂商 IP 的上游权益仍应单独标注。原源码和版权声明均保持不变。
-~~~~
-
-**After**
-
-~~~~text
-本清单集中说明第三方模型、软件和 IP 的来源、已有许可文件及待确认授权范围。原源码、版权及许可声明完整保留；比赛使用、公开再分发和商用按各组件适用条款分别核对。
-~~~~
-
-<a id="change-178"></a>
-#### 修改 178：原第 7–9 行 → 现第 7–9 行
-
-位置：第三方模型、软件与 IP 来源核对
-
-修改原因：C：将告警或授权状态集中为专题说明，保留未闭环事实和影响。
-
-**Before**
-
-~~~~text
-| PicoDet 架构与当前 `model.nb` | [当前模型](../data/model.nb) SHA256 `7c8a381bb5ba4a6a3c5c2b3277fd2cfb6ba1f802ddffd854c73bf75e747bfff4`；[`src/ps/licenses/notice.txt`](../src/ps/licenses/notice.txt) 记录来自先前 AX7020 交接。团队反馈交付说明将其描述为官方 PicoDet-XS 320 COCO LCNet 导出后转 Paddle-Lite ARM 格式、未由团队训练或量化；[官方模型表](https://github.com/PaddlePaddle/PaddleDetection/blob/release/2.6/configs/picodet/README.md)列有该型号。 | 团队反馈中两份交接模型哈希与仓库一致；所引用的另一台机器 E 盘原文件本次不可访问，尚未独立核对转换过程及官方原始文件身份。上游代码的许可证或文件哈希**不能单独证明该权重文件的比赛使用和再分发授权**；具体许可仍待确认。 |
-| Paddle-Lite ARM 静态库与头文件 | 现场记录中的 `original/a_repro_delta_20261027.zip` 包含 `eagleeye_z035/build/deps/paddle_lite_armv7_build_dep.tar.gz`，SHA256 `858832912944fa9c2e91eada484c1bc127a8ba0a553aa9363e2ef91c872219c2`；归档同目录提供 `PADDLE_LITE_LICENSE.txt`。 | 本地交接许可证文件为 [Apache License 2.0 文本](third_party/paddle_lite_license.txt)，按原始字节保存；与 [Paddle-Lite 上游许可](https://github.com/PaddlePaddle/Paddle-Lite/blob/develop/LICENSE)对照。仍需核对实际静态库版本、被打包的其他依赖及各自的 NOTICE/许可，不把一个文件概括为整个应用的全部许可。 |
-| Xilinx Linux 源码 | [`reference/linux_z035/readme.md`](../reference/linux_z035/readme.md) 记录 `linux-xlnx` 固定提交 `19984dd147fa7fbb7cb14b17400263ad0925c189`，源码归档通过 Git LFS 保存。 | 归档顶层 [`COPYING`](third_party/linux_copying.txt) 标明 GPL-2.0 与 Linux syscall exception，并提示其他许可也可能适用；[上游固定提交文件](https://github.com/Xilinx/linux-xlnx/blob/19984dd147fa7fbb7cb14b17400263ad0925c189/COPYING)对应。不能因此把归档中所有文件都简单认定为相同许可；发布时须按各文件及适用规则处理。 |
-~~~~
-
-**After**
-
-~~~~text
-| PicoDet 架构与当前 `model.nb` | [当前模型](../data/model.nb) SHA256 `7c8a381bb5ba4a6a3c5c2b3277fd2cfb6ba1f802ddffd854c73bf75e747bfff4`；[`src/ps/licenses/notice.txt`](../src/ps/licenses/notice.txt) 记录来自先前 AX7020 交接。团队反馈交付说明将其描述为官方 PicoDet-XS 320 COCO LCNet 导出后转 Paddle-Lite ARM 格式、未由团队训练或量化；[官方模型表](https://github.com/PaddlePaddle/PaddleDetection/blob/release/2.6/configs/picodet/README.md)列有该型号。 | 团队反馈中两份交接模型哈希与仓库一致；所引用的另一台机器 E 盘原文件本次不可访问，尚未独立核对转换过程及官方原始文件身份。权重的比赛使用及再分发许可须单独核对，当前状态为待确认；已有代码许可和文件哈希按各自用途保留。 |
-| Paddle-Lite ARM 静态库与头文件 | 现场记录中的 `original/a_repro_delta_20261027.zip` 包含 `eagleeye_z035/build/deps/paddle_lite_armv7_build_dep.tar.gz`，SHA256 `858832912944fa9c2e91eada484c1bc127a8ba0a553aa9363e2ef91c872219c2`；归档同目录提供 `PADDLE_LITE_LICENSE.txt`。 | 本地交接许可证文件为 [Apache License 2.0 文本](third_party/paddle_lite_license.txt)，按原始字节保存；与 [Paddle-Lite 上游许可](https://github.com/PaddlePaddle/Paddle-Lite/blob/develop/LICENSE)对照。仍需核对实际静态库版本、被打包的其他依赖及各自的 NOTICE/许可，各组件按实际许可与 NOTICE 分别登记。 |
-| Xilinx Linux 源码 | [`reference/linux_z035/readme.md`](../reference/linux_z035/readme.md) 记录 `linux-xlnx` 固定提交 `19984dd147fa7fbb7cb14b17400263ad0925c189`，源码归档通过 Git LFS 保存。 | 归档顶层 [`COPYING`](third_party/linux_copying.txt) 标明 GPL-2.0 与 Linux syscall exception，并提示其他许可也可能适用；[上游固定提交文件](https://github.com/Xilinx/linux-xlnx/blob/19984dd147fa7fbb7cb14b17400263ad0925c189/COPYING)对应。发布时按归档各文件及其适用规则处理。 |
-~~~~
-
-<a id="change-179"></a>
-#### 修改 179：原第 11–12 行 → 现第 11–12 行
-
-位置：第三方模型、软件与 IP 来源核对
-
-修改原因：C：将告警或授权状态集中为专题说明，保留未闭环事实和影响。
-
-**Before**
-
-~~~~text
-| Digilent / Xilinx 动态时钟 IP | [`axi_dynclk_v1_0/component.xml`](../src/ip_repo/video/axi_dynclk_v1_0/component.xml) 标注 Digilent；[`mmcme2_drp.v`](../src/ip_repo/video/axi_dynclk_v1_0/src/mmcme2_drp.v) 包含 Xilinx 与 Digilent 的来源和声明。 | 来源声明不能自动作为完整许可；保留原版权与免责声明，核对对应 IP 版本的发布条款及第三方授权。 |
-| AMD/Xilinx Vivado 生成文件及 IP | [`system.bd`](../src/vivado/eagleeye_7035_eyes.srcs/sources_1/bd/system/system.bd) 包含 `xilinx.com` 的 VDMA、DMA、PS7 等 IP；工程工具为 Vivado 2022.2。 | 具体 IP 和生成物按其各自适用许可核对；本次不能从 BD 的 VLNV 判断所有 IP 可自由公开再分发。 |
-~~~~
-
-**After**
-
-~~~~text
-| Digilent / Xilinx 动态时钟 IP | [`axi_dynclk_v1_0/component.xml`](../src/ip_repo/video/axi_dynclk_v1_0/component.xml) 标注 Digilent；[`mmcme2_drp.v`](../src/ip_repo/video/axi_dynclk_v1_0/src/mmcme2_drp.v) 包含 Xilinx 与 Digilent 的来源和声明。 | 具体发布条款按对应版本核对；保留原版权与免责声明，核对对应 IP 版本的发布条款及第三方授权。 |
-| AMD/Xilinx Vivado 生成文件及 IP | [`system.bd`](../src/vivado/eagleeye_7035_eyes.srcs/sources_1/bd/system/system.bd) 包含 `xilinx.com` 的 VDMA、DMA、PS7 等 IP；工程工具为 Vivado 2022.2。 | 具体 IP 和生成物按其各自适用许可核对；VLNV 用于版本识别，公开再分发条件按具体 IP 许可核对。 |
-~~~~
-
-<a id="change-180"></a>
-#### 修改 180：原第 18 行 → 现第 18 行
-
-位置：第三方模型、软件与 IP 来源核对
-
-修改原因：C：将告警或授权状态集中为专题说明，保留未闭环事实和影响。
-
-**Before**
-
-~~~~text
-团队另反馈有 PicoDet-S 416 量化训练记录，数据配置为 `dataset/newdata`、产物为 `picos416.nb`；型号、输入尺寸和文件名与当前 XS 320 的 `model.nb` 不同，不能据此称当前模型使用该训练数据或经过该次微调。该训练记录位于另一台机器，本次未独立读取。
-~~~~
-
-**After**
-
-~~~~text
-团队另反馈有 PicoDet-S 416 量化训练记录，数据配置为 `dataset/newdata`、产物为 `picos416.nb`；型号、输入尺寸和文件名与当前 XS 320 的 `model.nb` 不同，其训练数据和微调记录单独绑定 `picos416.nb`，当前 `model.nb` 保持官方 XS-320 来源记录。该训练记录位于另一台机器，本次未独立读取。
-~~~~
-
 ### report/warning_review_zh.md
 
-文件：[report/warning_review_zh.md](../report/warning_review_zh.md)。
+#### 原修改 181
 
-<a id="change-181"></a>
-#### 修改 181：原第 3 行 → 现第 3 行
+原行号：3–3；当时修改后行号：3–3。
 
 位置：本次复现工程告警说明
 
-修改原因：C：将告警或授权状态集中为专题说明，保留未闭环事实和影响。
+原因：C：将告警或授权状态集中为专题说明，保留未闭环事实和影响
 
 **Before**
 
@@ -3717,12 +3472,13 @@ AttentionPolicy 的五项权重为 3、1、3、2、3，用于人体目标选择�
 本页汇总 2026-10-28 干净克隆并从布线检查点续跑得到的 [Vivado 2022.2 报告](../build/clean_rebuild_20261028/reports/)及应用日志中的工程注意事项。现场已确认摄像头、人体检测、鼠标 ROI、按键、舵机和 HDMI 功能正常；板级时序与帧完整性签核仍按以下专项状态管理。
 ~~~~
 
-<a id="change-182"></a>
-#### 修改 182：原第 7–11 行 → 现第 7–11 行
+#### 原修改 182
+
+原行号：7–11；当时修改后行号：7–11。
 
 位置：本次复现工程告警说明
 
-修改原因：C：将告警或授权状态集中为专题说明，保留未闭环事实和影响。
+原因：C：将告警或授权状态集中为专题说明，保留未闭环事实和影响
 
 **Before**
 
@@ -3744,12 +3500,13 @@ AttentionPolicy 的五项权重为 3、1、3、2、3，用于人体目标选择�
 | VDMA 应用日志提示 | [应用日志](../board/reproduced_20261028/attention_app_20261028.log) 记录 `s2mm=0x15810`、`mm2s=0x11000`、`cleared=0`，并打印 `WARNING VDMA error bits present`；179 次快照标为 `freshness=unverified`。 | 应用据源码掩码 `0x00000ff0` 检查错误位；产生原因、时间及对功能的实际影响仍待定位；帧完成与张量 Golden 由专项测试核验。 |
 ~~~~
 
-<a id="change-183"></a>
-#### 修改 183：原第 13 行 → 现第 13 行
+#### 原修改 183
+
+原行号：13–13；当时修改后行号：13–13。
 
 位置：本次复现工程告警说明
 
-修改原因：C：将告警或授权状态集中为专题说明，保留未闭环事实和影响。
+原因：C：将告警或授权状态集中为专题说明，保留未闭环事实和影响
 
 **Before**
 
@@ -3763,12 +3520,13 @@ AttentionPolicy 的五项权重为 3、1、3、2、3，用于人体目标选择�
 上述项目作为已知工程问题保留，修复或签核需匹配版本源码、板级时序资料及受控实测。本次文档整理保持现有 RTL/XDC 和告警处理状态。
 ~~~~
 
-<a id="change-184"></a>
-#### 修改 184：原第 15 行 → 现第 15 行
+#### 原修改 184
+
+原行号：15–15；当时修改后行号：15–15。
 
 位置：本次复现工程告警说明
 
-修改原因：C：将告警或授权状态集中为专题说明，保留未闭环事实和影响。
+原因：C：将告警或授权状态集中为专题说明，保留未闭环事实和影响
 
 **Before**
 
@@ -3784,14 +3542,13 @@ AttentionPolicy 的五项权重为 3、1、3、2、3，用于人体目标选择�
 
 ### sim/lanczos_legacy_readme.md
 
-文件：[sim/lanczos_legacy_readme.md](../sim/lanczos_legacy_readme.md)。
+#### 原修改 185
 
-<a id="change-185"></a>
-#### 修改 185：原第 7 行 → 现第 7 行
+原行号：7–7；当时修改后行号：7–7。
 
 位置：Lanczos 旧仿真记录（非独立 Skill）
 
-修改原因：A/B：以成果和方法为主线精简重复否定，保留案例事实和适用条件。
+原因：A/B：以成果和方法为主线精简重复否定，保留案例事实和适用条件
 
 **Before**
 
@@ -3805,12 +3562,13 @@ AttentionPolicy 的五项权重为 3、1、3、2、3，用于人体目标选择�
 当前工程仍使用 Lanczos，原有 RTL 保存在 `src/vivado/`。`python tools/check_lanczos.py` 可核对七份工程 RTL 与原始快照中的来源，用于来源一致性核验，像素计算按下列仿真记录评估。
 ~~~~
 
-<a id="change-186"></a>
-#### 修改 186：原第 16 行 → 现第 16 行
+#### 原修改 186
+
+原行号：16–16；当时修改后行号：16–16。
 
 位置：Lanczos 旧仿真记录（非独立 Skill） / 历史独立工程的通过记录
 
-修改原因：A/B：以成果和方法为主线精简重复否定，保留案例事实和适用条件。
+原因：A/B：以成果和方法为主线精简重复否定，保留案例事实和适用条件
 
 **Before**
 
@@ -3824,12 +3582,13 @@ AttentionPolicy 的五项权重为 3、1、3、2、3，用于人体目标选择�
 两份日志保留原始字节，覆盖历史独立测试工程。对应完整源码和环境未随材料归档，因此本页引用其日志结果。来件记录部分 RTL 与当前 Eyes 的哈希不同，两套工程的完整版本关系仍待核对，当前 Eyes 的同版本逐像素验证按专项测试处理。
 ~~~~
 
-<a id="change-187"></a>
-#### 修改 187：原第 18 行 → 现第 18 行
+#### 原修改 187
+
+原行号：18–18；当时修改后行号：18–18。
 
 位置：Lanczos 旧仿真记录（非独立 Skill） / 历史独立工程的通过记录
 
-修改原因：A/B：以成果和方法为主线精简重复否定，保留案例事实和适用条件。
+原因：A/B：以成果和方法为主线精简重复否定，保留案例事实和适用条件
 
 **Before**
 
@@ -3845,14 +3604,13 @@ AttentionPolicy 的五项权重为 3、1、3、2、3，用于人体目标选择�
 
 ### sim/preproc_captured_dma_20261027/readme.md
 
-文件：[sim/preproc_captured_dma_20261027/readme.md](../sim/preproc_captured_dma_20261027/readme.md)。
+#### 原修改 188
 
-<a id="change-188"></a>
-#### 修改 188：原第 3 行 → 现第 3 行
+原行号：3–3；当时修改后行号：3–3。
 
 位置：采集帧预处理仿真输出
 
-修改原因：A/B：以成果和方法为主线精简重复否定，保留案例事实和适用条件。
+原因：A/B：以成果和方法为主线精简重复否定，保留案例事实和适用条件
 
 **Before**
 
@@ -3868,14 +3626,13 @@ AttentionPolicy 的五项权重为 3、1、3、2、3，用于人体目标选择�
 
 ### sim/verification_zh.md
 
-文件：[sim/verification_zh.md](../sim/verification_zh.md)。
+#### 原修改 189
 
-<a id="change-189"></a>
-#### 修改 189：原第 3 行 → 现第 3 行
+原行号：3–3；当时修改后行号：3–3。
 
 位置：仿真与验证说明
 
-修改原因：A/B：以成果和方法为主线精简重复否定，保留案例事实和适用条件。
+原因：A/B：以成果和方法为主线精简重复否定，保留案例事实和适用条件
 
 **Before**
 
@@ -3889,12 +3646,13 @@ AttentionPolicy 的五项权重为 3、1、3、2、3，用于人体目标选择�
 本页按主机工具、RTL、QEMU 与板端四类整理验证结果，连接测试输入、原始输出和复现方法。原工程 [sim/readme.md](readme.md)保留历史快照状态，后续结果以本页索引查阅。
 ~~~~
 
-<a id="change-190"></a>
-#### 修改 190：原第 11 行 → 现第 11 行
+#### 原修改 190
+
+原行号：11–11；当时修改后行号：11–11。
 
 位置：仿真与验证说明 / 测试输入和身份
 
-修改原因：A/B：以成果和方法为主线精简重复否定，保留案例事实和适用条件。
+原因：A/B：以成果和方法为主线精简重复否定，保留案例事实和适用条件
 
 **Before**
 
@@ -3908,12 +3666,13 @@ AttentionPolicy 的五项权重为 3、1、3、2、3，用于人体目标选择�
 | `data/model.nb` | `7c8a381bb5ba4a6a3c5c2b3277fd2cfb6ba1f802ddffd854c73bf75e747bfff4` | PicoDet 模型文件身份；现场加载版本见应用测试记录 |
 ~~~~
 
-<a id="change-191"></a>
-#### 修改 191：原第 17 行 → 现第 17 行
+#### 原修改 191
+
+原行号：17–17；当时修改后行号：17–17。
 
 位置：仿真与验证说明 / 预处理 RTL：Icarus 离线仿真
 
-修改原因：A/B：以成果和方法为主线精简重复否定，保留案例事实和适用条件。
+原因：A/B：以成果和方法为主线精简重复否定，保留案例事实和适用条件
 
 **Before**
 
@@ -3927,12 +3686,13 @@ AttentionPolicy 的五项权重为 3、1、3、2、3，用于人体目标选择�
 现补充本地保留的[采集帧三路仿真输出](preproc_captured_dma_20261027/)，分别为 R/G/B 32 位十六进制字，共 307,200 个值。输入和 Golden 与上述仓库文件哈希一致。运行 `python -B tools/verify_preproc_sim_capture.py` 可将这三路记录逐位对照仓库 Golden；该数据来源为 Icarus 适配器与核心仿真，板端张量输出见独立 Golden 记录。
 ~~~~
 
-<a id="change-192"></a>
-#### 修改 192：原第 19 行 → 现第 19 行
+#### 原修改 192
+
+原行号：19–19；当时修改后行号：19–19。
 
 位置：仿真与验证说明 / 预处理 RTL：Icarus 离线仿真
 
-修改原因：A/B：以成果和方法为主线精简重复否定，保留案例事实和适用条件。
+原因：A/B：以成果和方法为主线精简重复否定，保留案例事实和适用条件
 
 **Before**
 
@@ -3946,12 +3706,13 @@ AttentionPolicy 的五项权重为 3、1、3、2、3，用于人体目标选择�
 日志中核心 `673804 cycles` 和适配器加核心 `788884 cycles` 按测试平台的仿真周期记录，100 MHz 为换算条件；板端 DMA/cache 及完整预处理延迟由实测计时。
 ~~~~
 
-<a id="change-193"></a>
-#### 修改 193：原第 25–28 行 → 现第 25–28 行
+#### 原修改 193
+
+原行号：25–28；当时修改后行号：25–28。
 
 位置：仿真与验证说明 / 舵机与 ROI 控制
 
-修改原因：A/B：以成果和方法为主线精简重复否定，保留案例事实和适用条件。
+原因：A/B：以成果和方法为主线精简重复否定，保留案例事实和适用条件
 
 **Before**
 
@@ -3971,12 +3732,13 @@ AttentionPolicy 的五项权重为 3、1、3、2、3，用于人体目标选择�
 - 后续补充的两项 Skill 独立副本正反例、空配置和损坏归档测试见 [示例验证记录](skill_examples_20261028.txt)；XSA 检查覆盖文件元数据，运行行为由板端测试记录。
 ~~~~
 
-<a id="change-194"></a>
-#### 修改 194：原第 39 行 → 现第 39 行
+#### 原修改 194
+
+原行号：39–39；当时修改后行号：39–39。
 
 位置：仿真与验证说明 / PicoDet 与注意力独立候选
 
-修改原因：A/B：以成果和方法为主线精简重复否定，保留案例事实和适用条件。
+原因：A/B：以成果和方法为主线精简重复否定，保留案例事实和适用条件
 
 **Before**
 
@@ -3990,12 +3752,13 @@ AttentionPolicy 的五项权重为 3、1、3、2、3，用于人体目标选择�
 [主机测试摘要](picodet_c_candidate/host_results.txt)记录临时 ID、无目标、错误输入以及模拟 Hold 行为。ARM 用户态 QEMU 使用离线输入和 CPU 预处理：[人体框与注意力请求摘要](picodet_c_candidate/qemu_predictor.txt)和[无目标摘要](picodet_c_candidate/qemu_empty.txt)均标明测试范围。这里记录软件请求；Fovea 完成状态由硬件事件核验，临时 ID 用于相邻结果关联。构建入口和边界见 [候选说明](../src/picodet_c_candidate/readme.md)。
 ~~~~
 
-<a id="change-195"></a>
-#### 修改 195：原第 41 行 → 现第 41 行
+#### 原修改 195
+
+原行号：41–41；当时修改后行号：41–41。
 
 位置：仿真与验证说明 / Lanczos 历史仿真与版本范围
 
-修改原因：A/B：以成果和方法为主线精简重复否定，保留案例事实和适用条件。
+原因：A/B：以成果和方法为主线精简重复否定，保留案例事实和适用条件
 
 **Before**
 
@@ -4009,12 +3772,13 @@ AttentionPolicy 的五项权重为 3、1、3、2、3，用于人体目标选择�
 ## Lanczos 历史仿真与版本范围
 ~~~~
 
-<a id="change-196"></a>
-#### 修改 196：原第 43 行 → 现第 43 行
+#### 原修改 196
+
+原行号：43–43；当时修改后行号：43–43。
 
 位置：仿真与验证说明 / Lanczos 历史仿真与版本范围
 
-修改原因：A/B：以成果和方法为主线精简重复否定，保留案例事实和适用条件。
+原因：A/B：以成果和方法为主线精简重复否定，保留案例事实和适用条件
 
 **Before**
 
@@ -4028,12 +3792,13 @@ AttentionPolicy 的五项权重为 3、1、3、2、3，用于人体目标选择�
 [旧 XSim 原始记录](lanczos_legacy_xsim.txt)报告 1536 个输出像素中 768 处错误；旧测试台与当前 RTL 的版本、参考算法对应关系尚未确认。该日志按历史测试版本保存，当前 RTL 的逐像素状态需匹配版本后核验。工程源码和记录保留，独立 Lanczos Skill 不再展示；详见 [说明](lanczos_legacy_readme.md)。
 ~~~~
 
-<a id="change-197"></a>
-#### 修改 197：原第 45 行 → 现第 45 行
+#### 原修改 197
+
+原行号：45–45；当时修改后行号：45–45。
 
 位置：仿真与验证说明 / Lanczos 历史仿真与版本范围
 
-修改原因：A/B：以成果和方法为主线精简重复否定，保留案例事实和适用条件。
+原因：A/B：以成果和方法为主线精简重复否定，保留案例事实和适用条件
 
 **Before**
 
@@ -4047,12 +3812,13 @@ AttentionPolicy 的五项权重为 3、1、3、2、3，用于人体目标选择�
 另有历史独立测试工程的 [单通道](lanczos_single_xsim_pass_legacy.txt)和 [RGB](lanczos_rgb_xsim_pass_legacy.txt) XSim 日志，分别记录 768 和 1,536 个输出像素零错误。它们的测试工程源码未随本次材料提供，其与当前 Eyes RTL 的版本对应待核对，通过及失败日志分别保存。[测试范围与来源](lanczos_legacy_readme.md)
 ~~~~
 
-<a id="change-198"></a>
-#### 修改 198：原第 51 行 → 现第 51 行
+#### 原修改 198
+
+原行号：51–51；当时修改后行号：51–51。
 
 位置：仿真与验证说明 / 2026-10-28 脱离工程复用补充
 
-修改原因：A/B：以成果和方法为主线精简重复否定，保留案例事实和适用条件。
+原因：A/B：以成果和方法为主线精简重复否定，保留案例事实和适用条件
 
 **Before**
 
@@ -4066,12 +3832,13 @@ AttentionPolicy 的五项权重为 3、1、3、2、3，用于人体目标选择�
 两项 Skill 分别复制到临时空目录，使用另一种张量形状及不同模块/地址的合成 HWH 运行正反例、长度错误和单元测试，命令及输出见 [复用测试记录](skill_portability_20261028.txt)。该项验证独立目录及合成契约的可移植性，其他真实项目与 PYNQ 实板留待迁移测试。
 ~~~~
 
-<a id="change-199"></a>
-#### 修改 199：原第 55 行 → 现第 55 行
+#### 原修改 199
+
+原行号：55–55；当时修改后行号：55–55。
 
 位置：仿真与验证说明 / PYNQ 示例的模拟验证
 
-修改原因：A/B：以成果和方法为主线精简重复否定，保留案例事实和适用条件。
+原因：A/B：以成果和方法为主线精简重复否定，保留案例事实和适用条件
 
 **Before**
 
@@ -4087,14 +3854,13 @@ AttentionPolicy 的五项权重为 3、1、3、2、3，用于人体目标选择�
 
 ### skill/01-axi-video-regression/skill.md
 
-文件：[skill/01-axi-video-regression/skill.md](../skill/01-axi-video-regression/skill.md)。
+#### 原修改 200
 
-<a id="change-200"></a>
-#### 修改 200：原第 28 行 → 现第 28 行
+原行号：28–28；当时修改后行号：28–28。
 
 位置：AXI 视频流与 RGB 锁步回归 / 已验证效果与失败来源
 
-修改原因：A：以中性工程语言介绍成果，保留事实与适用范围。
+原因：A：以中性工程语言介绍成果，保留事实与适用范围
 
 **Before**
 
@@ -4110,14 +3876,13 @@ AttentionPolicy 的五项权重为 3、1、3、2、3，用于人体目标选择�
 
 ### skill/02-tensor-preprocess-golden/skill.md
 
-文件：[skill/02-tensor-preprocess-golden/skill.md](../skill/02-tensor-preprocess-golden/skill.md)。
+#### 原修改 201
 
-<a id="change-201"></a>
-#### 修改 201：原第 19–20 行 → 现第 19–20 行
+原行号：19–20；当时修改后行号：19–20。
 
 位置：预处理张量的完整数值验收 / 工作流
 
-修改原因：A：以中性工程语言介绍成果，保留事实与适用范围。
+原因：A：以中性工程语言介绍成果，保留事实与适用范围
 
 **Before**
 
@@ -4135,14 +3900,13 @@ AttentionPolicy 的五项权重为 3、1、3、2、3，用于人体目标选择�
 
 ### skill/03-armv7-inference-deploy/skill.md
 
-文件：[skill/03-armv7-inference-deploy/skill.md](../skill/03-armv7-inference-deploy/skill.md)。
+#### 原修改 202
 
-<a id="change-202"></a>
-#### 修改 202：原第 10 行 → 现第 10 行
+原行号：10–10；当时修改后行号：10–10。
 
 位置：Cortex-A9 推理移植与 ABI 验收 / 适用范围
 
-修改原因：A：以中性工程语言介绍成果，保留事实与适用范围。
+原因：A：以中性工程语言介绍成果，保留事实与适用范围
 
 **Before**
 
@@ -4156,12 +3920,13 @@ AttentionPolicy 的五项权重为 3、1、3、2、3，用于人体目标选择�
 目标为 ARM32 Linux CPU 推理，典型平台为 Zynq-7000 Cortex-A9。根据 SoC 和实际系统资料确认指令集、驱动及后端。模型训练、PL 卷积迁移和实时摄像头链路分别验收。
 ~~~~
 
-<a id="change-203"></a>
-#### 修改 203：原第 31 行 → 现第 31 行
+#### 原修改 203
+
+原行号：31–31；当时修改后行号：31–31。
 
 位置：Cortex-A9 推理移植与 ABI 验收 / 使用方法
 
-修改原因：A：以中性工程语言介绍成果，保留事实与适用范围。
+原因：A：以中性工程语言介绍成果，保留事实与适用范围
 
 **Before**
 
@@ -4177,14 +3942,13 @@ AttentionPolicy 的五项权重为 3、1、3、2、3，用于人体目标选择�
 
 ### skill/04-petalinux-xsa-rebuild/skill.md
 
-文件：[skill/04-petalinux-xsa-rebuild/skill.md](../skill/04-petalinux-xsa-rebuild/skill.md)。
+#### 原修改 204
 
-<a id="change-204"></a>
-#### 修改 204：原第 38 行 → 现第 38 行
+原行号：38–38；当时修改后行号：38–38。
 
 位置：硬件导出到系统镜像的可复现构建 / 已验证效果与失败来源
 
-修改原因：A：以中性工程语言介绍成果，保留事实与适用范围。
+原因：A：以中性工程语言介绍成果，保留事实与适用范围
 
 **Before**
 
@@ -4200,14 +3964,13 @@ AttentionPolicy 的五项权重为 3、1、3、2、3，用于人体目标选择�
 
 ### skill/05-vdma-frame-snapshot/skill.md
 
-文件：[skill/05-vdma-frame-snapshot/skill.md](../skill/05-vdma-frame-snapshot/skill.md)。
+#### 原修改 205
 
-<a id="change-205"></a>
-#### 修改 205：原第 10 行 → 现第 10 行
+原行号：10–10；当时修改后行号：10–10。
 
 位置：持续采集下的 DDR 帧快照 / 适用范围
 
-修改原因：A：以中性工程语言介绍成果，保留事实与适用范围。
+原因：A：以中性工程语言介绍成果，保留事实与适用范围
 
 **Before**
 
@@ -4221,12 +3984,13 @@ AttentionPolicy 的五项权重为 3、1、3、2、3，用于人体目标选择�
 适用于相机生产帧、显示或推理消费者异步读取同一 DDR 环的系统。先从实际硬件导出确认 VDMA 方向、地址、帧槽、stride、缓存属性及帧完成语义。实际硬件操作按目标系统的权限与恢复流程执行。
 ~~~~
 
-<a id="change-206"></a>
-#### 修改 206：原第 32 行 → 现第 32 行
+#### 原修改 206
+
+原行号：32–32；当时修改后行号：32–32。
 
 位置：持续采集下的 DDR 帧快照 / 已验证效果与失败来源
 
-修改原因：A：以中性工程语言介绍成果，保留事实与适用范围。
+原因：A：以中性工程语言介绍成果，保留事实与适用范围
 
 **Before**
 
@@ -4242,14 +4006,13 @@ AttentionPolicy 的五项权重为 3、1、3、2、3，用于人体目标选择�
 
 ### skill/06-detection-stream-contract/skill.md
 
-文件：[skill/06-detection-stream-contract/skill.md](../skill/06-detection-stream-contract/skill.md)。
+#### 原修改 207
 
-<a id="change-207"></a>
-#### 修改 207：原第 29 行 → 现第 29 行
+原行号：29–29；当时修改后行号：29–29。
 
 位置：检测流坐标与时间契约 / 使用方法
 
-修改原因：A：以中性工程语言介绍成果，保留事实与适用范围。
+原因：A：以中性工程语言介绍成果，保留事实与适用范围
 
 **Before**
 
@@ -4263,39 +4026,15 @@ AttentionPolicy 的五项权重为 3、1、3、2、3，用于人体目标选择�
 校验器检查帧序、计数、字段、范围、越界、同帧重复 ID，以及已观测到的 ID 类别变化。跨遮挡身份及接收方行为还需真值评价与端到端回放。保留窗口之后 ID 可重新分配时，须更换会话或扩充带 generation 的协议。
 ~~~~
 
-### skill/07-small-object-tracking-regression/skill.md
-
-文件：[skill/07-small-object-tracking-regression/skill.md](../skill/07-small-object-tracking-regression/skill.md)。
-
-<a id="change-208"></a>
-#### 修改 208：原第 37 行 → 现第 37 行
-
-位置：小目标检测与跟踪的场景回归 / 可直接使用的提示词
-
-修改原因：A：以中性工程语言介绍成果，保留事实与适用范围。
-
-**Before**
-
-~~~~text
-> 用现有权重建立小目标视频回归，先审计数据和模型身份，再跑成功、漏检、遮挡、快速运动和假阳性用例。输出源坐标检测流、标注视频、采样时间与实测吞吐。检查候选上限是否丢关键类别，明确短时 ID 保持的有效窗口；未验证的板端能力标为待确认。
-~~~~
-
-**After**
-
-~~~~text
-> 用现有权重建立小目标视频回归，先审计数据和模型身份，再跑成功、漏检、遮挡、快速运动和假阳性用例。输出源坐标检测流、标注视频、采样时间与实测吞吐。检查候选上限是否丢关键类别，明确短时 ID 保持的有效窗口；按实际执行环境分别报告 PC 结果和板端待测项。
-~~~~
-
 ### skill/08-roi-ablation-evaluation/skill.md
 
-文件：[skill/08-roi-ablation-evaluation/skill.md](../skill/08-roi-ablation-evaluation/skill.md)。
+#### 原修改 209
 
-<a id="change-209"></a>
-#### 修改 209：原第 32 行 → 现第 32 行
+原行号：32–32；当时修改后行号：32–32。
 
 位置：ROI 插值与精细识别的配对消融 / 已验证效果与失败来源
 
-修改原因：A：以中性工程语言介绍成果，保留事实与适用范围。
+原因：A：以中性工程语言介绍成果，保留事实与适用范围
 
 **Before**
 
@@ -4311,14 +4050,13 @@ AttentionPolicy 的五项权重为 3、1、3、2、3，用于人体目标选择�
 
 ### skill/09-roi-transaction-integration/skill.md
 
-文件：[skill/09-roi-transaction-integration/skill.md](../skill/09-roi-transaction-integration/skill.md)。
+#### 原修改 210
 
-<a id="change-210"></a>
-#### 修改 210：原第 21 行 → 现第 21 行
+原行号：21–21；当时修改后行号：21–21。
 
 位置：跨模块语义适配与 ROI 事务闭环 / 工作流
 
-修改原因：A：以中性工程语言介绍成果，保留事实与适用范围。
+原因：A：以中性工程语言介绍成果，保留事实与适用范围
 
 **Before**
 
@@ -4334,14 +4072,13 @@ AttentionPolicy 的五项权重为 3、1、3、2、3，用于人体目标选择�
 
 ### skill/10-hls-cross-platform-port/skill.md
 
-文件：[skill/10-hls-cross-platform-port/skill.md](../skill/10-hls-cross-platform-port/skill.md)。
+#### 原修改 211
 
-<a id="change-211"></a>
-#### 修改 211：原第 33 行 → 现第 33 行
+原行号：33–33；当时修改后行号：33–33。
 
 位置：HLS 算子到 Zynq 系统的迁移审计 / 可直接使用的提示词
 
-修改原因：A：以中性工程语言介绍成果，保留事实与适用范围。
+原因：A：以中性工程语言介绍成果，保留事实与适用范围
 
 **Before**
 
@@ -4357,14 +4094,13 @@ AttentionPolicy 的五项权重为 3、1、3、2、3，用于人体目标选择�
 
 ### skill/11-reproducible-evidence-release/skill.md
 
-文件：[skill/11-reproducible-evidence-release/skill.md](../skill/11-reproducible-evidence-release/skill.md)。
+#### 原修改 212
 
-<a id="change-212"></a>
-#### 修改 212：原第 10 行 → 现第 10 行
+原行号：10–10；当时修改后行号：10–10。
 
 位置：模型、程序和演示的可复现发布 / 适用范围
 
-修改原因：A：以中性工程语言介绍成果，保留事实与适用范围。
+原因：A：以中性工程语言介绍成果，保留事实与适用范围
 
 **Before**
 
@@ -4380,14 +4116,13 @@ AttentionPolicy 的五项权重为 3、1、3、2、3，用于人体目标选择�
 
 ### skill/evidence.md
 
-文件：[skill/evidence.md](../skill/evidence.md)。
+#### 原修改 213
 
-<a id="change-213"></a>
-#### 修改 213：原第 3 行 → 现第 3 行
+原行号：3–3；当时修改后行号：3–3。
 
 位置：经验来源与证据覆盖
 
-修改原因：B/C：合并重复边界说明，在成果之后集中交代测试条件。
+原因：B/C：合并重复边界说明，在成果之后集中交代测试条件
 
 **Before**
 
@@ -4401,12 +4136,13 @@ AttentionPolicy 的五项权重为 3、1、3、2、3，用于人体目标选择�
 本文件为技能方法提供经验来源和文件索引。历史会话用于定位问题与修正过程，工程文件记录对应输入和结果；原工作区路径以 `E:/Lanczos` 为基准，迁移时通过发布清单绑定位置及 SHA-256。
 ~~~~
 
-<a id="change-214"></a>
-#### 修改 214：原第 7 行 → 现第 7 行
+#### 原修改 214
+
+原行号：7–7；当时修改后行号：7–7。
 
 位置：经验来源与证据覆盖 / 对话覆盖
 
-修改原因：A：以中性工程语言介绍成果，保留事实与适用范围。
+原因：A：以中性工程语言介绍成果，保留事实与适用范围
 
 **Before**
 
@@ -4420,12 +4156,13 @@ AttentionPolicy 的五项权重为 3、1、3、2、3，用于人体目标选择�
 已逐页读取以下 10 个聊天，所有分页均到 `hasMore=false`，合计 93 回合。标题按工具返回原文记录。当前聊天补充了 model.nb 来源、训练路线与授权核对。本次提炼范围限定为上述可访问聊天。
 ~~~~
 
-<a id="change-215"></a>
-#### 修改 215：原第 28 行 → 现第 28 行
+#### 原修改 215
+
+原行号：28–28；当时修改后行号：28–28。
 
 位置：证据案例 / E01：视频流的正确性不能只看静态画面
 
-修改原因：A：以中性工程语言介绍成果，保留事实与适用范围。
+原因：A：以中性工程语言介绍成果，保留事实与适用范围
 
 **Before**
 
@@ -4439,12 +4176,13 @@ AttentionPolicy 的五项权重为 3、1、3、2、3，用于人体目标选择�
 现存说明记录：单通道 16×12 连续两帧 1536 个像素、640×8 目标行宽测试 20480 个像素零错误；RGB 连续两帧 1536 个像素零错误。检查覆盖 clamp、Q10 数值、SOF/EOL、反压保持、通道锁步。旧版本坐标总线宽度错误，后改为 `$clog2(2*IMG_WIDTH)` 等按数值范围计算。全分辨率长时稳定性另设板端测试。
 ~~~~
 
-<a id="change-216"></a>
-#### 修改 216：原第 34 行 → 现第 34 行
+#### 原修改 216
+
+原行号：34–34；当时修改后行号：34–34。
 
 位置：证据案例 / E02：预处理必须验证整个张量
 
-修改原因：A：以中性工程语言介绍成果，保留事实与适用范围。
+原因：A：以中性工程语言介绍成果，保留事实与适用范围
 
 **Before**
 
@@ -4458,12 +4196,13 @@ AttentionPolicy 的五项权重为 3、1、3、2、3，用于人体目标选择�
 历史记录：五类 640×360 RGB888 输入，每帧输出 307200 个 FP32，与 CPU 双线性 Golden 逐位一致。Vivado 2024.2 独立 IP 后布线报告：709 LUT、333 FF、25.5 BRAM36 等效 tile、1 DSP、100 MHz WNS +3.519 ns。流接口仿真 7.88884 ms；真实 DDR 端到端延迟、模型框变化和 2022.2 重跑未验证。该固定尺寸的插值结果落在 1/32 像素值网格，归一化 ROM 按 n/32 编址，Golden 直接以双精度插值后归一化再转 FP32。改变尺寸时需重新生成与坐标契约匹配的 ROM 和相位表。
 ~~~~
 
-<a id="change-217"></a>
-#### 修改 217：原第 40 行 → 现第 40 行
+#### 原修改 217
+
+原行号：40–40；当时修改后行号：40–40。
 
 位置：证据案例 / E03：ARM 指令集正确仍可能因系统库失败
 
-修改原因：A：以中性工程语言介绍成果，保留事实与适用范围。
+原因：A：以中性工程语言介绍成果，保留事实与适用范围
 
 **Before**
 
@@ -4477,12 +4216,13 @@ AttentionPolicy 的五项权重为 3、1、3、2、3，用于人体目标选择�
 历史失败：早期动态链接二进制要求 `GLIBC_2.27`，旧板端系统兼容性未满足，后改为完全静态链接。Cortex-A9 QEMU 运行 JPEG 检出 8 个 PERSON，最高置信度 0.8298。实时 raw-frame 程序的另一份 QEMU 日志检出 6 个 PERSON，两份结果按输入和程序分别记录，板卡 FPS 使用真实板端计时。
 ~~~~
 
-<a id="change-218"></a>
-#### 修改 218：原第 46 行 → 现第 46 行
+#### 原修改 218
+
+原行号：46–46；当时修改后行号：46–46。
 
 位置：证据案例 / E04：镜像重建前先识别工具代际
 
-修改原因：A：以中性工程语言介绍成果，保留事实与适用范围。
+原因：A：以中性工程语言介绍成果，保留事实与适用范围
 
 **Before**
 
@@ -4496,12 +4236,13 @@ AttentionPolicy 的五项权重为 3、1、3、2、3，用于人体目标选择�
 观察：XSA 标示 2022.2，旧 2017.4 流程期待 HDF；现有 Ubuntu 24.04/26.04 环境与本次推荐宿主版本不匹配，且未安装所需 PetaLinux。该次工作完成环境预检与脚本准备，BOOT.BIN/image.ub 构建留待依赖满足后执行。宿主支持表和工具命令随版本变化，复用时应查目标版本官方文档。
 ~~~~
 
-<a id="change-219"></a>
-#### 修改 219：原第 52 行 → 现第 52 行
+#### 原修改 219
+
+原行号：52–52；当时修改后行号：52–52。
 
 位置：证据案例 / E05：VDMA 私有快照保护推理输入
 
-修改原因：A：以中性工程语言介绍成果，保留事实与适用范围。
+原因：A：以中性工程语言介绍成果，保留事实与适用范围
 
 **Before**
 
@@ -4515,12 +4256,13 @@ AttentionPolicy 的五项权重为 3、1、3、2、3，用于人体目标选择�
 代码选择最近完成槽、复制到私有内存并复查写指针。该策略依赖复制期间写者未回绕覆盖所选槽。仅前后两次环形指针相同不能排除多次回绕；复用必须增加可证明的时间界限、单调帧序号或显式缓冲所有权。本包将上述条件纳入验收清单，真实 DMA 并发按目标板证据评估。
 ~~~~
 
-<a id="change-220"></a>
-#### 修改 220：原第 64 行 → 现第 64 行
+#### 原修改 220
+
+原行号：64–64；当时修改后行号：64–64。
 
 位置：证据案例 / E07：小球回归需要保留失败案例
 
-修改原因：A：以中性工程语言介绍成果，保留事实与适用范围。
+原因：A：以中性工程语言介绍成果，保留事实与适用范围
 
 **Before**
 
@@ -4534,12 +4276,13 @@ AttentionPolicy 的五项权重为 3、1、3、2、3，用于人体目标选择�
 历史记录：两类数据合并 6111 张图片，训练集 12228 个 PLAYER 框、1011 个 BALL 框；CPU 1 epoch、1% 数据冒烟 mAP50=0.00063，只证明链路能运行。队友正式训练报告指标为 P=96.1%、R=91.4%、mAP50=95.8%、mAP50-95=69.9%，该训练集指标与真实视频/板端性能按各自测试条件记录。真实视频分块检测仍有低置信假球；目标数上限内增加 BALL 保留策略，遮挡时保留 valid=0 的短时轨迹。上述数值引用历史训练记录。
 ~~~~
 
-<a id="change-221"></a>
-#### 修改 221：原第 70 行 → 现第 70 行
+#### 原修改 221
+
+原行号：70–70；当时修改后行号：70–70。
 
 位置：证据案例 / E08：负消融结果同样是可复用结论
 
-修改原因：A：以中性工程语言介绍成果，保留事实与适用范围。
+原因：A：以中性工程语言介绍成果，保留事实与适用范围
 
 **Before**
 
@@ -4553,12 +4296,13 @@ VOC2007 代理数据，训练 1200 ROI、验证 400 ROI、同一 TinyFoveaCNN。
 VOC2007 代理数据，训练 1200 ROI、验证 400 ROI、同一 TinyFoveaCNN。Closed-set Accuracy：Nearest 49.00%、Bilinear 53.25%、Lanczos 49.75%。Operational Accuracy：19.50%、14.25%、20.50%。后者包含 UNKNOWN 拒识条件，与闭集准确率分列；小目标 23 个样本按小样本条件解释。Pillow Lanczos 与 FPGA 定点实现需分别验证。
 ~~~~
 
-<a id="change-222"></a>
-#### 修改 222：原第 76 行 → 现第 76 行
+#### 原修改 222
+
+原行号：76–76；当时修改后行号：76–76。
 
 位置：证据案例 / E09：字段同名不代表语义兼容
 
-修改原因：A：以中性工程语言介绍成果，保留事实与适用范围。
+原因：A：以中性工程语言介绍成果，保留事实与适用范围
 
 **Before**
 
@@ -4572,35 +4316,15 @@ VOC2007 代理数据，训练 1200 ROI、验证 400 ROI、同一 TinyFoveaCNN。
 旧检测流置信度为 0..255，注意力输入为 0..100；速度 Q8.8 与整数不同；OBSTACLE 不可直接转为 BICYCLE；区域枚举语义不同。现存 12 帧软件闭环报告为 PASS，正常结果接受、过期结果拒绝、request ID 唯一。输入为合成视频、软件 Lanczos 和 VOC 模型，FPGA ROI 及板端闭环留待实际硬件接入后验证。
 ~~~~
 
-<a id="change-223"></a>
-#### 修改 223：原第 88 行 → 现第 88 行
-
-位置：证据案例 / E11：发布身份必须细化到文件
-
-修改原因：A：以中性工程语言介绍成果，保留事实与适用范围。
-
-**Before**
-
-~~~~text
-官方 XS-320 model.nb 与本地 S-416 QAT picos416.nb 记录属不同路线；YOLO 1280 导出 ONNX 与 ARM 512 ONNX 也不是同一文件。`runs/`、`build/` 被忽略时，分支名不能交付产物。2026-10-27 复现包的历史核对记录区分 GridPolicy as-built 与后续 AttentionPolicy，并注明用户反馈上板通过但无原始当次日志。该附件当前未重新读取，因此本包不把它作为本次独立确认的现场状态。GitHub 最新仓库未登录访问返回 404；不能据此认定仓库不存在。权重/数据及比赛用途授权不明处为“待确认”。
-~~~~
-
-**After**
-
-~~~~text
-官方 XS-320 model.nb 与本地 S-416 QAT picos416.nb 记录属不同路线；YOLO 1280 导出 ONNX 与 ARM 512 ONNX 也不是同一文件。`runs/`、`build/` 被忽略时，分支名不能交付产物。2026-10-27 复现包的历史核对记录区分 GridPolicy as-built 与后续 AttentionPolicy，并注明用户反馈上板通过但无原始当次日志。该段保留当时的交接核对状态，后续 Z035 板端证据见仓库主报告。历史未登录访问的 404 记录按权限或可达性问题处理，仓库存在性需在有权限的环境核对。权重/数据及比赛用途授权不明处为“待确认”。
-~~~~
-
 ### skill/experience_notes.md
 
-文件：[skill/experience_notes.md](../skill/experience_notes.md)。
+#### 原修改 224
 
-<a id="change-224"></a>
-#### 修改 224：原第 5 行 → 现第 5 行
+原行号：5–5；当时修改后行号：5–5。
 
 位置：嵌赛项目可复用技能包
 
-修改原因：A：以中性工程语言介绍成果，保留事实与适用范围。
+原因：A：以中性工程语言介绍成果，保留事实与适用范围
 
 **Before**
 
@@ -4614,12 +4338,13 @@ VOC2007 代理数据，训练 1200 ROI、验证 400 ROI、同一 TinyFoveaCNN。
 本包从“嵌赛”项目的 10 个可访问历史聊天（93 个回合）及当前聊天提炼，结合本地源码、测试、训练报告和工程材料编写。整理日期：2026-10-29。覆盖清单及证据见 [EVIDENCE.md](evidence.md)。各案例的验证层级和原始材料可获取情况列于来源说明。
 ~~~~
 
-<a id="change-225"></a>
-#### 修改 225：原第 15 行 → 现第 15 行
+#### 原修改 225
+
+原行号：15–15；当时修改后行号：15–15。
 
 位置：嵌赛项目可复用技能包 / 技能索引
 
-修改原因：A：以中性工程语言介绍成果，保留事实与适用范围。
+原因：A：以中性工程语言介绍成果，保留事实与适用范围
 
 **Before**
 
@@ -4633,12 +4358,13 @@ VOC2007 代理数据，训练 1200 ROI、验证 400 ROI、同一 TinyFoveaCNN。
 | [01-axi-video-regression](01-axi-video-regression/skill.md) | AXI 视频缩放错行、RGB 错位、反压后丢像素 | 握手不变量、独立 Golden、连续帧回归提示词 | 单通道及 RGB 小帧、目标行宽的离线回归 |
 ~~~~
 
-<a id="change-226"></a>
-#### 修改 226：原第 18 行 → 现第 18 行
+#### 原修改 226
+
+原行号：18–18；当时修改后行号：18–18。
 
 位置：嵌赛项目可复用技能包 / 技能索引
 
-修改原因：A：以中性工程语言介绍成果，保留事实与适用范围。
+原因：A：以中性工程语言介绍成果，保留事实与适用范围
 
 **Before**
 
@@ -4652,12 +4378,13 @@ VOC2007 代理数据，训练 1200 ROI、验证 400 ROI、同一 TinyFoveaCNN。
 | [04-petalinux-xsa-rebuild](04-petalinux-xsa-rebuild/skill.md) | XSA、bitstream、系统镜像版本混用 | XSA/外部 bitstream 校验脚本、环境预检清单 | 硬件身份检查与环境预检已记录，镜像构建按目标环境执行 |
 ~~~~
 
-<a id="change-227"></a>
-#### 修改 227：原第 24 行 → 现第 24 行
+#### 原修改 227
+
+原行号：24–24；当时修改后行号：24–24。
 
 位置：嵌赛项目可复用技能包 / 技能索引
 
-修改原因：A：以中性工程语言介绍成果，保留事实与适用范围。
+原因：A：以中性工程语言介绍成果，保留事实与适用范围
 
 **Before**
 
@@ -4671,12 +4398,13 @@ VOC2007 代理数据，训练 1200 ROI、验证 400 ROI、同一 TinyFoveaCNN。
 | [10-hls-cross-platform-port](10-hls-cross-platform-port/skill.md) | 将上游 FPGA 后端误当可直接部署的 Zynq 工程 | 仓库职责图、寄存器/内存迁移表、器件支持预检 | Z100 的 set_part 器件预检定位了环境依赖 |
 ~~~~
 
-<a id="change-228"></a>
-#### 修改 228：原第 32 行 → 现第 32 行
+#### 原修改 228
+
+原行号：32–32；当时修改后行号：32–32。
 
 位置：嵌赛项目可复用技能包 / 使用方法
 
-修改原因：A：以中性工程语言介绍成果，保留事实与适用范围。
+原因：A：以中性工程语言介绍成果，保留事实与适用范围
 
 **Before**
 
@@ -4690,12 +4418,13 @@ VOC2007 代理数据，训练 1200 ROI、验证 400 ROI、同一 TinyFoveaCNN。
 4. 输出按“已证实、历史记录、待验证”标注，新工程以自身输入和测试结果验收。
 ~~~~
 
-<a id="change-229"></a>
-#### 修改 229：原第 56 行 → 现第 56 行
+#### 原修改 229
+
+原行号：56–56；当时修改后行号：56–56。
 
 位置：嵌赛项目可复用技能包 / 验证与复用边界
 
-修改原因：B/C：合并重复边界说明，在成果之后集中交代测试条件。
+原因：B/C：合并重复边界说明，在成果之后集中交代测试条件
 
 **Before**
 
@@ -4709,12 +4438,13 @@ VOC2007 代理数据，训练 1200 ROI、验证 400 ROI、同一 TinyFoveaCNN。
 PYNQ 迁移可复用 AXI 握手、DMA/cache、张量校验和发布检查方法。当前 [Overlay 与 DMA 示例](pynq-overlay-dma/readme.md)已完成离线模拟验证；转接 `Overlay`、`allocate` 和 DMA Python API 后，还需在目标平台验证缓冲生命周期、flush/invalidate、TLAST 和完成条件，实板及跨项目复用为后续验证项。
 ~~~~
 
-<a id="change-230"></a>
-#### 修改 230：原第 58 行 → 现第 58 行
+#### 原修改 230
+
+原行号：58–58；当时修改后行号：58–58。
 
 位置：嵌赛项目可复用技能包 / 验证与复用边界
 
-修改原因：B/C：合并重复边界说明，在成果之后集中交代测试条件。
+原因：B/C：合并重复边界说明，在成果之后集中交代测试条件
 
 **Before**
 
@@ -4730,14 +4460,13 @@ PYNQ 迁移可复用 AXI 握手、DMA/cache、张量校验和发布检查方法�
 
 ### skill/preproc-fp32-golden/readme.md
 
-文件：[skill/preproc-fp32-golden/readme.md](../skill/preproc-fp32-golden/readme.md)。
+#### 原修改 231
 
-<a id="change-231"></a>
-#### 修改 231：原第 5 行 → 现第 5 行
+原行号：5–5；当时修改后行号：5–5。
 
 位置：PicoDet FP32 预处理 Golden 验证 / 问题来源与提炼
 
-修改原因：A：以中性工程语言介绍成果，保留事实与适用范围。
+原因：A：以中性工程语言介绍成果，保留事实与适用范围
 
 **Before**
 
@@ -4751,12 +4480,13 @@ PYNQ 迁移可复用 AXI 握手、DMA/cache、张量校验和发布检查方法�
 在摄像头、四路 DMA 和 FPGA 预处理对接时，需要同时检查 IP 完成状态和模型实际收到的完整张量：输入帧可能被覆盖，通道顺序、缩放或缓存状态也可能不一致。因此将“固定同一输入、比较完整参考张量、检查错误和退出码”整理成可复用流程；项目背景与局限见 [AI 协作记录](../../report/ai_collaboration_record.md)的预处理案例。
 ~~~~
 
-<a id="change-232"></a>
-#### 修改 232：原第 9 行 → 现第 9 行
+#### 原修改 232
+
+原行号：9–9；当时修改后行号：9–9。
 
 位置：PicoDet FP32 预处理 Golden 验证 / 适用范围
 
-修改原因：A：以中性工程语言介绍成果，保留事实与适用范围。
+原因：A：以中性工程语言介绍成果，保留事实与适用范围
 
 **Before**
 
@@ -4770,12 +4500,13 @@ PYNQ 迁移可复用 AXI 握手、DMA/cache、张量校验和发布检查方法�
 验证 RGB888 摄像头帧经 FPGA 预处理后生成的 FP32 NCHW 张量。默认示例契约为 640x360 RGB888 输入、`1x3x320x320` 输出；换模型或输入尺寸时，应先修改参考程序和 DMA 长度，再使用本 Skill。IP 的来源和使用许可由对应工程资料另行记录。
 ~~~~
 
-<a id="change-233"></a>
-#### 修改 233：原第 19 行 → 现第 19 行
+#### 原修改 233
+
+原行号：19–19；当时修改后行号：19–19。
 
 位置：PicoDet FP32 预处理 Golden 验证 / 不依赖开发板的最小示例
 
-修改原因：A：以中性工程语言介绍成果，保留事实与适用范围。
+原因：A：以中性工程语言介绍成果，保留事实与适用范围
 
 **Before**
 
@@ -4789,12 +4520,13 @@ PYNQ 迁移可复用 AXI 握手、DMA/cache、张量校验和发布检查方法�
 将本目录完整复制到任意位置，在该目录下用 Python 3.10 或更新版本运行；脚本仅使用标准库。`examples/` 提供人工构造的 2×2 小端 FP32 正反例，适合在主机验证比较器：
 ~~~~
 
-<a id="change-234"></a>
-#### 修改 234：原第 31 行 → 现第 31 行
+#### 原修改 234
+
+原行号：31–31；当时修改后行号：31–31。
 
 位置：PicoDet FP32 预处理 Golden 验证 / 非 EagleEye 形状的复用示例
 
-修改原因：A：以中性工程语言介绍成果，保留事实与适用范围。
+原因：A：以中性工程语言介绍成果，保留事实与适用范围
 
 **Before**
 
@@ -4808,12 +4540,13 @@ PYNQ 迁移可复用 AXI 握手、DMA/cache、张量校验和发布检查方法�
 以下是合成的 2×3 小端 FP32 数据，展示比较工具在不同张量形状下的复用，数据来源为主机构造：
 ~~~~
 
-<a id="change-235"></a>
-#### 修改 235：原第 38 行 → 现第 38 行
+#### 原修改 235
+
+原行号：38–38；当时修改后行号：38–38。
 
 位置：PicoDet FP32 预处理 Golden 验证 / 非 EagleEye 形状的复用示例
 
-修改原因：A：以中性工程语言介绍成果，保留事实与适用范围。
+原因：A：以中性工程语言介绍成果，保留事实与适用范围
 
 **Before**
 
@@ -4827,12 +4560,13 @@ PYNQ 迁移可复用 AXI 握手、DMA/cache、张量校验和发布检查方法�
 正例退出码 0；第二个例子改动了一个值，退出码 1。其他项目先确认输入来源一致、元素类型、布局、字节序和预先确定的容差；比较器接收符合契约的原始文件；格式转换、Overlay、缓存与 DMA 由目标工程负责。PYNQ 文件比较可复用本工具，板端适配待实际迁移验证。
 ~~~~
 
-<a id="change-236"></a>
-#### 修改 236：原第 51 行 → 现第 51 行
+#### 原修改 236
+
+原行号：51–51；当时修改后行号：51–51。
 
 位置：PicoDet FP32 预处理 Golden 验证 / 用法
 
-修改原因：B/C：合并重复边界说明，在成果之后集中交代测试条件。
+原因：B/C：合并重复边界说明，在成果之后集中交代测试条件
 
 **Before**
 
@@ -4846,12 +4580,13 @@ PYNQ 迁移可复用 AXI 握手、DMA/cache、张量校验和发布检查方法�
 测速分别记录 IP `cycles`、包含 DMA/DDR/cache 的端到端 `preprocess_ms`、PS 参考 `preprocess_ms` 和检测结果。流接口仿真周期按仿真条件报告，板端时间按现场计时报告。已有 [CPU/FPGA A/B 日志](../../report/preproc_ab_20261028_zh.md)保持相同模型与线程，比较 CPU 双三次和 FPGA 双线性两种配置，使用先后采集的实时帧；同算法收益及同输入数值一致性分别验证。
 ~~~~
 
-<a id="change-237"></a>
-#### 修改 237：原第 55 行 → 现第 55 行
+#### 原修改 237
+
+原行号：55–55；当时修改后行号：55–55。
 
 位置：PicoDet FP32 预处理 Golden 验证 / 已验证效果与边界
 
-修改原因：A：以中性工程语言介绍成果，保留事实与适用范围。
+原因：A：以中性工程语言介绍成果，保留事实与适用范围
 
 **Before**
 
@@ -4867,14 +4602,13 @@ PYNQ 迁移可复用 AXI 握手、DMA/cache、张量校验和发布检查方法�
 
 ### skill/pynq-overlay-dma/readme.md
 
-文件：[skill/pynq-overlay-dma/readme.md](../skill/pynq-overlay-dma/readme.md)。
+#### 原修改 238
 
-<a id="change-238"></a>
-#### 修改 238：原第 7 行 → 现第 7 行
+原行号：7–7；当时修改后行号：7–7。
 
 位置：PYNQ Overlay、寄存器与 DMA 接入示例 / 问题来源和适用范围
 
-修改原因：B/C：合并重复边界说明，在成果之后集中交代测试条件。
+原因：B/C：合并重复边界说明，在成果之后集中交代测试条件
 
 **Before**
 
@@ -4888,12 +4622,13 @@ PYNQ 迁移可复用 AXI 握手、DMA/cache、张量校验和发布检查方法�
 **验证状态：已完成 Python 离线模拟。**示例覆盖 Overlay 文件检查、寄存器白名单与简单 DMA 调用顺序；PYNQ 实板和真实跨项目复用为后续验证项。BIT/HWH 由目标工程提供，设备驱动、隔离、硬件准入和故障恢复由目标平台负责。SHA256 用于文件完整性核对，来源认证及 BIT/HWH 与板卡的实际配套关系单独核验。
 ~~~~
 
-<a id="change-239"></a>
-#### 修改 239：原第 18 行 → 现第 18 行
+#### 原修改 239
+
+原行号：18–18；当时修改后行号：18–18。
 
 位置：PYNQ Overlay、寄存器与 DMA 接入示例 / 脱离工程运行模拟示例
 
-修改原因：A：以中性工程语言介绍成果，保留事实与适用范围。
+原因：A：以中性工程语言介绍成果，保留事实与适用范围
 
 **Before**
 
@@ -4907,12 +4642,13 @@ PYNQ 迁移可复用 AXI 握手、DMA/cache、张量校验和发布检查方法�
 第一条以 `MOCK` 标记演示缓存和传输顺序；第二条使用 Python 假对象检查成功、身份不符、未授权寄存器写、DMA 异常、长度错误及中断。验证记录见 [本仓库记录](../../sim/pynq_skill_mock_20261028.txt)。复制到别的项目时只复制本目录即可，仓库记录链接不属于运行依赖。
 ~~~~
 
-<a id="change-240"></a>
-#### 修改 240：原第 83 行 → 现第 83 行
+#### 原修改 240
+
+原行号：83–83；当时修改后行号：83–83。
 
 位置：PYNQ Overlay、寄存器与 DMA 接入示例 / 官方资料与验证边界
 
-修改原因：B/C：合并重复边界说明，在成果之后集中交代测试条件。
+原因：B/C：合并重复边界说明，在成果之后集中交代测试条件
 
 **Before**
 
@@ -4928,14 +4664,13 @@ PYNQ 迁移可复用 AXI 握手、DMA/cache、张量校验和发布检查方法�
 
 ### skill/readme.md
 
-文件：[skill/readme.md](../skill/readme.md)。
+#### 原修改 241
 
-<a id="change-241"></a>
-#### 修改 241：原第 36 行 → 现第 36 行
+原行号：36–36；当时修改后行号：36–36。
 
 位置：EagleEye 可复用技能包 / 使用与验证
 
-修改原因：B/C：合并重复边界说明，在成果之后集中交代测试条件。
+原因：B/C：合并重复边界说明，在成果之后集中交代测试条件
 
 **Before**
 
@@ -4949,12 +4684,13 @@ PYNQ 迁移可复用 AXI 握手、DMA/cache、张量校验和发布检查方法�
 每项 Skill 提供适用范围、输入输出契约和验证方法。可根据任务选择工具；足球检测、AX7020 和历史工程案例用于展示可迁移的方法，当前 Z035 的板端功能见各自测试记录。
 ~~~~
 
-<a id="change-242"></a>
-#### 修改 242：原第 47 行 → 现第 47 行
+#### 原修改 242
+
+原行号：47–47；当时修改后行号：47–47。
 
 位置：EagleEye 可复用技能包 / 使用与验证
 
-修改原因：A：以中性工程语言介绍成果，保留事实与适用范围。
+原因：A：以中性工程语言介绍成果，保留事实与适用范围
 
 **Before**
 
@@ -4970,14 +4706,13 @@ PYNQ 迁移可复用 AXI 握手、DMA/cache、张量校验和发布检查方法�
 
 ### skill/roi-review-control/readme.md
 
-文件：[skill/roi-review-control/readme.md](../skill/roi-review-control/readme.md)。
+#### 原修改 243
 
-<a id="change-243"></a>
-#### 修改 243：原第 5 行 → 现第 5 行
+原行号：5–5；当时修改后行号：5–5。
 
 位置：可暂停的 ROI 自动/手动复判 / 问题来源与提炼
 
-修改原因：A：以中性工程语言介绍成果，保留事实与适用范围。
+原因：A：以中性工程语言介绍成果，保留事实与适用范围
 
 **Before**
 
@@ -4991,12 +4726,13 @@ PYNQ 迁移可复用 AXI 握手、DMA/cache、张量校验和发布检查方法�
 项目曾出现暂停后切换模式导致 HDMI 黑屏的反馈；复盘将暂停状态、帧边界、模式切换和人工接管拆成需要核对的条件，并将检测进程、显示链路与硬件状态分别检查。相关历史过程见 [AI 协作记录](../../report/ai_collaboration_record.md)的黑屏排查案例；本 Skill 将可检查的静态接口与必须上板观察的行为分开。
 ~~~~
 
-<a id="change-244"></a>
-#### 修改 244：原第 9 行 → 现第 9 行
+#### 原修改 244
+
+原行号：9–9；当时修改后行号：9–9。
 
 位置：可暂停的 ROI 自动/手动复判 / 适用范围
 
-修改原因：A：以中性工程语言介绍成果，保留事实与适用范围。
+原因：A：以中性工程语言介绍成果，保留事实与适用范围
 
 **Before**
 
@@ -5010,12 +4746,13 @@ PYNQ 迁移可复用 AXI 握手、DMA/cache、张量校验和发布检查方法�
 适合已有“检测器给出 ROI + 视频放大窗口”的 Zynq/FPGA 工程。实时播放时自动跟踪；暂停后由 USB 相对鼠标接管 ROI，KEY0 切换放大/边缘模式；可选两路位置舵机跟随最终 ROI。此 Skill 提供可迁移的控制契约和验收方法，目标板引脚与电气配置按各自工程定义。
 ~~~~
 
-<a id="change-245"></a>
-#### 修改 245：原第 26 行 → 现第 26 行
+#### 原修改 245
+
+原行号：26–26；当时修改后行号：26–26。
 
 位置：快速检查 / 不依赖开发板的最小示例
 
-修改原因：A：以中性工程语言介绍成果，保留事实与适用范围。
+原因：A：以中性工程语言介绍成果，保留事实与适用范围
 
 **Before**
 
@@ -5029,12 +4766,13 @@ PYNQ 迁移可复用 AXI 握手、DMA/cache、张量校验和发布检查方法�
 将本目录完整复制到任意位置，在该目录下用 Python 3.10 或更新版本运行；脚本仅使用标准库。`examples/sample.xsa` 为仅含演示 `system.hwh` 的合成 ZIP，用于主机检查器正反例：
 ~~~~
 
-<a id="change-246"></a>
-#### 修改 246：原第 45 行 → 现第 45 行
+#### 原修改 246
+
+原行号：45–45；当时修改后行号：45–45。
 
 位置：快速检查 / 第二种工程与独立 HWH 示例
 
-修改原因：A：以中性工程语言介绍成果，保留事实与适用范围。
+原因：A：以中性工程语言介绍成果，保留事实与适用范围
 
 **Before**
 
@@ -5048,12 +4786,13 @@ PYNQ 迁移可复用 AXI 握手、DMA/cache、张量校验和发布检查方法�
 依次应返回 0（匹配）和 1（故意缺少模块）。XSA 和 HWH 参数互斥；文件损坏、配置类型错误返回 2。迁移时用目标设计的 HWH 和逐项确认的模块名、顶层端口、地址替换示例；不能将示例地址用于设备访问。若目标是 PYNQ，可用本工具预查 Overlay 的 HWH 元数据；加载、寄存器与 DMA 操作由目标平台负责，BIT/HWH 配套及运行时身份分别核验。当前跨工程示例为主机合成数据，PYNQ 与其他真实工程复用留待验证。
 ~~~~
 
-<a id="change-247"></a>
-#### 修改 247：原第 56 行 → 现第 56 行
+#### 原修改 247
+
+原行号：56–56；当时修改后行号：56–56。
 
 位置：快速检查 / 检查自己的工程
 
-修改原因：A：以中性工程语言介绍成果，保留事实与适用范围。
+原因：A：以中性工程语言介绍成果，保留事实与适用范围
 
 **Before**
 
@@ -5067,12 +4806,13 @@ PYNQ 迁移可复用 AXI 握手、DMA/cache、张量校验和发布检查方法�
 该脚本检查 XSA 中的 HWH 或独立 HWH 中列出的模块、外部端口和寄存器基地址。鼠标事件、暂停后的帧保持和舵机方向由后续现场功能测试检查。配置应列出实际需要检查的项目；空配置会被拒绝。脚本要求 ZIP 根目录包含名为 `system.hwh` 的文件；其他导出结构或 HWH 格式需先核对，不能忽略异常。随后至少做：KEY1 暂停 10 秒且 HDMI 不黑屏；两种起始模式各循环多次 KEY0；鼠标四个动作及拔插恢复；ROI 在四边界保持合法；KEY1 恢复后自动跟踪；断电冷启动和 30 分钟连续演示。以上为迁移后的建议验收步骤，实际执行结果按现场记录填写。
 ~~~~
 
-<a id="change-248"></a>
-#### 修改 248：原第 62 行 → 现第 62 行
+#### 原修改 248
+
+原行号：62–62；当时修改后行号：62–62。
 
 位置：可暂停的 ROI 自动/手动复判 / 已验证与失效条件
 
-修改原因：A：以中性工程语言介绍成果，保留事实与适用范围。
+原因：A：以中性工程语言介绍成果，保留事实与适用范围
 
 **Before**
 
@@ -5086,12 +4826,13 @@ PYNQ 迁移可复用 AXI 握手、DMA/cache、张量校验和发布检查方法�
 现场已确认复现 BIT 上的摄像头、人体检测、鼠标 ROI、按键、舵机和 HDMI 六项功能均正常。该项验证来源为现场功能确认，量化指标和跨板复用按各自实际测试记录。现场证据范围见 [上板记录](../../report/board_reproduced_20261028_zh.md)。
 ~~~~
 
-<a id="change-249"></a>
-#### 修改 249：原第 64 行 → 现第 64 行
+#### 原修改 249
+
+原行号：64–64；当时修改后行号：64–64。
 
 位置：可暂停的 ROI 自动/手动复判 / 已验证与失效条件
 
-修改原因：A：以中性工程语言介绍成果，保留事实与适用范围。
+原因：A：以中性工程语言介绍成果，保留事实与适用范围
 
 **Before**
 
@@ -5107,14 +4848,13 @@ PYNQ 迁移可复用 AXI 握手、DMA/cache、张量校验和发布检查方法�
 
 ### skill/validation.md
 
-文件：[skill/validation.md](../skill/validation.md)。
+#### 原修改 250
 
-<a id="change-250"></a>
-#### 修改 250：原第 3 行 → 现第 3 行
+原行号：3–3；当时修改后行号：3–3。
 
 位置：本次技能包验证
 
-修改原因：A：以中性工程语言介绍成果，保留事实与适用范围。
+原因：A：以中性工程语言介绍成果，保留事实与适用范围
 
 **Before**
 
@@ -5128,12 +4868,13 @@ PYNQ 迁移可复用 AXI 握手、DMA/cache、张量校验和发布检查方法�
 验证日期：2026-10-29。本次验证对象是新整理的技能格式、校验工具和已有保存产物；验证方式为主机工具测试和保存产物复核，训练、Vivado 及板端测试按来源记录列示。
 ~~~~
 
-<a id="change-251"></a>
-#### 修改 251：原第 19 行 → 现第 19 行
+#### 原修改 251
+
+原行号：19–19；当时修改后行号：19–19。
 
 位置：本次技能包验证 / 已有本地产物复核
 
-修改原因：A：以中性工程语言介绍成果，保留事实与适用范围。
+原因：A：以中性工程语言介绍成果，保留事实与适用范围
 
 **Before**
 
@@ -5147,12 +4888,13 @@ PYNQ 迁移可复用 AXI 握手、DMA/cache、张量校验和发布检查方法�
 | JPEG 版 paddle_person ELF 头 | ARM32、小端、EABI5、hard-float 标记通过 | ELF 头部验证；NEON、动态依赖和实际运行分别检查 |
 ~~~~
 
-<a id="change-252"></a>
-#### 修改 252：原第 21–22 行 → 现第 21–22 行
+#### 原修改 252
+
+原行号：21–22；当时修改后行号：21–22。
 
 位置：本次技能包验证 / 已有本地产物复核
 
-修改原因：A：以中性工程语言介绍成果，保留事实与适用范围。
+原因：A：以中性工程语言介绍成果，保留事实与适用范围
 
 **Before**
 
@@ -5168,12 +4910,13 @@ PYNQ 迁移可复用 AXI 握手、DMA/cache、张量校验和发布检查方法�
 | XSA 内嵌/外部 system_wrapper.bit | 相同，2037636 bytes | 内嵌与外部文件身份核验，板级配置及启动分别验证 |
 ~~~~
 
-<a id="change-253"></a>
-#### 修改 253：原第 37 行 → 现第 37 行
+#### 原修改 253
+
+原行号：37–37；当时修改后行号：37–37。
 
 位置：本次技能包验证 / 接收方复核
 
-修改原因：A：以中性工程语言介绍成果，保留事实与适用范围。
+原因：A：以中性工程语言介绍成果，保留事实与适用范围
 
 **Before**
 
@@ -5189,14 +4932,13 @@ PYNQ 迁移可复用 AXI 握手、DMA/cache、张量校验和发布检查方法�
 
 ### src/attention_reference/readme.md
 
-文件：[src/attention_reference/readme.md](../src/attention_reference/readme.md)。
+#### 原修改 254
 
-<a id="change-254"></a>
-#### 修改 254：原第 3 行 → 现第 3 行
+原行号：3–3；当时修改后行号：3–3。
 
 位置：注意力参考子集
 
-修改原因：A：以中性工程语言介绍成果，保留事实与适用范围。
+原因：A：以中性工程语言介绍成果，保留事实与适用范围
 
 **Before**
 
@@ -5210,12 +4952,13 @@ PYNQ 迁移可复用 AXI 握手、DMA/cache、张量校验和发布检查方法�
 此目录仅包含 `attention.c`、`attention_scheduler.c` 和对应的三个头文件，用于说明注意力 ROI 算法；完整 PC 仿真及板端 PicoDet 程序分别位于对应工程。来源参考仓库 `EagleEye_C_Attention_Sim` 的 `c-attention` 分支，当前核对提交为 `25bd7a35ab1a072f004e75cad20331a3d128c166`。所用子集与当前分支的全部文件/构建目标并不等价。
 ~~~~
 
-<a id="change-255"></a>
-#### 修改 255：原第 5 行 → 现第 5 行
+#### 原修改 255
+
+原行号：5–5；当时修改后行号：5–5。
 
 位置：注意力参考子集
 
-修改原因：A：以中性工程语言介绍成果，保留事实与适用范围。
+原因：A：以中性工程语言介绍成果，保留事实与适用范围
 
 **Before**
 
@@ -5231,14 +4974,13 @@ PYNQ 迁移可复用 AXI 握手、DMA/cache、张量校验和发布检查方法�
 
 ### src/picodet_c_candidate/readme.md
 
-文件：[src/picodet_c_candidate/readme.md](../src/picodet_c_candidate/readme.md)。
+#### 原修改 256
 
-<a id="change-256"></a>
-#### 修改 256：原第 6 行 → 现第 6 行
+原行号：6–6；当时修改后行号：6–6。
 
 位置：PicoDet 注意力独立候选
 
-修改原因：A：以中性工程语言介绍成果，保留事实与适用范围。
+原因：A：以中性工程语言介绍成果，保留事实与适用范围
 
 **Before**
 
@@ -5252,12 +4994,13 @@ PYNQ 迁移可复用 AXI 握手、DMA/cache、张量校验和发布检查方法�
 - 推理 sequence 表示推理序号；`c_request` 表示软件请求，`hardware_commit=pending` 表示提交待完成。摄像头帧号及硬件完成状态需各自事件记录。
 ~~~~
 
-<a id="change-257"></a>
-#### 修改 257：原第 8 行 → 现第 8 行
+#### 原修改 257
+
+原行号：8–8；当时修改后行号：8–8。
 
 位置：PicoDet 注意力独立候选
 
-修改原因：A：以中性工程语言介绍成果，保留事实与适用范围。
+原因：A：以中性工程语言介绍成果，保留事实与适用范围
 
 **Before**
 
@@ -5271,12 +5014,13 @@ PYNQ 迁移可复用 AXI 握手、DMA/cache、张量校验和发布检查方法�
 - 本候选面向 PERSON 人体框，足球检测及控球链由独立参考路线提供。
 ~~~~
 
-<a id="change-258"></a>
-#### 修改 258：原第 20 行 → 现第 20 行
+#### 原修改 258
+
+原行号：20–20；当时修改后行号：20–20。
 
 位置：PicoDet 注意力独立候选 / 构建和离线测试
 
-修改原因：A：以中性工程语言介绍成果，保留事实与适用范围。
+原因：A：以中性工程语言介绍成果，保留事实与适用范围
 
 **Before**
 
@@ -5290,12 +5034,13 @@ PYNQ 迁移可复用 AXI 握手、DMA/cache、张量校验和发布检查方法�
 交叉编译所生成的 ELF 在本机 SHA256 为 `1421b51bb95c448fe8ed244a21aff300d13156ecbf02ef9bde4b7b4a5c9a19f5`；该哈希为本地编译产物身份；离线设备交互使用 mock。QEMU 的 `--c-attention-dry-run` 仅允许离线 RGB、CPU 预处理且不启用硬件 ROI；一次输入 7 人框与原程序一致，并产生注意力 ROI。`sim/picodet_c_candidate/` 保留摘要。开发板 FPS 按实板计时报告。
 ~~~~
 
-<a id="change-259"></a>
-#### 修改 259：原第 24 行 → 现第 24 行
+#### 原修改 259
+
+原行号：24–24；当时修改后行号：24–24。
 
 位置：PicoDet 注意力独立候选 / 板端反馈与证据边界
 
-修改原因：A：以中性工程语言介绍成果，保留事实与适用范围。
+原因：A：以中性工程语言介绍成果，保留事实与适用范围
 
 **Before**
 
@@ -5309,431 +5054,10 @@ PYNQ 迁移可复用 AXI 握手、DMA/cache、张量校验和发布检查方法�
 2026-10-27，现场已确认上板使用这次新 PicoDet 注意力候选且功能正常，按现场确认记录。该次原始串口及量化性能数据未随包提供；后续 AttentionPolicy 日志按对应 ELF 单独归档，本候选量化指标待实测记录。现有资料确认暂无独立稳定 target_id。
 ~~~~
 
-## 3. 重点修改展示（16 处）
-
-以下摘取具有代表性的完整句段；每段均来自第 2 节的准确对照。
-
-### 示例 1：readme.md
-
-完整变更：[修改 005](#change-005)。
-
-**原文**
-
-~~~~text
-系统原理、软硬件接口及团队分工见 [设计报告](report/design_report_zh.md) 和 [硬件接口表](report/hardware_interfaces_zh.md)。当前系统以 PicoDet 人体检测为准；仓库中的足球 YOLO 是独立参考路线，不代表已在当前 Z035 系统部署。
-~~~~
-
-**修改后**
-
-~~~~text
-系统原理、软硬件接口及团队分工见 [设计报告](report/design_report_zh.md) 和 [硬件接口表](report/hardware_interfaces_zh.md)。当前演示采用 PicoDet 人体检测；足球 YOLO 参考路线单独保存在参考资料中。
-~~~~
-
-修改理由与表达优势：将当前 PicoDet 路线与足球参考路线清楚并列，便于读者定位主系统。
-
-### 示例 2：readme.md
-
-完整变更：[修改 008](#change-008)。
-
-**原文**
-
-~~~~text
-技术文档记录的阶段联调观察为检测更新约 **2 FPS**、视频显示约 **30 FPS**；两者是不同指标。现有[应用日志](report/board_app_evidence_20261028_zh.md)可重算检测路径耗时，视频显示帧率未见独立计时记录，不将显示帧率当作检测速度。
-~~~~
-
-**修改后**
-
-~~~~text
-阶段联调观察中，检测更新约 **2 FPS**、视频显示约 **30 FPS**，分别对应智能感知和视频展示路径。[应用日志](report/board_app_evidence_20261028_zh.md)提供检测路径的计时记录；30 FPS 为阶段观察值，独立显示帧率计时留待后续测量。
-~~~~
-
-修改理由与表达优势：先介绍异步架构和观察结果，再交代 30 FPS 的测量层级。
-
-### 示例 3：report/readme.md
-
-完整变更：[修改 155](#change-155)。
-
-**原文**
-
-~~~~text
-板端 Golden 是一次独立固定输入测试；CPU/FPGA 计时使用不同缩放算法和实时帧。两类结果的条件和范围分别写在对应记录中，不应混作同一次测试。
-~~~~
-
-**修改后**
-
-~~~~text
-项目分别完成了 FPGA 预处理的独立板端 Golden 一致性验证，以及 CPU/FPGA 两种预处理配置的性能测试。各项测试的输入、算法、版本和结果详见对应验证报告。
-~~~~
-
-修改理由与表达优势：突出已完成的两类验证，并将各自条件交给对应报告。
-
-### 示例 4：report/readme.md
-
-完整变更：[修改 156](#change-156)。
-
-**原文**
-
-~~~~text
-原工程归档和验证记录用于追溯来源。当前设计报告仍是提交整理稿；未核实的授权、旧仿真记录及告警按各自证据范围说明。
-~~~~
-
-**修改后**
-
-~~~~text
-项目建立了覆盖源码、构建、仿真、板端测试及版本管理的资料体系，通过工程归档与原始记录支持成果追溯。授权核对、历史仿真版本及工程告警集中在各专题页说明。
-~~~~
-
-修改理由与表达优势：以资料体系和可复现性概括成果，专题入口保留授权及告警。
-
-### 示例 5：report/design_report_zh.md
-
-完整变更：[修改 089](#change-089)。
-
-**原文**
-
-~~~~text
-**状态：提交整理稿。**已有内容依据仓库源码、工具报告、实板日志及现场确认编写；已有 CPU/FPGA 预处理 A/B 耗时记录，以及一次[独立板端固定输入 Golden 对比](preproc_board_golden_20261029_zh.md)；两次测试的 BIT 身份关系和最终发布版本仍待确认。团队主要职责按确认记录。 本报告对应 Z035 Eyes 基线与后续板端测试；具体 BIT、应用和模型身份见 [版本说明](release_identity_zh.md)。不把独立 V2/V3 卷积实验当作该系统已经集成的功能。
-~~~~
-
-**修改后**
-
-~~~~text
-本报告介绍 EagleEye 在 XC7Z035 上的仿生视觉系统设计与实现，涵盖视频处理、FPGA 预处理、ARM 人体检测、注意力决策和机械眼联动。项目已完成源码构建、RTL 仿真、板端功能确认、CPU/FPGA 预处理计时及[独立固定输入 Golden 对比](preproc_board_golden_20261029_zh.md)。具体 BIT、应用和模型身份见 [版本说明](release_identity_zh.md)，各项测试条件和验证范围集中于第 3、4 节。
-~~~~
-
-修改理由与表达优势：开篇展示系统与已完成工作，版本和验证范围提供独立入口。
-
-### 示例 6：report/design_report_zh.md
-
-完整变更：[修改 095](#change-095)。
-
-**原文**
-
-~~~~text
-**本项目拟体现的贡献**是上述功能面向同一观察场景的软硬件组合：将视频显示和预处理、PS 人体检测、ROI 人工接管及舵机控制组织成一套 XC7Z035 原型，并保留对应源码与复现材料。已有工作分别覆盖视频复核、检测和硬件图像处理；本报告没有与其他完整系统开展同条件实验，因此不声称本原型在成本、精度、速度或适用性上优于它们。具体实现与验证边界见下表及第 3、4 节。
-~~~~
-
-**修改后**
-
-~~~~text
-**本项目的设计贡献**在于面向快速运动观察场景的软硬件协同：将视频显示、PL 预处理、PS 人体检测、ROI 人工接管及舵机控制组织成一套 XC7Z035 原型，并提供源码、测试记录和复现工具。相关工作提供技术基础，本报告以本项目的实现与测试说明系统价值，与其他完整系统的同条件横向评价留待后续开展。
-~~~~
-
-修改理由与表达优势：准确表述系统协同贡献，避免反复解释未开展的横向对比。
-
-### 示例 7：report/design_report_zh.md
-
-完整变更：[修改 129](#change-129)。
-
-**原文**
-
-~~~~text
-团队目前没有 PYNQ 实板和跨项目复用验证资料；PYNQ 示例按离线模拟候选展示，不作为需要队友补交的既有材料，也不声称已获得加分。
-~~~~
-
-**修改后**
-
-~~~~text
-项目提炼了视频处理、软硬件接口、模型部署和数据验证的可复用 Skill。PYNQ Overlay、寄存器、DMA 和缓存示例已完成离线模拟验证，为平台迁移提供参考，实板及真实跨项目复用留待后续验证。
-~~~~
-
-修改理由与表达优势：介绍可复用技能和离线验证成果，保留实板及跨项目的待测状态。
-
-### 示例 8：report/ai_collaboration_record.md
-
-完整变更：[修改 036](#change-036)。
-
-**原文**
-
-~~~~text
-该案例体现的是**性能结论的边界检查**；现有会话没有证据表明模型曾给出相反结论，因此不人为编造一次错误回答。
-~~~~
-
-**修改后**
-
-~~~~text
-该案例体现 AI 对配置、计时区间与统计口径的联合核对，帮助团队形成可复算的性能分析。
-~~~~
-
-修改理由与表达优势：以实际配置与统计核对展示 AI 价值，保留真实会话而不添加虚构纠错。
-
-### 示例 9：report/ai_collaboration_record.md
-
-完整变更：[修改 041](#change-041)。
-
-**原文**
-
-~~~~text
-本项目中，AI 的价值体现在把复杂工程问题拆成能够检查的接口、命令和结果，并在工具失败或收到现场反馈后调整后续步骤。实际过程也显示出局限：一种开发机环境的测试可能漏掉板端工具差异；局部 Golden 正确不能保证整网更快；脚本生成 BIT 也不等同于外设时序和现场功能已经全部验证。
-~~~~
-
-**修改后**
-
-~~~~text
-本项目中，AI 将复杂工程问题转化为可执行的接口检查、构建命令和验证脚本，帮助团队快速定位依赖、复核数据并组织可复现材料。现场反馈推动工具迭代：BusyBox 的真实选项差异进入回归，局部数值结果与整网性能分开评估，BIT 构建与外设时序及板端功能分别验收。
-~~~~
-
-修改理由与表达优势：以可执行检查和反馈迭代解释协作效率，不编写工时节省数字。
-
-### 示例 10：report/preproc_ab_20261028_zh.md
-
-完整变更：[修改 143](#change-143)。
-
-**原文**
-
-~~~~text
-**重要区别：CPU 路径采用双三次缩放和归一化，FPGA 路径采用双线性缩放和归一化。**两组先后使用实时摄像头，帧尺寸相同但不是同一张输入图像；因此下表是两种实际配置的耗时对比，不是同算法、逐帧配对的纯硬件加速比。PicoDet 模型推理在两组均由 ARM 执行，不代表 FPGA 卷积加速。
-~~~~
-
-**修改后**
-
-~~~~text
-**测试配置：CPU 采用双三次缩放与归一化，FPGA 采用双线性缩放与归一化。**两组使用相同帧尺寸、先后采集的实时画面，下表评价这两种实际配置的耗时；同算法、逐帧配对性能另需测试。两组 PicoDet 模型推理均由 ARM 执行。
-~~~~
-
-修改理由与表达优势：中性介绍算法、输入和 ARM 推理条件，保留配置比较范围。
-
-### 示例 11：report/preproc_board_golden_20261029_zh.md
-
-完整变更：[修改 152](#change-152)。
-
-**原文**
-
-~~~~text
-- 测试说明指出执行前自动推理进程已退出。独立测试程序及源码保留在原始归档；该源码直接使用 `/dev/mem` 和固定地址控制 DMA，不应在正在运行的稳定视频系统中直接复用。
-- 本次对比不证明摄像头采集帧的新鲜度、完整视频共存、完整模型检测精度、性能加速比或不同版本 BIT 身份。既有应用日志的 VDMA 错误位、外部 I/O 和 CDC 告警继续保留，不能被本次对比替代。
-~~~~
-
-**修改后**
-
-~~~~text
-- 测试说明指出执行前自动推理进程已退出。独立测试程序及源码保留在原始归档；该源码通过 `/dev/mem` 和固定地址控制 DMA，执行环境要求停止自动推理并独占相关资源，稳定视频运行期间保持隔离。
-- 本次结论限定为固定输入的预处理张量一致性。摄像头帧新鲜度、完整视频共存、模型检测精度、性能及跨版本 BIT 身份分别评估；既有 VDMA、外部 I/O 和 CDC 状态见[告警说明](warning_review_zh.md)。
-~~~~
-
-修改理由与表达优势：清楚定义固定输入张量验证的范围，并将其他状态链接到专题。
-
-### 示例 12：report/warning_review_zh.md
-
-完整变更：[修改 183](#change-183)。
-
-**原文**
-
-~~~~text
-上述问题是当前资料中的技术边界。若后续需要修改或签核，需使用匹配版本工程、板级资料及受控实测；本次仅整理已有证据，不声称问题已修复。
-~~~~
-
-**修改后**
-
-~~~~text
-上述项目作为已知工程问题保留，修复或签核需匹配版本源码、板级时序资料及受控实测。本次文档整理保持现有 RTL/XDC 和告警处理状态。
-~~~~
-
-修改理由与表达优势：保留真实已知问题，用专业工程状态替代反复免责声明。
-
-### 示例 13：report/third_party_sources_zh.md
-
-完整变更：[修改 177](#change-177)。
-
-**原文**
-
-~~~~text
-本清单记录本地已有的来源及许可文件，**不是对全部组件公开分发、比赛提交或商用授权的最终法律结论**。模型权重、框架和厂商 IP 的上游权益仍应单独标注。原源码和版权声明均保持不变。
-~~~~
-
-**修改后**
-
-~~~~text
-本清单集中说明第三方模型、软件和 IP 的来源、已有许可文件及待确认授权范围。原源码、版权及许可声明完整保留；比赛使用、公开再分发和商用按各组件适用条款分别核对。
-~~~~
-
-修改理由与表达优势：保持授权待确认事实，将法律范围转为逐组件许可核对。
-
-### 示例 14：skill/pynq-overlay-dma/readme.md
-
-完整变更：[修改 238](#change-238)。
-
-**原文**
-
-~~~~text
-**团队目前没有 PYNQ 实板和真实外部项目复用验证资料；本项仅作为 Python 离线模拟验证的 Skill 候选提交，不再作为需要队友提供的既有材料。** 示例不是完整设备驱动、隔离机制、硬件安全准入或可直接部署的 Overlay；不提供实际 BIT/HWH。哈希核对只验证文件与给定值一致，不能证明来源可信、BIT 与 HWH 真实配套或适用于某块板。
-~~~~
-
-**修改后**
-
-~~~~text
-**验证状态：已完成 Python 离线模拟。**示例覆盖 Overlay 文件检查、寄存器白名单与简单 DMA 调用顺序；PYNQ 实板和真实跨项目复用为后续验证项。BIT/HWH 由目标工程提供，设备驱动、隔离、硬件准入和故障恢复由目标平台负责。SHA256 用于文件完整性核对，来源认证及 BIT/HWH 与板卡的实际配套关系单独核验。
-~~~~
-
-修改理由与表达优势：一开始明确离线模拟成果和平台职责，避免内部补交及加分措辞。
-
-### 示例 15：skill/readme.md
-
-完整变更：[修改 241](#change-241)。
-
-**原文**
-
-~~~~text
-每项都有适用范围和验证边界。部分工具功能相近，但输入契约和输出有所不同，按任务选用即可。足球检测、AX7020 和历史工程案例仅作为可复用经验，不代表当前 Z035 系统已完成相同板端功能。
-~~~~
-
-**修改后**
-
-~~~~text
-每项 Skill 提供适用范围、输入输出契约和验证方法。可根据任务选择工具；足球检测、AX7020 和历史工程案例用于展示可迁移的方法，当前 Z035 的板端功能见各自测试记录。
-~~~~
-
-修改理由与表达优势：将读者注意力放在选择方法与迁移方式。
-
-### 示例 16：skill/roi-review-control/readme.md
-
-完整变更：[修改 244](#change-244)。
-
-**原文**
-
-~~~~text
-适合已有“检测器给出 ROI + 视频放大窗口”的 Zynq/FPGA 工程。实时播放时自动跟踪；暂停后由 USB 相对鼠标接管 ROI，KEY0 切换放大/边缘模式；可选两路位置舵机跟随最终 ROI。此 Skill 提供控制契约和验收方法，**不是**可以直接接到任意板卡的引脚文件。
-~~~~
-
-**修改后**
-
-~~~~text
-适合已有“检测器给出 ROI + 视频放大窗口”的 Zynq/FPGA 工程。实时播放时自动跟踪；暂停后由 USB 相对鼠标接管 ROI，KEY0 切换放大/边缘模式；可选两路位置舵机跟随最终 ROI。此 Skill 提供可迁移的控制契约和验收方法，目标板引脚与电气配置按各自工程定义。
-~~~~
-
-修改理由与表达优势：说明可复用内容和板级配置责任，保留实际电气及机械约束。
-
-## 4. 保留的关键技术边界
-
-| 技术事实 | 本次呈现方式 |
-|---|---|
-| PicoDet 推理在 ARM 端 | 首页架构、设计报告分工与当前验证范围明确说明；独立 V2/R3 卷积实验按历史研究归档。 |
-| CPU 双三次、FPGA 双线性，先后使用实时帧 | 性能表之前说明配置，结果后列统计区间与条件；保持全部耗时和均值比。 |
-| Golden 为独立固定输入 | 保持 307,200/307,200 FP32 逐位一致及零误差；BOOT、独立 BIT 关联与视频版本分别说明。 |
-| 显示与检测的 FPS 不同 | 阶段约 30 FPS 明确为显示观察值；检测计时、ROI、帧新鲜度及显示刷新分别定义。 |
-| 历史 Lanczos 通过、失败日志和 67% DSP 记录 | 原始日志均未改动；当前 Eyes 版本对应及 DSP 独立复算所需报告仍明确列示。 |
-| I/O、CDC、方法学和 VDMA 状态 | 集中在告警专题；12 输入/33 输出、8 项 Critical、VDMA 状态及帧新鲜度事实继续保留。 |
-| PYNQ 验证级别 | 提供离线模拟示例，真实 PYNQ 实板和跨项目复用列为后续验证；超时、故障锁定、DMA/cache 责任不变。 |
-| 第三方权重与 IP 授权 | 来源与授权专题保留逐项许可、权重使用/再分发待确认状态，原版权与许可文件保持不变。 |
-| 版本与源码对应关系 | 50 份修改文档中的 SHA256 字面值集合均保持一致；旧应用、当前应用、内核及独立实验分别绑定。 |
-| AI 协作真实性 | 原始会话证据页和所有代码/日志引用保持原样；只修改案例的说明性文字。 |
-
-## 5. 检查与保留范围
-
-- 已比对：50 份文档的前后代码围栏内容完全一致；所有原有 SHA256 字面值集合保持一致。
-- 数字差异检查：设计报告新增 `3.1` 节号，历史导读调整日期写法；统计表达式额外识别到 `Z035` 中的数字。未发现测量数据数值改动。
-- 原始快照与参考源码的 80 份 Markdown、5 份原始结果/会话页及桌面原目录 16 份 Markdown 保持原始字节。
-- 原有实验数据、日志、源码、RTL、XDC、构建脚本和自动生成产物均保持不变。除 Markdown 外只同步根目录 SHA256 清单。
-- 相对文件链接、Markdown 格式和仓库完整性核验结果在最终检查完成后记录于下一小节。
-
-### 最终检查结果
-
-本轮仅执行文档与文件一致性检查，未重跑 RTL、QEMU、板端或 Vivado 构建。
-
-| 检查命令或项目 | 实际结果 | 退出码 |
-|---|---|---:|
-| `git diff --check` | 通过，无空白或补丁格式问题 | 0 |
-| `python -B tools/check_submission_links.py` | 检查 54 份文档，544 个本地链接有效，缺失 0；15 个外部链接仅记录、不验证在线可达性 | 0 |
-| `python -B tools/verify_submission.py` | 原始源码 173 项逐字节核对、53 项保留归档；四份参考快照共 241/76/137/75 文件核对通过，当前 1096 项清单通过 | 0 |
-| 完整修改对照覆盖检查 | 50 份文档、259 个差异块及 16 个代表性示例均逐项匹配实际前后文本 | 0 |
-| 表格数值检查 | 50 份修改文档的表格数字行保持一致 | 0 |
-| 原代码示例及 SHA256 字面值 | 所有修改文档的代码围栏内容及原有 SHA256 集合保持一致 | 0 |
-| 非 Markdown 文件比对 | 948 个原有非 Markdown 文件的 SHA256 保持一致；源码、数据、日志、归档及生成物未改动 | 0 |
-| Markdown 代码围栏 | 50 份修改文档及新增修订报告，共 51 份均闭合 | 0 |
-
-`sha256sums.txt` 仅更新 50 份已有文档和新增修订报告的对应清单项。相对链接检查范围为仓库核验工具所支持的行内文件链接；Markdown 锚点与外部网站在线可达性不在该工具范围内。当前编辑状态保留在工作区，未提交、未推送。
-
-
-## 6. 保留原文的文档清单
-
-下列源码快照、原始结果和会话证据仅作扫描与来源核对，未进行展示性润色。技术错误输出及原始措辞保留以支持追溯。
-
-| 文档 | 保留原因 |
-|---|---|
-| `board/deploy_status_zh.md` | 源码或参考快照，维持来源字节一致 |
-| `board/measurements/preproc_ab_20261028/source_report_zh.md` | 原始结果或会话摘录，维持原文 |
-| `board/measurements/preproc_golden_20261029/result_source_zh.md` | 原始结果或会话摘录，维持原文 |
-| `board/progress_and_deploy_zh.md` | 源码或参考快照，维持来源字节一致 |
-| `board/readme.md` | 源码或参考快照，维持来源字节一致 |
-| `board/reproduced_20261028/board_result_app_source_zh.md` | 原始结果或会话摘录，维持原文 |
-| `board/reproduced_20261028/board_result_source_zh.md` | 原始结果或会话摘录，维持原文 |
-| `data/readme.md` | 源码或参考快照，维持来源字节一致 |
-| `reference/github_a_fovea/a_fovea/fpga_interface/readme.md` | 源码或参考快照，维持来源字节一致 |
-| `reference/github_a_fovea/a_fovea/readme_a_fovea.md` | 源码或参考快照，维持来源字节一致 |
-| `reference/github_a_fovea/a_fovea/readme_fpga_upload.md` | 源码或参考快照，维持来源字节一致 |
-| `reference/github_a_fovea/ball_carrier_focus.md` | 源码或参考快照，维持来源字节一致 |
-| `reference/github_a_fovea/hardware_bringup_checklist.md` | 源码或参考快照，维持来源字节一致 |
-| `reference/github_a_fovea/interface_spec.md` | 源码或参考快照，维持来源字节一致 |
-| `reference/github_a_fovea/progress.md` | 源码或参考快照，维持来源字节一致 |
-| `reference/github_a_fovea/readme.md` | 源码或参考快照，维持来源字节一致 |
-| `reference/github_a_fovea/soccer_hardware_bringup_checklist.md` | 源码或参考快照，维持来源字节一致 |
-| `reference/github_a_fovea/soccer_migration.md` | 源码或参考快照，维持来源字节一致 |
-| `reference/github_a_fovea/submit_guide.md` | 源码或参考快照，维持来源字节一致 |
-| `reference/github_a_fovea/tools/readme_visualizer.md` | 源码或参考快照，维持来源字节一致 |
-| `reference/github_a_fovea/vitis_porting.md` | 源码或参考快照，维持来源字节一致 |
-| `reference/github_a_fovea/vivado_vitis_bringup_steps.md` | 源码或参考快照，维持来源字节一致 |
-| `reference/github_b_detection/b_detection_interface.md` | 源码或参考快照，维持来源字节一致 |
-| `reference/github_b_detection/b_to_c_yolo_handoff.md` | 源码或参考快照，维持来源字节一致 |
-| `reference/github_b_detection/ball_carrier_focus.md` | 源码或参考快照，维持来源字节一致 |
-| `reference/github_b_detection/hardware_bringup_checklist.md` | 源码或参考快照，维持来源字节一致 |
-| `reference/github_b_detection/interface_spec.md` | 源码或参考快照，维持来源字节一致 |
-| `reference/github_b_detection/progress.md` | 源码或参考快照，维持来源字节一致 |
-| `reference/github_b_detection/readme.md` | 源码或参考快照，维持来源字节一致 |
-| `reference/github_b_detection/soccer_hardware_bringup_checklist.md` | 源码或参考快照，维持来源字节一致 |
-| `reference/github_b_detection/soccer_migration.md` | 源码或参考快照，维持来源字节一致 |
-| `reference/github_b_detection/submit_guide.md` | 源码或参考快照，维持来源字节一致 |
-| `reference/github_b_detection/tools/readme_visualizer.md` | 源码或参考快照，维持来源字节一致 |
-| `reference/github_b_detection/vision_detection.md` | 源码或参考快照，维持来源字节一致 |
-| `reference/github_b_detection/vitis_porting.md` | 源码或参考快照，维持来源字节一致 |
-| `reference/github_b_detection/vivado_vitis_bringup_steps.md` | 源码或参考快照，维持来源字节一致 |
-| `reference/github_c_attention/a_c_board_bringup.md` | 源码或参考快照，维持来源字节一致 |
-| `reference/github_c_attention/a_c_integration_plan.md` | 源码或参考快照，维持来源字节一致 |
-| `reference/github_c_attention/a_c_interface_analysis.md` | 源码或参考快照，维持来源字节一致 |
-| `reference/github_c_attention/b_c_interface_v1.md` | 源码或参考快照，维持来源字节一致 |
-| `reference/github_c_attention/b_c_pc_integration.md` | 源码或参考快照，维持来源字节一致 |
-| `reference/github_c_attention/ball_carrier_focus.md` | 源码或参考快照，维持来源字节一致 |
-| `reference/github_c_attention/c_ball_challenger_gate.md` | 源码或参考快照，维持来源字节一致 |
-| `reference/github_c_attention/c_competition_features_v2.md` | 源码或参考快照，维持来源字节一致 |
-| `reference/github_c_attention/c_dual_mode_roi_control.md` | 源码或参考快照，维持来源字节一致 |
-| `reference/github_c_attention/c_feedback_aware_attention_v1.md` | 源码或参考快照，维持来源字节一致 |
-| `reference/github_c_attention/c_fovea_feedback_v1.md` | 源码或参考快照，维持来源字节一致 |
-| `reference/github_c_attention/c_latency_aware_prediction.md` | 源码或参考快照，维持来源字节一致 |
-| `reference/github_c_attention/c_runtime_tuning.md` | 源码或参考快照，维持来源字节一致 |
-| `reference/github_c_attention/c_timing_semantics.md` | 源码或参考快照，维持来源字节一致 |
-| `reference/github_c_attention/hardware_bringup_checklist.md` | 源码或参考快照，维持来源字节一致 |
-| `reference/github_c_attention/interface_spec.md` | 源码或参考快照，维持来源字节一致 |
-| `reference/github_c_attention/player_driven_attention_v3.md` | 源码或参考快照，维持来源字节一致 |
-| `reference/github_c_attention/progress.md` | 源码或参考快照，维持来源字节一致 |
-| `reference/github_c_attention/readme.md` | 源码或参考快照，维持来源字节一致 |
-| `reference/github_c_attention/soccer_hardware_bringup_checklist.md` | 源码或参考快照，维持来源字节一致 |
-| `reference/github_c_attention/soccer_migration.md` | 源码或参考快照，维持来源字节一致 |
-| `reference/github_c_attention/submit_guide.md` | 源码或参考快照，维持来源字节一致 |
-| `reference/github_c_attention/tools/readme_visualizer.md` | 源码或参考快照，维持来源字节一致 |
-| `reference/github_c_attention/vitis/readme.md` | 源码或参考快照，维持来源字节一致 |
-| `reference/github_c_attention/vitis_porting.md` | 源码或参考快照，维持来源字节一致 |
-| `reference/github_c_attention/vivado_vitis_bringup_steps.md` | 源码或参考快照，维持来源字节一致 |
-| `reference/github_linux_petalinux/ball_carrier_focus.md` | 源码或参考快照，维持来源字节一致 |
-| `reference/github_linux_petalinux/hardware_bringup_checklist.md` | 源码或参考快照，维持来源字节一致 |
-| `reference/github_linux_petalinux/interface_spec.md` | 源码或参考快照，维持来源字节一致 |
-| `reference/github_linux_petalinux/linux/ax7020-petalinux/artifact_sha256.md` | 源码或参考快照，维持来源字节一致 |
-| `reference/github_linux_petalinux/linux/ax7020-petalinux/board_test_for_a.md` | 源码或参考快照，维持来源字节一致 |
-| `reference/github_linux_petalinux/linux/ax7020-petalinux/build_status.md` | 源码或参考快照，维持来源字节一致 |
-| `reference/github_linux_petalinux/linux/ax7020-petalinux/readme.md` | 源码或参考快照，维持来源字节一致 |
-| `reference/github_linux_petalinux/linux/ax7020-petalinux/vdma_fix_v2_notes.md` | 源码或参考快照，维持来源字节一致 |
-| `reference/github_linux_petalinux/linux/ax7020-petalinux/vdma_probe_log_status.md` | 源码或参考快照，维持来源字节一致 |
-| `reference/github_linux_petalinux/progress.md` | 源码或参考快照，维持来源字节一致 |
-| `reference/github_linux_petalinux/readme.md` | 源码或参考快照，维持来源字节一致 |
-| `reference/github_linux_petalinux/soccer_hardware_bringup_checklist.md` | 源码或参考快照，维持来源字节一致 |
-| `reference/github_linux_petalinux/soccer_migration.md` | 源码或参考快照，维持来源字节一致 |
-| `reference/github_linux_petalinux/submit_guide.md` | 源码或参考快照，维持来源字节一致 |
-| `reference/github_linux_petalinux/tools/readme_visualizer.md` | 源码或参考快照，维持来源字节一致 |
-| `reference/github_linux_petalinux/vitis_porting.md` | 源码或参考快照，维持来源字节一致 |
-| `reference/github_linux_petalinux/vivado_vitis_bringup_steps.md` | 源码或参考快照，维持来源字节一致 |
-| `report/ai_collaboration_evidence_20261030.md` | 原始结果或会话摘录，维持原文 |
-| `report/source_readme.md` | 源码或参考快照，维持来源字节一致 |
-| `sim/readme.md` | 源码或参考快照，维持来源字节一致 |
-| `src/ip_repo/preproc/readme.md` | 源码或参考快照，维持来源字节一致 |
-| `src/ps/readme_mouse_roi_zh.md` | 源码或参考快照，维持来源字节一致 |
-| `src/servo/readme_servo_zh.md` | 源码或参考快照，维持来源字节一致 |
-
-其余 12 份说明或模板已审阅，保留既有参数说明、适用条件和历史来源内容；没有必要为语言调整改动其正文。
+## 关键技术事实的呈现
+
+- PicoDet 模型推理在 ARM 端执行，FPGA 负责视频和模型输入预处理。
+- CPU 双三次与 FPGA 双线性按两种实际配置统计，固定输入 Golden 按独立测试记录。
+- 历史独立仿真、当前完整工程及现场功能反馈分别绑定版本。
+- 已知 I/O、CDC 和 VDMA 状态保留在专题说明中。
+- PYNQ 示例按离线模拟状态展示，原始对话和测试输出保留来源。

@@ -4,7 +4,7 @@
 
 | 项目 | 已有 | 尚需完成 |
 |---|---|---|
-| 工程与代码 | Z035 Eyes RTL、BD、XDC、IP、PicoDet 应用、注意力候选和 Linux 固定源码；原快照与补充材料均可哈希核验 | 团队主要分工及 [实测版本](release_identity_zh.md)已记录；仍需确认最终演示应用选择及具体版本对应关系，并核对 [第三方许可](third_party_sources_zh.md)；若足球检测列为实际参赛功能，需补齐其最终模型及板端链路，PERSON 与 PLAYER/BALL 按独立模型路线管理 |
+| 工程与代码 | Z035 Eyes RTL、BD、XDC、IP、PicoDet 应用、注意力候选和 Linux 固定源码；原快照与补充材料均可哈希核验 | 团队主要分工及 [实测版本](release_identity_zh.md)已记录；仍需确认最终演示应用选择及具体版本对应关系，并核对 [第三方许可](third_party/)；当前演示统一采用 PicoDet PERSON 人体检测 |
 | 仿真 | 预处理五类帧及适配器、AXI-Lite、舵机 RTL；注意力模块主机与 QEMU | Lanczos 历史独立工程有通过日志，旧逐像素日志亦有 768 个错误；版本与测试条件需分别说明，见[记录范围](../sim/lanczos_legacy_readme.md) |
 | 硬件实现 | 工程快照使用完整构建入口完成综合、实现、BIT 和 XSA，报告见 `build/full_rebuild_20261027/` | 12 项输入和 33 项输出延迟缺失；8 项 Methodology Critical Warning 和 CDC Critical 分类尚需核查。已约束 STA、板端功能和专项时序签核分别记录 |
 | 可复现构建 | 工程快照恢复、Vivado 全流程入口、Paddle-Lite 依赖、固定 Linux 源码及配置 | Vivado 和 PetaLinux 2022.2 工具链/sysroot 需自行准备；重建内核与历史镜像哈希不同；rootfs 与现场镜像一致性未证明 |

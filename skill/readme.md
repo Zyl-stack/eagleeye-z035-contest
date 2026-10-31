@@ -18,7 +18,6 @@
 | Skill | 作用 |
 |---|---|
 | [检测流接口合同](06-detection-stream-contract/skill.md) | 检查目标框、坐标、ID、尺寸与时间基准。 |
-| [小目标跟踪回归](07-small-object-tracking-regression/skill.md) | 设计遮挡、小目标与跟踪错误的回归评估。 |
 | [ROI 消融评估](08-roi-ablation-evaluation/skill.md) | 使用配对实验比较不同 ROI 处理方式。 |
 | [ROI 请求事务](09-roi-transaction-integration/skill.md) | 检查请求关联、目标身份和过期结果处理。 |
 
@@ -33,7 +32,7 @@
 
 ## 使用与验证
 
-每项 Skill 提供适用范围、输入输出契约和验证方法。可根据任务选择工具；足球检测、AX7020 和历史工程案例用于展示可迁移的方法，当前 Z035 的板端功能见各自测试记录。
+每项 Skill 提供适用范围、输入输出契约和验证方法。可根据任务选择工具；AX7020 和历史工程案例用于展示可迁移的方法，当前 Z035 的板端功能见各自测试记录。
 
 从仓库根目录运行主要离线检查：
 

@@ -12,7 +12,7 @@ description: 将视觉模型分阶段移植到 Zynq Cortex-A9 ARMv7 Linux，排�
 ## 工作流
 
 1. 获取板卡完整 SoC、CPU/NEON、ARM32 endian、hard/soft-float、内核、glibc、RAM 和可用存储。记录实际 rootfs 信息；不要把开发主机的 `uname` 当成板端信息。
-2. 固定模型 SHA-256、输入输出 shape、类别表、预处理和后处理。先完成单图加载/推理，再接 raw-frame，最后接实时采集。YOLO 导出需检查是否有内置 NMS、输出 layout 和 letterbox 逆变换。
+2. 固定模型 SHA-256、输入输出 shape、类别表、预处理和后处理。先完成单图加载/推理，再接 raw-frame，最后接实时采集。模型导出需检查输出布局、后处理边界和坐标逆变换。
 3. 选择确实支持目标 ABI 的运行时、交叉工具链和模型优化器，固定 commit/版本及 flags。Paddle-Lite `.nb` 应绑定优化器和运行库；不应随意混用不同分支生成物。
 4. 用 `scripts/audit_elf.py` 排除 x86/aarch64/soft-float 标记问题，再用工具链的 `readelf -h -A -d`、`objdump -T` 检查架构属性、NEON、解释器、动态库及 GLIBC/GLIBCXX 符号版本。ELF 标记通过只是一项必要条件。
 5. 若旧板端 glibc 不满足要求，优先使用匹配 SDK/sysroot；可在运行时和许可允许、功能支持时评估静态链接。静态链接不消除内核系统调用、驱动及 CPU 指令要求。

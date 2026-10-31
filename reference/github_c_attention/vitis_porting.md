@@ -1,6 +1,6 @@
 # EagleEye Vitis Porting Notes
 
-当前阶段：Zynq PS / Vitis / AXI-Lite 最小通信准备。本文档不包含真实图像处理、Lanczos、YOLO、摄像头、HDMI、DMA 或 VDMA。
+当前阶段：Zynq PS / Vitis / AXI-Lite 最小通信准备。本文档不包含真实图像处理、Lanczos、摄像头、HDMI、DMA 或 VDMA。
 
 ## Platform-Independent Core Logic
 

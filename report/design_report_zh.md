@@ -40,7 +40,7 @@ EagleEye 面向足球转播等快速运动场景的辅助观察，借鉴人眼�
 
 ### 1.3 四项可核查的设计贡献
 
-以下四项围绕系统组合、规则型视觉决策、资源约束下的视频处理和模型输入适配展开。PicoDet、Lanczos 算法及厂商 IP 的来源见 [第三方资料](third_party_sources_zh.md)；独立卷积研究的范围见第 3 节。
+以下四项围绕系统组合、规则型视觉决策、资源约束下的视频处理和模型输入适配展开。相关软件的已有许可文本见 [第三方许可](third_party/)；独立卷积研究的范围见第 3 节。
 
 **一、视觉关注与机械眼协同。** 系统将关注区域与双路舵机动作联系起来，为屏幕上的 ROI 提供可观察的物理反馈。[`roi_servo_pwm.v`](../src/servo/roi_servo_pwm.v) 将 ROI 坐标映射为水平、垂直 PWM 目标，并设置中心、范围和渐变步进；暂停后也可通过鼠标调整 ROI。现场已确认鼠标 ROI、按键和舵机等功能正常，[舵机 RTL 仿真](../sim/servo_iverilog_20261027.log)覆盖中心、周期及渐变。机械眼采用 PWM 开环位置控制；机械误差与响应延迟的量化测量列为后续验证项。
 
@@ -58,9 +58,9 @@ EagleEye 面向足球转播等快速运动场景的辅助观察，借鉴人眼�
 
 项目还提供测试输入、参考张量、RTL 日志、构建报告、BIT/XSA/HWH 和核验脚本，形成由实现到验证的资料链；见[比赛材料与证据索引](contest_evidence_index_zh.md)。
 
-第三方来源、已有许可及待确认授权范围统一见 [来源与授权核对](third_party_sources_zh.md)。
+已有第三方许可文本保存在 [许可资料](third_party/)，各组件的使用及再分发范围按对应条款核对。
 
-当前 `model.nb` 按团队来源记录为官方 PicoDet-XS 320 COCO LCNet 导出后转换的 Paddle-Lite ARM 模型，采用原始预训练权重，未由团队训练或量化。PicoDet-S 416 属另一训练路线；模型哈希、转换资料核对情况和权重使用及再分发授权状态见[来源与授权核对](third_party_sources_zh.md)。
+当前 `model.nb` 按团队来源记录为官方 PicoDet-XS 320 COCO LCNet 导出后转换的 Paddle-Lite ARM 模型，采用原始预训练权重，未由团队训练或量化。PicoDet-S 416 属另一训练路线；模型哈希见[版本说明](release_identity_zh.md)；原始转换资料及权重使用和再分发授权仍待核对，已有框架许可见[许可资料](third_party/)。
 
 ## 2. 设计原理与软硬件分工
 
@@ -113,18 +113,18 @@ Fovea AXI-Lite、预处理 IP、四路预处理 DMA 和视频 VDMA 的地址，�
 
 ### 2.3 团队分工与接口
 
-按团队确认的 A、B、C 职责，并结合原仓库四个分支的源码整理。分工表归纳主要职责，文件实现与系统集成由团队协作完成。
+按团队确认的 A、B、C 职责，并结合当前板级工程、PicoDet 应用和注意力源码整理。分工表归纳主要职责，文件实现与系统集成由团队协作完成。
 
 | 角色 | 主要分工 | 源码与当前系统边界 |
 |---|---|---|
 | A：视频、Fovea 与板级集成 | 摄像头输入、VDMA 和视频显示；ROI 局部画布、插值放大、视频模式控制、Fovea 接口及板级工程集成。 | 原 [a-fovea](https://github.com/Zyl-stack/EagleEye_C_Attention_Sim/tree/729a8d05a01ecac1b97351dfc5d1d6654294f304) 分支包含 `video_mode_switch_top.v`、`bilinear_scaler_rgb_top.v`、`fovea_axil_ctrl.v` 和摄像头/VDMA 软件。当前 Z035 版本以本仓库 Eyes 源码和 A 的上板资料为准；现场已确认六项功能正常。 |
-| B：PicoDet 人体检测 | 负责 PicoDet 模型与 ARM/Paddle-Lite 推理，产生人体检测框及置信度，供后续关注区域选择使用。 | 当前 Z035 路线的模型与程序见 [`data/model.nb`](../data/model.nb) 和 [`src/ps/`](../src/ps/)；[预处理 A/B 记录](preproc_ab_20261028_zh.md)中两组 PicoDet 推理均在 ARM。原 [b-detection](https://github.com/Zyl-stack/EagleEye_C_Attention_Sim/tree/a4d9226b401c878c6a83a6e520966f997262b492) 分支中的足球 YOLO、目标跟踪及 `EE_B_TARGET_STREAM_V1` 为独立足球检测参考路线，其模型、类别及测试记录单独管理；当前板端采用 PicoDet PERSON 检测。 |
+| B：PicoDet 人体检测 | 负责 PicoDet 模型与 ARM/Paddle-Lite 推理，产生人体检测框及置信度，供后续关注区域选择使用。 | 当前 Z035 路线的模型与程序见 [`data/model.nb`](../data/model.nb) 和 [`src/ps/`](../src/ps/)；[预处理 A/B 记录](preproc_ab_20261028_zh.md)中两组 PicoDet 推理均在 ARM。 |
 | C：注意力与 ROI 调度 | 接收人体目标信息，计算关注度并选择目标；处理保持、切换、ROI 平滑及向 A 的 Fovea 控制接口发出请求。 | 原 [c-attention](https://github.com/Zyl-stack/EagleEye_C_Attention_Sim/tree/e91d713a5b42153d29f7b80ad53ae6709c656716) 分支包含 `attention_score.c`、`attention_scheduler.c`、`bc_adapter.c`、`roi_smoother.c` 和 `a_fovea_adapter.c`。当前 PicoDet+C 独立候选见 [`src/picodet_c_candidate/`](../src/picodet_c_candidate/readme.md)；现场已确认该候选上板功能正常。足球场景的扩展功能按参考分支的验证范围记录。 |
 | 团队与 AI 协作 | 需求拆分、接口核对、构建测试与交付资料整理；现场上板由团队执行与确认。 | [AI 协作记录](ai_collaboration_record.md)以案例和真实会话节选呈现开发过程；第三方模型与 IP 的来源和授权单独记录。 |
 
-原 [main](https://github.com/Zyl-stack/EagleEye_C_Attention_Sim/tree/d1253a65f09451d2c48cffbc70d22d12bba3003a) 分支的 `src/main.c` 使用模拟目标数据串联注意力、调度、运动预测与事务状态，属于 PC 软件模拟，板端功能由各自上板资料记录。本仓库的 `reference/github_a_fovea/`、`reference/github_b_detection/`、`reference/github_c_attention/` 保存了对应参考快照；原仓库链接的可访问范围由其权限决定。
+原 [main](https://github.com/Zyl-stack/EagleEye_C_Attention_Sim/tree/d1253a65f09451d2c48cffbc70d22d12bba3003a) 分支的 `src/main.c` 使用模拟目标数据串联注意力、调度、运动预测与事务状态，属于 PC 软件模拟，板端功能由各自上板资料记录。本仓库的 `reference/github_a_fovea/`、`reference/github_c_attention/` 保存了对应参考快照；原仓库链接的可访问范围由其权限决定。
 
-当前板端 PicoDet 输出 PERSON 人体框；足球 YOLO 参考路线输出 PLAYER/BALL 并形成跟踪目标流。两条路线的模型、接口及验证记录独立管理。AttentionPolicy 的本地匹配 ID 用于相邻推理结果关联；独立注意力候选的现场反馈与另一 ELF 的 AttentionPolicy 原始日志见各自版本记录。
+当前板端 PicoDet 输出 PERSON 人体框，AttentionPolicy 的本地匹配 ID 用于相邻推理结果关联。独立注意力候选的现场反馈与 AttentionPolicy 原始日志分别绑定各自版本。
 
 AttentionPolicy 的五项权重为 3、1、3、2、3，用于人体目标选择。评分对象和图像空间特征见第 2.2 节；独立注意力候选采用自身源码和配置。
 
@@ -193,7 +193,7 @@ AttentionPolicy 的五项权重为 3、1、3、2、3，用于人体目标选择�
 
 项目提炼了视频处理、软硬件接口、模型部署和数据验证的可复用 Skill。PYNQ Overlay、寄存器、DMA 和缓存示例已完成离线模拟验证，为平台迁移提供参考，实板及真实跨项目复用留待后续验证。
 
-[AI 协作记录](ai_collaboration_record.md)整理六个工程案例，结合真实提示词、模型回答、纠错轨迹及工具结果；[会话证据索引](ai_collaboration_evidence_20261030.md)保存相关原文节选与来源信息。[技能索引](../skill/index.md)按用途提供工作流、最小示例、适用条件和验证方法，足球检测与 AX7020 经验按独立参考案例收录。Lanczos 历史记录见[验证说明](../sim/lanczos_legacy_readme.md)。
+[AI 协作记录](ai_collaboration_record.md)整理六个工程案例，结合真实提示词、模型回答、纠错轨迹及工具结果；[会话证据索引](ai_collaboration_evidence_20261030.md)保存相关原文节选与来源信息。[技能索引](../skill/index.md)按用途提供工作流、最小示例、适用条件和验证方法，AX7020 经验按独立参考案例收录。Lanczos 历史记录见[验证说明](../sim/lanczos_legacy_readme.md)。
 
 协作案例展示了 AI 在环境排障、接口适配、统计复核及资料整理中的效率价值：依据真实 BusyBox 功能修订采集工具，将固定输入 Golden 和配置性能分别评估，并以版本化记录连接构建产物与现场结果。各案例提供来源、修正过程及测试结果，读者可按证据索引追溯相关会话。
 

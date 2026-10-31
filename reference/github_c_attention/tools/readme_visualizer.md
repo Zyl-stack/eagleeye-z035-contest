@@ -96,4 +96,4 @@ Mini Match 的 Director State/Event、Enhance Mode/Reason、Possession、Switch 
 - 当前 bridge 是离线 40 帧回放，不读取实时视频。
 - 右侧 2x 是图形示意，不验证 FPGA 像素处理。
 - Mini Match 的遮挡阶段使用现有 Motion Predictor 接口对最后一个有效球描述生成短时展示预测；这不是新增算法，也不代表缺失视频帧已被 FPGA 恢复。`prediction_source` 会标明来源。
-- 没有 YOLO、OCR、人脸识别、摄像头、HDMI、DMA、VDMA、Kalman 或真实判罚功能。
+- 没有 OCR、人脸识别、摄像头、HDMI、DMA、VDMA、Kalman 或真实判罚功能。
