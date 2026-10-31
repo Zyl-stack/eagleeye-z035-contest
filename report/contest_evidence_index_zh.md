@@ -10,7 +10,7 @@
 | 上板、运行及实测 | [现场团队的 BIT 和启动记录](board_reproduced_20261028_zh.md)、[应用日志与功能确认](board_app_evidence_20261028_zh.md)、[CPU/FPGA 预处理 A/B 计时](preproc_ab_20261028_zh.md)、[板端 Golden](preproc_board_golden_20261029_zh.md) | 现场确认六项功能正常；应用日志含 VDMA 错误位提示、帧新鲜度未验证。独立板端固定输入 Golden 通过；A/B 两组缩放算法及实时帧不同，按两种系统配置的计时结果报告。 |
 | 可复现构建 | [复现说明](reproduction_zh.md)、[Vivado 构建 Tcl](../build/build_full_vivado.tcl)、[干净复现记录](clean_reproduction_20261028_zh.md) | 干净克隆构建在布线中断后从检查点续跑完成，生成 BIT/XSA；工具链、许可证和部分运行依赖需另行准备。独立重建内核与现场镜像一致性尚未证明。 |
 | Skill | [技能索引](../skill/index.md)、[独立复用测试](../sim/skill_portability_20261028.txt)、[工具验证记录](../skill/validation.md)、[PYNQ 模拟测试](../sim/pynq_skill_mock_20261028.txt) | 技能按用途统一整理，已提供运行示例、适用范围和验证边界。PYNQ 已完成离线模拟，实板与真实跨项目复用为后续验证项。 |
-| 设计报告 | [设计报告](design_report_zh.md)、[AI 协作记录](ai_collaboration_record.md)、[版本说明](release_identity_zh.md) | 有背景、相关工作、原理、分工、性能、资源和复现说明；AI 协作包含真实会话节选和六个案例；性能按配置条件比较，资源按各构建版本列示。 |
+| 设计报告 | [设计报告](design_report_zh.md)、[AI 协作记录](ai_collaboration_record.md)、[版本说明](release_identity_zh.md) | 有背景、相关工作、原理、分工、性能、资源和复现说明；AI 协作主报告整合了八个典型工程案例，涵盖提示词、模型回答、自我纠错轨迹和智能体工作流，并提供可追溯的原始会话及工程验证依据；性能按配置条件比较，资源按各构建版本列示。 |
 
 ## 本地已有结果复核
 
