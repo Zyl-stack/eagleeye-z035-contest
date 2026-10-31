@@ -1,6 +1,6 @@
 # EagleEye 可复用技能包
 
-本目录汇集项目开发中形成的验证工具、工作流、提示词和案例模板。按需要选择对应项目，将器件、模型、尺寸和接口替换为自己的实际配置；各项 README 或 `skill.md` 中列有使用方法、经验来源和失效条件。
+本目录汇集项目开发中形成的验证工具、工作流、提示词和案例模板。选择与任务对应的 Skill，按目标工程填写器件、模型、尺寸及接口；各项说明提供使用步骤、示例、经验来源和失效条件。
 
 ## 视频与硬件验证
 
@@ -32,6 +32,8 @@
 
 ## 使用与验证
 
+选择对应 Skill 后，填写其提示词所需的器件、接口和输入路径，冻结输入输出契约，再执行示例或工具。保存命令、版本、退出码及输入/产物 SHA256，并按该项通过条件核验结果。
+
 每项 Skill 提供适用范围、输入输出契约和验证方法。可根据任务选择工具；AX7020 和历史工程案例用于展示可迁移的方法，当前 Z035 的板端功能见各自测试记录。
 
 从仓库根目录运行主要离线检查：
@@ -43,6 +45,6 @@ python -B -m unittest discover -s skill/roi-review-control/tests -v
 python -B -m unittest discover -s skill/pynq-overlay-dma/tests -v
 ```
 
-已有测试和来源见 [验证记录](validation.md)、[整理与复核记录](validation_local_20261030.txt)、[经验来源](evidence.md) 和 [Skill 复用测试](../sim/skill_portability_20261028.txt)。PYNQ 示例已完成模拟对象验证，实板和真实跨项目复用留待迁移时验证。
+已有测试和来源见 [验证记录](validation.md)、[格式与工具复核记录](validation_local_20261030.txt)、[经验来源](evidence.md) 和 [Skill 复用测试](../sim/skill_portability_20261028.txt)。PYNQ 示例已完成模拟对象验证，实板和真实跨项目复用留待迁移时验证。
 
 为符合比赛仓库命名要求，展开后的技能入口使用小写 `skill.md`。若需安装到要求大写入口 `SKILL.md` 的工具，请在自己的独立副本中改名。

@@ -1,10 +1,12 @@
-# EagleEye Z035 已上板版本的复现路径（2026-10-27）
+# Eyes 构建工具链与应用复现
 
-## 身份边界
+本页保存工程快照、工具链和两版应用的构建参数。命令面向按[复现指南](../report/reproduction_zh.md)恢复后的大小写工程目录；当前实测组合见[版本表](../report/release_identity_zh.md)。
+
+## 工程快照身份
 
 - Z035 Vivado Eyes 工程：本包 `src/vivado/EagleEye_7035_Eyes.srcs` 的 63 个文件与本机 `D:/EagleEye_FPGA_Competition/Vivado_EagleEye_7035_Eyes/EagleEye_7035_Eyes/EagleEye_7035_Eyes.srcs` 逐文件 SHA256 一致。`system.bd` SHA256 为 `2bf8317351d9a591a30f3a5f6f9a3cb40bb52723597723599cc86048f749f222`。
 - 与 `board/BOOT.BIN` 配套的实现 BIT SHA256 为 `09486c3e7f0410482aad560d0e4aa22bc6f604fc140518ab61e06ebe203e6397`，它与 `board/bootgen_inputs.tar.gz` 内的 `system.bit` 及原工程 `impl_1/z100_top.bit` 一致。BOOT.BIN SHA256 为 `54003cd2490c38d5caf208791e2995de7112a8e3b5b826a39b0f1811735e2765`。
-- 原稳定应用是 `src/ps_as_built/` 的九宫格 `GridPolicy`，模型是 `data/model.nb`。后续 `src/ps/` 的注意力 ROI 版本已编译成独立应用归档，见 `board/attention/`；它与原稳定版共用 BOOT、image.ub、boot.scr。用户于 2026-10-27 反馈上板验证通过，但本提交包尚未收录该次完整串口日志/演示录像。`src/attention_reference/` 仍只是 C 参考子集，并非板端程序。
+- 原稳定应用是 `src/ps_as_built/` 的九宫格 `GridPolicy`，模型是 `data/model.nb`。后续 `src/ps/` 的注意力 ROI 版本已编译成独立应用归档，见 `board/attention/`；它与原稳定版共用 BOOT、image.ub、boot.scr。应用日志与功能确认见[板端应用记录](../report/board_app_evidence_20261028_zh.md)，连续演示录像尚未归档。`src/attention_reference/` 仍只是 C 参考子集，并非板端程序。
 
 ## Vivado 2022.2 干净重建入口
 
@@ -14,7 +16,7 @@
 & 'D:\Vivado\Vivado\2022.2\bin\vivado.bat' -mode batch -source 'D:\EEZ035\build\recreate_vivado.tcl'
 ```
 
-脚本从随包的 RTL/BD/XCI/XDC 和 OV5640、动态时钟、预处理 IP Repository 创建新的 `build/vivado_work/eagleeye_z035.xpr`。2026-10-27 在独立复制目录 `D:/EEZ035R6` 实测：Vivado 2022.2 退出码 0，BD Validation 与 Output Products 生成通过。此前失败原因是脚本只复制 BD、遗漏其 `ip/*.xci`，且 BD/XCI 的相对生成路径落到工程外；这两点现已修复。**新的干净实现/bitstream 以及新 BIT 上板未在本轮完成**；包内既有 BIT 和实现报告属于原已验证工程。
+脚本从随包的 RTL/BD/XCI/XDC 和 OV5640、动态时钟、预处理 IP Repository 创建新的 `build/vivado_work/eagleeye_z035.xpr`。2026-10-27 在独立复制目录 `D:/EEZ035R6` 实测：Vivado 2022.2 退出码 0，BD Validation 与 Output Products 生成通过。此前失败原因是脚本只复制 BD、遗漏其 `ip/*.xci`，且 BD/XCI 的相对生成路径落到工程外；这两点现已修复。完整综合、实现及 BIT/XSA 使用[全流程构建入口](build_full_vivado.tcl)，结果见[干净复现记录](../report/clean_reproduction_20261028_zh.md)；板端 BIT 身份见[上板记录](../report/board_reproduced_20261028_zh.md)。
 
 ## PS 已上板应用重编
 
@@ -37,6 +39,6 @@ sha256sum src/ps_as_built/bin/paddle_person_live
 
 ## 部署、时序及未闭环项
 
-稳定 SD 启动分区的 BOOT.BIN、image.ub、boot.scr、应用归档均在 `board/`；按 `board/README.md` 逐项校验后再复制到**独立实验卡**，不要覆盖现有稳定介质。现有板端验证主要来自用户现场反馈和既有日志；新的干净构建 BIT/应用组合没有重新上板。
+原工程快照的 BOOT.BIN、image.ub、boot.scr 和应用归档保存在 `board/`。按恢复目录的 `board/README.md` 校验后使用**独立实验卡**，保留稳定介质。当前可核查的 BIT、BOOT 和应用组合见[版本表](../report/release_identity_zh.md)，干净构建产物的板测范围见[复现报告](../report/clean_reproduction_20261028_zh.md)。
 
 原 Eyes routed report：WNS +0.505 ns，WHS +0.051 ns，已约束路径满足设定约束；Methodology 同时报告 `TIMING-18 Missing input or output delay` 16 项及其他时钟相关 Critical Warning。因此不能宣称摄像头/HDMI 全部板级 I/O 时序已经签核。需要基于实际 Z100/OV5640/MS7210 连接和器件时序补充输入/输出延迟、重新实现并上板校验，不能照搬 AX7020 参考工程的约束。

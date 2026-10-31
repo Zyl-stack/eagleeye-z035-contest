@@ -1,6 +1,6 @@
 # 仿真与验证说明
 
-本页按主机工具、RTL、QEMU 与板端四类整理验证结果，连接测试输入、原始输出和复现方法。原工程 [sim/readme.md](readme.md)保留历史快照状态，后续结果以本页索引查阅。
+本页按主机工具、RTL、QEMU 与板端四类提供验证结果、测试输入和复现方法；原工程测试入口见 [sim/readme.md](readme.md)。
 
 ## 测试输入和身份
 
@@ -14,7 +14,7 @@
 
 2026-10-27 的实际工具命令、退出码和逐项输出保存在 [原始仿真日志](preproc_iverilog_20261027.log)。输入包括零值、满值、通道区分、边界及采集帧；每帧 307,200 个 FP32 值与对应参考逐位一致，最大和平均绝对误差均为 0。采集帧经 RGB 字节适配器和核心联合仿真后也逐位一致。另有字节适配器与 AXI-Lite 独立地址/数据通道和 busy 状态测试通过。
 
-现补充本地保留的[采集帧三路仿真输出](preproc_captured_dma_20261027/)，分别为 R/G/B 32 位十六进制字，共 307,200 个值。输入和 Golden 与上述仓库文件哈希一致。运行 `python -B tools/verify_preproc_sim_capture.py` 可将这三路记录逐位对照仓库 Golden；该数据来源为 Icarus 适配器与核心仿真，板端张量输出见独立 Golden 记录。
+[采集帧三路仿真输出](preproc_captured_dma_20261027/)，分别为 R/G/B 32 位十六进制字，共 307,200 个值。输入和 Golden 与上述仓库文件哈希一致。运行 `python -B tools/verify_preproc_sim_capture.py` 可将这三路记录逐位对照仓库 Golden；该数据来源为 Icarus 适配器与核心仿真，板端张量输出见独立 Golden 记录。
 
 日志中核心 `673804 cycles` 和适配器加核心 `788884 cycles` 按测试平台的仿真周期记录，100 MHz 为换算条件；板端 DMA/cache 及完整预处理延迟由实测计时。
 
@@ -25,7 +25,7 @@
 - [舵机 RTL 仿真日志](servo_iverilog_20261027.log)：Icarus Verilog 10.3，中心保持、20 ms 周期、10 µs 步进和 ROI 反向用例通过。该项覆盖 RTL 行为，板端机械限位、供电和方向按现场条件核验。
 - [ROI 合同检查器测试](host_roi.log)：主机 1 项通过；测试范围为接口合同检查器，板端功能见现场确认记录。
 - [预处理比较器测试](host_preproc.log)：主机 2 项通过，覆盖相等、差异与长度错误；该项覆盖主机比较器。2026-10-28 复核见 [测试记录](host_skill_tests_20261028.txt)。
-- 后续补充的两项 Skill 独立副本正反例、空配置和损坏归档测试见 [示例验证记录](skill_examples_20261028.txt)；XSA 检查覆盖文件元数据，运行行为由板端测试记录。
+- 两项 Skill 独立副本的正反例、空配置和损坏归档测试见 [示例验证记录](skill_examples_20261028.txt)；XSA 检查覆盖文件元数据，运行行为由板端测试记录。
 
 在各 Skill 目录可复现对应主机测试：
 
@@ -44,9 +44,9 @@ cd ../roi-review-control && python -B -m unittest discover -s tests -v
 
 另有历史独立测试工程的 [单通道](lanczos_single_xsim_pass_legacy.txt)和 [RGB](lanczos_rgb_xsim_pass_legacy.txt) XSim 日志，分别记录 768 和 1,536 个输出像素零错误。它们的测试工程源码未随本次材料提供，其与当前 Eyes RTL 的版本对应待核对，通过及失败日志分别保存。[测试范围与来源](lanczos_legacy_readme.md)
 
-现已收到 Attention 应用日志，现场已确认六项功能上板正常；后续[独立板端固定输入测试](../report/preproc_board_golden_20261029_zh.md)记录 307,200 个输出与 Golden 逐位一致，本次 BIT 哈希未核实。所需材料列于 [现场证据清单](../report/field_evidence_needed_zh.md)。[BIT 上板记录](../report/board_reproduced_20261028_zh.md)保存启动串口；[应用证据](../report/board_app_evidence_20261028_zh.md)记录了应用输出和 VDMA 警告，该次应用日志不包含实板张量比较。
+完整 Eyes 的[上板记录](../report/board_reproduced_20261028_zh.md)保存启动串口，[应用证据](../report/board_app_evidence_20261028_zh.md)记录六项功能确认、应用输出和 VDMA 警告。张量逐值对比见[独立板端 Golden](../report/preproc_board_golden_20261029_zh.md)，其独立 BIT 身份及其他测试条件见[验证范围](../report/field_evidence_needed_zh.md)。
 
-## 2026-10-28 脱离工程复用补充
+## 脱离工程的复用验证
 
 两项 Skill 分别复制到临时空目录，使用另一种张量形状及不同模块/地址的合成 HWH 运行正反例、长度错误和单元测试，命令及输出见 [复用测试记录](skill_portability_20261028.txt)。该项验证独立目录及合成契约的可移植性，其他真实项目与 PYNQ 实板留待迁移测试。
 

@@ -4,7 +4,7 @@ EagleEye 是一套基于 **Xilinx Zynq XC7Z035** 的仿生视觉辅助观察原�
 
 摄像头提供全局视频，PicoDet 检测人体候选目标；注意力策略综合目标的区域、运动、接近趋势、尺寸和检测不确定性，选择关注对象并生成动态 ROI。视频画面与局部窗口共同显示，使用者也可以暂停画面，通过鼠标调整观察区域；双轴机械眼随关注位置联动。
 
-本项目使用 **Vivado 2022.2** 构建 FPGA 工程，采用 **PicoDet-XS 与 Paddle-Lite** 在 ARM 端完成人体检测，并在 PL 侧实现视频处理与模型输入预处理。
+系统以 **XC7Z035** 为核心，采用 **Vivado 2022.2** 构建 PL 视频与预处理链路，结合 ARM 端 **PicoDet-XS / Paddle-Lite**、OV5640 摄像头和 HDMI 显示，完成从全景感知到局部观察的软硬件协同。
 
 ## 系统功能
 
@@ -28,7 +28,7 @@ OV5640 摄像头 → FPGA 视频通路 / VDMA → HDMI 全景与局部显示
 
 系统原理、软硬件接口及团队分工见 [设计报告](report/design_report_zh.md) 和 [硬件接口表](report/hardware_interfaces_zh.md)。当前演示采用 PicoDet-XS 320 人体检测，模型推理运行在 ARM 端。
 
-系统将视频显示、检测推理和 ROI 更新异步组织，使画面展示与智能感知按各自节奏运行。
+视频显示、人体检测和 ROI 更新异步协同，让全景画面持续展示，同时按检测结果更新关注区域。
 
 ## 验证与实现结果
 
@@ -40,7 +40,7 @@ OV5640 摄像头 → FPGA 视频通路 / VDMA → HDMI 全景与局部显示
 | Vivado 构建 | 干净克隆后的独立构建生成 BIT/XSA：LUT 24,986、FF 28,246、BRAM36 303/500、DSP 49；已约束路径 WNS +0.608 ns、WHS +0.007 ns。[构建记录和报告](report/clean_reproduction_20261028_zh.md) |
 | 预处理计时 | CPU 双三次与 FPGA 双线性两种预处理配置均已完成板端计时，输入条件、算法及统计口径见对应报告。[测试条件与结果](report/preproc_ab_20261028_zh.md) |
 
-阶段联调观察中，检测更新约 **2 FPS**、视频显示约 **30 FPS**，分别对应智能感知和视频展示路径。[应用日志](report/board_app_evidence_20261028_zh.md)提供检测路径的计时记录；30 FPS 为阶段观察值，独立显示帧率计时留待后续测量。
+阶段联调观察中，视频显示约 **30 FPS**，人体检测更新约 **2 FPS**，分别对应视频展示与智能感知路径。[应用日志](report/board_app_evidence_20261028_zh.md)记录了检测路径耗时；显示帧率为现场观察值。
 
 ### 测试条件与工程说明
 
@@ -79,12 +79,15 @@ python -B tools/verify_submission.py
 
 使用 Vivado 2025.2 可参考 [实验性迁移脚本及说明](build/vivado_2025_2_zh.md)。已记录的完整构建基于 2022.2；2025.2 脚本的目标版本运行验证为后续迁移步骤。
 
-已完成从干净克隆恢复工程、综合与实现；布线中断后从检查点续跑生成 BIT/XSA。具体命令、原始日志及验证范围见 [干净复现记录](report/clean_reproduction_20261028_zh.md)。
-
 ## 报告与技能包
 
-- [报告目录导航](report/readme.md) · [设计报告](report/design_report_zh.md) · [比赛材料与证据索引](report/contest_evidence_index_zh.md) · [版本身份](report/release_identity_zh.md)
-- [AI 协作记录](report/ai_collaboration_record.md) · [Skill 索引](skill/index.md) · [第三方许可文本](report/third_party/)
-- [预处理板端 Golden](report/preproc_board_golden_20261029_zh.md) · [CPU/FPGA 计时](report/preproc_ab_20261028_zh.md) · [复现指南](report/reproduction_zh.md)
+建议按以下顺序阅读：
+
+1. [设计报告](report/design_report_zh.md)：项目背景、系统原理和实现结果。
+2. [AI 协作记录](report/ai_collaboration_record.md)：提示词、模型回答、纠错过程与工程工作流。
+3. [仿真与上板验证](report/contest_evidence_index_zh.md)：仿真、Golden、板端功能与性能记录。
+4. [Skill 索引](skill/index.md)与[复现指南](report/reproduction_zh.md)：可复用方法和构建步骤。
+
+更多版本和来源资料见[报告导航](report/readme.md)、[版本身份](report/release_identity_zh.md)及[第三方许可文本](report/third_party/)。
 
 PYNQ Skill 提供 Overlay、寄存器、DMA 和缓存一致性的可复用示例，已完成离线模拟验证，实板及跨项目复用留待平台迁移时验证。已收录许可文本见 [许可资料](report/third_party/)；模型权重及部分第三方 IP 的具体授权范围仍待核对。

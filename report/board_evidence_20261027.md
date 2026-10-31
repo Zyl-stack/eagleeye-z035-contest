@@ -1,4 +1,4 @@
-# 本地实板证据补充（2026-10-27）
+# ARM98 与 V2/R3 独立实板实验
 
 本页汇总两次历史独立开发板实验：ARM98 逐层计时与 V2/R3 卷积卸载。它们为后续架构选择提供实测依据，与当前 Eyes 视频程序的测试按独立版本归档。仓库收录分析记录和输出，启动镜像、设备序列号及现场个人信息保留在本地原始交接资料中。
 
@@ -19,8 +19,8 @@
 - 同次 20 帧平均：ARM 完整 Predictor **815.568 ms，1.22614 FPS**；V2 **861.566 ms，1.16068 FPS**；报告加速比 **0.946611**，即该次实验 V2 较慢。此处 FPS 为固定输入完整推理 FPS，不是实时视频检测更新率。
 - 20 次卸载明细的平均值：输入 pack **51.685 ms**、输出 decode **22.308 ms**、驱动计算监测区间 **16.209 ms**、完整卸载 **105.256 ms**。驱动监测区间包含等待，作为完整卸载的子区间统计；纯 PL 计算需单独硬件计时。
 
-## 可复核性与现有缺口
+## 复核方法与相关测试
 
 运行 `python tools/verify_field_evidence.py` 可从收录数据复核帧数、硬件提交数、逐层统计、重复输出一致性及 V2 Golden/耗时摘要。核验脚本检查归档数据的内部一致性，两次实验的条件与版本分别列于上文。
 
-2026-10-28 后续补充已确认新复现 BIT 的哈希为 `b286f480...`，并保存 U-Boot 到 Linux 登录的串口原文；证据范围见 [复现 BIT 的上板记录](board_reproduced_20261028_zh.md)。后续收到 Attention 应用日志、现场对六项功能正常的确认、不同缩放算法的 [CPU/FPGA A/B 计时](preproc_ab_20261028_zh.md)，以及另一次[固定输入板端 Golden 对照](preproc_board_golden_20261029_zh.md)。原有 CPU 预处理记录见 [已有板端数据](board_measurements.md)，必要的现场证据见 [待补清单](field_evidence_needed_zh.md)。
+当前 Eyes 视频系统的功能与性能见[上板记录](board_reproduced_20261028_zh.md)、[应用日志](board_app_evidence_20261028_zh.md)、[CPU/FPGA A/B](preproc_ab_20261028_zh.md)及[固定输入预处理 Golden](preproc_board_golden_20261029_zh.md)。历史 CPU 基线保留在[计时记录](board_measurements.md)，测试边界集中见[验证范围](field_evidence_needed_zh.md)。

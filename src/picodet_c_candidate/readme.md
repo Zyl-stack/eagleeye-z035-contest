@@ -9,7 +9,7 @@
 
 ## 构建和离线测试
 
-先按 `report/a_supplement_results_20261027.md` 恢复工程快照，准备 PetaLinux 2022.2 的 ARM 工具链/sysroot，以及 已有的 Paddle-Lite 库。设置 `PROJECT` 和 `PADDLE_LITE_DIR` 后运行：
+先按[干净目录复现指南](../../report/reproduction_zh.md)恢复工程快照，准备 PetaLinux 2022.2 的 ARM 工具链/sysroot 和已有的 Paddle-Lite 库；依赖说明见[构建记录](../../build/a_reproduce_zh.md)。设置 `PROJECT` 和 `PADDLE_LITE_DIR` 后运行：
 
 ```sh
 bash src/picodet_c_candidate/app/build_arm.sh

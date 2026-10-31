@@ -29,6 +29,8 @@ vivado -mode batch -source build/build_full_vivado.tcl -tclargs /tmp/eagleeye_a_
 python3 tools/verify_vivado_outputs.py /tmp/eagleeye_vivado_new
 ```
 
+原始现场交接归档的 SHA256 为 `ebdc78bc05cbae70bba3b78baf2ca23668cc0b243e4bcb060135704b7015ade4`，该原包保存在本地；仓库中的 `original/eagleeye_z035.zip` 与 Git LFS 增量 `original/a_repro_delta_20261027.zip` 组合还原快照，增量包含 54 个新增或变更文件。恢复目录中的 `build/deps/paddle_lite_armv7_build_dep.tar.gz` 为 Paddle-Lite 构建依赖；完整 PetaLinux 2022.2 工具链和 sysroot 需另行准备。旧稳定应用重编时出现静态链接涉及 `dlopen` 和匹配 glibc 动态库的告警；应用版本及哈希见[版本说明](release_identity_zh.md)，工具链与依赖见[构建记录](../build/a_reproduce_zh.md)。
+
 先执行 `git lfs pull`。恢复工具将原始快照与补充材料合并并核验 275 项哈希；`build_full_vivado.tcl` 在独立输出目录进行 BD 校验、综合、实现、BIT/XSA 和资源/时序/CDC/DRC 报告。最后的校验脚本确认 XSA 内 BIT 与独立 BIT 一致，并输出 BIT/XSA/HWH SHA256。实际运行以本机 Vivado 2022.2 与许可证为准。上述完整入口已在本机从还原的工程快照实际完成 BD、综合、实现和 BIT/XSA；报告与哈希见 `build/full_rebuild_20261027/`。此前独立构建报告保存在 `build/independent_rebuild_20261027/`。板端功能与 BIT 身份见[上板记录](board_reproduced_20261028_zh.md)，I/O 延迟和 CDC Critical 的处理状态见[告警说明](warning_review_zh.md)。
 
 ## 3. 预处理 IP RTL 仿真

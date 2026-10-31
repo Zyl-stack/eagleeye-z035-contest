@@ -1,6 +1,6 @@
-# 本次技能包验证
+# Skill 验证方法与结果
 
-验证日期：2026-10-29。本次验证对象是新整理的技能格式、校验工具和已有保存产物；验证方式为主机工具测试和保存产物复核，训练、Vivado 及板端测试按来源记录列示。
+验证日期：2026-10-29。验证覆盖技能格式、校验工具和保存产物，采用主机测试与文件复核；训练、Vivado 及板端结果按各自来源列示。
 
 ## 技能格式与工具测试
 
@@ -23,13 +23,13 @@ bitstream SHA-256：`bc5d35a5a414006309d0057ad6b99277847bd2f9e25162e99c92ea38d93
 
 完整结果：[current-checks.json](validation/current-checks.json)。保留的原始依据文件的大小与 SHA-256 见 [source-fingerprints.json](validation/source-fingerprints.json)，其中不包含原始权重、数据或完整源码内容。
 
-## 接收方复核
+## 复核命令
 
-技能目录合并后，从仓库根目录运行：
+从仓库根目录运行：
 
 ```sh
 python -B tools/verify_submission.py
 python -B -m unittest discover -s skill/tests -v
 ```
 
-技能材料已按用途统一整理在当前目录；格式、工具行为及保存张量按本次检查结果记录，目标板运行及 RTL 重跑分别列示。历史资源/时序、QEMU、训练和上板反馈的证据范围见 [经验来源](evidence.md)。迁移到新模型、工具版本、器件、坐标系或 PYNQ API 后，需按相应技能重新验证。
+格式、工具行为及保存张量的结果按上述记录引用；目标板运行及 RTL 重跑分别列示。历史资源/时序、QEMU、训练和上板反馈的证据范围见 [经验来源](evidence.md)。迁移到新模型、工具版本、器件、坐标系或 PYNQ API 后，需按相应技能重新验证。
