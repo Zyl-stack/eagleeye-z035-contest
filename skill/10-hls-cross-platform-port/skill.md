@@ -7,7 +7,7 @@ description: 审计 HLS 加速器与推理运行时的跨 FPGA 平台迁移，�
 
 ## 适用范围
 
-适用于拿到学长/第三方 HLS 仓库、Intel FPGA 推理后端或多分支加速工程后迁移到 Zynq。不能把改 `set_part` 视为整个运行时已移植。
+适用于拿到第三方 HLS 仓库、Intel FPGA 推理后端或多分支加速工程后迁移到 Zynq。不能把改 `set_part` 视为整个运行时已移植。
 
 ## 工作流
 
