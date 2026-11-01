@@ -48,6 +48,7 @@ def main():
             elif rel == 'sha256sums.txt':
                 rel = 'report/source_sha256sums.txt'
             elif rel in (
+                'data/readme.md',  # Current documentation differs; original remains in the source archive.
                 'skill/readme.md',
                 'skill/preproc-fp32-golden/readme.md',
                 'skill/roi-review-control/readme.md',
