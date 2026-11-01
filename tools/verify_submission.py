@@ -1,8 +1,10 @@
 #!/usr/bin/env python3
-"""Verify source provenance and the matching curated reference archives."""
+"""Verify the source archives, restored snapshot and repository manifest."""
 import hashlib
 from pathlib import Path
 import re
+import subprocess
+import sys
 import zipfile
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -72,23 +74,8 @@ def main():
                 raise ValueError('source mismatch: ' + entry.filename)
             compared += 1
         print('SOURCE_PASS compared=' + str(compared) + ' archive_only=' + str(archive_only))
-    for name in ('github_a_fovea', 'github_c_attention', 'github_linux_petalinux'):
-        mirror = ROOT / 'reference' / name
-        with zipfile.ZipFile(ROOT / 'original' / (name + '.zip')) as z:
-            bad = z.testzip()
-            if bad:
-                raise ValueError('reference CRC: ' + name + '/' + bad)
-            entries = [x for x in z.infolist() if not x.is_dir()]
-            names = [x.filename.lower() for x in entries]
-            if len(names) != len(set(names)):
-                raise ValueError('reference case collision: ' + name)
-            actual = {p.relative_to(mirror).as_posix() for p in mirror.rglob('*') if p.is_file()}
-            if set(names) != actual:
-                raise ValueError('reference file list mismatch: ' + name)
-            for entry in entries:
-                if hashlib.sha256(z.read(entry)).hexdigest() != digest(mirror / entry.filename.lower()):
-                    raise ValueError('reference mismatch: ' + entry.filename)
-            print('REFERENCE_PASS ' + name + ' files=' + str(len(entries)))
+    # Verify the combined source snapshot and delta using the same restoration contract.
+    subprocess.run([sys.executable, str(ROOT / 'tools/restore_a_repro.py')], check=True)
     expected = set(MANIFEST.read_text(encoding='utf-8').splitlines())
     actual = {digest(p) + '  ' + p.relative_to(ROOT).as_posix() for p in files()}
     if actual != expected:

@@ -17,7 +17,7 @@ python3 -B tools/verify_submission.py
 python3 -B tools/verify_kernel_source.py
 ```
 
-源码包约 240 MiB，若没有 Git LFS 或未拉取对象，源码路径可能只有 LFS 指针；核验脚本会拒绝。`verify_submission.py` 还会核对原始 Eyes 快照、各模块与 Linux 参考快照及清单。文件完整性、来源认证及板端运行分别使用对应验证方式。
+源码包约 240 MiB，若没有 Git LFS 或未拉取对象，源码路径可能只有 LFS 指针；核验脚本会拒绝。`verify_submission.py` 还会核对原始 Eyes 快照、工程增量恢复及仓库清单。文件完整性、来源认证及板端运行分别使用对应验证方式。
 
 ## 2. 恢复大小写并构建 Vivado 工程
 
