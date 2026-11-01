@@ -12,5 +12,5 @@
 ## 模型、接口与来源
 
 - 当前检测路线为 ARM 端 PicoDet PERSON；AttentionPolicy 使用本地临时匹配 ID，跨遮挡稳定跟踪由独立测试评估。演示应用变化时同步更新[版本表](release_identity_zh.md)。
-- 模型权重及部分第三方 IP 的使用和再分发授权范围见[来源与许可](third_party/)。团队分工见[设计报告](design_report_zh.md)。
+- 模型权重及部分第三方 IP 的使用和再分发授权范围见[来源与许可](../third_party/)。团队分工见[设计报告](../design_report_zh.md)。
 - ARM98 与 V2/R3 属于[历史独立实板实验](board_evidence_20261027.md)，其固定输入计时与当前视频链分别统计。

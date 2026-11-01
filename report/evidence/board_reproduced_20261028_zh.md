@@ -6,12 +6,12 @@
 
 | 文件 | SHA256 | 核验范围 |
 |---|---|---|
-| [z100_top.bit](../board/reproduced_20261028/z100_top.bit) | `b286f480a1e91282c4be813f35247deffbc6de7d35f31bb9a7984dd3c7fa4a15` | 与本地 2026-10-27 独立复现所生成 BIT 的 SHA256 一致。 |
-| [eagleeye_z035.xsa](../board/reproduced_20261028/eagleeye_z035.xsa) | `18667ead62c25cde514e871cba67e927c5ffd32af80d3a0d5e0565a8a56a7e42` | 本地同次独立构建产物，XSA 内 BIT 与上述 BIT 一致；不是板端读回。 |
-| [system.hwh](../board/reproduced_20261028/system.hwh) | `fd6938d2dae6bbcd363df5d176892c38e714fbc9734d0be80c4eaeb1086ae9fc` | 本地同次独立构建产物，与 XSA 内 `system.hwh` 一致；不是板端读回。 |
-| [boot.bin](../board/reproduced_20261028/boot.bin) | `816ebd03dc533f857399938e533994c1989f8af4437ce5b361329da6d461b039` | 现场结果说明记载使用此 BOOT；原始 SD 读回哈希清单未随本包提供。 |
-| [原始串口记录](../board/reproduced_20261028/board_serial_boot_raw.txt) | `6b25da2bf152b74528fa3f8bd5cba20e3972152f09211444f1ee1185fd8144b1` | 记录从 U-Boot 到 Linux 登录提示，不包含 FSBL 或登录后应用输出。 |
-| [现场原始结果说明](../board/reproduced_20261028/board_result_source_zh.md) | `7c7c1ff84ab9db6309ceb4eb6f42891610f0867a88955308edc7a21fd391170b` | 原文保留；其中指向现场电脑 `SHA256SUMS_SD.txt` 的相对路径不在本仓库内。 |
+| [z100_top.bit](../../board/reproduced_20261028/z100_top.bit) | `b286f480a1e91282c4be813f35247deffbc6de7d35f31bb9a7984dd3c7fa4a15` | 与本地 2026-10-27 独立复现所生成 BIT 的 SHA256 一致。 |
+| [eagleeye_z035.xsa](../../board/reproduced_20261028/eagleeye_z035.xsa) | `18667ead62c25cde514e871cba67e927c5ffd32af80d3a0d5e0565a8a56a7e42` | 本地同次独立构建产物，XSA 内 BIT 与上述 BIT 一致；不是板端读回。 |
+| [system.hwh](../../board/reproduced_20261028/system.hwh) | `fd6938d2dae6bbcd363df5d176892c38e714fbc9734d0be80c4eaeb1086ae9fc` | 本地同次独立构建产物，与 XSA 内 `system.hwh` 一致；不是板端读回。 |
+| [boot.bin](../../board/reproduced_20261028/boot.bin) | `816ebd03dc533f857399938e533994c1989f8af4437ce5b361329da6d461b039` | 现场结果说明记载使用此 BOOT；原始 SD 读回哈希清单未随本包提供。 |
+| [原始串口记录](../../board/reproduced_20261028/board_serial_boot_raw.txt) | `6b25da2bf152b74528fa3f8bd5cba20e3972152f09211444f1ee1185fd8144b1` | 记录从 U-Boot 到 Linux 登录提示，不包含 FSBL 或登录后应用输出。 |
+| [现场原始结果说明](../../board/reproduced_20261028/board_result_source_zh.md) | `7c7c1ff84ab9db6309ceb4eb6f42891610f0867a88955308edc7a21fd391170b` | 原文保留；其中指向现场电脑 `SHA256SUMS_SD.txt` 的相对路径不在本仓库内。 |
 
 **后续验证：**登录后的 Attention 应用日志和六项功能确认见 [应用证据](board_app_evidence_20261028_zh.md)，固定输入预处理结果见[独立板端 Golden](preproc_board_golden_20261029_zh.md)。原启动串口与登录后应用记录分别归档。
 

@@ -2,7 +2,7 @@
 
 ## 回传与核验
 
-现场回传 `eagleeye_z035_repro_with_app_log_20261028.zip`，SHA256 `6e7210373081177ac8f14c0f63833afb4799ccca874509478b20f4cd2524c070`，ZIP CRC 通过；包内 `SHA256SUMS.txt` 的 280 项逐项核验通过。本仓库收录 [应用日志原文](../board/reproduced_20261028/attention_app_20261028.log)与 [现场结果说明原文](../board/reproduced_20261028/board_result_app_source_zh.md)，并与已有 BIT、BOOT 和启动串口记录共同归档。
+现场回传 `eagleeye_z035_repro_with_app_log_20261028.zip`，SHA256 `6e7210373081177ac8f14c0f63833afb4799ccca874509478b20f4cd2524c070`，ZIP CRC 通过；包内 `SHA256SUMS.txt` 的 280 项逐项核验通过。本仓库收录 [应用日志原文](../../board/reproduced_20261028/attention_app_20261028.log)与 [现场结果说明原文](../../board/reproduced_20261028/board_result_app_source_zh.md)，并与已有 BIT、BOOT 和启动串口记录共同归档。
 
 | 资料 | SHA256 | 边界 |
 |---|---|---|

@@ -13,12 +13,12 @@
 
 | 案例 | 原始指令、模型回答与反馈 | 纠错或状态变化 | 可复核的工程证据 |
 |---|---|---|---|
-| Vivado 构建 | `01a1793f:2961–4620`；干净复现 `7813–8992` | 启动失败、BD/IP 配置与旧路径问题；后续布线中断后从检查点续跑 | [复现记录](clean_reproduction_20261028_zh.md)、[构建脚本](../build/build_full_vivado.tcl) |
-| 人体框与注意力 | `01a1793f:5229–5638` | 文件写入参数报错后修正；检测输出无稳定 ID 的现场反馈 | [候选源码](../src/picodet_c_candidate/readme.md)、[主机测试](../sim/picodet_c_candidate/host_results.txt)、[QEMU 输出](../sim/picodet_c_candidate/qemu_predictor.txt) |
+| Vivado 构建 | `01a1793f:2961–4620`；干净复现 `7813–8992` | 启动失败、BD/IP 配置与旧路径问题；后续布线中断后从检查点续跑 | [复现记录](clean_reproduction_20261028_zh.md)、[构建脚本](../../build/build_full_vivado.tcl) |
+| 人体框与注意力 | `01a1793f:5229–5638` | 文件写入参数报错后修正；检测输出无稳定 ID 的现场反馈 | [候选源码](../../src/picodet_c_candidate/readme.md)、[主机测试](../../sim/picodet_c_candidate/host_results.txt)、[QEMU 输出](../../sim/picodet_c_candidate/qemu_predictor.txt) |
 | 板端 Golden | `01a1793f:11554–11738` | 由“板端同输入对照未测试”更新为收到固定输入对照结果；不将新证据套用到未核实的 BIT | [板端结果、日志和数据](preproc_board_golden_20261029_zh.md) |
 | 性能比较 | `01a1793f:10268–10427` | 识别 CPU/FPGA 缩放算法与输入帧不同；未发现相反的先前模型结论，不编造纠错 | [实测与统计口径](preproc_ab_20261028_zh.md) |
 | BusyBox 采集 | `01a15f7f:11010–11256` | PC 夹具通过后现场报告 `head -c` 不支持；改用 `dd` 并重新做夹具检查 | 本页原文摘录；完整脚本与定向测试位于本地历史 V2 目录，未并入当前 Eyes 工程 |
-| 历史 V2 卷积 | `01a15f7f:18157–18358` | 驱动 `-22` 分支最初不明确；修订后实板 Golden 通过，但完整推理变慢 | [历史板端证据](board_evidence_20261027.md)、[日志摘录](../board/measurements/v2_r3_20261024/serial_measurement_excerpt.txt) |
+| 历史 V2 卷积 | `01a15f7f:18157–18358` | 驱动 `-22` 分支最初不明确；修订后实板 Golden 通过，但完整推理变慢 | [历史板端证据](board_evidence_20261027.md)、[日志摘录](../../board/measurements/v2_r3_20261024/serial_measurement_excerpt.txt) |
 
 ## 案例摘录
 
@@ -68,7 +68,7 @@
 
   > 独立工程已完成布线并成功生成 BIT
 
-可核查的工程文件和运行记录见[协作报告](ai_collaboration_record.md)对应案例。
+可核查的工程文件和运行记录见[协作报告](../ai_collaboration_record.md)对应案例。
 
 ### 人体框适配、Python 错误与注意力联调
 
@@ -108,7 +108,7 @@
 
   > 这次新候选程序
 
-可核查的工程文件和运行记录见[协作报告](ai_collaboration_record.md)对应案例。
+可核查的工程文件和运行记录见[协作报告](../ai_collaboration_record.md)对应案例。
 
 ### 固定输入预处理 Golden
 
@@ -132,7 +132,7 @@
 
   > 307,200 个 FP32 值全部与 Golden 逐位一致
 
-可核查的工程文件和运行记录见[协作报告](ai_collaboration_record.md)对应案例。
+可核查的工程文件和运行记录见[协作报告](../ai_collaboration_record.md)对应案例。
 
 ### 预处理配置对比与统计边界
 
@@ -152,7 +152,7 @@
 
   > 416.960 ms
 
-可核查的工程文件和运行记录见[协作报告](ai_collaboration_record.md)对应案例。
+可核查的工程文件和运行记录见[协作报告](../ai_collaboration_record.md)对应案例。
 
 ### BusyBox 现场错误与修订
 
@@ -180,7 +180,7 @@
 
   > 25项BusyBox夹具检查通过
 
-可核查的工程文件和运行记录见[协作报告](ai_collaboration_record.md)对应案例。
+可核查的工程文件和运行记录见[协作报告](../ai_collaboration_record.md)对应案例。
 
 ### 历史独立 V2 驱动修订与整网测量
 
@@ -208,4 +208,4 @@
 
   > V2 **慢了45.998 ms，延迟增加5.64%**
 
-可核查的工程文件和运行记录见[协作报告](ai_collaboration_record.md)对应案例。
+可核查的工程文件和运行记录见[协作报告](../ai_collaboration_record.md)对应案例。

@@ -4,7 +4,7 @@
 
 EagleEye 在 XC7Z035 上结合视频处理、FPGA 预处理、ARM 端 PicoDet、注意力选择和局部观察。开发中，团队负责确定场景、提出约束、选择方案及操作开发板；Codex 读取工程与工具输出，辅助分析接口、修改独立候选、组织验证和整理可复现材料。方案是否有效，最终以源码、实际工具结果和现场记录为依据。
 
-本报告围绕真实工程案例呈现**提示词、模型回答、纠错轨迹和协作工作流**。聊天摘录保留原文；历史工程复盘中的模型处理明确标为摘要。[会话证据索引](ai_collaboration_evidence_20261030.md)和[补充来源摘录](ai_collaboration_excerpts_20261031.md)记录来源。
+本报告围绕真实工程案例呈现**提示词、模型回答、纠错轨迹和协作工作流**。聊天摘录保留原文；历史工程复盘中的模型处理明确标为摘要。[会话证据索引](evidence/ai_collaboration_evidence_20261030.md)和[补充来源摘录](evidence/ai_collaboration_excerpts_20261031.md)记录来源。
 
 | 证据类别 | 报告中的含义 |
 |---|---|
@@ -26,15 +26,15 @@ EagleEye 在 XC7Z035 上结合视频处理、FPGA 预处理、ARM 端 PicoDet、
 
 **验证与后续纠错。** 之后团队再次要求从 GitHub 干净复现。那次布线开始后中断，Codex 先确认综合和布局检查点，再从布线阶段续跑，而非将中间状态当成完成。最终生成 BIT/XSA，已约束路径 WNS **+0.608 ns**、WHS **+0.007 ns**；该 STA 结果覆盖已约束路径；I/O 与 CDC 的专项状态见告警说明，该次新文件独立板测为后续验证项。
 
-**可核查材料：**[原始会话摘录](ai_collaboration_evidence_20261030.md)、[干净复现记录及日志](clean_reproduction_20261028_zh.md)、[构建入口](../build/build_full_vivado.tcl)、[告警说明](warning_review_zh.md)。
+**可核查材料：**[原始会话摘录](evidence/ai_collaboration_evidence_20261030.md)、[干净复现记录及日志](evidence/clean_reproduction_20261028_zh.md)、[构建入口](../build/build_full_vivado.tcl)、[告警说明](evidence/warning_review_zh.md)。
 
 **协作价值。** 模型将启动环境、BD/IP 依赖和实现状态分阶段检查，并根据失败结果改变下一步；团队提出“不修改稳定工程”的约束，工具报告则决定哪些结论可以成立。
 
 ### 案例 2：从仿真通过到板端固定输入 Golden
 
-**提示词与模型回答。** 预处理 IP 的需求明确输入“640×360 RGB888”和输出“1×3×320×320、FP32、NCHW”。模型回答：“核心 RTL 和控制接口已经落地。插值权重可精确表示为整数分数，归一化则由随源码交付的 FP32 查找表完成”。[原始摘录](ai_collaboration_excerpts_20261031.md)记录了提示词与回答。
+**提示词与模型回答。** 预处理 IP 的需求明确输入“640×360 RGB888”和输出“1×3×320×320、FP32、NCHW”。模型回答：“核心 RTL 和控制接口已经落地。插值权重可精确表示为整数分数，归一化则由随源码交付的 FP32 查找表完成”。[原始摘录](evidence/ai_collaboration_excerpts_20261031.md)记录了提示词与回答。
 
-**实现与工具反馈。** 历史工作为 32 位 DMA 字节流补充输入适配器，联合检查张量顺序及背压。模型记录：“从干净压缩包解压后，Vivado 2024.2 已成功重新打包”；Icarus 12 开发版重复编译出现间歇性进程崩溃后，又准备 Vivado 仿真路径。独立 IP 的历史结果与当前完整工程的 Vivado 2022.2 构建分别记录，见[来源摘录](ai_collaboration_excerpts_20261031.md)和[仿真说明](../sim/verification_zh.md)。
+**实现与工具反馈。** 历史工作为 32 位 DMA 字节流补充输入适配器，联合检查张量顺序及背压。模型记录：“从干净压缩包解压后，Vivado 2024.2 已成功重新打包”；Icarus 12 开发版重复编译出现间歇性进程崩溃后，又准备 Vivado 仿真路径。独立 IP 的历史结果与当前完整工程的 Vivado 2022.2 构建分别记录，见[来源摘录](evidence/ai_collaboration_excerpts_20261031.md)和[仿真说明](../sim/verification_zh.md)。
 
 **背景与指令。** 已有预处理 RTL 仿真结果，但当时没有同一固定输入下的板端输出对照。Codex 在核查比赛材料时明确指出：“板端同输入预处理输出与 Golden 的逐值对比未测试”。用户随后要求整理可执行的板端对比方法。
 
@@ -48,13 +48,13 @@ python -B skill/preproc-fp32-golden/tools/verify_tensor.py --actual board/measur
 
 这一案例展示了从 RTL 到**新增实板证据后更新结论**的验证递进。
 
-**可核查材料：**[用户请求和模型结论摘录](ai_collaboration_evidence_20261030.md)、[板端 Golden 结果及原始文件](preproc_board_golden_20261029_zh.md)、[RTL 验证说明](../sim/verification_zh.md)。
+**可核查材料：**[用户请求和模型结论摘录](evidence/ai_collaboration_evidence_20261030.md)、[板端 Golden 结果及原始文件](evidence/preproc_board_golden_20261029_zh.md)、[RTL 验证说明](../sim/verification_zh.md)。
 
 **协作价值。** 模型把“画面能运行”和“张量计算正确”拆成可分别检查的问题；固定输入的真实执行和数据回收由现场人员完成。
 
 ### 案例 3：人体框接入注意力模块时发现 Python 兼容错误
 
-**提示词与回答。** 用户提出“在独立副本中完成接口适配、无目标处理和离线联调验证”。遇到写入错误后，Codex 回答：“此前发现并修复了 WSL 自带 Python 对文件写入参数的不兼容。”目标 ID 和板端效果当时继续等待确认；[原始摘录](ai_collaboration_evidence_20261030.md)记录了指令、错误与回答。
+**提示词与回答。** 用户提出“在独立副本中完成接口适配、无目标处理和离线联调验证”。遇到写入错误后，Codex 回答：“此前发现并修复了 WSL 自带 Python 对文件写入参数的不兼容。”目标 ID 和板端效果当时继续等待确认；[原始摘录](evidence/ai_collaboration_evidence_20261030.md)记录了指令、错误与回答。
 
 **首次方案。** Codex 将保存的检测结果转换为下游可读取的数据流，检查坐标、置信度和人数边界；对无有效目标的情况停止生成旧目标请求，同时清理调度及平滑状态。目标编号采用本地临时关联，PicoDet 输出与关联 ID 分别定义。
 
@@ -70,7 +70,7 @@ Codex 随后将写入方式改为通过文件对象 `open(..., newline='\n')` �
 
 现场后来确认使用新候选程序上板功能正常；仓库中另有 AttentionPolicy 的应用日志，两者对应不同 ELF，现场反馈与应用日志分别归档。
 
-**可核查材料：**[原始会话与工具错误摘录](ai_collaboration_evidence_20261030.md)、[独立候选源码与说明](../src/picodet_c_candidate/readme.md)、[QEMU 人体框和请求](../sim/picodet_c_candidate/qemu_predictor.txt)、[主机测试摘要](../sim/picodet_c_candidate/host_results.txt)、[现场功能与应用日志范围](board_app_evidence_20261028_zh.md)。
+**可核查材料：**[原始会话与工具错误摘录](evidence/ai_collaboration_evidence_20261030.md)、[独立候选源码与说明](../src/picodet_c_candidate/readme.md)、[QEMU 人体框和请求](../sim/picodet_c_candidate/qemu_predictor.txt)、[主机测试摘要](../sim/picodet_c_candidate/host_results.txt)、[现场功能与应用日志范围](evidence/board_app_evidence_20261028_zh.md)。
 
 **协作价值。** AI 的具体作用是把检测输出转成可检查的接口契约，并根据真实运行错误修正文件写入方式；团队提供的 ID 信息和现场反馈决定了跟踪结论的边界。
 
@@ -82,7 +82,7 @@ Codex 随后将写入方式改为通过文件对象 `open(..., newline='\n')` �
 
 **画面反馈。** 工程复盘还转录了对 ROI 红色细框和标题拼写的具体反馈；模型按这些要求修正框线、标题和显示文案。该过程按复盘摘要呈现，原始连续画面未随材料归档。
 
-**验证范围。** 工程复盘记载调整后模式状态文字可用、鼠标可改变 ROI；现场已确认鼠标 ROI、按键和 HDMI 功能正常。逐步处理为复盘摘要，原始完整回合和连续演示录像未随材料提供。源码与证据见 [视频模式](../src/vivado/eagleeye_7035_eyes.srcs/sources_1/imports/rtl/video_mode_switch_top.v)、[鼠标控制](../src/ps/src/mouse_roi_controller.cpp)、[功能记录](board_app_evidence_20261028_zh.md)及[复盘摘录](ai_collaboration_excerpts_20261031.md)。
+**验证范围。** 工程复盘记载调整后模式状态文字可用、鼠标可改变 ROI；现场已确认鼠标 ROI、按键和 HDMI 功能正常。逐步处理为复盘摘要，原始完整回合和连续演示录像未随材料提供。源码与证据见 [视频模式](../src/vivado/eagleeye_7035_eyes.srcs/sources_1/imports/rtl/video_mode_switch_top.v)、[鼠标控制](../src/ps/src/mouse_roi_controller.cpp)、[功能记录](evidence/board_app_evidence_20261028_zh.md)及[复盘摘录](evidence/ai_collaboration_excerpts_20261031.md)。
 
 ### 案例 5：双轴机械眼的 PWM 与舵机型号
 
@@ -90,9 +90,9 @@ Codex 随后将写入方式改为通过文件对象 `open(..., newline='\n')` �
 
 **模型处理与纠错。** 模型协助将 ROI 坐标映射为双路受限 PWM，并检查引脚、电压与供电。持续转动的反馈促使团队区分位置舵机与连续旋转舵机；前者的脉宽到角度映射不能直接用于后者。此处为工程复盘摘要。
 
-**验证范围。** [PWM RTL 仿真](../sim/servo_iverilog_20261027.log)覆盖中心、周期和渐变，现场确认舵机功能正常；实物型号、机械误差及响应延迟以实测记录为准。对应 [舵机 RTL](../src/servo/roi_servo_pwm.v) 和[来源摘录](ai_collaboration_excerpts_20261031.md)。
+**验证范围。** [PWM RTL 仿真](../sim/servo_iverilog_20261027.log)覆盖中心、周期和渐变，现场确认舵机功能正常；实物型号、机械误差及响应延迟以实测记录为准。对应 [舵机 RTL](../src/servo/roi_servo_pwm.v) 和[来源摘录](evidence/ai_collaboration_excerpts_20261031.md)。
 
-其他模型来源和演示版本的历史核对见 [补充案例](ai_collaboration_supplement_20261031.md)。
+其他模型来源和演示版本的历史核对见 [补充案例](evidence/ai_collaboration_supplement_20261031.md)。
 
 ### 案例 6：性能统计中区分配置收益与同算法加速比
 
@@ -112,17 +112,17 @@ Codex 随后将写入方式改为通过文件对象 `open(..., newline='\n')` �
 
 该案例体现 AI 对配置、计时区间与统计口径的联合核对，帮助团队形成可复算的性能分析。
 
-**可核查材料：**[会话摘录](ai_collaboration_evidence_20261030.md)、[测试条件、原始日志与重算方法](preproc_ab_20261028_zh.md)、[统计脚本](../tools/summarize_preproc_ab.py)。
+**可核查材料：**[会话摘录](evidence/ai_collaboration_evidence_20261030.md)、[测试条件、原始日志与重算方法](evidence/preproc_ab_20261028_zh.md)、[统计脚本](../tools/summarize_preproc_ab.py)。
 
 ### 案例 7：BusyBox 功能差异暴露现场采集脚本问题
 
 **问题与纠错。** 历史 V2 的只读采集需要兼容缺少 `timeout` 的 BusyBox，同时保留时间和读取量上限。Codex 基于进程组的首版限时方案完成语法及 **21 项 PC/WSL 夹具检查**，当时尚未板端验证；现场随后报告 `head: invalid option -- 'c'`，脚本在创建输出目录前退出。根据反馈，限字节读取改为 `dd bs=1 count=N`，`head` 只用于限行，并加入拒绝 `head -c` 的夹具；修订记录报告 **25 项定向检查通过**。
 
-**范围与来源。** 该采集脚本属于历史 V2 实验，采集结果与现场启动准入分别判断。[原始指令、现场错误和修订结论](ai_collaboration_evidence_20261030.md)可供追溯；完整脚本和测试文件保存在本地历史实验中。
+**范围与来源。** 该采集脚本属于历史 V2 实验，采集结果与现场启动准入分别判断。[原始指令、现场错误和修订结论](evidence/ai_collaboration_evidence_20261030.md)可供追溯；完整脚本和测试文件保存在本地历史实验中。
 
 ### 案例 8：独立卷积实验的性能反馈
 
-历史 V2 独立实验中，驱动返回 `-22`，Codex 为时钟及其他拒绝分支增加诊断；当时日志不足以确定唯一原因。后续板端 Golden **21/21 零差异**，但完整 Predictor 从 ARM **815.568 ms** 增至 V2 **861.566 ms**，说明数值正确和整网净收益需要分别评价。该实验独立于当前 Eyes 视频工程；[补充报告](ai_collaboration_supplement_20261031.md)和[原始反馈](ai_collaboration_evidence_20261030.md)记录纠错及证据。
+历史 V2 独立实验中，驱动返回 `-22`，Codex 为时钟及其他拒绝分支增加诊断；当时日志不足以确定唯一原因。后续板端 Golden **21/21 零差异**，但完整 Predictor 从 ARM **815.568 ms** 增至 V2 **861.566 ms**，说明数值正确和整网净收益需要分别评价。该实验独立于当前 Eyes 视频工程；[补充报告](evidence/ai_collaboration_supplement_20261031.md)和[原始反馈](evidence/ai_collaboration_evidence_20261030.md)记录纠错及证据。
 
 ## 三、Codex 智能体工作流
 
@@ -152,7 +152,7 @@ flowchart LR
 
 项目把验证中反复出现的问题整理进统一的 [Skill 目录](../skill/index.md)。例如，[预处理 Golden](../skill/preproc-fp32-golden/readme.md)明确张量输入、形状和逐值比较方法；[ROI 复判控制](../skill/roi-review-control/readme.md)提供接口合同检查；[AXI 视频流回归](../skill/01-axi-video-regression/skill.md)关注握手、反压和帧边界；[PYNQ Overlay 与 DMA](../skill/pynq-overlay-dma/readme.md)提供寄存器、DMA 和缓存处理示例。
 
-**提示词与模型回答。** 团队提出“我们比赛需要整理skills”，模型回答：“每项都有**适用范围、操作步骤、提示词、失效条件、验证结果和踩坑来源**”。[来源摘录](ai_collaboration_excerpts_20261031.md)保存了相关对话；验证范围以各项记录为准。
+**提示词与模型回答。** 团队提出“我们比赛需要整理skills”，模型回答：“每项都有**适用范围、操作步骤、提示词、失效条件、验证结果和踩坑来源**”。[来源摘录](evidence/ai_collaboration_excerpts_20261031.md)保存了相关对话；验证范围以各项记录为准。
 
 这些技能包含适用范围、使用方法、示例或测试与失败条件。主机夹具用于验证工具行为，目标硬件按板端流程验收；PYNQ 示例已完成离线模拟，实板及真实跨项目复用留待后续迁移验证。各项结果见 [Skill 验证说明](../skill/validation.md)。
 

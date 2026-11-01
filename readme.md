@@ -26,7 +26,7 @@ OV5640 摄像头 → FPGA 视频通路 / VDMA → HDMI 全景与局部显示
                         鼠标 / 按键 / 舵机
 ```
 
-系统原理、软硬件接口及团队分工见 [设计报告](report/design_report_zh.md) 和 [硬件接口表](report/hardware_interfaces_zh.md)。当前演示采用 PicoDet-XS 320 人体检测，模型推理运行在 ARM 端。
+系统原理、软硬件接口及团队分工见 [设计报告](report/design_report_zh.md) 和 [硬件接口表](report/evidence/hardware_interfaces_zh.md)。当前演示采用 PicoDet-XS 320 人体检测，模型推理运行在 ARM 端。
 
 视频显示、人体检测和 ROI 更新异步协同，让全景画面持续展示，同时按检测结果更新关注区域。
 
@@ -34,17 +34,17 @@ OV5640 摄像头 → FPGA 视频通路 / VDMA → HDMI 全景与局部显示
 
 | 项目 | 已有结果 |
 |---|---|
-| 上板功能 | 现场已确认摄像头、人体检测、鼠标 ROI、按键、舵机和 HDMI 功能正常；[上板记录](report/board_reproduced_20261028_zh.md)与[应用日志](report/board_app_evidence_20261028_zh.md)已保存。 |
-| 预处理板端 Golden | 一次独立固定输入测试中，**307,200 / 307,200 个 FP32 值**与参考逐位一致；[结果与复核方式](report/preproc_board_golden_20261029_zh.md)。 |
+| 上板功能 | 现场已确认摄像头、人体检测、鼠标 ROI、按键、舵机和 HDMI 功能正常；[上板记录](report/evidence/board_reproduced_20261028_zh.md)与[应用日志](report/evidence/board_app_evidence_20261028_zh.md)已保存。 |
+| 预处理板端 Golden | 一次独立固定输入测试中，**307,200 / 307,200 个 FP32 值**与参考逐位一致；[结果与复核方式](report/evidence/preproc_board_golden_20261029_zh.md)。 |
 | RTL 仿真 | 预处理五类输入、AXI-Lite 和舵机等测试记录见 [仿真与验证说明](sim/verification_zh.md)。 |
-| Vivado 构建 | 干净克隆后的独立构建生成 BIT/XSA：LUT 24,986、FF 28,246、BRAM36 303/500、DSP 49；已约束路径 WNS +0.608 ns、WHS +0.007 ns。[构建记录和报告](report/clean_reproduction_20261028_zh.md) |
-| 预处理计时 | CPU 双三次与 FPGA 双线性两种预处理配置均已完成板端计时，输入条件、算法及统计口径见对应报告。[测试条件与结果](report/preproc_ab_20261028_zh.md) |
+| Vivado 构建 | 干净克隆后的独立构建生成 BIT/XSA：LUT 24,986、FF 28,246、BRAM36 303/500、DSP 49；已约束路径 WNS +0.608 ns、WHS +0.007 ns。[构建记录和报告](report/evidence/clean_reproduction_20261028_zh.md) |
+| 预处理计时 | CPU 双三次与 FPGA 双线性两种预处理配置均已完成板端计时，输入条件、算法及统计口径见对应报告。[测试条件与结果](report/evidence/preproc_ab_20261028_zh.md) |
 
-阶段联调观察中，视频显示约 **30 FPS**，人体检测更新约 **2 FPS**，分别对应视频展示与智能感知路径。[应用日志](report/board_app_evidence_20261028_zh.md)记录了检测路径耗时；显示帧率为现场观察值。
+阶段联调观察中，视频显示约 **30 FPS**，人体检测更新约 **2 FPS**，分别对应视频展示与智能感知路径。[应用日志](report/evidence/board_app_evidence_20261028_zh.md)记录了检测路径耗时；显示帧率为现场观察值。
 
 ### 测试条件与工程说明
 
-固定输入 Golden 使用独立测试程序，其 BOOT 身份已记录，独立 BIT 哈希及与视频测试版本的对应关系待核对。CPU/FPGA 计时比较双三次与双线性两种配置，使用先后采集的实时帧。PicoDet 推理保持在 ARM 端，独立 V2/R3 卷积实验作为历史研究资料保存。I/O 时序、CDC 和 VDMA 的处理状态集中见 [工程告警说明](report/warning_review_zh.md)。
+固定输入 Golden 使用独立测试程序，其 BOOT 身份已记录，独立 BIT 哈希及与视频测试版本的对应关系待核对。CPU/FPGA 计时比较双三次与双线性两种配置，使用先后采集的实时帧。PicoDet 推理保持在 ARM 端，独立 V2/R3 卷积实验作为历史研究资料保存。I/O 时序、CDC 和 VDMA 的处理状态集中见 [工程告警说明](report/evidence/warning_review_zh.md)。
 
 ## 仓库目录
 
@@ -88,6 +88,6 @@ python -B tools/verify_submission.py
 3. [仿真与上板验证](report/contest_evidence_index_zh.md)：仿真、Golden、板端功能与性能记录。
 4. [Skill 索引](skill/index.md)与[复现指南](report/reproduction_zh.md)：可复用方法和构建步骤。
 
-更多版本和来源资料见[报告导航](report/readme.md)、[版本身份](report/release_identity_zh.md)及[第三方许可文本](report/third_party/)。
+更多版本和来源资料见[报告导航](report/readme.md)、[版本身份](report/evidence/release_identity_zh.md)及[第三方许可文本](report/third_party/)。
 
 PYNQ Skill 提供 Overlay、寄存器、DMA 和缓存一致性的可复用示例，已完成离线模拟验证，实板及跨项目复用留待平台迁移时验证。已收录许可文本见 [许可资料](report/third_party/)；模型权重及部分第三方 IP 的具体授权范围仍待核对。

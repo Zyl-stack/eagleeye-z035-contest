@@ -2,7 +2,7 @@
 
 ## 资料来源与条件
 
-现场提供 `Preproc_AB_Result_20261028.zip`，SHA256 `27a45173a5a6e2148cf8abb32f8f77e0ea093180486b833eacee062da7ecad42`；ZIP CRC 通过。包内板端归档 [`source_board_return.tar.gz`](../board/measurements/preproc_ab_20261028/source_board_return.tar.gz) SHA256 `0059dc49e95b127ff6d162c56b2e2f5a026909afcb98525550dbb85c9b05744a`。已保留现场团队的[原始说明](../board/measurements/preproc_ab_20261028/source_report_zh.md)、[CPU 日志](../board/measurements/preproc_ab_20261028/cpu.log)、[FPGA 日志](../board/measurements/preproc_ab_20261028/fpga.log)和板端条件、身份及 VDMA 状态文件。
+现场提供 `Preproc_AB_Result_20261028.zip`，SHA256 `27a45173a5a6e2148cf8abb32f8f77e0ea093180486b833eacee062da7ecad42`；ZIP CRC 通过。包内板端归档 [`source_board_return.tar.gz`](../../board/measurements/preproc_ab_20261028/source_board_return.tar.gz) SHA256 `0059dc49e95b127ff6d162c56b2e2f5a026909afcb98525550dbb85c9b05744a`。已保留现场团队的[原始说明](../../board/measurements/preproc_ab_20261028/source_report_zh.md)、[CPU 日志](../../board/measurements/preproc_ab_20261028/cpu.log)、[FPGA 日志](../../board/measurements/preproc_ab_20261028/fpga.log)和板端条件、身份及 VDMA 状态文件。
 
 根据交接说明，两组使用同一块板、同一 BIT/BOOT 与 `paddle_person_live`、`model.nb`，320×320 模型输入、2 线程、阈值 0.3、RGB 像素顺序、摄像头及既有 VDMA。板端身份文件记录的应用 SHA256 为 `785948413759d4478d8b99578da3a406f7d5870304756e386518fb6b4d73c57f`、模型 SHA256 为 `7c8a381bb5ba4a6a3c5c2b3277fd2cfb6ba1f802ddffd854c73bf75e747bfff4`；A 交接说明 BOOT 为 `816ebd03...`、BIT 为 `b286f480...`。模型先预热 1 次；每组记录 35 帧，统计时各丢弃前 5 帧，保留 30 帧。
 
@@ -41,4 +41,4 @@ python -B tools/summarize_preproc_ab.py board/measurements/preproc_ab_20261028
 python -B -m unittest discover -s tools/tests -v
 ```
 
-重算输出已保存为 [`recomputed.json`](../board/measurements/preproc_ab_20261028/recomputed.json)。脚本检查后端标记、35 次记录与回退标记，计算丢弃前 5 次后的均值和样本标准差；其检查范围为日志字段及统计；BIT 身份、摄像头输入和硬件事务由对应测试核验。原始板端脚本作为 `source_board_script.txt` 保留供审查；执行该脚本会停止推理进程，应限定于独立实验环境。
+重算输出已保存为 [`recomputed.json`](../../board/measurements/preproc_ab_20261028/recomputed.json)。脚本检查后端标记、35 次记录与回退标记，计算丢弃前 5 次后的均值和样本标准差；其检查范围为日志字段及统计；BIT 身份、摄像头输入和硬件事务由对应测试核验。原始板端脚本作为 `source_board_script.txt` 保留供审查；执行该脚本会停止推理进程，应限定于独立实验环境。

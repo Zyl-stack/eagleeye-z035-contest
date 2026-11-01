@@ -48,13 +48,13 @@ python -m unittest discover -s tests -v
 
 板端顺序：确认 HWH 地址/时钟与驱动一致；锁定输入帧槽；CPU 写过输入时先 clean cache；启动一条 MM2S 和三条 S2MM；等待三条输出、检查 DMA/IP 状态与超时；invalidate 输出 cache；导出张量比对。不得把摄像头仍在写入的槽当作固定输入。
 
-测速分别记录 IP `cycles`、包含 DMA/DDR/cache 的端到端 `preprocess_ms`、PS 参考 `preprocess_ms` 和检测结果。流接口仿真周期按仿真条件报告，板端时间按现场计时报告。已有 [CPU/FPGA A/B 日志](../../report/preproc_ab_20261028_zh.md)保持相同模型与线程，比较 CPU 双三次和 FPGA 双线性两种配置，使用先后采集的实时帧；同算法收益及同输入数值一致性分别验证。
+测速分别记录 IP `cycles`、包含 DMA/DDR/cache 的端到端 `preprocess_ms`、PS 参考 `preprocess_ms` 和检测结果。流接口仿真周期按仿真条件报告，板端时间按现场计时报告。已有 [CPU/FPGA A/B 日志](../../report/evidence/preproc_ab_20261028_zh.md)保持相同模型与线程，比较 CPU 双三次和 FPGA 双线性两种配置，使用先后采集的实时帧；同算法收益及同输入数值一致性分别验证。
 
 ## 已验证效果与边界
 
 仓库内 [Icarus 仿真记录](../../sim/preproc_iverilog_20261027.log)显示五类帧各 307200 个值与参考逐位一致；采集帧的三路仿真输出和独立复核方法见 [仿真数据说明](../../sim/preproc_captured_dma_20261027/readme.md)。该记录覆盖指定测试台和输入下的离线结果，实板 DMA 与缓存行为由独立板端测试核验。
 
-现场已确认复现 BIT 上板功能正常，登录后应用输出已收到；后续[独立板端固定输入测试](../../report/preproc_board_golden_20261029_zh.md)中 307,200 个输出与 Golden 逐位一致，BIT 哈希未核实。本 Skill 不自动锁帧、操作 DMA 或维护缓存；板端采集必须由匹配系统的驱动和流程完成。
+现场已确认复现 BIT 上板功能正常，登录后应用输出已收到；后续[独立板端固定输入测试](../../report/evidence/preproc_board_golden_20261029_zh.md)中 307,200 个输出与 Golden 逐位一致，BIT 哈希未核实。本 Skill 不自动锁帧、操作 DMA 或维护缓存；板端采集必须由匹配系统的驱动和流程完成。
 
 ## 失效条件
 

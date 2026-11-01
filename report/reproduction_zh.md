@@ -1,8 +1,8 @@
 # 干净目录复现指南
 
-2026-10-28 已另从 GitHub 提交 `8588b389aacab349c8cae3132730d7ed1bac6669` 干净克隆并完成独立复现：Vivado 在布线中断后从检查点续跑生成 BIT/XSA；新 BIT 与既有上板 BIT 的配置数据一致，但整文件哈希不同，新 BIT 未实板验证。完整过程、工具依赖、原始日志及未闭环问题见 [本次干净复现记录](clean_reproduction_20261028_zh.md)。可执行 `python -B tools/verify_clean_rebuild_20261028.py` 验证本次归档及 BIT/XSA 的关联。
+2026-10-28 已另从 GitHub 提交 `8588b389aacab349c8cae3132730d7ed1bac6669` 干净克隆并完成独立复现：Vivado 在布线中断后从检查点续跑生成 BIT/XSA；新 BIT 与既有上板 BIT 的配置数据一致，但整文件哈希不同，新 BIT 未实板验证。完整过程、工具依赖、原始日志及未闭环问题见 [本次干净复现记录](evidence/clean_reproduction_20261028_zh.md)。可执行 `python -B tools/verify_clean_rebuild_20261028.py` 验证本次归档及 BIT/XSA 的关联。
 
-以下步骤用于重建与验证的独立工作目录，不能覆盖稳定 SD。本仓库包含原工程完整快照和 Git LFS 中的 Xilinx Linux 固定版本源码；已在本机独立目录完成 Eyes 源码综合、实现和 BIT 生成，并完成固定源码的 Linux 内核和模块构建。现场于 2026-10-28 回传的 BIT SHA256 与 2026-10-27 构建产物一致；启动串口覆盖 U-Boot 至 Linux 登录，后续应用日志已收录，现场已确认六项功能正常。启动串口本身不含 FSBL 或登录后应用输出，独立文件身份仍以实际记录为准，具体见 [上板证据](board_reproduced_20261028_zh.md)。
+以下步骤用于重建与验证的独立工作目录，不能覆盖稳定 SD。本仓库包含原工程完整快照和 Git LFS 中的 Xilinx Linux 固定版本源码；已在本机独立目录完成 Eyes 源码综合、实现和 BIT 生成，并完成固定源码的 Linux 内核和模块构建。现场于 2026-10-28 回传的 BIT SHA256 与 2026-10-27 构建产物一致；启动串口覆盖 U-Boot 至 Linux 登录，后续应用日志已收录，现场已确认六项功能正常。启动串口本身不含 FSBL 或登录后应用输出，独立文件身份仍以实际记录为准，具体见 [上板证据](evidence/board_reproduced_20261028_zh.md)。
 
 ## 1. 获取与验证
 
@@ -29,9 +29,9 @@ vivado -mode batch -source build/build_full_vivado.tcl -tclargs /tmp/eagleeye_a_
 python3 tools/verify_vivado_outputs.py /tmp/eagleeye_vivado_new
 ```
 
-原始现场交接归档的 SHA256 为 `ebdc78bc05cbae70bba3b78baf2ca23668cc0b243e4bcb060135704b7015ade4`，该原包保存在本地；仓库中的 `original/eagleeye_z035.zip` 与 Git LFS 增量 `original/a_repro_delta_20261027.zip` 组合还原快照，增量包含 54 个新增或变更文件。恢复目录中的 `build/deps/paddle_lite_armv7_build_dep.tar.gz` 为 Paddle-Lite 构建依赖；完整 PetaLinux 2022.2 工具链和 sysroot 需另行准备。旧稳定应用重编时出现静态链接涉及 `dlopen` 和匹配 glibc 动态库的告警；应用版本及哈希见[版本说明](release_identity_zh.md)，工具链与依赖见[构建记录](../build/a_reproduce_zh.md)。
+原始现场交接归档的 SHA256 为 `ebdc78bc05cbae70bba3b78baf2ca23668cc0b243e4bcb060135704b7015ade4`，该原包保存在本地；仓库中的 `original/eagleeye_z035.zip` 与 Git LFS 增量 `original/a_repro_delta_20261027.zip` 组合还原快照，增量包含 54 个新增或变更文件。恢复目录中的 `build/deps/paddle_lite_armv7_build_dep.tar.gz` 为 Paddle-Lite 构建依赖；完整 PetaLinux 2022.2 工具链和 sysroot 需另行准备。旧稳定应用重编时出现静态链接涉及 `dlopen` 和匹配 glibc 动态库的告警；应用版本及哈希见[版本说明](evidence/release_identity_zh.md)，工具链与依赖见[构建记录](../build/a_reproduce_zh.md)。
 
-先执行 `git lfs pull`。恢复工具将原始快照与补充材料合并并核验 275 项哈希；`build_full_vivado.tcl` 在独立输出目录进行 BD 校验、综合、实现、BIT/XSA 和资源/时序/CDC/DRC 报告。最后的校验脚本确认 XSA 内 BIT 与独立 BIT 一致，并输出 BIT/XSA/HWH SHA256。实际运行以本机 Vivado 2022.2 与许可证为准。上述完整入口已在本机从还原的工程快照实际完成 BD、综合、实现和 BIT/XSA；报告与哈希见 `build/full_rebuild_20261027/`。此前独立构建报告保存在 `build/independent_rebuild_20261027/`。板端功能与 BIT 身份见[上板记录](board_reproduced_20261028_zh.md)，I/O 延迟和 CDC Critical 的处理状态见[告警说明](warning_review_zh.md)。
+先执行 `git lfs pull`。恢复工具将原始快照与补充材料合并并核验 275 项哈希；`build_full_vivado.tcl` 在独立输出目录进行 BD 校验、综合、实现、BIT/XSA 和资源/时序/CDC/DRC 报告。最后的校验脚本确认 XSA 内 BIT 与独立 BIT 一致，并输出 BIT/XSA/HWH SHA256。实际运行以本机 Vivado 2022.2 与许可证为准。上述完整入口已在本机从还原的工程快照实际完成 BD、综合、实现和 BIT/XSA；报告与哈希见 `build/full_rebuild_20261027/`。此前独立构建报告保存在 `build/independent_rebuild_20261027/`。板端功能与 BIT 身份见[上板记录](evidence/board_reproduced_20261028_zh.md)，I/O 延迟和 CDC Critical 的处理状态见[告警说明](evidence/warning_review_zh.md)。
 
 ## 3. 预处理 IP RTL 仿真
 

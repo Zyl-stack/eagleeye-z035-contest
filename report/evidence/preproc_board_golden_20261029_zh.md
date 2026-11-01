@@ -2,15 +2,15 @@
 
 ## 结果与范围
 
-现场回传的[原始归档](../board/measurements/preproc_golden_20261029/source_board_return.zip)记录了一次独立 Z035 板端 FPGA 预处理测试。输入为固定的 640×360 RGB888，输出为小端 FP32、NCHW、`1×3×320×320`：**307,200/307,200 个值与对应双线性缩放及归一化 Golden 的 32 位表示完全一致，差异 0 个，最大和平均绝对误差均为 0**。测试覆盖一次固定输入、独立程序运行，比较单位为张量中的 FP32 元素。
+现场回传的[原始归档](../../board/measurements/preproc_golden_20261029/source_board_return.zip)记录了一次独立 Z035 板端 FPGA 预处理测试。输入为固定的 640×360 RGB888，输出为小端 FP32、NCHW、`1×3×320×320`：**307,200/307,200 个值与对应双线性缩放及归一化 Golden 的 32 位表示完全一致，差异 0 个，最大和平均绝对误差均为 0**。测试覆盖一次固定输入、独立程序运行，比较单位为张量中的 FP32 元素。
 
-原始归档 SHA256 `b15fc2855426a4f0822f1c01ef5b21e46ff88051e529486869e30b366a572473`，ZIP CRC 和归档内 9 项 SHA256 核验均通过。随消息提供的独立结果说明与归档内 `RESULT_ZH.md` 逐字节一致；[原始说明副本](../board/measurements/preproc_golden_20261029/result_source_zh.md)、[串口/程序输出](../board/measurements/preproc_golden_20261029/preproc_golden_run.log)和[机器可读比较结果](../board/measurements/preproc_golden_20261029/compare_result.json)已保留。
+原始归档 SHA256 `b15fc2855426a4f0822f1c01ef5b21e46ff88051e529486869e30b366a572473`，ZIP CRC 和归档内 9 项 SHA256 核验均通过。随消息提供的独立结果说明与归档内 `RESULT_ZH.md` 逐字节一致；[原始说明副本](../../board/measurements/preproc_golden_20261029/result_source_zh.md)、[串口/程序输出](../../board/measurements/preproc_golden_20261029/preproc_golden_run.log)和[机器可读比较结果](../../board/measurements/preproc_golden_20261029/compare_result.json)已保留。
 
 | 文件 | SHA256 | 说明 |
 |---|---|---|
-| [固定输入](../data/captured.rgb) | `5560050490623f2292416364a2de30ea0182ead515f774c860c2ef5750a39070` | 与回传归档中的输入逐字节相同 |
-| [参考张量](../data/captured.golden.f32) | `aece2b12ba154bf37dc209440bdc8fa0a0b1bc9a44936d12c4e327b03f7d447f` | 与回传归档中的 Golden 逐字节相同 |
-| [板端输出](../board/measurements/preproc_golden_20261029/board_tensor.f32) | `aece2b12ba154bf37dc209440bdc8fa0a0b1bc9a44936d12c4e327b03f7d447f` | 1,228,800 字节，与 Golden 逐字节一致 |
+| [固定输入](../../data/captured.rgb) | `5560050490623f2292416364a2de30ea0182ead515f774c860c2ef5750a39070` | 与回传归档中的输入逐字节相同 |
+| [参考张量](../../data/captured.golden.f32) | `aece2b12ba154bf37dc209440bdc8fa0a0b1bc9a44936d12c4e327b03f7d447f` | 与回传归档中的 Golden 逐字节相同 |
+| [板端输出](../../board/measurements/preproc_golden_20261029/board_tensor.f32) | `aece2b12ba154bf37dc209440bdc8fa0a0b1bc9a44936d12c4e327b03f7d447f` | 1,228,800 字节，与 Golden 逐字节一致 |
 
 ## 测试身份与适用范围
 

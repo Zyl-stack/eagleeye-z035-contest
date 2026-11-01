@@ -1,6 +1,6 @@
 # EagleEye AI 协作补充案例与历史实践
 
-本材料补充展示模型部署、应用版本、权重来源及历史独立卷积实验。预处理、视频交互、机械眼及 Skill 的主要过程已纳入[AI 协作主报告](ai_collaboration_record.md)。以下聊天摘录按[来源记录](ai_collaboration_excerpts_20261031.md)保存，历史 AX7020 与当前 Z035 分别标注。
+本材料补充展示模型部署、应用版本、权重来源及历史独立卷积实验。预处理、视频交互、机械眼及 Skill 的主要过程已纳入[AI 协作主报告](../ai_collaboration_record.md)。以下聊天摘录按[来源记录](ai_collaboration_excerpts_20261031.md)保存，历史 AX7020 与当前 Z035 分别标注。
 
 ## 一、实时推理与运行环境
 
@@ -18,7 +18,7 @@
 
 历史方案采用“最近完成槽→复制到私有内存→复查写指针”。后续工程复盘进一步指出：环形指针前后相同仍可能经历多次回绕，需增加复制时间界限、单调帧序号或缓冲所有权保证。私有快照是设计方向，不能仅凭两次指针检查宣称并发读取绝对安全。
 
-**证据**　team_handoff_20261005_v1/DELIVERY_README.md；integration/linux_ov5640_picodet/；deliverables/logs/qemu_offline_validation.log。快照限制见[技能经验](../skill/evidence.md)的 E05。
+**证据**　team_handoff_20261005_v1/DELIVERY_README.md；integration/linux_ov5640_picodet/；deliverables/logs/qemu_offline_validation.log。快照限制见[技能经验](../../skill/evidence.md)的 E05。
 
 ## 二、应用版本与模型来源
 
@@ -64,7 +64,7 @@
 
 这个案例纠正了“局部计算正确就会提升整网 FPS”的推断：数值正确、真实完成和整网净收益需要分别验证。该实验为历史架构评估提供实测依据，当前 Eyes 的摄像头检测 FPS 与功能另由自身记录呈现。
 
-**可核查材料：**[原始反馈和模型判断摘录](ai_collaboration_evidence_20261030.md)、[独立实板数据及复核方法](board_evidence_20261027.md)、[测量日志摘录](../board/measurements/v2_r3_20261024/serial_measurement_excerpt.txt)、[复核脚本](../tools/verify_field_evidence.py)。
+**可核查材料：**[原始反馈和模型判断摘录](ai_collaboration_evidence_20261030.md)、[独立实板数据及复核方法](board_evidence_20261027.md)、[测量日志摘录](../../board/measurements/v2_r3_20261024/serial_measurement_excerpt.txt)、[复核脚本](../../tools/verify_field_evidence.py)。
 
 ## 四、验证与资料入口
 

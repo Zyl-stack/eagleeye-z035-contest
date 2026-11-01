@@ -44,7 +44,7 @@ cd ../roi-review-control && python -B -m unittest discover -s tests -v
 
 另有历史独立测试工程的 [单通道](lanczos_single_xsim_pass_legacy.txt)和 [RGB](lanczos_rgb_xsim_pass_legacy.txt) XSim 日志，分别记录 768 和 1,536 个输出像素零错误。它们的测试工程源码未随本次材料提供，其与当前 Eyes RTL 的版本对应待核对，通过及失败日志分别保存。[测试范围与来源](lanczos_legacy_readme.md)
 
-完整 Eyes 的[上板记录](../report/board_reproduced_20261028_zh.md)保存启动串口，[应用证据](../report/board_app_evidence_20261028_zh.md)记录六项功能确认、应用输出和 VDMA 警告。张量逐值对比见[独立板端 Golden](../report/preproc_board_golden_20261029_zh.md)，其独立 BIT 身份及其他测试条件见[验证范围](../report/field_evidence_needed_zh.md)。
+完整 Eyes 的[上板记录](../report/evidence/board_reproduced_20261028_zh.md)保存启动串口，[应用证据](../report/evidence/board_app_evidence_20261028_zh.md)记录六项功能确认、应用输出和 VDMA 警告。张量逐值对比见[独立板端 Golden](../report/evidence/preproc_board_golden_20261029_zh.md)，其独立 BIT 身份及其他测试条件见[验证范围](../report/evidence/field_evidence_needed_zh.md)。
 
 ## 脱离工程的复用验证
 
