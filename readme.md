@@ -89,5 +89,3 @@ python -B tools/verify_submission.py
 4. [Skill 索引](skill/index.md)与[复现指南](report/reproduction_zh.md)：可复用方法和构建步骤。
 
 更多版本和来源资料见[报告导航](report/readme.md)、[版本身份](report/evidence/release_identity_zh.md)及[第三方许可文本](report/third_party/)。
-
-PYNQ Skill 提供 Overlay、寄存器、DMA 和缓存一致性的可复用示例，已完成离线模拟验证，实板及跨项目复用留待平台迁移时验证。已收录许可文本见 [许可资料](report/third_party/)；模型权重及部分第三方 IP 的具体授权范围仍待核对。
