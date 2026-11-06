@@ -89,3 +89,9 @@ python -B tools/verify_submission.py
 4. [Skill 索引](skill/index.md)与[复现指南](report/reproduction_zh.md)：可复用方法和构建步骤。
 
 更多版本和来源资料见[报告导航](report/readme.md)、[版本身份](report/evidence/release_identity_zh.md)及[第三方许可文本](report/third_party/)。
+
+## 开源许可
+
+团队原创且有权授权的代码采用 [MIT 许可证](license)，允许按照许可证条款使用、修改和再分发，分发时须保留版权和许可声明。
+
+第三方软件、源码、IP、模型、权重、数据、图像及其他材料遵循其各自的许可或授权条件，不因本项目使用 MIT 而改变。Linux 内核及 Paddle-Lite 的许可文本见[第三方许可资料](report/third_party/)；`model.nb` 权重和部分厂商 IP 的公开再分发授权仍待核对。重新分发前请核对各组件的来源、许可证及版权声明。
